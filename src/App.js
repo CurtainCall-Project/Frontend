@@ -1,8 +1,8 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import Navbar from './components/Navbar';
-import GlobalStyles from './styles/GlobalStyles';
+import { ThemeProvider } from 'styled-components';
 import theme from './theme';
+import GlobalStyles from './styles/GlobalStyles';
 import Routes from './Routes';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';

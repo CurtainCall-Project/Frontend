@@ -48,29 +48,29 @@ const Navbar = () => {
             <MenuItem>
               <MenuName>게시판</MenuName>
               <InnerMenu>
-                <InnerMenuItems>
+                <ul>
                   <InnerMenuItem>자유게시판</InnerMenuItem>
                   <InnerMenuItem>시야게시판</InnerMenuItem>
                   <InnerMenuItem>새내기게시판</InnerMenuItem>
-                </InnerMenuItems>
+                </ul>
               </InnerMenu>
             </MenuItem>
             <MenuItem>
               <MenuName>마켓</MenuName>
               <InnerMenu>
-                <InnerMenuItems>
+                <ul>
                   <InnerMenuItem>오페라글라스 대여</InnerMenuItem>
                   <InnerMenuItem>굿즈거래</InnerMenuItem>
-                </InnerMenuItems>
+                </ul>
               </InnerMenu>
             </MenuItem>
             <MenuItem>
               <MenuName>공연후기</MenuName>
               <InnerMenu>
-                <InnerMenuItems>
+                <ul>
                   <InnerMenuItem>공연후기 작성</InnerMenuItem>
                   <InnerMenuItem>내가 쓴 후기</InnerMenuItem>
-                </InnerMenuItems>
+                </ul>
               </InnerMenu>
             </MenuItem>
             <MenuItem>
@@ -79,11 +79,11 @@ const Navbar = () => {
             <WriteMenuItem>
               <WriteMenuName>글쓰기</WriteMenuName>
               <WriteInnerMenu>
-                <WriteInnerMenuItems>
+                <ul>
                   <WriteInnerMenuItem>게시판 글쓰기</WriteInnerMenuItem>
                   <WriteInnerMenuItem>대여하기</WriteInnerMenuItem>
                   <WriteInnerMenuItem>거래하기</WriteInnerMenuItem>
-                </WriteInnerMenuItems>
+                </ul>
               </WriteInnerMenu>
             </WriteMenuItem>
           </Menu>
@@ -95,14 +95,11 @@ const Navbar = () => {
 
 // Top Bar
 const TopbarContainer = styled.div`
-  display: flex;
-  align-items: center;
   height: 51px;
   background-color: ${({ theme }) => theme.purple};
 `;
 const TopbarWrapper = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.verticalCenter};
   max-width: 1256px;
   width: 80%;
   height: 51px;
@@ -110,9 +107,8 @@ const TopbarWrapper = styled.div`
 `;
 
 const TopbarLeftContent = styled.div`
-  display: flex;
+  ${({ theme }) => theme.verticalCenter};
   justify-content: flex-start;
-  align-items: center;
   width: 30%;
   height: 51px;
   padding-left: 10px;
@@ -121,16 +117,14 @@ const IconItem = styled.div`
   margin-right: 10px;
 `;
 const TopbarRightContent = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
   width: 70%;
   height: 51px;
 `;
 const SearchContainer = styled.div`
-  display: flex;
+  ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  align-items: center;
   position: relative;
   width: 250px;
   height: 38px;
@@ -160,14 +154,13 @@ const SigninLink = styled(Link)`
   color: ${({ theme }) => theme.navSignInFontGray};
   transition: 0.3s;
   &:hover {
-    color: #fff;
+    color: ${({ theme }) => theme.white};
   }
 `;
 
 // Logo Bar
 const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.verticalCenter};
   height: 95px;
 `;
 const LogoLink = styled(Link)`
@@ -205,9 +198,8 @@ const InnerMenu = styled.div`
   padding-bottom: 10px;
 `;
 const MenuName = styled.div`
-  display: flex;
+  ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  align-items: center;
   width: 95px;
   height: 55px;
   font-weight: bold;
@@ -222,11 +214,10 @@ const MenuItem = styled.li`
     }
     ${InnerMenu} {
       display: block;
-      background-color: #fafafa;
+      background-color: ${({ theme }) => theme.navInnerMenuGray};
     }
   }
 `;
-const InnerMenuItems = styled.ul``;
 const InnerMenuItem = styled.li`
   margin-top: 10px;
 
@@ -264,7 +255,6 @@ const WriteMenuItem = styled.li`
     }
   }
 `;
-const WriteInnerMenuItems = styled.ul``;
 const WriteInnerMenuItem = styled.li`
   padding: 8px 0;
   &:hover {
