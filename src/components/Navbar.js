@@ -236,22 +236,25 @@ const WriteInnerMenu = styled.div`
   text-align: center;
 `;
 const WriteMenuName = styled.div`
-  display: flex;
+  ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  align-items: center;
   width: 120px;
   height: 55px;
   font-weight: bold;
 `;
 const WriteMenuItem = styled.li`
   position: relative;
-  color: ${({ theme }) => theme.white};
-  background-color: ${({ theme }) => theme.mainBlue};
-  border-radius: 10px;
+  color: ${({ theme }) => theme.mainBlue};
+  transition: 0.1s ease-out;
+  border-radius: 10px 10px 0 0;
+
   &:hover {
-    border-radius: 10px 10px 0 0;
+    color: ${({ theme }) => theme.white};
+    background-color: ${({ theme }) => theme.mainBlue};
+    //border-radius: 10px 10px 0 0;
     ${WriteInnerMenu} {
       display: block;
+      transition: 0.15s ease-out;
     }
   }
 `;
