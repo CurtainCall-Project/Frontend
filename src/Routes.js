@@ -1,6 +1,6 @@
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
-import SignInPage from './pages/SignInPage';
+import SignInPage from './pages/signin/SigninPage';
 import FreeBoardPage from './pages/FreeBoardPage';
 import SightBoardPage from './pages/SightBoardPage';
 import NewBoardPage from './pages/NewBoardPage';

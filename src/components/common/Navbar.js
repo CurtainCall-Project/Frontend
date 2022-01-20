@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as InstaIcon } from '../assets/insta_btn.svg';
-import { ReactComponent as TwitterIcon } from '../assets/twitter_icon.svg';
-import { ReactComponent as NaverIcon } from '../assets/naver.svg';
-import { ReactComponent as SearchIcon } from '../assets/search_icon.svg';
-import { ReactComponent as Logo } from '../assets/logo.svg';
+import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
+import { ReactComponent as TwitterIcon } from '../../assets/twitter_icon.svg';
+import { ReactComponent as NaverIcon } from '../../assets/naver.svg';
+import { ReactComponent as SearchIcon } from '../../assets/search_icon.svg';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 import { Link } from 'react-router-dom';
 
