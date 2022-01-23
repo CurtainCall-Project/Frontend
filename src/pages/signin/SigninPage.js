@@ -1,33 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SigninButton from '../../components/signin/SigninButton';
 import naver_logo from '../../assets/naver_login.svg';
 import kakao_logo from '../../assets/kakao_login.svg';
-import google_logo from '../../assets/google_login.svg';
+import { KAKAO_AUTH_URL } from '../../oauth/KakaoOauth';
+import GoogleLogin from '../../components/signin/GoogleLogin';
 
 const SignInPage = () => {
-  const logos = [
-    {
-      image: naver_logo,
-      text: '네이버',
-    },
-    {
-      image: kakao_logo,
-      text: '카카오',
-    },
-    {
-      image: google_logo,
-      text: '구글',
-    },
-  ];
-
+  const alertMessage = () => alert('로그인되었습니다.');
   return (
     <>
       <Container>
         <Title>회원가입/로그인</Title>
-        {logos.map((logo) => (
-          <SigninButton logo={logo} />
-        ))}
+        <SigninButton logo={naver_logo} text="네이버" />
+        <a href={KAKAO_AUTH_URL}>
+          <SigninButton logo={kakao_logo} text="카카오" />
+        </a>
+        {/* <a class="g-signin2" href={GOOGLE_AUTH_URL}>
+          <SigninButton logo={google_logo} text="구글" />
+        </a> */}
+        <GoogleLogin alert={alertMessage} />
       </Container>
     </>
   );
@@ -42,4 +34,5 @@ const Title = styled.div`
   padding: 10px;
   text-align: center;
 `;
+
 export default SignInPage;

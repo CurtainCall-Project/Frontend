@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SigninButton = ({ logo }) => {
+const SigninButton = ({ logo, text }) => {
   return (
     <>
       <LoginButton>
         <ContentWrapper>
-          <img src={logo.image} alt={logo.text} />
+          <img src={logo} alt={text} />
           <TitleWrapper>
-            <Title>{logo.text}로 로그인</Title>
+            <Title>{text}로 로그인</Title>
           </TitleWrapper>
         </ContentWrapper>
       </LoginButton>

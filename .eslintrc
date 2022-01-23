@@ -1,3 +1,4 @@
 {
+  "globals": { "gapi": true },
   "extends": ["react-app", "plugin:prettier/recommended"]
 }
