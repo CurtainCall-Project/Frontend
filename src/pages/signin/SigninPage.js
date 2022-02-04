@@ -7,7 +7,6 @@ import { KAKAO_AUTH_URL } from '../../oauth/KakaoOauth';
 import GoogleLogin from '../../components/signin/GoogleLogin';
 
 const SignInPage = () => {
-  const alertMessage = () => alert('로그인되었습니다.');
   return (
     <>
       <Container>
@@ -19,7 +18,7 @@ const SignInPage = () => {
         {/* <a class="g-signin2" href={GOOGLE_AUTH_URL}>
           <SigninButton logo={google_logo} text="구글" />
         </a> */}
-        <GoogleLogin alert={alertMessage} />
+        <GoogleLogin />
       </Container>
     </>
   );
