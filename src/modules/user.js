@@ -17,15 +17,12 @@ const ADD_NICKNAME = 'user/ADD_NICKNAME';
 // 로그인 시  user 정보를 받아오는 액션 생성함수
 export const getUser = (token) => (dispatch) => {
   axios
-    .get(
-      'https://cd3a2b97-904a-4127-9c73-a01eb564a693.mock.pstmn.io/login/google',
-      {
-        headers: {
-          Authorization: token,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL}/login/google`, {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    })
     .then((res) => {
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
       res.data.isSignUp ? history.push('/') : history.push('/mypage/nickname');
@@ -37,14 +34,11 @@ export const getUser = (token) => (dispatch) => {
 export const setNickname = (nickname) => (dispatch) => {
   dispatch({ type: SET_NICKNAME, payload: nickname });
   axios
-    .get(
-      'https://cd3a2b97-904a-4127-9c73-a01eb564a693.mock.pstmn.io/mypage/nickname',
-      {
-        params: {
-          nickname: nickname,
-        },
-      }
-    )
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL}/mypage/nickname`, {
+      params: {
+        nickname: nickname,
+      },
+    })
     .then((res) => {
       dispatch({ type: CHECK_NICKNAME, payload: res.data });
     });
@@ -55,10 +49,9 @@ export const setNickname = (nickname) => (dispatch) => {
 export const addNickname = (nickname) => (dispatch) => {
   //dispatch({ type: ADD_NICKNAME, payload: nickname });
   axios
-    .post(
-      'https://cd3a2b97-904a-4127-9c73-a01eb564a693.mock.pstmn.io/mypage/nickname',
-      { nickname: nickname }
-    )
+    .post(`${process.env.REACT_APP_MOCK_SERVER_URL}/mypage/nickname`, {
+      nickname: nickname,
+    })
     .then(() => {
       window.alert('메인페이지로 이동합니다.');
       history.push('/');
