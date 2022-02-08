@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const NicknameForm = () => {
-  const [nickname, setNickname] = useState('');
-
-  const onChange = (e) => {
-    console.log(e.target.value);
-    setNickname(e.target.value);
-  };
+const NicknameForm = ({ clicked, color, isUnique, onChange, onCheck }) => {
   return (
     <>
       <FormContainer>
@@ -20,7 +14,15 @@ const NicknameForm = () => {
             <InputWrapper>
               <NicknameInput type="text" maxLength="8" onChange={onChange} />
             </InputWrapper>
-            <DuplicationButton>중복확인</DuplicationButton>
+            <DuplicationButton onClick={onCheck}>중복확인</DuplicationButton>
+            <NicknameCheckText>
+              {clicked &&
+                (isUnique ? (
+                  <span style={{ color: color }}>사용가능한 닉네임입니다.</span>
+                ) : (
+                  <span style={{ color: color }}>중복된 닉네임입니다.</span>
+                ))}
+            </NicknameCheckText>
           </InputFormWrapper>
         </ContentWrapper>
       </FormContainer>
@@ -35,7 +37,7 @@ const FormContainer = styled.div`
   color: ${({ theme }) => theme.nicknameFormGray};
   font-size: 18px;
   border: 1px solid;
-  margin: 0 auto 30px auto;
+  margin: 0px auto 30px auto;
 `;
 
 const ContentWrapper = styled.div`
@@ -51,6 +53,7 @@ const GuideText = styled.div`
 const InputFormWrapper = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
   margin-top: 30px;
 `;
 const Title = styled.div`
@@ -80,5 +83,12 @@ const DuplicationButton = styled.button`
   background-color: ${({ theme }) => theme.mainBlue};
   opacity: 70%;
   border: none;
+  cursor: pointer;
+`;
+const NicknameCheckText = styled.div`
+  position: absolute;
+  top: 40px;
+  left: 162px;
+  font-size: 14px;
 `;
 export default NicknameForm;

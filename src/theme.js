@@ -11,6 +11,7 @@ const colors = {
 
 const fontSize = {
   signinFontSize: '20px',
+  smallFontSize: '14px',
 };
 
 const verticalCenter = css`

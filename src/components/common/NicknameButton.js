@@ -1,16 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const NicknameButton = ({ text }) => {
-  /* onClick 함수를 정의한다.
-  버튼 클릭 시 user 객체를 서버에 보내고, 홈으로 이동한다(useHistory) */
-  //const onClick = () => {};
+const NicknameButton = ({ onSave }) => {
   return (
     <>
-      <Link to="/">
-        <Button>{text}</Button>
-      </Link>
+      <Button onClick={onSave}>저 장</Button>
     </>
   );
 };

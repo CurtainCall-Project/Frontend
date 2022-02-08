@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import google_logo from '../../assets/google_login.svg';
-import axios from 'axios';
 
-const GoogleLogin = () => {
+const GoogleLogin = ({ getUserInfo }) => {
   const googleButton = useRef(null);
-  const [token, setToken] = useState('');
-  const [user, setUser] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -35,34 +32,13 @@ const GoogleLogin = () => {
       auth2.attachClickHandler(googleButton.current, {}, (googleUser) => {
         // 사용자의 토큰을 받아온다.
         const user_token = googleUser.getAuthResponse().id_token;
-        setToken(user_token);
-        postToken(user_token);
+        console.log(user_token);
+        // setToken(user_token);
+        getUserInfo(user_token);
       });
     });
   };
 
-  const postToken = (token) => {
-    axios
-      .get(
-        'https://cd3a2b97-904a-4127-9c73-a01eb564a693.mock.pstmn.io/login/google',
-        {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-      .then((res) => {
-        setUser(res.data);
-        //isSignup 여부에 따라 홈/닉네임 설정 페이지로 이동한다.
-        res.data.isSignUp
-          ? history.push('/')
-          : history.push('/mypage/nickname');
-      })
-      .catch((error) => alert('error'));
-  };
-
-  console.log(user);
   //sessionStorage.setItem('token', token);
   return (
     <GoogleButton

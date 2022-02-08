@@ -5,6 +5,7 @@ import naver_logo from '../../assets/naver_login.svg';
 import kakao_logo from '../../assets/kakao_login.svg';
 import { KAKAO_AUTH_URL } from '../../oauth/KakaoOauth';
 import GoogleLogin from '../../components/signin/GoogleLogin';
+import GoogleLoginContainer from '../../containers/GoogleLoginContainer';
 
 const SignInPage = () => {
   return (
@@ -15,10 +16,7 @@ const SignInPage = () => {
         <a href={KAKAO_AUTH_URL}>
           <SigninButton logo={kakao_logo} text="카카오" />
         </a>
-        {/* <a class="g-signin2" href={GOOGLE_AUTH_URL}>
-          <SigninButton logo={google_logo} text="구글" />
-        </a> */}
-        <GoogleLogin />
+        <GoogleLoginContainer />
       </Container>
     </>
   );
