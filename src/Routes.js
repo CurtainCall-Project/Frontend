@@ -1,11 +1,12 @@
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
-import SignInPage from './pages/SignInPage';
+import SignInPage from './pages/signin/SigninPage';
 import FreeBoardPage from './pages/FreeBoardPage';
 import SightBoardPage from './pages/SightBoardPage';
 import NewBoardPage from './pages/NewBoardPage';
 import RentPage from './pages/RentPage';
 import MarketPage from './pages/MarketPage';
+import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
   {
@@ -39,5 +40,9 @@ export default [
   {
     path: '/market',
     component: MarketPage,
+  },
+  {
+    path: '/mypage/nickname',
+    component: NicknameSetPage,
   },
 ];

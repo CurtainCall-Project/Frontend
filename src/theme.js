@@ -6,6 +6,12 @@ const colors = {
   white: '#ffffff',
   navInnerMenuGray: '#fafafa',
   navSignInFontGray: '#595858',
+  nicknameFormGray: '#9b9b9b',
+};
+
+const fontSize = {
+  signinFontSize: '20px',
+  smallFontSize: '14px',
 };
 
 const verticalCenter = css`
@@ -15,6 +21,7 @@ const verticalCenter = css`
 
 const theme = {
   ...colors,
+  fontSize,
   verticalCenter,
 };
 export default theme;

@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as InstaIcon } from '../assets/insta_btn.svg';
-import { ReactComponent as TwitterIcon } from '../assets/twitter_icon.svg';
-import { ReactComponent as NaverIcon } from '../assets/naver.svg';
-import { ReactComponent as SearchIcon } from '../assets/search_icon.svg';
-import { ReactComponent as Logo } from '../assets/logo.svg';
+import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
+import { ReactComponent as TwitterIcon } from '../../assets/twitter_icon.svg';
+import { ReactComponent as NaverIcon } from '../../assets/naver.svg';
+import { ReactComponent as SearchIcon } from '../../assets/search_icon.svg';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ isLogin, onLogOut }) => {
   return (
     <>
       <TopbarContainer>
@@ -33,7 +33,11 @@ const Navbar = () => {
               </Link>
               <SearchInput placeholder="검색" />
             </SearchContainer>
-            <SigninLink to="/signin">회원가입/로그인</SigninLink>
+            {isLogin ? (
+              <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
+            ) : (
+              <LoginButton to="/signin">회원가입/로그인</LoginButton>
+            )}
           </TopbarRightContent>
         </TopbarWrapper>
       </TopbarContainer>
@@ -150,7 +154,15 @@ const SearchInput = styled.input`
   outline: none;
   font-size: 16px;
 `;
-const SigninLink = styled(Link)`
+const LogoutButton = styled.div`
+  color: ${({ theme }) => theme.navSignInFontGray};
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.white};
+  }
+`;
+const LoginButton = styled(Link)`
   color: ${({ theme }) => theme.navSignInFontGray};
   transition: 0.3s;
   &:hover {
