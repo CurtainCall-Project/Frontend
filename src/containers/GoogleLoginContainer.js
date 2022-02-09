@@ -4,15 +4,21 @@
 import React from 'react';
 import GoogleLogin from '../components/signin/GoogleLogin';
 import { useDispatch } from 'react-redux';
-import { getUser } from '../modules/user';
+import { getUser, login } from '../modules/user';
 
 const GoogleLoginContainer = () => {
   const dispatch = useDispatch();
 
-  const getUserInfo = (token) => {
-    dispatch(getUser(token));
+  const onLogin = (token) => {
+    dispatch(login(token));
   };
-  return <GoogleLogin getUserInfo={getUserInfo}></GoogleLogin>;
+  // const getUserInfo = () => {
+  //   dispatch(getUser());
+  // };
+  return (
+    // <GoogleLogin onLogin={onLogin} getUserInfo={getUserInfo}></GoogleLogin>
+    <GoogleLogin onLogin={onLogin}></GoogleLogin>
+  );
 };
 
 export default GoogleLoginContainer;

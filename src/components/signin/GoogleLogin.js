@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import google_logo from '../../assets/google_login.svg';
 
-const GoogleLogin = ({ getUserInfo }) => {
+const GoogleLogin = ({ onLogin }) => {
   const googleButton = useRef(null);
-  const history = useHistory();
 
   useEffect(() => {
     console.log('Hi');
@@ -30,16 +28,14 @@ const GoogleLogin = ({ getUserInfo }) => {
       });
       console.log('api inited');
       auth2.attachClickHandler(googleButton.current, {}, (googleUser) => {
-        // 사용자의 토큰을 받아온다.
+        // 구글이 발급한 요청 토큰을 따로 저장한다.
         const user_token = googleUser.getAuthResponse().id_token;
-        console.log(user_token);
-        // setToken(user_token);
-        getUserInfo(user_token);
+        onLogin(user_token);
+        // getUserInfo();
       });
     });
   };
 
-  //sessionStorage.setItem('token', token);
   return (
     <GoogleButton
       ref={googleButton}
