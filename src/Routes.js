@@ -1,6 +1,7 @@
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import SignInPage from './pages/signin/SigninPage';
+import PostWritePage from './pages/PostWritePage';
 import FreeBoardPage from './pages/FreeBoardPage';
 import SightBoardPage from './pages/SightBoardPage';
 import NewBoardPage from './pages/NewBoardPage';
@@ -20,6 +21,10 @@ export default [
   {
     path: '/signin',
     component: SignInPage,
+  },
+  {
+    path: '/board/write',
+    component: PostWritePage,
   },
   {
     path: '/free_board',

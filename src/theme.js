@@ -6,11 +6,12 @@ const colors = {
   white: '#ffffff',
   navInnerMenuGray: '#fafafa',
   navSignInFontGray: '#595858',
-  nicknameFormGray: '#9b9b9b',
+  borderGray: '#9b9b9b',
 };
 
 const fontSize = {
   signinFontSize: '20px',
+  middleFontSize: '16px',
   smallFontSize: '14px',
 };
 
