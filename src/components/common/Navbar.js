@@ -86,11 +86,11 @@ const Navbar = ({ isLogin, onLogOut }) => {
                 <StyledLink to="/board/write">
                   <li>게시판 글쓰기</li>
                 </StyledLink>
-                <StyledLink to="/board/write">
+                <StyledLink to="/rent/write">
                   <li>대여하기</li>
                 </StyledLink>
-                <StyledLink to="/board/write">
-                  <li>거래하기</li>
+                <StyledLink to="/sell/write">
+                  <li className="sell">거래하기</li>
                 </StyledLink>
               </WriteInnerMenu>
             </WriteMenuItem>
@@ -258,6 +258,9 @@ const WriteInnerMenu = styled.ul`
       background-color: ${({ theme }) => theme.purple};
     }
   }
+  li.sell {
+    border-radius: 0 0 10px 10px;
+  }
 `;
 const WriteMenuName = styled.div`
   ${({ theme }) => theme.verticalCenter};
@@ -282,17 +285,6 @@ const WriteMenuItem = styled.li`
     }
   }
 `;
-// const WriteInnerMenuItem = styled.li`
-//   color: ${({ theme }) => theme.white};
-//   padding: 8px 0;
-//   &:hover {
-//     background-color: ${({ theme }) => theme.purple};
-//     &:last-child {
-//       border-radius: 0 0 10px 10px;
-//     }
-//   }
-// `;
-
 const StyledLink = styled(Link)`
   text-decoration: none;
   width: 100%;

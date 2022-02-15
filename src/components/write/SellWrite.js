@@ -1,12 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import {
-  Box,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-} from '@material-ui/core';
+
 import {
   Grid,
   Text,
@@ -18,16 +12,7 @@ import {
 import { ReactComponent as PictureButton } from '../../assets/picture_icon.svg';
 import { ReactComponent as DeleteButton } from '../../assets/delete_button.svg';
 
-const PostWrite = ({
-  boardType,
-  imgFiles,
-  selectBoardType,
-  changeTitle,
-  changeContent,
-  selectFiles,
-  deleteFile,
-  onSubmit,
-}) => {
+const SellWrite = (props) => {
   const hiddenFileInput = useRef();
 
   const renderImages = (previews) => {
@@ -35,7 +20,7 @@ const PostWrite = ({
       return (
         <ImageWrapper key={preview.id}>
           <DeleteButtonWrapper
-            onClick={() => deleteFile(preview.id)}
+            onClick={() => props.deleteFile(preview.id)}
             key={preview.id}></DeleteButtonWrapper>
           <Image src={preview.dataUrl} key={preview.dataUrl}></Image>
         </ImageWrapper>
@@ -44,38 +29,51 @@ const PostWrite = ({
   };
 
   const onClick = (e) => hiddenFileInput.current.click();
+
   return (
     <FormWrapper>
-      {/* <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth> */}
-      <Grid>
-        <StyledSelect
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={boardType}
-          label="게시판 선택"
-          onChange={selectBoardType}>
-          <StyledMenuItem value="자유">자유게시판</StyledMenuItem>
-          <StyledMenuItem value="시야">시야게시판</StyledMenuItem>
-          <StyledMenuItem value="새내기">새내기게시판</StyledMenuItem>
-        </StyledSelect>
-
-        {/* </FormControl>
-      </Box> */}
-        <Grid margin="0 0 0 35px">
-          <Text width="7%" type="label">
-            제목
-          </Text>
-          <Input
-            placeholder="제목을 입력해주세요"
-            onChange={changeTitle}></Input>
-        </Grid>
+      <Grid margin="20px 0">
+        <Text width="10%" type="label">
+          제목
+        </Text>
+        <Input
+          placeholder="제목을 입력해주세요"
+          onChange={props.changeTitle}></Input>
       </Grid>
-      <Grid flex_direction="column" margin="45px 0">
+      <Grid margin="20px 0" width="45%">
+        <Text width="25%" type="label">
+          기종
+        </Text>
+        <Input
+          placeholder="거래할 물품의 기종을 입력해주세요"
+          onChange={props.changeItem}></Input>
+      </Grid>
+      <Grid margin="20px 0 20px auto" width="45%">
+        <Text width="30%" type="label">
+          가격
+        </Text>
+        <Input
+          placeholder="숫자만 입력해주세요"
+          onChange={props.changePrice}></Input>
+      </Grid>
+      <Grid margin="20px 0 20px 0" width="100%">
+        <Text width="9%" type="label">
+          거래장소
+        </Text>
+        <Input
+          width="80%"
+          placeholder="시/구(군) (ex. 서울시 강남구)"
+          onChange={props.changePlace}></Input>
+        <DeliveryButton onClick={props.clickDelivery} delivery={props.delivery}>
+          택배가능
+        </DeliveryButton>
+      </Grid>
+      <Grid flex_direction="column" margin="20px 0">
         <Text type="label">내용</Text>
         <InputBox
+          height="200px"
           placeholder="내용을 입력해주세요"
-          onChange={changeContent}></InputBox>
+          onChange={props.changeContent}></InputBox>
       </Grid>
       <Grid>
         <PictureButton onClick={() => onClick()}></PictureButton>
@@ -85,14 +83,14 @@ const PostWrite = ({
           accpet="image/*"
           ref={hiddenFileInput}
           style={{ display: 'none' }}
-          onChange={selectFiles}
+          onChange={props.selectFiles}
         />
         <Text margin_left="10px" color="gray">
           * 사진은 최대 8장까지 첨부 가능합니다.
         </Text>
-        <Button onClick={onSubmit}>등록</Button>
+        <Button onClick={props.onSubmit}>등록</Button>
       </Grid>
-      <Images>{renderImages(imgFiles)}</Images>
+      <Images>{renderImages(props.imgFiles)}</Images>
     </FormWrapper>
   );
 };
@@ -112,21 +110,17 @@ const FormWrapper = styled.div`
   padding: 37px 65px;
 `;
 
-const StyledSelect = styled(Select)`
-  && {
-    width: 120px;
-    height: 35px;
-    background-color: ${({ theme }) => theme.mainBlue};
-    color: ${({ theme }) => theme.white};
-    border-radius: 10px;
-    padding-left: 10px;
-  }
-`;
-
-const StyledMenuItem = styled(MenuItem)`
-  && {
-    background-color: ${({ theme }) => theme.mainBlue};
-  }
+const DeliveryButton = styled.button`
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20px;
+  margin-left: 20px;
+  width: 80px;
+  height: 35px;
+  cursor: pointer;
+  background-color: ${(props) => (props.delivery ? '#6166b3' : '#b0b0b0')};
+  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  color: ${({ theme }) => theme.white};
 `;
 
 const Images = styled.div`
@@ -147,5 +141,4 @@ const DeleteButtonWrapper = styled(DeleteButton)`
   top: -12px;
   cursor: pointer;
 `;
-
-export default PostWrite;
+export default SellWrite;
