@@ -34,7 +34,7 @@ const FormContainer = styled.div`
   width: 623px;
   height: 233px;
   border-radius: 10px;
-  color: ${({ theme }) => theme.nicknameFormGray};
+  color: ${({ theme }) => theme.borderGray};
   font-size: 18px;
   border: 1px solid;
   margin: 0px auto 30px auto;

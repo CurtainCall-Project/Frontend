@@ -83,11 +83,15 @@ const Navbar = ({ isLogin, onLogOut }) => {
             <WriteMenuItem>
               <WriteMenuName>글쓰기</WriteMenuName>
               <WriteInnerMenu>
-                <ul>
-                  <WriteInnerMenuItem>게시판 글쓰기</WriteInnerMenuItem>
-                  <WriteInnerMenuItem>대여하기</WriteInnerMenuItem>
-                  <WriteInnerMenuItem>거래하기</WriteInnerMenuItem>
-                </ul>
+                <StyledLink to="/board/write">
+                  <li>게시판 글쓰기</li>
+                </StyledLink>
+                <StyledLink to="/rent/write">
+                  <li>대여하기</li>
+                </StyledLink>
+                <StyledLink to="/sell/write">
+                  <li className="sell">거래하기</li>
+                </StyledLink>
               </WriteInnerMenu>
             </WriteMenuItem>
           </Menu>
@@ -237,7 +241,7 @@ const InnerMenuItem = styled.li`
     color: ${({ theme }) => theme.mainBlue};
   }
 `;
-const WriteInnerMenu = styled.div`
+const WriteInnerMenu = styled.ul`
   width: 120px;
   display: none;
   position: absolute;
@@ -246,6 +250,17 @@ const WriteInnerMenu = styled.div`
   border-radius: 0 0 10px 10px;
   font-size: 14px;
   text-align: center;
+
+  li {
+    color: ${({ theme }) => theme.white};
+    padding: 8px 0;
+    &:hover {
+      background-color: ${({ theme }) => theme.purple};
+    }
+  }
+  li.sell {
+    border-radius: 0 0 10px 10px;
+  }
 `;
 const WriteMenuName = styled.div`
   ${({ theme }) => theme.verticalCenter};
@@ -270,14 +285,9 @@ const WriteMenuItem = styled.li`
     }
   }
 `;
-const WriteInnerMenuItem = styled.li`
-  padding: 8px 0;
-  &:hover {
-    background-color: ${({ theme }) => theme.purple};
-    &:last-child {
-      border-radius: 0 0 10px 10px;
-    }
-  }
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
 `;
-
 export default Navbar;

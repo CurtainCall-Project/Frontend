@@ -1,6 +1,9 @@
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import SignInPage from './pages/signin/SigninPage';
+import PostWritePage from './pages/PostWritePage';
+import RentWritePage from './pages/RentWritePage';
+import SellWritePage from './pages/SellWritePage';
 import FreeBoardPage from './pages/FreeBoardPage';
 import SightBoardPage from './pages/SightBoardPage';
 import NewBoardPage from './pages/NewBoardPage';
@@ -22,6 +25,18 @@ export default [
     component: SignInPage,
   },
   {
+    path: '/board/write',
+    component: PostWritePage,
+  },
+  {
+    path: '/rent/write',
+    component: RentWritePage,
+  },
+  {
+    path: '/sell/write',
+    component: SellWritePage,
+  },
+  {
     path: '/free_board',
     component: FreeBoardPage,
   },
@@ -33,10 +48,7 @@ export default [
     path: '/new_board',
     component: NewBoardPage,
   },
-  {
-    path: '/rent',
-    component: RentPage,
-  },
+
   {
     path: '/market',
     component: MarketPage,
