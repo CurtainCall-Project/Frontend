@@ -23,7 +23,7 @@ export const addPost =
       console.log(value);
     }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL}/board/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/write`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
@@ -53,7 +53,7 @@ export const addRentPost =
       console.log(value);
     }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL}/rent/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/rent/write`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
@@ -82,7 +82,7 @@ export const addSellPost =
       console.log(value);
     }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL}/sell/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/sell/write`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {

@@ -53,9 +53,15 @@ const Navbar = ({ isLogin, onLogOut }) => {
               <MenuName>게시판</MenuName>
               <InnerMenu>
                 <ul>
-                  <InnerMenuItem>자유게시판</InnerMenuItem>
-                  <InnerMenuItem>시야게시판</InnerMenuItem>
-                  <InnerMenuItem>새내기게시판</InnerMenuItem>
+                  <StyledLink to="/board/free">
+                    <InnerMenuItem>자유게시판</InnerMenuItem>
+                  </StyledLink>
+                  <StyledLink to="/board/sight">
+                    <InnerMenuItem>시야게시판</InnerMenuItem>
+                  </StyledLink>
+                  <StyledLink to="/board/new">
+                    <InnerMenuItem>새내기게시판</InnerMenuItem>
+                  </StyledLink>
                 </ul>
               </InnerMenu>
             </MenuItem>
@@ -63,8 +69,12 @@ const Navbar = ({ isLogin, onLogOut }) => {
               <MenuName>마켓</MenuName>
               <InnerMenu>
                 <ul>
-                  <InnerMenuItem>오페라글라스 대여</InnerMenuItem>
-                  <InnerMenuItem>굿즈거래</InnerMenuItem>
+                  <StyledLink to="/rent">
+                    <InnerMenuItem>오페라글라스 대여</InnerMenuItem>
+                  </StyledLink>
+                  <StyledLink to="/sell">
+                    <InnerMenuItem>굿즈거래</InnerMenuItem>
+                  </StyledLink>
                 </ul>
               </InnerMenu>
             </MenuItem>
@@ -287,6 +297,7 @@ const WriteMenuItem = styled.li`
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
+  color: #000;
   width: 100%;
   height: 100%;
 `;

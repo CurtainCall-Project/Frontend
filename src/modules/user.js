@@ -14,7 +14,7 @@ const ADD_NICKNAME = 'user/ADD_NICKNAME';
 // 로그인 액션 생성함수
 export const login = (token) => (dispatch) => {
   axios
-    .post(`${process.env.REACT_APP_MOCK_SERVER_URL}/login/google`, {
+    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/google`, {
       headers: {
         Authorization: token,
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const login = (token) => (dispatch) => {
       axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
       // 처음 로그인 시 닉네임 설정 페이지로 이동
       axios
-        .get(`${process.env.REACT_APP_MOCK_SERVER_URL}/login/user`)
+        .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/user`)
         .then((res) => {
           console.log(res);
           dispatch({ type: GET_USER_SUCCESS, payload: res.data });
@@ -53,7 +53,7 @@ export const getUser = () => (dispatch) => {
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
   axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL}/login/user`)
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/user`)
     .then((res) => {
       console.log(res);
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
@@ -65,7 +65,7 @@ export const getUser = () => (dispatch) => {
 export const setNickname = (nickname) => (dispatch) => {
   dispatch({ type: SET_NICKNAME, payload: nickname });
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL}/mypage/nickname`, {
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/nickname`, {
       params: {
         nickname: nickname,
       },
@@ -80,7 +80,7 @@ export const setNickname = (nickname) => (dispatch) => {
 export const addNickname = (nickname) => (dispatch) => {
   //dispatch({ type: ADD_NICKNAME, payload: nickname });
   axios
-    .post(`${process.env.REACT_APP_MOCK_SERVER_URL}/mypage/nickname`, {
+    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/nickname`, {
       nickname: nickname,
     })
     .then(() => {

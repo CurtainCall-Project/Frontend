@@ -7,6 +7,8 @@ const colors = {
   navInnerMenuGray: '#fafafa',
   navSignInFontGray: '#595858',
   borderGray: '#9b9b9b',
+  lightGray: '#f0f0f0',
+  darkGray: '#e1e1e1',
 };
 
 const fontSize = {

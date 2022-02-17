@@ -4,11 +4,11 @@ import SignInPage from './pages/signin/SigninPage';
 import PostWritePage from './pages/PostWritePage';
 import RentWritePage from './pages/RentWritePage';
 import SellWritePage from './pages/SellWritePage';
-import FreeBoardPage from './pages/FreeBoardPage';
-import SightBoardPage from './pages/SightBoardPage';
-import NewBoardPage from './pages/NewBoardPage';
-import RentPage from './pages/RentPage';
-import MarketPage from './pages/MarketPage';
+import FreeBoardPage from './pages/board/FreeBoardPage';
+import SightBoardPage from './pages/board/SightBoardPage';
+import NewBoardPage from './pages/board/NewBoardPage';
+import RentBoardPage from './pages/board/RentBoardPage';
+import SellBoardPage from './pages/board/SellBoardPage';
 import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
@@ -37,21 +37,24 @@ export default [
     component: SellWritePage,
   },
   {
-    path: '/free_board',
+    path: '/board/free',
     component: FreeBoardPage,
   },
   {
-    path: '/sight_board',
+    path: '/board/sight',
     component: SightBoardPage,
   },
   {
-    path: '/new_board',
+    path: '/board/new',
     component: NewBoardPage,
   },
-
   {
-    path: '/market',
-    component: MarketPage,
+    path: '/rent',
+    component: RentBoardPage,
+  },
+  {
+    path: '/sell',
+    component: SellBoardPage,
   },
   {
     path: '/mypage/nickname',
