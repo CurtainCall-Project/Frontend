@@ -5,19 +5,30 @@ import DescriptonBox from '../../components/board/DescriptionBox';
 import Paging from '../../components/board/Paging';
 import { setPosts } from '../../modules/posts';
 
-const FreeBoardPage = () => {
+const BoardPage = (props) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  useEffect(() => {
-    dispatch(setPosts(page, 'free'));
-  }, [page]);
+  const [boardType, setBoardType] = useState(props.match.path.split('/')[1]);
 
-  const text =
-    '이곳은 자유게시판입니다.\n이 네모칸에는 각 게시판에 대한 설명과 함께 간단한 일러스트 또는 아이콘이 들어갈 예정입니다.';
+  // 렌더링될 때마다 boardType을 저장한다.
+  useEffect(() => {
+    setBoardType(props.match.path.split('/')[1]);
+  });
+
+  useEffect(() => {
+    setPage(1);
+  }, [boardType]);
+
+  useEffect(() => {
+    if (boardType === 'free' || boardType === 'sight' || boardType === 'new') {
+      dispatch(setPosts(`board/${boardType}`, page));
+      return;
+    }
+    dispatch(setPosts(boardType, page));
+  }, [page]);
 
   const posts = useSelector((state) => state.posts);
   const postCount = posts.totalCount;
-  console.log(postCount);
 
   const changePage = (page) => {
     setPage(page);
@@ -26,11 +37,11 @@ const FreeBoardPage = () => {
 
   return (
     <>
-      <DescriptonBox text={text} />
+      <DescriptonBox boardType={boardType} />
       <BoardList posts={posts} />
       <Paging page={page} postCount={postCount} changePage={changePage} />
     </>
   );
 };
 
-export default FreeBoardPage;
+export default BoardPage;

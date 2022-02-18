@@ -32,8 +32,12 @@ const App = () => {
           <Switch>
             {Routes.map((route) => {
               return (
-                <Route key={route.path} exact path={route.path}>
-                  <route.component />
+                <Route
+                  key={route.path}
+                  exact
+                  path={route.path}
+                  component={route.component}>
+                  {/* <route.component /> */}
                 </Route>
               );
             })}

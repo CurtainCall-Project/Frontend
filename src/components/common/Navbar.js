@@ -53,13 +53,13 @@ const Navbar = ({ isLogin, onLogOut }) => {
               <MenuName>게시판</MenuName>
               <InnerMenu>
                 <ul>
-                  <StyledLink to="/board/free">
+                  <StyledLink to="/free">
                     <InnerMenuItem>자유게시판</InnerMenuItem>
                   </StyledLink>
-                  <StyledLink to="/board/sight">
+                  <StyledLink to="/sight">
                     <InnerMenuItem>시야게시판</InnerMenuItem>
                   </StyledLink>
-                  <StyledLink to="/board/new">
+                  <StyledLink to="/new">
                     <InnerMenuItem>새내기게시판</InnerMenuItem>
                   </StyledLink>
                 </ul>
