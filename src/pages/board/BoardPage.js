@@ -20,10 +20,6 @@ const BoardPage = (props) => {
   }, [boardType]);
 
   useEffect(() => {
-    if (boardType === 'free' || boardType === 'sight' || boardType === 'new') {
-      dispatch(setPosts(`board/${boardType}`, page));
-      return;
-    }
     dispatch(setPosts(boardType, page));
   }, [page]);
 
@@ -38,7 +34,7 @@ const BoardPage = (props) => {
   return (
     <>
       <DescriptonBox boardType={boardType} />
-      <BoardList posts={posts} />
+      <BoardList posts={posts} boardType={boardType} />
       <Paging page={page} postCount={postCount} changePage={changePage} />
     </>
   );

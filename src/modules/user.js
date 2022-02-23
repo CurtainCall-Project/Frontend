@@ -90,10 +90,10 @@ export const addNickname = (nickname) => (dispatch) => {
 };
 
 const initialUser = {
-  nickname: '',
-  profileImg: '',
-  email: '',
-  isUnique: '',
+  nickname: null,
+  profileImg: null,
+  email: null,
+  isUnique: null,
   isLogin: false,
 };
 

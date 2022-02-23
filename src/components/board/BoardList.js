@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import history from '../../history';
 const BoardList = (props) => {
   const list = props.posts;
-
+  console.log(list);
   return (
     <Table>
       <Heading>번호</Heading>
@@ -12,7 +12,9 @@ const BoardList = (props) => {
       <Heading>작성일</Heading>
       <Heading>공감수</Heading>
       {list.posts.map((list) => (
-        <Row key={list.id}>
+        <Row
+          onClick={() => history.push(`/${props.boardType}/${list.id}`)}
+          key={list.id}>
           <Column key={list.id}>{list.id}</Column>
           <Column key={list.title}>
             <div>{list.title}</div>

@@ -5,6 +5,7 @@ import PostWritePage from './pages/PostWritePage';
 import RentWritePage from './pages/RentWritePage';
 import SellWritePage from './pages/SellWritePage';
 import BoardPage from './pages/board/BoardPage';
+import PostPage from './pages/PostPage';
 import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
@@ -35,6 +36,10 @@ export default [
   {
     path: ['/free', '/sight', '/new', '/rent', '/sell'],
     component: BoardPage,
+  },
+  {
+    path: ['/free/:id', '/sight/:id', '/new/:id', '/rent/:id', '/sell/:id'],
+    component: PostPage,
   },
   {
     path: '/mypage/nickname',
