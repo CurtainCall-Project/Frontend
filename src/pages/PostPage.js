@@ -15,6 +15,8 @@ import { setPost, postLike, postScrap } from '../modules/posts';
 
 const PostPage = (props) => {
   const dispatch = useDispatch();
+  // 댓글 작성 상태관리
+  const [newComment, setNewComment] = useState('');
   // 댓글 비공개 여부
   const [secret, setSecret] = useState(false);
   // 현재 게시판 타입 받기
