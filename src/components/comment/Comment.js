@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import CommentInput from './CommentInput';
 import Reply from './Reply';
 import { Grid, Text } from '../../elements/elements';
 
 const Comment = () => {
+  const [clicked, setClicked] = useState(false);
+
+  const clickReplyButton = () => {
+    setClicked(!clicked);
+  };
+
   return (
     <>
       {/* replyList가 존재하면 대댓글을 보여준다 */}
@@ -19,12 +26,17 @@ const Comment = () => {
           </Text>
           <Grid>
             <Text font_weight="regular" width="auto">
-              2022.01.01
+              2022.01.01 14:53
             </Text>
-            <ReplyButton>답글달기</ReplyButton>
+            <ReplyButton onClick={clickReplyButton}>답글달기</ReplyButton>
           </Grid>
         </Grid>
       </CommentBox>
+      {clicked ? (
+        <Grid margin="0 0 20px 0">
+          <CommentInput width="800px" />
+        </Grid>
+      ) : null}
       <Reply />
     </>
   );

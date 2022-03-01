@@ -10,16 +10,16 @@ const SET_SCRAP = 'posts/SET_SCRAP';
 const initialState = {
   totalCount: 0,
   posts: [],
-  nowPost: {},
+  nowPost: {
+    post: {},
+    user: {},
+  },
 };
 
 // 게시글 목록을 불러오고, 스토어에 게시글 목록을 저장하는 액션 생성함수
 export const setPosts =
   (boardType, page = 1) =>
   (dispatch) => {
-    // console.log(
-    //   `보내려는 게시판의 uri는 ${boardType}이고, 페이지 번호는 ${page}이다.`
-    // );
     axios
       .get(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}?page=${page}`
@@ -33,13 +33,10 @@ export const setPosts =
 
 // 특정 게시글을 불러오고, 스토어에 특정 게시글을 저장하는 액션 생성함수
 export const setPost = (boardType, id) => (dispatch) => {
-  console.log(boardType);
-  console.log(id);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}/${id}`)
     .then((res) => {
       dispatch({ type: SET_POST, payload: res.data });
-      console.log(res.data);
     })
     .catch((error) => alert(error));
 };
@@ -48,7 +45,6 @@ export const setPost = (boardType, id) => (dispatch) => {
 export const postLike =
   (boardType, id, user, isLike) => (dispatch, getState) => {
     let nowLikeCount = getState().posts.nowPost.likeCount;
-    console.log(nowLikeCount);
     axios
       .post(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}/like/${id}`,
@@ -58,7 +54,6 @@ export const postLike =
         }
       )
       .then((res) => {
-        console.log(res.data);
         nowLikeCount = res.data.isLike ? nowLikeCount + 1 : nowLikeCount - 1;
         dispatch({
           type: SET_LIKE,
@@ -67,11 +62,10 @@ export const postLike =
       });
   };
 
-// 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
+// 스크랩 눌렀을 때 데이터 보내는 액션 생성함수
 export const postScrap =
   (boardType, id, user, isScrap) => (dispatch, getState) => {
     let nowScrapCount = getState().posts.nowPost.scrapCount;
-    console.log(nowScrapCount);
     axios
       .post(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}/scrap/${id}`,
@@ -81,7 +75,6 @@ export const postScrap =
         }
       )
       .then((res) => {
-        console.log(res.data);
         nowScrapCount = res.data.isLike ? nowScrapCount + 1 : nowScrapCount - 1;
         dispatch({
           type: SET_SCRAP,
@@ -97,11 +90,14 @@ export default handleActions(
       ({
         totalCount: action.payload.totalCount,
         posts: [...action.payload.list],
-        nowPost: {},
+        nowPost: { ...state.nowPost },
       }),
     [SET_POST]: (state, action) => ({
       ...state,
-      nowPost: action.payload,
+      nowPost: {
+        post: { ...action.payload.post },
+        user: { ...action.payload.user },
+      },
     }),
     [SET_LIKE]: (state, action) => ({
       ...state,
