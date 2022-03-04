@@ -6,12 +6,14 @@ import PostDetail from '../components/board/post/PostDetail';
 import MarketPostDetail from '../components/board/post/MarketPostDetail';
 import CommentInput from '../components/comment/CommentInput';
 import Comment from '../components/comment/Comment';
+import Reply from '../components/comment/Reply';
 import { Grid, Text } from '../elements/elements';
 
 import LikeButton from '../components/board/post/LikeButton';
 import ScrapButton from '../components/board/post/ScrapButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPost, postLike, postScrap } from '../modules/posts';
+import { addComment, setComment } from '../modules/comments';
 
 const PostPage = (props) => {
   const dispatch = useDispatch();
@@ -23,19 +25,42 @@ const PostPage = (props) => {
   const nowBoardType = props.match.path.split('/')[1];
   // 게시글 id 받기
   const postId = props.match.params.id;
-  // 유저 닉네임 불러오기
-  const user = useSelector((state) => state.user.nickname);
-
   // 첫 렌더링 시 게시글 페이지 데이터를 불러온다.
   useEffect(() => {
     dispatch(setPost(nowBoardType, postId));
   }, []);
 
+  // 댓글 데이터를 불러온다.
+  useEffect(() => {
+    dispatch(setComment(postId));
+  }, []);
+  // 유저 닉네임 불러오기
+  const user = useSelector((state) => state.user.nickname);
+
+  // 댓글 리스트 가져오기
+  const comments = useSelector((state) => state.comments.commentList);
+
+  // 댓글 추출
+  const parentComment = comments.filter(
+    (comment) => comment.parentReply === null
+  );
+
+  // 답글 추출
+  const getReplies = (id) => {
+    return comments
+      .filter((comment) => comment.parentReply === id)
+      .sort(
+        (a, b) =>
+          new Date(a.registerDate).getTime() -
+          new Date(b.registerDate).getTime()
+      );
+  };
+
   // 게시글 정보 불러오기
   const post = useSelector((state) => state.posts.nowPost.post);
   // 사용자의 게시글 좋아요, 스크랩 정보 불러오기
   const postUser = useSelector((state) => state.posts.nowPost.user);
-  const { likeCount, scrapCount } = post;
+  const { likeCount, scrapCount, nickname } = post;
   const { isLike, isScrap } = postUser;
 
   // 좋아요 클릭/취소
@@ -60,6 +85,28 @@ const PostPage = (props) => {
   const clickSecret = (e) => {
     setSecret(!secret);
     console.log(secret);
+  };
+
+  // 댓글 입력 시 상태 관리
+  const handleComment = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  // 등록 버튼 클릭 시 댓글 데이터 전송
+  const clickSubmitButton = (e) => {
+    e.preventDefault();
+    if (!user) {
+      history.push('/signin');
+      return;
+    }
+    if (!newComment) {
+      alert('댓글을 작성해주세요.');
+      return;
+    }
+    dispatch(addComment(newComment, null, secret, postId));
+    setNewComment('');
+    setSecret(false);
+    console.log('댓글을 작성했어요!');
   };
 
   const postDetail = {
@@ -91,15 +138,28 @@ const PostPage = (props) => {
       <CommentContainer>
         <Grid margin="15px 0">
           <Text width="4%">댓글</Text>
-          <Text font_weight="regular">22</Text>
+          <Text font_weight="regular">{comments.length}</Text>
         </Grid>
         <Grid margin="0 0 25px 0">
           <CommentInput
+            newComment={newComment}
             secret={secret}
-            clickSecret={clickSecret}></CommentInput>
+            clickSecret={clickSecret}
+            handleComment={handleComment}
+            clickSubmitButton={clickSubmitButton}></CommentInput>
         </Grid>
         {/* comment_list 존재하면 Commnet 컴포넌트를 보여준다 */}
-        <Comment></Comment>
+        {comments &&
+          parentComment.map((comment) => (
+            <Comment
+              key={comment.id}
+              comment={comment}
+              replies={getReplies(comment.id)}
+              user={user}
+              nickname={nickname}
+              postId={postId}
+            />
+          ))}
       </CommentContainer>
     </Container>
   );

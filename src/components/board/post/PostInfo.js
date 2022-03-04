@@ -10,11 +10,11 @@ const PostInfo = (props) => {
       <Text font_size="24px">{props.post.title}</Text>
       <Grid margin="20px 0 10px 0">
         <ProfileImg></ProfileImg>
-        <Text font_weight="regular" width="8%" margin_left="5px">
+        <Text font_weight="regular" width="7%" margin_left="5px">
           {props.post.nickname}
         </Text>
-        <Text font_weight="regular" width="15%">
-          {props.post.registerDate}
+        <Text font_weight="regular" width="18%">
+          {new Date(props.post.registerDate).toLocaleString('ko-KR')}
         </Text>
         <Text font_weight="regular" width="auto">
           조회수 {props.post.viewCount + 1}

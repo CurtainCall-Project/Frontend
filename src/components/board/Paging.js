@@ -14,7 +14,8 @@ const Paging = (props) => {
         pageRangeDisplayed={itemCount}
         prevPageText={'<'}
         nextPageText={'>'}
-        onChange={props.changePage}></Pagination>
+        onChange={props.changePage}
+      />
     </PaginationWrapper>
   );
 };

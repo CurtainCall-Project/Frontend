@@ -1,16 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import Comment from './Comment';
 import { Grid, Text } from '../../elements/elements';
-const Reply = () => {
+
+const Reply = (props) => {
+  const registerDate = new Date(props.reply.registerDate).toLocaleString(
+    'ko-KR'
+  );
   return (
     <ReplyBox>
       <ProfileImg></ProfileImg>
-      <Grid display="block">
-        <Text width="8%">닉네임</Text>
-        <Text font_weight="regular">답글이 보이는 공간입니다</Text>
+      <Grid display="block" margin="5px 0">
+        <Text width="8%">{props.reply.nickname}</Text>
+        <Text font_weight="regular">
+          {props.reply.secret &&
+            (props.user === props.nickname ? (
+              <Text font_weight="regular">{props.reply.replyContent}</Text>
+            ) : props.comment.id === props.reply.parentReply &&
+              props.user === props.comment.nickname ? (
+              <Text font_weight="regular">{props.reply.replyContent}</Text>
+            ) : (
+              '비밀 댓글입니다.'
+            ))}
+        </Text>
         <Grid>
           <Text font_weight="regular" width="auto">
-            2022.01.01
+            {registerDate}
           </Text>
         </Grid>
       </Grid>
@@ -24,7 +39,8 @@ const ReplyBox = styled.div`
   border-radius: 5px;
   background-color: #e5e0f0;
   display: flex;
-  line-height: 22px;
+  line-height: 24px;
+  margin-bottom: 10px;
 `;
 
 const ProfileImg = styled.div`
@@ -32,7 +48,8 @@ const ProfileImg = styled.div`
   height: 20px;
   background-color: gray;
   border-radius: 10px;
-  margin-top: 5px;
+  margin: 5px 10px 0 7px;
+  margin-right: 10px;
 `;
 
 export default Reply;

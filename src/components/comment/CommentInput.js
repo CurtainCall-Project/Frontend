@@ -7,12 +7,20 @@ import { ReactComponent as ActiveCheckIcon } from '../../assets/active_check_ico
 const CommentInput = (props) => {
   return (
     <Container width={props.width}>
-      <InputBox placeholder="댓글 남기기" />
-      <SecretBox secret={props.secret} onClick={props.clickSecret}>
+      <InputBox
+        width={props.width}
+        placeholder="댓글 남기기"
+        value={props.newComment}
+        onChange={props.handleComment}
+      />
+      <SecretBox
+        width={props.width}
+        secret={props.secret}
+        onClick={props.clickSecret}>
         {props.secret ? <ActiveCheckIcon /> : <CheckIcon />}
         <Name>비밀</Name>
       </SecretBox>
-      <Button width="60px" height="30px;">
+      <Button width="60px" height="30px" onClick={props.clickSubmitButton}>
         등록
       </Button>
     </Container>
@@ -21,7 +29,7 @@ const CommentInput = (props) => {
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: ${(props) => (props.width ? '800px' : '1000px')}
+  width: ${(props) => (props.width ? `${props.width}` : '1000px')};
   height: 35px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.borderGray};
@@ -30,8 +38,8 @@ const Container = styled.div`
   ${({ theme }) => theme.verticalCenter};
 `;
 const InputBox = styled.input`
-  width: 920px;
-  height: 31px;
+  width: ${(props) => (props.width ? '830px' : '920px')};
+  height: 33px;
   border: none;
   outline: none;
   margin-right: 10px;
@@ -48,7 +56,6 @@ const SecretBox = styled.div`
 `;
 
 const Name = styled.div`
-  //border: 1px solid;
   margin-left: 6px;
   margin-top: 4px;
   text-align: center;

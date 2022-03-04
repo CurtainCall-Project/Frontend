@@ -9,7 +9,7 @@ const BoardPage = (props) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [boardType, setBoardType] = useState(props.match.path.split('/')[1]);
-
+  console.log(boardType);
   // 렌더링될 때마다 boardType을 저장한다.
   useEffect(() => {
     setBoardType(props.match.path.split('/')[1]);
@@ -21,14 +21,13 @@ const BoardPage = (props) => {
 
   useEffect(() => {
     dispatch(setPosts(boardType, page));
-  }, [page]);
+  }, [boardType, page]);
 
   const posts = useSelector((state) => state.posts);
   const postCount = posts.totalCount;
 
   const changePage = (page) => {
     setPage(page);
-    console.log(page);
   };
 
   return (
