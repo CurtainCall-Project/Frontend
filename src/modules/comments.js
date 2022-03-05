@@ -11,7 +11,8 @@ const initialState = {
 
 // 댓글 추가하는 액션 생성함수
 export const addComment =
-  (replyContent, parentId, secret, postId) => (dispatch) => {
+  (replyContent, parentId, postId, secret = null) =>
+  (dispatch) => {
     console.log(replyContent);
     console.log(parentId);
     axios

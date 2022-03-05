@@ -6,7 +6,7 @@ import PostDetail from '../components/board/post/PostDetail';
 import MarketPostDetail from '../components/board/post/MarketPostDetail';
 import CommentInput from '../components/comment/CommentInput';
 import Comment from '../components/comment/Comment';
-import Reply from '../components/comment/Reply';
+import Paging from '../components/board/Paging';
 import { Grid, Text } from '../elements/elements';
 
 import LikeButton from '../components/board/post/LikeButton';
@@ -21,6 +21,8 @@ const PostPage = (props) => {
   const [newComment, setNewComment] = useState('');
   // 댓글 비공개 여부
   const [secret, setSecret] = useState(false);
+  // 댓글 페이지 상태관리
+  const [page, setPage] = useState(1);
   // 현재 게시판 타입 받기
   const nowBoardType = props.match.path.split('/')[1];
   // 게시글 id 받기
@@ -56,11 +58,34 @@ const PostPage = (props) => {
       );
   };
 
+  const [startIndex, setStartIndex] = useState(0);
+  // 각 페이지 별 댓글 렌더링
+  const changeComments = (a) => {
+    let pageComments = parentComment.slice(a, a + 5);
+    console.log(pageComments);
+    return pageComments.map((comment) => (
+      <Comment
+        key={comment.id}
+        comment={comment}
+        replies={getReplies(comment.id)}
+        user={user}
+        nickname={nickname}
+        postId={postId}
+        boardType={boardType}
+      />
+    ));
+  };
+  // 댓글 페이지 변경
+  const changePage = (page) => {
+    setPage(page);
+    setStartIndex((page - 1) * 5);
+  };
+
   // 게시글 정보 불러오기
   const post = useSelector((state) => state.posts.nowPost.post);
   // 사용자의 게시글 좋아요, 스크랩 정보 불러오기
   const postUser = useSelector((state) => state.posts.nowPost.user);
-  const { likeCount, scrapCount, nickname } = post;
+  const { likeCount, scrapCount, nickname, boardType } = post;
   const { isLike, isScrap } = postUser;
 
   // 좋아요 클릭/취소
@@ -103,10 +128,16 @@ const PostPage = (props) => {
       alert('댓글을 작성해주세요.');
       return;
     }
-    dispatch(addComment(newComment, null, secret, postId));
+    if (boardType === 'rent' || boardType === 'sell') {
+      dispatch(addComment(newComment, null, postId, secret));
+      setNewComment('');
+      setSecret(false);
+      console.log('대여, 거래 댓글을 작성했어요!');
+      return;
+    }
+    dispatch(addComment(newComment, null, postId));
     setNewComment('');
-    setSecret(false);
-    console.log('댓글을 작성했어요!');
+    console.log('자유, 시야, 새내기 댓글을 작성했어요!');
   };
 
   const postDetail = {
@@ -146,20 +177,31 @@ const PostPage = (props) => {
             secret={secret}
             clickSecret={clickSecret}
             handleComment={handleComment}
-            clickSubmitButton={clickSubmitButton}></CommentInput>
+            clickSubmitButton={clickSubmitButton}
+            boardType={boardType}></CommentInput>
         </Grid>
         {/* comment_list 존재하면 Commnet 컴포넌트를 보여준다 */}
-        {comments &&
-          parentComment.map((comment) => (
-            <Comment
-              key={comment.id}
-              comment={comment}
-              replies={getReplies(comment.id)}
-              user={user}
-              nickname={nickname}
-              postId={postId}
-            />
-          ))}
+        {comments.length > 0 && changeComments(startIndex)}
+        {/* {comments.length > 0 &&
+          parentComment
+            .slice(0, 5)
+            .map((comment) => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                replies={getReplies(comment.id)}
+                user={user}
+                nickname={nickname}
+                postId={postId}
+                boardType={boardType}
+              />
+            ))} */}
+        <Paging
+          page={page}
+          itemsCount={5}
+          totalItemsCount={parentComment.length}
+          changePage={changePage}
+        />
       </CommentContainer>
     </Container>
   );

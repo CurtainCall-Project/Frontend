@@ -46,13 +46,20 @@ const Comment = (props) => {
       alert('댓글을 작성해주세요.');
       return;
     }
-    dispatch(addComment(newReply, props.comment.id, replySecret, props.postId));
+    if (props.boardType === 'rent' || props.boardType === 'sell') {
+      dispatch(
+        addComment(newReply, props.comment.id, props.postId, replySecret)
+      );
+      setNewReply('');
+      setReplySecret(false);
+      console.log('대여, 거래 답글을 작성했어요!');
+      return;
+    }
+    dispatch(addComment(newReply, null, props.postId));
     setNewReply('');
-    console.log('댓글을 작성했어요!');
+    console.log('자유, 시야, 새내기 댓글을 작성했어요!');
   };
 
-  console.log(props.user);
-  console.log(props.comment.nickname);
   return (
     <>
       {/* replyList가 존재하면 대댓글을 보여준다 */}
@@ -89,6 +96,7 @@ const Comment = (props) => {
                 clickSecret={clickReplySecret}
                 handleComment={handleReply}
                 clickSubmitButton={clickSubmitButton}
+                boardType={props.boardType}
               />
             </Grid>
           ) : null}

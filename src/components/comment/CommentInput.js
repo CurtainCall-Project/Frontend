@@ -13,16 +13,22 @@ const CommentInput = (props) => {
         value={props.newComment}
         onChange={props.handleComment}
       />
-      <SecretBox
-        width={props.width}
-        secret={props.secret}
-        onClick={props.clickSecret}>
-        {props.secret ? <ActiveCheckIcon /> : <CheckIcon />}
-        <Name>비밀</Name>
-      </SecretBox>
-      <Button width="60px" height="30px" onClick={props.clickSubmitButton}>
+      {(props.boardType === 'rent' || props.boardType === 'sell') && (
+        <SecretBox
+          width={props.width}
+          secret={props.secret}
+          onClick={props.clickSecret}>
+          {props.secret ? <ActiveCheckIcon /> : <CheckIcon />}
+          <Name>비밀</Name>
+        </SecretBox>
+      )}
+
+      <EnrollButton
+        width="60px"
+        height="30px"
+        onClick={props.clickSubmitButton}>
         등록
-      </Button>
+      </EnrollButton>
     </Container>
   );
 };
@@ -36,9 +42,10 @@ const Container = styled.div`
   overflow: hidden;
   font-size: ${({ theme }) => theme.middleFontSize};
   ${({ theme }) => theme.verticalCenter};
+  position: relative;
 `;
 const InputBox = styled.input`
-  width: ${(props) => (props.width ? '830px' : '920px')};
+  width: ${(props) => (props.width ? '835px' : '855px')};
   height: 33px;
   border: none;
   outline: none;
@@ -59,5 +66,9 @@ const Name = styled.div`
   margin-left: 6px;
   margin-top: 4px;
   text-align: center;
+`;
+const EnrollButton = styled(Button)`
+  position: absolute;
+  right: 3px;
 `;
 export default CommentInput;

@@ -4,13 +4,13 @@ import Pagination from 'react-js-pagination';
 
 const Paging = (props) => {
   const [itemCount, setItemCount] = useState(5);
-
+  console.log(props.page);
   return (
     <PaginationWrapper>
       <Pagination
         activePage={props.page}
-        itemsCountPerPage={13}
-        totalItemsCount={props.postCount}
+        itemsCountPerPage={props.itemsCount || 13}
+        totalItemsCount={props.totalItemsCount}
         pageRangeDisplayed={itemCount}
         prevPageText={'<'}
         nextPageText={'>'}
