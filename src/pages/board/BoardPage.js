@@ -3,19 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import BoardList from '../../components/board/BoardList';
 import DescriptonBox from '../../components/board/DescriptionBox';
 import Paging from '../../components/board/Paging';
-import { setPosts } from '../../modules/posts';
+import { setHotPosts, setPosts } from '../../modules/posts';
 
 const BoardPage = (props) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [boardType, setBoardType] = useState(props.match.path.split('/')[1]);
-  console.log(boardType);
-  // 렌더링될 때마다 boardType을 저장한다.
+
+  //렌더링될 때마다 boardType을 저장한다.
   useEffect(() => {
     setBoardType(props.match.path.split('/')[1]);
   });
 
   useEffect(() => {
+    dispatch(setHotPosts(boardType));
     setPage(1);
   }, [boardType]);
 

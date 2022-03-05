@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
 
+const SET_HOT_POSTS = 'posts/SET_HOT_POSTS';
 const SET_POSTS = 'posts/SET_POSTS'; // 게시글 목록 데이터를 저장하는 액션 타입
 const SET_POST = 'posts/SET_POST'; // 특정 id를 갖는 게시글 데이터를 저장하는 액션 타입
 const SET_LIKE = 'posts/SET_LIKE';
@@ -10,9 +11,19 @@ const SET_SCRAP = 'posts/SET_SCRAP';
 const initialState = {
   totalCount: 0,
   posts: [],
+  hotPosts: [],
   nowPost: {},
 };
 
+// 핫게시글 목록을 불러오고, 스토어에 핫게시글 목록을 저장하는 액션 생성함수
+export const setHotPosts = (boardType) => (dispatch) => {
+  axios
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/hot/${boardType}`)
+    .then((res) => {
+      dispatch({ type: SET_HOT_POSTS, payload: res.data });
+    })
+    .catch((error) => alert(error));
+};
 // 게시글 목록을 불러오고, 스토어에 게시글 목록을 저장하는 액션 생성함수
 export const setPosts =
   (boardType, page = 1) =>
@@ -75,9 +86,14 @@ export const postScrap = (id, user, scrap) => (dispatch, getState) => {
 
 export default handleActions(
   {
+    [SET_HOT_POSTS]: (state, action) => ({
+      ...state,
+      hotPosts: [...action.payload.list],
+    }),
     [SET_POSTS]: (state, action) =>
       // (state = state.posts.concat(action.payload.free)),
       ({
+        ...state,
         totalCount: action.payload.totalCount,
         posts: [...action.payload.list],
         nowPost: { ...state.nowPost },

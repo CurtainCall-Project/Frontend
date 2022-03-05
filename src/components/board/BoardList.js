@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
+import { ReactComponent as BestIcon } from '../../assets/best_icon.svg';
+
 const BoardList = (props) => {
   const list = props.posts;
-  console.log(list);
   return (
     <Table>
       <Heading>번호</Heading>
@@ -11,6 +12,25 @@ const BoardList = (props) => {
       <Heading>글쓴이</Heading>
       <Heading>작성일</Heading>
       <Heading>공감수</Heading>
+      {list.hotPosts.map((list) => (
+        <BestRow
+          onClick={() => history.push(`/${props.boardType}/${list.id}`)}
+          key={list.id}>
+          <Column key={list.id}>
+            <IconContainer>
+              <BestIcon />
+            </IconContainer>
+          </Column>
+          <Column key={list.title}>
+            <div>{list.title}</div>
+          </Column>
+          <Column key={list.nickname}>{list.nickname}</Column>
+          <Column key={list.registerDate}>
+            {new Date(list.registerDate).toLocaleDateString('ko-KR')}
+          </Column>
+          <Column key={list.likeCount}>{list.likeCount}</Column>
+        </BestRow>
+      ))}
       {list.posts.map((list) => (
         <Row
           onClick={() => history.push(`/${props.boardType}/${list.id}`)}
@@ -51,6 +71,14 @@ const Row = styled.div`
     background-color: ${({ theme }) => theme.darkGray};
   }
 `;
+const BestRow = styled.div`
+  display: table-row;
+  line-height: 50px;
+  background-color: #eae7ef;
+  &:hover {
+    background-color: #e5d9fe;
+  }
+`;
 const Column = styled.div`
   display: table-cell;
   border-top: 1px solid ${({ theme }) => theme.white};
@@ -58,6 +86,7 @@ const Column = styled.div`
 
   &:first-child {
     width: 100px;
+    vertical-align: middle;
   }
   &:nth-child(2) {
     width: 500px;
@@ -78,5 +107,9 @@ const Column = styled.div`
   &:last-child {
     width: 100px;
   }
+`;
+const IconContainer = styled.div`
+  ${({ theme }) => theme.verticalCenter};
+  justify-content: center;
 `;
 export default BoardList;
