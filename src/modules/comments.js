@@ -13,8 +13,6 @@ const initialState = {
 export const addComment =
   (replyContent, parentId, postId, secret = null) =>
   (dispatch) => {
-    console.log(replyContent);
-    console.log(parentId);
     axios
       .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`, {
         replyContent: replyContent,
@@ -22,7 +20,6 @@ export const addComment =
         secret: secret,
       })
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: ADD_COMMENT, payload: res.data });
       });
   };
@@ -32,7 +29,6 @@ export const setComment = (postId) => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: SET_COMMENT, payload: res.data });
     });
 };

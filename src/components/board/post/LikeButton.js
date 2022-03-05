@@ -5,7 +5,7 @@ import { ReactComponent as HeartIcon } from '../../../assets/heart_icon.svg';
 const LikeButton = (props) => {
   return (
     <>
-      <Button onClick={props.clickLike} isLike={props.isLike}>
+      <Button onClick={props.clickLike} like={props.like}>
         <HeartIconWrapper />
         <LikeCount>{props.likeCount}</LikeCount>
       </Button>
@@ -27,7 +27,7 @@ const Button = styled.div`
     background-color: #fccadc;
     transition: 0.2s;
   }
-  ${(props) => props.isLike && `background-color: #fccadc`};
+  ${(props) => props.like && `background-color: #fccadc`};
 `;
 
 const HeartIconWrapper = styled(HeartIcon)`

@@ -10,10 +10,7 @@ const SET_SCRAP = 'posts/SET_SCRAP';
 const initialState = {
   totalCount: 0,
   posts: [],
-  nowPost: {
-    post: {},
-    user: {},
-  },
+  nowPost: {},
 };
 
 // 게시글 목록을 불러오고, 스토어에 게시글 목록을 저장하는 액션 생성함수
@@ -22,7 +19,7 @@ export const setPosts =
   (dispatch) => {
     axios
       .get(
-        `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}?page=${page}`
+        `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/list/${boardType}?page=${page}`
       )
       .then((res) => {
         //console.log(res.data.free);
@@ -32,9 +29,9 @@ export const setPosts =
   };
 
 // 특정 게시글을 불러오고, 스토어에 특정 게시글을 저장하는 액션 생성함수
-export const setPost = (boardType, id) => (dispatch) => {
+export const setPost = (id) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}/${id}`)
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${id}`)
     .then((res) => {
       dispatch({ type: SET_POST, payload: res.data });
     })
@@ -42,46 +39,39 @@ export const setPost = (boardType, id) => (dispatch) => {
 };
 
 // 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
-export const postLike =
-  (boardType, id, user, isLike) => (dispatch, getState) => {
-    let nowLikeCount = getState().posts.nowPost.likeCount;
-    axios
-      .post(
-        `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}/like/${id}`,
-        {
-          nickname: user,
-          isLke: isLike,
-        }
-      )
-      .then((res) => {
-        nowLikeCount = res.data.isLike ? nowLikeCount + 1 : nowLikeCount - 1;
-        dispatch({
-          type: SET_LIKE,
-          payload: { ...res.data, likeCount: nowLikeCount },
-        });
+export const postLike = (id, user, like) => (dispatch, getState) => {
+  let nowLikeCount = getState().posts.nowPost.likeCount;
+  axios
+    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/like/${id}`, {
+      nickname: user,
+      lke: like,
+    })
+    .then((res) => {
+      nowLikeCount = res.data.like ? nowLikeCount + 1 : nowLikeCount - 1;
+      dispatch({
+        type: SET_LIKE,
+        payload: { ...res.data, likeCount: nowLikeCount },
       });
-  };
+    });
+};
 
 // 스크랩 눌렀을 때 데이터 보내는 액션 생성함수
-export const postScrap =
-  (boardType, id, user, isScrap) => (dispatch, getState) => {
-    let nowScrapCount = getState().posts.nowPost.scrapCount;
-    axios
-      .post(
-        `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}/scrap/${id}`,
-        {
-          nickname: user,
-          isScrap: isScrap,
-        }
-      )
-      .then((res) => {
-        nowScrapCount = res.data.isLike ? nowScrapCount + 1 : nowScrapCount - 1;
-        dispatch({
-          type: SET_SCRAP,
-          payload: { ...res.data, scrapCount: nowScrapCount },
-        });
+export const postScrap = (id, user, scrap) => (dispatch, getState) => {
+  let nowScrapCount = getState().posts.nowPost.scrapCount;
+  axios
+    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/scrap/${id}`, {
+      nickname: user,
+      scrap: scrap,
+    })
+    .then((res) => {
+      console.log(res.data);
+      nowScrapCount = res.data.scrap ? nowScrapCount + 1 : nowScrapCount - 1;
+      dispatch({
+        type: SET_SCRAP,
+        payload: { ...res.data, scrapCount: nowScrapCount },
       });
-  };
+    });
+};
 
 export default handleActions(
   {
@@ -95,15 +85,14 @@ export default handleActions(
     [SET_POST]: (state, action) => ({
       ...state,
       nowPost: {
-        post: { ...action.payload.post },
-        user: { ...action.payload.user },
+        ...action.payload,
       },
     }),
     [SET_LIKE]: (state, action) => ({
       ...state,
       nowPost: {
         ...state.nowPost,
-        isLike: action.payload.isLike,
+        like: action.payload.like,
         likeCount: action.payload.likeCount,
       },
     }),
@@ -111,7 +100,7 @@ export default handleActions(
       ...state,
       nowPost: {
         ...state.nowPost,
-        isScrap: action.payload.isScrap,
+        scrap: action.payload.scrap,
         scrapCount: action.payload.scrapCount,
       },
     }),

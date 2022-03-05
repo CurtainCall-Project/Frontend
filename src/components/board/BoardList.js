@@ -20,7 +20,9 @@ const BoardList = (props) => {
             <div>{list.title}</div>
           </Column>
           <Column key={list.nickname}>{list.nickname}</Column>
-          <Column key={list.datee}>{list.date}</Column>
+          <Column key={list.registerDate}>
+            {new Date(list.registerDate).toLocaleDateString('ko-KR')}
+          </Column>
           <Column key={list.likeCount}>{list.likeCount}</Column>
         </Row>
       ))}

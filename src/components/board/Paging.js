@@ -4,7 +4,6 @@ import Pagination from 'react-js-pagination';
 
 const Paging = (props) => {
   const [itemCount, setItemCount] = useState(5);
-  console.log(props.page);
   return (
     <PaginationWrapper>
       <Pagination

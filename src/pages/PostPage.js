@@ -26,10 +26,11 @@ const PostPage = (props) => {
   // 현재 게시판 타입 받기
   const nowBoardType = props.match.path.split('/')[1];
   // 게시글 id 받기
-  const postId = props.match.params.id;
+  const postId = props.match.url.split('/')[2];
+
   // 첫 렌더링 시 게시글 페이지 데이터를 불러온다.
   useEffect(() => {
-    dispatch(setPost(nowBoardType, postId));
+    dispatch(setPost(postId));
   }, []);
 
   // 댓글 데이터를 불러온다.
@@ -62,7 +63,6 @@ const PostPage = (props) => {
   // 각 페이지 별 댓글 렌더링
   const changeComments = (a) => {
     let pageComments = parentComment.slice(a, a + 5);
-    console.log(pageComments);
     return pageComments.map((comment) => (
       <Comment
         key={comment.id}
@@ -82,11 +82,8 @@ const PostPage = (props) => {
   };
 
   // 게시글 정보 불러오기
-  const post = useSelector((state) => state.posts.nowPost.post);
-  // 사용자의 게시글 좋아요, 스크랩 정보 불러오기
-  const postUser = useSelector((state) => state.posts.nowPost.user);
-  const { likeCount, scrapCount, nickname, boardType } = post;
-  const { isLike, isScrap } = postUser;
+  const post = useSelector((state) => state.posts.nowPost);
+  const { boardType, nickname, likeCount, scrapCount, like, scrap } = post;
 
   // 좋아요 클릭/취소
   const clickLike = (e) => {
@@ -94,7 +91,7 @@ const PostPage = (props) => {
       history.push('/signin');
       return;
     }
-    dispatch(postLike(nowBoardType, postId, user, !isLike));
+    dispatch(postLike(postId, user, !like));
   };
 
   // 스크랩 클릭/취소
@@ -103,13 +100,12 @@ const PostPage = (props) => {
       history.push('/signin');
       return;
     }
-    dispatch(postScrap(nowBoardType, postId, user, !isScrap));
+    dispatch(postScrap(postId, user, !scrap));
   };
 
   // 댓글 비공개 설정
   const clickSecret = (e) => {
     setSecret(!secret);
-    console.log(secret);
   };
 
   // 댓글 입력 시 상태 관리
@@ -154,14 +150,10 @@ const PostPage = (props) => {
         <PostInfo post={post} />
         {postDetail[nowBoardType]}
         <Grid justify_content="center " margin="25px 0 0 0">
-          <LikeButton
-            clickLike={clickLike}
-            isLike={isLike}
-            likeCount={likeCount}
-          />
+          <LikeButton clickLike={clickLike} like={like} likeCount={likeCount} />
           <ScrapButton
             clickScrap={clickScrap}
-            isScrap={isScrap}
+            scrap={scrap}
             scrapCount={scrapCount}
           />
         </Grid>
@@ -182,20 +174,6 @@ const PostPage = (props) => {
         </Grid>
         {/* comment_list 존재하면 Commnet 컴포넌트를 보여준다 */}
         {comments.length > 0 && changeComments(startIndex)}
-        {/* {comments.length > 0 &&
-          parentComment
-            .slice(0, 5)
-            .map((comment) => (
-              <Comment
-                key={comment.id}
-                comment={comment}
-                replies={getReplies(comment.id)}
-                user={user}
-                nickname={nickname}
-                postId={postId}
-                boardType={boardType}
-              />
-            ))} */}
         <Paging
           page={page}
           itemsCount={5}

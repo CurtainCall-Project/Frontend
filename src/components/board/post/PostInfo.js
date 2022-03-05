@@ -17,7 +17,7 @@ const PostInfo = (props) => {
           {new Date(props.post.registerDate).toLocaleString('ko-KR')}
         </Text>
         <Text font_weight="regular" width="auto">
-          조회수 {props.post.viewCount + 1}
+          조회수 {props.post.views + 1}
         </Text>
       </Grid>
     </Container>

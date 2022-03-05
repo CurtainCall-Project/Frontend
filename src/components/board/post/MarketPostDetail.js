@@ -9,7 +9,7 @@ const MarketPostDetail = (props) => {
       <Grid>
         <Text width="7%">기종</Text>
         <Text width="30%" font_weight="regular">
-          {props.post.item}
+          {props.post.product}
         </Text>
         <Text width="7%">가격</Text>
         <Text width="30%" font_weight="regular">
@@ -21,7 +21,7 @@ const MarketPostDetail = (props) => {
           <>
             <Text width="7%">대여기간</Text>
             <Text width="30%" font_weight="regular">
-              {props.post.period}
+              {props.post.term}
             </Text>
           </>
         )}

@@ -5,7 +5,7 @@ import { ReactComponent as ScrapIcon } from '../../../assets/scrap_icon.svg';
 const ScrapButton = (props) => {
   return (
     <>
-      <Button onClick={props.clickScrap} isScrap={props.isScrap}>
+      <Button onClick={props.clickScrap} scrap={props.scrap}>
         <ScrapIconWrapper />
         <ScrapCount>{props.scrapCount}</ScrapCount>
       </Button>
@@ -26,7 +26,7 @@ const Button = styled.div`
     background-color: #dddcf0;
     transition: 0.2s;
   }
-  ${(props) => props.isScrap && `background-color: #dddcf0`};
+  ${(props) => props.scrap && `background-color: #dddcf0`};
 `;
 
 const ScrapIconWrapper = styled(ScrapIcon)`

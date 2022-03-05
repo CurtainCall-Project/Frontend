@@ -27,7 +27,6 @@ const Comment = (props) => {
   // 답글 비공개 설정
   const clickReplySecret = (e) => {
     setReplySecret(!replySecret);
-    console.log(replySecret);
   };
 
   // 답글 입력 시 상태 관리

@@ -24,6 +24,7 @@ const BoardPage = (props) => {
   }, [boardType, page]);
 
   const posts = useSelector((state) => state.posts);
+  console.log(posts);
   const totalItemsCount = posts.totalCount;
 
   const changePage = (page) => {
