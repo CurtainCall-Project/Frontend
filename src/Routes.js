@@ -4,6 +4,8 @@ import SignInPage from './pages/signin/SigninPage';
 import PostWritePage from './pages/PostWritePage';
 import RentWritePage from './pages/RentWritePage';
 import SellWritePage from './pages/SellWritePage';
+import BoardPage from './pages/board/BoardPage';
+import PostPage from './pages/PostPage';
 import FreeBoardPage from './pages/FreeBoardPage';
 import SightBoardPage from './pages/SightBoardPage';
 import NewBoardPage from './pages/NewBoardPage';
@@ -41,10 +43,12 @@ export default [
     component: SellWritePage,
   },
   {
-    path: '/free_board',
-    component: FreeBoardPage,
+    path: ['/free', '/sight', '/new', '/rent', '/sell'],
+    component: BoardPage,
   },
   {
+    path: ['/free/:id', '/sight/:id', '/new/:id', '/rent/:id', '/sell/:id'],
+    component: PostPage,
     path: '/sight_board',
     component: SightBoardPage,
   },
