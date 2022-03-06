@@ -26,7 +26,9 @@ const BoardList = (props) => {
           </Column>
           <Column key={list.nickname}>{list.nickname}</Column>
           <Column key={list.registerDate}>
-            {new Date(list.registerDate).toLocaleDateString('ko-KR')}
+            {new Date(list.registerDate)
+              .toLocaleDateString('ko-KR')
+              .slice(0, -1)}
           </Column>
           <Column key={list.likeCount}>{list.likeCount}</Column>
         </BestRow>
@@ -41,7 +43,9 @@ const BoardList = (props) => {
           </Column>
           <Column key={list.nickname}>{list.nickname}</Column>
           <Column key={list.registerDate}>
-            {new Date(list.registerDate).toLocaleDateString('ko-KR')}
+            {new Date(list.registerDate)
+              .toLocaleDateString('ko-KR')
+              .slice(0, -1)}
           </Column>
           <Column key={list.likeCount}>{list.likeCount}</Column>
         </Row>

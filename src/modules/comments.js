@@ -11,8 +11,9 @@ const initialState = {
 
 // 댓글 추가하는 액션 생성함수
 export const addComment =
-  (replyContent, parentId, postId, secret = null) =>
+  (replyContent, parentId, postId, secret = false) =>
   (dispatch) => {
+    console.log(secret);
     axios
       .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`, {
         replyContent: replyContent,

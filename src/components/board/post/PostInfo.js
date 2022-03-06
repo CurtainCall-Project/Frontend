@@ -5,11 +5,12 @@ import styled from 'styled-components';
 import { Grid, Text } from '../../../elements/elements';
 
 const PostInfo = (props) => {
+  console.log(props.post);
   return (
     <Container>
       <Text font_size="24px">{props.post.title}</Text>
       <Grid margin="20px 0 10px 0">
-        <ProfileImg></ProfileImg>
+        <ProfileImg src={props.post.profileImg}></ProfileImg>
         <Text font_weight="regular" width="7%" margin_left="5px">
           {props.post.nickname}
         </Text>
@@ -30,10 +31,10 @@ const Container = styled.div`
 `;
 
 // 프로필 이미지 나중에 img 태그로 수정할 것
-const ProfileImg = styled.div`
+const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
-  background-color: gray;
   border-radius: 10px;
+  background-position: center;
 `;
 export default PostInfo;

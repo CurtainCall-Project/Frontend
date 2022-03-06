@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { Grid, Text } from '../../../elements/elements';
 
 const MarketPostDetail = (props) => {
+  const priceWithCommas = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
   return (
     <Container>
       <Grid>
@@ -13,11 +16,11 @@ const MarketPostDetail = (props) => {
         </Text>
         <Text width="7%">가격</Text>
         <Text width="30%" font_weight="regular">
-          {props.post.price}원
+          {priceWithCommas(props.post.price)}원
         </Text>
       </Grid>
       <Grid margin="15px 0">
-        {props.nowBoardType === 'rent' && (
+        {props.boardType === 'rent' && (
           <>
             <Text width="7%">대여기간</Text>
             <Text width="30%" font_weight="regular">
@@ -32,6 +35,9 @@ const MarketPostDetail = (props) => {
         </Text>
       </Grid>
       <Text font_weight="regular">{props.post.content}</Text>
+      {props.post.boardImgs.map((image) => (
+        <Image src={image} />
+      ))}
     </Container>
   );
 };
@@ -42,5 +48,9 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-
+const Image = styled.img`
+  max-width: 60%;
+  height: auto;
+  margin: 20px 0;
+`;
 export default MarketPostDetail;

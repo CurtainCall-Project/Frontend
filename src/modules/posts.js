@@ -41,9 +41,11 @@ export const setPosts =
 
 // 특정 게시글을 불러오고, 스토어에 특정 게시글을 저장하는 액션 생성함수
 export const setPost = (id) => (dispatch) => {
+  console.log(id);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${id}`)
     .then((res) => {
+      console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
     })
     .catch((error) => alert(error));

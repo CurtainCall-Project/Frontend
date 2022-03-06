@@ -37,8 +37,13 @@ const PostPage = (props) => {
   useEffect(() => {
     dispatch(setComment(postId));
   }, []);
+
   // 유저 닉네임 불러오기
   const user = useSelector((state) => state.user.nickname);
+
+  // 게시글 정보 불러오기
+  const post = useSelector((state) => state.posts.nowPost);
+  const { boardType, nickname, likeCount, scrapCount, like, scrap } = post;
 
   // 댓글 리스트 가져오기
   const comments = useSelector((state) => state.comments.commentList);
@@ -80,10 +85,6 @@ const PostPage = (props) => {
     setPage(page);
     setStartIndex((page - 1) * 5);
   };
-
-  // 게시글 정보 불러오기
-  const post = useSelector((state) => state.posts.nowPost);
-  const { boardType, nickname, likeCount, scrapCount, like, scrap } = post;
 
   // 좋아요 클릭/취소
   const clickLike = (e) => {
@@ -140,15 +141,15 @@ const PostPage = (props) => {
     free: <PostDetail post={post} />,
     sight: <PostDetail post={post} />,
     new: <PostDetail post={post} />,
-    rent: <MarketPostDetail nowBoardType={nowBoardType} post={post} />,
-    sell: <MarketPostDetail nowBoardType={nowBoardType} post={post} />,
+    rent: <MarketPostDetail boardType={boardType} post={post} />,
+    sell: <MarketPostDetail boardType={boardType} post={post} />,
   };
 
   return (
     <Container>
       <PostContainer>
         <PostInfo post={post} />
-        {postDetail[nowBoardType]}
+        {postDetail[boardType]}
         <Grid justify_content="center " margin="25px 0 0 0">
           <LikeButton clickLike={clickLike} like={like} likeCount={likeCount} />
           <ScrapButton
