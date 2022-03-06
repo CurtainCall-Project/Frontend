@@ -82,8 +82,12 @@ const Navbar = ({ isLogin, onLogOut }) => {
               <MenuName>공연후기</MenuName>
               <InnerMenu>
                 <ul>
-                  <InnerMenuItem>공연후기 작성</InnerMenuItem>
-                  <InnerMenuItem>내가 쓴 후기</InnerMenuItem>
+                  <StyledLink to="/reviews/search">
+                    <InnerMenuItem>공연후기 작성</InnerMenuItem>
+                  </StyledLink>
+                  <StyledLink to="/reviews">
+                    <InnerMenuItem>내가 쓴 후기</InnerMenuItem>
+                  </StyledLink>
                 </ul>
               </InnerMenu>
             </MenuItem>
