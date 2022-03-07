@@ -6,11 +6,6 @@ import RentWritePage from './pages/RentWritePage';
 import SellWritePage from './pages/SellWritePage';
 import BoardPage from './pages/board/BoardPage';
 import PostPage from './pages/PostPage';
-import FreeBoardPage from './pages/FreeBoardPage';
-import SightBoardPage from './pages/SightBoardPage';
-import NewBoardPage from './pages/NewBoardPage';
-import RentPage from './pages/RentPage';
-import MarketPage from './pages/MarketPage';
 import ReviewSearchPage from './pages/review/ReviewSearchPage';
 import ReviewWritePage from './pages/review/ReviewWritePage';
 import ReviewsPage from './pages/review/ReviewsPage';
@@ -49,16 +44,6 @@ export default [
   {
     path: ['/free/:id', '/sight/:id', '/new/:id', '/rent/:id', '/sell/:id'],
     component: PostPage,
-    path: '/sight_board',
-    component: SightBoardPage,
-  },
-  {
-    path: '/new_board',
-    component: NewBoardPage,
-  },
-  {
-    path: '/market',
-    component: MarketPage,
   },
   {
     path: '/mypage/nickname',

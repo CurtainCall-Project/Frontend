@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PostWrite from '../components/write/PostWrite';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost } from '../modules/post';
-import { ImageList } from '@material-ui/core';
 
 const PostWritePage = () => {
   const dispatch = useDispatch();
-
-  const [boardType, setBoardType] = useState('자유');
+  const [selectBox, setSelectBox] = useState(false);
+  const [boardType, setBoardType] = useState('');
+  const [boardName, setBoardName] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [imgFiles, setImgFiles] = useState([]);
@@ -18,22 +18,42 @@ const PostWritePage = () => {
   const totalCount = useRef(8);
   const nextId = useRef(1);
 
+  // select box 클릭 상태 바꾸기
+  const clickSelectBox = (e) => {
+    setSelectBox(!selectBox);
+  };
+
   // 게시판 선택 시 게시판 타입 저장하는 함수
   const selectBoardType = (e) => {
-    setBoardType(e.target.value);
-    //console.log(boardType);
+    switch (e.target.value) {
+      case 1:
+        setBoardType('free');
+        setBoardName('자유');
+        setSelectBox(false);
+        break;
+      case 2:
+        setBoardType('sight');
+        setBoardName('시야');
+        setSelectBox(false);
+        break;
+      case 3:
+        setBoardType('new');
+        setBoardName('새내기');
+        setSelectBox(false);
+        break;
+      default:
+        return;
+    }
   };
 
   // 제목 작성 시 제목 저장하는 함수
   const changeTitle = (e) => {
     setTitle(e.target.value);
-    //console.log(title);
   };
 
   // 내용 작성 시 내용 저장하는 함수
   const changeContent = (e) => {
     setContent(e.target.value);
-    //console.log(content);
   };
 
   // 이미지 파일 선택 시 이미지를 저장하고, 미리보기를 보여주는 함수
@@ -68,7 +88,6 @@ const PostWritePage = () => {
   // 삭제 버튼 클릭시 미리보기 이미지를 삭제한다
   const deleteFile = (id) => {
     setImgFiles(imgFiles.filter((imgFile) => imgFile.id !== id));
-    //console.log(imgFiles);
   };
 
   const onSubmit = () => {
@@ -81,8 +100,11 @@ const PostWritePage = () => {
   return (
     <>
       <PostWrite
+        selectBox={selectBox}
+        clickSelectBox={clickSelectBox}
         selectBoardType={selectBoardType}
         boardType={boardType}
+        boardName={boardName}
         imgFiles={imgFiles}
         changeTitle={changeTitle}
         changeContent={changeContent}
