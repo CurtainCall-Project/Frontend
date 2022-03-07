@@ -19,17 +19,19 @@ export const addPost =
     formData.append('imgFiles', imgFiles);
     formData.append('nickname', nickname);
 
-    for (var value of formData.values()) {
-      console.log(value);
-    }
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/write`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
+      .post(
+        `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}`,
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
+      )
       .then((res) => {
-        console.log('게시글을 저장했습니다!');
-        console.log(res.data);
-        history.push('/');
+        history.push(`/${res.data.boardType}/${res.data.boardId}`);
       })
       .catch((error) => console.log(error));
   };
@@ -49,17 +51,15 @@ export const addRentPost =
     formData.append('imgFiles', imgFiles);
     formData.append('nickname', nickname);
 
-    for (var value of formData.values()) {
-      console.log(value);
-    }
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/rent/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
-        console.log('게시글을 저장했습니다!');
-        console.log(res.data);
-        history.push('/');
+        history.push(`/${res.data.boardType}/${res.data.boardId}`);
       })
       .catch((error) => console.log(error));
   };
@@ -78,17 +78,15 @@ export const addSellPost =
     formData.append('imgFiles', imgFiles);
     formData.append('nickname', nickname);
 
-    for (var value of formData.values()) {
-      console.log(value);
-    }
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/sell/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
-        console.log('게시글을 저장했습니다!');
-        console.log(res.data);
-        history.push('/');
+        history.push(`/${res.data.boardType}/${res.data.boardId}`);
       })
       .catch((error) => console.log(error));
   };
