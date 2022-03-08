@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SearchIcon } from '../../assets/search_icon.svg';
 
-const ReviewSearchBar = () => {
+const ReviewSearchBar = (props) => {
   return (
     <>
       <Container>
-        <TitleInput placeholder="공연명을 입력해주세요" />
-        <SearchButton>
+        <TitleInput
+          placeholder="공연명을 입력해주세요"
+          onChange={props.changeInput}
+          onKeyPress={props.handleEnterKey}
+        />
+        <SearchButton onClick={props.handleSearch}>
           <SearchIcon />
         </SearchButton>
       </Container>
@@ -36,5 +40,6 @@ const SearchButton = styled.div`
   justify-content: center;
   width: 5%;
   height: 60%;
+  cursor: pointer;
 `;
 export default ReviewSearchBar;
