@@ -91,6 +91,10 @@ const PostWritePage = () => {
   };
 
   const onSubmit = () => {
+    if (!boardType || !title || !content) {
+      alert('게시판 선택 후 제목과 내용을 작성해주세요.');
+      return;
+    }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
     dispatch(addPost(boardType, title, content, files, user));
     //const { dataUrl } = imgFiles.dataUrl;

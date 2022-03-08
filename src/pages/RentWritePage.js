@@ -86,6 +86,10 @@ const RentWritePage = () => {
   };
 
   const onSubmit = () => {
+    if (!title || !item || !price || !period || !place) {
+      alert('필수 작성 항목은 제목, 기종, 가격, 대여기간, 거래장소입니다.');
+      return;
+    }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
     dispatch(
       addRentPost(

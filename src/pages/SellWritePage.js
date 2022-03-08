@@ -79,6 +79,10 @@ const SellWritePage = () => {
   };
 
   const onSubmit = () => {
+    if (!title || !item || !price || !place) {
+      alert('필수 작성 항목은 제목, 기종, 가격, 거래장소입니다.');
+      return;
+    }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
     dispatch(
       addSellPost(title, item, price, place, delivery, content, files, user)

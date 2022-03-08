@@ -52,6 +52,7 @@ const RentWrite = (props) => {
           가격
         </Text>
         <Input
+          type="number"
           placeholder="숫자만 입력해주세요"
           onChange={props.changePrice}></Input>
       </Grid>
