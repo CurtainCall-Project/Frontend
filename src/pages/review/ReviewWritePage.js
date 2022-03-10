@@ -1,11 +1,66 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ReviewWrite from '../../components/review/ReviewWrite';
+import { addReview } from '../../modules/review';
 
-const ReviewWritePage = () => {
+const ReviewWritePage = (props) => {
+  const dispatch = useDispatch();
+  const [viewingDate, setViewingDate] = useState(new Date());
+  const [casting, setCasting] = useState('');
+  const [content, setContent] = useState('');
+  const [rating, setRating] = useState(0);
   const [imgFiles, setImgFiles] = useState([]);
   const totalCount = useRef(8);
   const nextId = useRef(1);
+
+  // 기존 리뷰 글 수정 시 상세 리뷰 정보 가져오기
+  const reviewDetail = useSelector((state) => state.review.reviewDetail);
+
+  // 현재 로그인한 사용자 id 가져오기
+  const userId = useSelector((state) => state.user.userId);
+  // 현재 리뷰를 작성할 뮤지컬 id 가져오기
+  const musicalId = props.match.params.id;
+  // 뮤지컬 검색 결과 리스트 가져오기
+  const results = useSelector((state) => state.review.searchResults);
+  // musicalId와 동일한 id를 갖는 뮤지컬 정보 가져오기
+  const nowMusical = results.filter(
+    (result) => String(result.musicalId) === musicalId
+  )[0];
+
+  useEffect(() => {
+    // 사용자가 리뷰를 작성한 뮤지컬이라면 뮤지컬 정보를 저장하기
+    if (String(reviewDetail.musicalId) === musicalId) {
+      console.log('뮤지컬 id는 ' + reviewDetail.musicalId + musicalId);
+      setViewingDate(new Date(reviewDetail.viewingDate));
+      setCasting(reviewDetail.casting);
+      setRating(reviewDetail.rating * 20);
+      setContent(reviewDetail.content);
+    }
+  }, [reviewDetail]);
+
+  // 리뷰 등록하기
+  const submitReview = () => {
+    console.log('등록');
+    const files = imgFiles.map((imgFile) => imgFile.imgFile);
+    dispatch(
+      addReview(
+        musicalId,
+        userId,
+        rating,
+        viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
+        casting,
+        content,
+        files
+      )
+    );
+  };
+
+  // 별점 점수 담기
+  const handleRating = (rate) => {
+    const calculatedRate = rate / 20;
+    setRating(calculatedRate);
+  };
 
   // 이미지 파일 선택 시 이미지를 저장하고, 미리보기를 보여주는 함수
   const selectFiles = (e) => {
@@ -45,9 +100,20 @@ const ReviewWritePage = () => {
   return (
     <Wrapper>
       <ReviewWrite
+        nowMusical={nowMusical}
+        viewingDate={viewingDate}
+        rating={rating}
+        casting={casting}
+        content={content}
         imgFiles={imgFiles}
         selectFiles={selectFiles}
         deleteFile={deleteFile}
+        setViewingDate={setViewingDate}
+        setCasting={setCasting}
+        setContent={setContent}
+        handleRating={handleRating}
+        submitReview={submitReview}
+        reviewDetail={reviewDetail}
       />
     </Wrapper>
   );

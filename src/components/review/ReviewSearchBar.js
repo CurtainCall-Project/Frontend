@@ -7,7 +7,7 @@ const ReviewSearchBar = (props) => {
     <>
       <Container>
         <TitleInput
-          placeholder="공연명을 입력해주세요"
+          placeholder="찾으시는 공연 제목을 입력해주세요"
           onChange={props.changeInput}
           onKeyPress={props.handleEnterKey}
         />

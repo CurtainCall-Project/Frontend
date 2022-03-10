@@ -5,11 +5,11 @@ import { Text, Button } from '../../elements/elements';
 
 const PerformanceBox = ({ result }) => {
   const clickReviewButton = () => {
-    history.push(`/review/write/${result.id}`);
+    history.push(`/review/write/${result.musicalId}`);
   };
   return (
     <Container>
-      <ImageBox src="https://image.yes24.com/themusical/upFiles/Themusical/Play/post_2013wicked.jpg" />
+      <ImageBox src={result.musicalImg} />
       <InfoWrapper>
         <Text>{result.mname}</Text>
         <Text font_weight="regular">

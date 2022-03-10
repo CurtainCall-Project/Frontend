@@ -9,7 +9,7 @@ import PostPage from './pages/PostPage';
 import ReviewSearchPage from './pages/review/ReviewSearchPage';
 import ReviewWritePage from './pages/review/ReviewWritePage';
 import ReviewsPage from './pages/review/ReviewsPage';
-import ReviewPage from './pages/review/ReviewPage';
+import ReviewDetailPage from './pages/review/ReviewDetailPage';
 import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
@@ -63,6 +63,6 @@ export default [
   },
   {
     path: '/my-review/:id',
-    component: ReviewPage,
+    component: ReviewDetailPage,
   },
 ];
