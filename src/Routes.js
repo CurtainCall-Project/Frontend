@@ -6,15 +6,13 @@ import RentWritePage from './pages/RentWritePage';
 import SellWritePage from './pages/SellWritePage';
 import BoardPage from './pages/board/BoardPage';
 import PostPage from './pages/PostPage';
-import FreeBoardPage from './pages/FreeBoardPage';
-import SightBoardPage from './pages/SightBoardPage';
-import NewBoardPage from './pages/NewBoardPage';
-import RentPage from './pages/RentPage';
-import MarketPage from './pages/MarketPage';
 import ReviewSearchPage from './pages/review/ReviewSearchPage';
 import ReviewWritePage from './pages/review/ReviewWritePage';
 import ReviewsPage from './pages/review/ReviewsPage';
 import ReviewPage from './pages/review/ReviewPage';
+import MyPage from './pages/mypage/MyPage';
+import MyPostPage from './pages/mypage/MyPostPage';
+import MyScrapPage from './pages/mypage/MyScrapPage';
 import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
@@ -49,16 +47,18 @@ export default [
   {
     path: ['/free/:id', '/sight/:id', '/new/:id', '/rent/:id', '/sell/:id'],
     component: PostPage,
-    path: '/sight_board',
-    component: SightBoardPage,
   },
   {
-    path: '/new_board',
-    component: NewBoardPage,
+    path: '/mypage/:id',
+    component: MyPage,
   },
   {
-    path: '/market',
-    component: MarketPage,
+    path: '/mypage/:id/my-post',
+    component: MyPostPage,
+  },
+  {
+    path: '/mypage/:id/scrapped-post',
+    component: MyScrapPage,
   },
   {
     path: '/mypage/nickname',

@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 // 여백(Grid) 최소단위 컴포넌트
 const Grid = styled.div`
-  //border: 1px solid;
   box-sizing: border-box;
-  border: 1px solid blue;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   display: ${(props) => (props.display ? `${props.display}` : 'flex')};
   ${(props) => (props.height ? `height: ${props.height};` : '')};
@@ -22,7 +20,6 @@ const Grid = styled.div`
 // 텍스트(Text) 최소단위 컴포넌트
 const Text = styled.div`
   box-sizing: border-box;
-  //border: 1px solid;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   font-size: ${(props) =>
     props.font_size
@@ -33,8 +30,10 @@ const Text = styled.div`
   color: ${(props) =>
     props.color === 'gray' ? `${({ theme }) => theme.borderGray}` : '#000'};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
+  ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
+  ${(props) => (props.text_align ? `text-align: ${props.text_align};` : '')}
 `;
 
 // 입력(Input) 최소단위 컴포넌트
