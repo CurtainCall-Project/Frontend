@@ -33,7 +33,7 @@ export const setPosts =
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/list/${boardType}?page=${page}`
       )
       .then((res) => {
-        //console.log(res.data.free);
+        console.log(res.data);
         dispatch({ type: SET_POSTS, payload: res.data });
       })
       .catch((error) => alert(error));

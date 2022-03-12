@@ -1,28 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import history from '../../history';
 
-const PostBox = () => {
+const PostBox = (props) => {
+  const renderingPost = props.postInfo[0];
+  const { boardType, id } = renderingPost;
+
+  const clickPost = () => {
+    history.push(`/${boardType}/${id}`);
+  };
+
   return (
-    <Container>
+    <Container onClick={clickPost}>
       <TextContainer>
-        <Title>
-          제목입니다.게시글 내용입니다. 내용을 길게 쓰면 말줄임표로 생략되겠죠?
-          어쩌구 저쩌구. 지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리
-          따라가자.
-        </Title>
-        <Content>
-          게시글 내용입니다. 내용을 길게 쓰면 말줄임표로 생략되겠죠? 어쩌구
-          저쩌구. 지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.
-        </Content>
-        <Nickname>좋은닉네임</Nickname>
+        <Title>{renderingPost.title}</Title>
+        <Content>{renderingPost.content}</Content>
+        <Nickname>{renderingPost.nickname}</Nickname>
       </TextContainer>
       <ImageContainer>
-        <Image />
+        <Image src={renderingPost.img} />
       </ImageContainer>
     </Container>
   );

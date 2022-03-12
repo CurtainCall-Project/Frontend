@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button } from '../../elements/elements';
+import { Text, Button } from '../../elements/elements';
 import { ReactComponent as CameraIcon } from '../../assets/camera_icon.svg';
 
 const ProfileBox = () => {

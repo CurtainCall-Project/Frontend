@@ -1,28 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import history from '../../history';
 
-const LongPostBox = () => {
+const LongPostBox = ({ postInfo }) => {
+  const clickPost = () => {
+    history.push(`/${postInfo.boardType}/ ${postInfo.id}`);
+  };
   return (
-    <Container>
+    <Container onClick={clickPost}>
       <TextContainer>
-        <Title>
-          제목입니다.게시글 내용입니다. 내용을 길게 쓰면 말줄임표로 생략되겠죠?
-          어쩌구 저쩌구. 지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리
-          따라가자.
-        </Title>
-        <Content>
-          게시글 내용입니다. 내용을 길게 쓰면 말줄임표로 생략되겠죠? 어쩌구
-          저쩌구. 지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.지금 이건 검정이 아니라 진한 회색입니다. 모르면 컬리 따라가자.
-          모컬따.
-        </Content>
-        <Nickname>좋은닉네임</Nickname>
+        <Title>{postInfo.title}</Title>
+        <Content>{postInfo.content}</Content>
+        <Nickname>{postInfo.nickname}</Nickname>
       </TextContainer>
       <ImageContainer>
-        <Image />
+        <Image src={postInfo.img} />
       </ImageContainer>
     </Container>
   );
@@ -34,7 +26,7 @@ const Container = styled.div`
   height: 166px;
   border: 1px solid ${({ theme }) => theme.borderGray};
   border-radius: 5px;
-  margin: 0 auto;
+  margin: 0 auto 20px 0;
 `;
 const TextContainer = styled.div`
   box-sizing: border-box;

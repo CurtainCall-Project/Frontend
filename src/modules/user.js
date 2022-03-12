@@ -8,7 +8,7 @@ const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
 const LOG_OUT = 'user/LOG_OUT';
 const CHECK_NICKNAME = 'user/CHECK_NICKNAME';
 const SET_NICKNAME = 'user/SET_NICKNAME';
-const ADD_NICKNAME = 'user/ADD_NICKNAME';
+const SET_USER_POSTS = 'user/SET_USER_POSTS';
 //const SET_PROFILEIMG = 'user/SET_PROFILEIMG';
 
 // 로그인 액션 생성함수
@@ -89,12 +89,27 @@ export const addNickname = (nickname) => (dispatch) => {
     });
 };
 
+export const getUserPosts = (userId) => (dispatch) => {
+  axios
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/${userId}`)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({ type: SET_USER_POSTS, payload: res.data });
+    })
+    .catch((error) => alert(error));
+};
+
 const initialUser = {
   nickname: null,
+  userId: null,
   profileImg: null,
   email: null,
   isUnique: null,
   isLogin: false,
+  userPosts: {
+    myPost: [],
+    myScrap: [],
+  },
 };
 
 // 리듀서 정의
@@ -112,6 +127,10 @@ export default handleActions(
       profileImg: null,
       isUnique: null,
       isLogin: false,
+      userPosts: {
+        myPost: [],
+        myScrap: [],
+      },
     }),
     [SET_NICKNAME]: (state, action) => ({
       ...state,
@@ -120,6 +139,13 @@ export default handleActions(
     [CHECK_NICKNAME]: (state, action) => ({
       ...state,
       ...action.payload,
+    }),
+    [SET_USER_POSTS]: (state, action) => ({
+      ...state,
+      userPosts: {
+        myPost: [...action.payload.myBoard],
+        myScrap: [...action.payload.myScrap],
+      },
     }),
   },
   initialUser
