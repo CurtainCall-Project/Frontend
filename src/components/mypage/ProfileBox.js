@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
+import history from '../../history';
 import { Text, Button } from '../../elements/elements';
 import { ReactComponent as CameraIcon } from '../../assets/camera_icon.svg';
+import basicProfile from '../../assets/default_profile.png';
+const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
+  const hiddenFileInput = useRef();
+  const onClick = (e) => hiddenFileInput.current.click();
 
-const ProfileBox = () => {
+  const clickButton = () => {
+    history.push('/mypage/nickname');
+  };
+
   return (
     <Container>
       <ImageContainer>
-        <ProfileImage></ProfileImage>
-        <AddButton>
+        <ImageWrapper>
+          {profileImage ? (
+            <ProfileImage src={profileImage} />
+          ) : (
+            <ProfileImage src={basicProfile} alt="기본 이미지" />
+          )}
+        </ImageWrapper>
+        <AddButton onClick={() => onClick()}>
           <CameraIcon />
         </AddButton>
+        <input
+          type="file"
+          accpet="image/*"
+          ref={hiddenFileInput}
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
       </ImageContainer>
       <NicknameContainer>
         <Text text_align="center" margin="0 0 15px 0">
-          닉네임
+          {nickname}
         </Text>
-        <Button>변경</Button>
+        <Button onClick={clickButton}>변경</Button>
       </NicknameContainer>
     </Container>
   );
@@ -37,11 +58,18 @@ const ImageContainer = styled.div`
   position: relative;
   height: auto;
 `;
-const ProfileImage = styled.div`
+const ImageWrapper = styled.div`
   width: 135px;
   height: 135px;
   border: 1px solid ${({ theme }) => theme.borderGray};
   border-radius: 68px;
+`;
+const ProfileImage = styled.img`
+  width: 135px;
+  height: 135px;
+  // border: 1px solid ${({ theme }) => theme.borderGray};
+  border-radius: 68px;
+  overflow: hidden;
 `;
 const AddButton = styled.div`
   background-color: ${({ theme }) => theme.mainBlue};

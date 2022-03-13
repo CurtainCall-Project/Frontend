@@ -1,23 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { Text, Grid } from '../../elements/elements';
 import PostBox from '../../components/mypage/PostBox';
 import ProfileBox from '../../components/mypage/ProfileBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserPosts } from '../../modules/user';
+import { getUserPosts, addProfileImage } from '../../modules/user';
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.userId);
 
   useEffect(() => {
-    console.log('hi');
     dispatch(getUserPosts(userId));
   }, []);
 
-  // 사용자의 마이페이지 정보 가져오기
+  // 현재 유저의 마이페이지 정보 가져오기
   const { myPost, myScrap } = useSelector((state) => state.user.userPosts);
+  // 현재 유저 정보 가져오기
+  const { userId, nickname, profileImg } = useSelector((state) => state.user);
+  const [profileImage, setProfileImage] = useState(profileImg);
+  const [file, setFile] = useState(null);
+
+  // 이미지 파일 선택 시 저장하고, post하기
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileImage(reader.result);
+      dispatch(addProfileImage(file));
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   // 내가 쓴글 더보기 버튼 클릭 시 내가 쓴글 페이지로 이동
   const clickMorePostBtn = () => {
@@ -30,7 +44,11 @@ const MyPage = () => {
 
   return (
     <Container>
-      <ProfileBox />
+      <ProfileBox
+        nickname={nickname}
+        profileImage={profileImage}
+        handleFileChange={handleFileChange}
+      />
       <PostContainer>
         <Grid margin="0 0 15px 0">
           <Text>내가 쓴 글</Text>

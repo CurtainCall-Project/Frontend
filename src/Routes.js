@@ -49,6 +49,10 @@ export default [
     component: PostPage,
   },
   {
+    path: '/mypage/nickname',
+    component: NicknameSetPage,
+  },
+  {
     path: '/mypage/:id',
     component: MyPage,
   },
@@ -59,10 +63,6 @@ export default [
   {
     path: '/mypage/:id/scrapped-post',
     component: MyScrapPage,
-  },
-  {
-    path: '/mypage/nickname',
-    component: NicknameSetPage,
   },
   {
     path: '/reviews/search',
