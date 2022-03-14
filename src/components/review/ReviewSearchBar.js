@@ -11,7 +11,9 @@ const ReviewSearchBar = (props) => {
           onChange={props.changeInput}
           onKeyPress={props.handleEnterKey}
         />
-        <SearchButton onClick={props.handleSearch}>
+        <SearchButton
+          onClick={() => props.handleSearch()}
+          ref={props.searchButton}>
           <SearchIcon />
         </SearchButton>
       </Container>

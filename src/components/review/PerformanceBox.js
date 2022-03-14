@@ -8,17 +8,17 @@ const PerformanceBox = ({ result }) => {
     history.push(`/review/write/${result.musicalId}`);
   };
   return (
-    <Container>
-      <ImageBox src={result.musicalImg} />
+    <Container key={result.mt20id}>
+      <ImageBox src={result.poster} />
       <InfoWrapper>
-        <Text>{result.mname}</Text>
+        <Text>{result.prfnm}</Text>
         <Text font_weight="regular">
           기간|{' '}
-          {result.startDate === result.endDate
-            ? result.startDate
-            : `${result.startDate}~${result.endDate}`}
+          {result.prfpdfrom === result.prfpdto
+            ? result.prfpdfrom
+            : `${result.prfpdfrom}~${result.prfpdto}`}
         </Text>
-        <Text font_weight="regular">장소| {result.place}</Text>
+        <Text font_weight="regular">장소| {result.fcltynm}</Text>
       </InfoWrapper>
       <StyledButton onClick={clickReviewButton}>후기 작성하기</StyledButton>
     </Container>
@@ -52,5 +52,6 @@ const StyledButton = styled(Button)`
   position: absolute;
   right: 15px;
   bottom: 13px;
+  cursor: pointer;
 `;
 export default PerformanceBox;

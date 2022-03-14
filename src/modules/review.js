@@ -62,17 +62,22 @@ export const addReview =
       .catch((error) => alert(error));
   };
 
-export const getMusical = (input) => (dispatch) => {
-  console.log(input);
+export const getMusical = (input, page) => (dispatch) => {
+  console.log(input, page);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/musical`, {
       params: {
         keyword: input,
+        page: page,
       },
     })
     .then((res) => {
+      if (!res.data.dbs.db) {
+        window.alert('마지막 페이지입니다.');
+        return;
+      }
       console.log(res.data);
-      dispatch({ type: GET_MUSICAL, payload: res.data });
+      dispatch({ type: GET_MUSICAL, payload: res.data.dbs.db });
     })
     .catch((error) => alert(error));
 };
