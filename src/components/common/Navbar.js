@@ -8,7 +8,14 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isLogin, userId, onLogOut }) => {
+const Navbar = ({
+  isLogin,
+  userId,
+  onLogOut,
+  changeInput,
+  handleEnterKey,
+  clickSearchBtn,
+}) => {
   return (
     <>
       <TopbarContainer>
@@ -26,12 +33,14 @@ const Navbar = ({ isLogin, userId, onLogOut }) => {
           </TopbarLeftContent>
           <TopbarRightContent>
             <SearchContainer>
-              <Link to="/search">
-                <SearchButton>
-                  <SearchIcon />
-                </SearchButton>
-              </Link>
-              <SearchInput placeholder="검색" />
+              <SearchButton onClick={clickSearchBtn}>
+                <SearchIcon />
+              </SearchButton>
+              <SearchInput
+                placeholder="검색"
+                onChange={changeInput}
+                onKeyPress={handleEnterKey}
+              />
             </SearchContainer>
             {isLogin ? (
               <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
