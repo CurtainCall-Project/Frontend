@@ -8,7 +8,7 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isLogin, onLogOut }) => {
+const Navbar = ({ isLogin, userId, onLogOut }) => {
   return (
     <>
       <TopbarContainer>
@@ -92,7 +92,9 @@ const Navbar = ({ isLogin, onLogOut }) => {
               </InnerMenu>
             </MenuItem>
             <MenuItem>
-              <MenuName>마이페이지</MenuName>
+              <StyledLink to={`/mypage/${userId}`}>
+                <MenuName>마이페이지</MenuName>
+              </StyledLink>
             </MenuItem>
             <WriteMenuItem>
               <WriteMenuName>글쓰기</WriteMenuName>
