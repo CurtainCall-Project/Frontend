@@ -5,7 +5,7 @@ import { Text, Button } from '../../elements/elements';
 
 const PerformanceBox = ({ result }) => {
   const clickReviewButton = () => {
-    history.push(`/review/write/${result.musicalId}`);
+    history.push(`/review/write/${result.mt20id}`);
   };
   return (
     <Container key={result.mt20id}>

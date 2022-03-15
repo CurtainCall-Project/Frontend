@@ -62,6 +62,10 @@ const ReviewSearchPage = () => {
 
   // 뮤지컬 검색 수행
   const handleSearch = (e) => {
+    if (!input) {
+      window.alert('공연 제목을 입력하세요');
+      return;
+    }
     searchButton.current.click();
     setPage(1);
     dispatch(getMusical(input, page));

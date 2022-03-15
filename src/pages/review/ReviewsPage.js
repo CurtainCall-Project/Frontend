@@ -16,7 +16,7 @@ const ReviewsPage = () => {
 
   // 내가 쓴 후기 리스트 가져오기
   const myReviews = useSelector((state) => state.review.myReviews);
-
+  console.log(myReviews);
   return (
     <Wrapper>
       <Text width="45%" font_size="18px">

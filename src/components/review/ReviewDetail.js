@@ -7,14 +7,14 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn }) => {
   return (
     <Container>
       <Grid margin="0 0 10px 0">
-        <MusicalImage src={reviewDetail.musicalImg} />
+        <MusicalImage src={reviewDetail.musical.poster} />
         <Grid
           flex_direction="column"
           justify_content="flex-end"
           width="80%"
           height="100%">
           <Text width="70%" margin_left="10px">
-            {reviewDetail.mname}
+            {reviewDetail.musical.prfnm}
           </Text>
           <StarContainer>
             <Rating
@@ -30,7 +30,7 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn }) => {
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">관람일</Text>
-        <Text font_weight="regular">{reviewDetail.viewDate}</Text>
+        <Text font_weight="regular">{reviewDetail.viewingDate}</Text>
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">캐스팅</Text>

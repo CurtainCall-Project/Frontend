@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ReviewWrite from '../../components/review/ReviewWrite';
-import { addReview } from '../../modules/review';
+import { addReview, editReview, getMusicalDetail } from '../../modules/review';
 
 const ReviewWritePage = (props) => {
   const dispatch = useDispatch();
@@ -16,22 +16,32 @@ const ReviewWritePage = (props) => {
 
   // 기존 리뷰 글 수정 시 상세 리뷰 정보 가져오기
   const reviewDetail = useSelector((state) => state.review.reviewDetail);
-
+  console.log(reviewDetail);
   // 현재 로그인한 사용자 id 가져오기
   const userId = useSelector((state) => state.user.userId);
   // 현재 리뷰를 작성할 뮤지컬 id 가져오기
   const musicalId = props.match.params.id;
   // 뮤지컬 검색 결과 리스트 가져오기
   const results = useSelector((state) => state.review.searchResults);
-  // musicalId와 동일한 id를 갖는 뮤지컬 정보 가져오기
-  const nowMusical = results.filter(
-    (result) => String(result.musicalId) === musicalId
-  )[0];
+  console.log(results);
+  // // musicalId와 동일한 id를 갖는 뮤지컬 정보 가져오기
+  // const nowMusical = results.filter(
+  //   (result) => String(result.mt20id) === musicalId
+  // )[0];
+  // 현재 뮤지컬 id에 해당하는 뮤지컬 정보 가져오기
+  const nowMusical = useSelector((state) => state.review.nowMusical);
+
+  useEffect(() => {
+    dispatch(getMusicalDetail(musicalId));
+  }, []);
 
   useEffect(() => {
     // 사용자가 리뷰를 작성한 뮤지컬이라면 뮤지컬 정보를 저장하기
-    if (String(reviewDetail.musicalId) === musicalId) {
-      console.log('뮤지컬 id는 ' + reviewDetail.musicalId + musicalId);
+    if (
+      !(JSON.stringify(reviewDetail) === '{}') &&
+      reviewDetail.musical.mt20id === musicalId
+    ) {
+      console.log('뮤지컬 id는 ' + reviewDetail.musical.mt20id + musicalId);
       setViewingDate(new Date(reviewDetail.viewingDate));
       setCasting(reviewDetail.casting);
       setRating(reviewDetail.rating * 20);
@@ -43,8 +53,27 @@ const ReviewWritePage = (props) => {
   const submitReview = () => {
     console.log('등록');
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
+    if (
+      !(JSON.stringify(reviewDetail) === '{}') &&
+      reviewDetail.musical.mt20id === musicalId
+    ) {
+      dispatch(
+        editReview(
+          nowMusical.prfnm,
+          musicalId,
+          userId,
+          rating,
+          viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
+          casting,
+          content,
+          files
+        )
+      );
+      return;
+    }
     dispatch(
       addReview(
+        nowMusical.prfnm,
         musicalId,
         userId,
         rating,

@@ -7,14 +7,14 @@ import { ReactComponent as StarIcon } from '../../assets/star_icon.svg';
 const ReviewBox = ({ review }) => {
   // 후기 상세 페이지로 이동
   const clickReview = () => {
-    history.push(`/my-review/${review.reviewId}`);
+    history.push(`/my-review/${review.id}`);
   };
 
   return (
     <Container onClick={clickReview}>
-      <ImageBox src={review.musicalImg} />
+      <ImageBox src={review.musical.poster} />
       <InfoWrapper>
-        <Text>{review.mname}</Text>
+        <Text>{review.musical.prfnm}</Text>
         <StarIcon />
         <MusicalRating>{review.rating}</MusicalRating>
         <h1>{review.viewingDate}</h1>

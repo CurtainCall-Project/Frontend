@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import {
   Grid,
@@ -16,6 +16,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
 
 const ReviewWrite = (props) => {
+  console.log(props.nowMusical);
   const hiddenFileInput = useRef();
 
   const ExampleCustomInput = ({ value, onClick }) => (
@@ -44,9 +45,9 @@ const ReviewWrite = (props) => {
     <FormWrapper>
       <Grid margin="0 0 10px 0">
         {props.nowMusical ? (
-          <MusicalImage src={props.nowMusical.musicalImg} />
+          <MusicalImage src={props.nowMusical.poster} />
         ) : (
-          <MusicalImage src={props.reviewDetail.musicalImg} />
+          <MusicalImage src={props.reviewDetail.poster} />
         )}
         <Grid
           flex_direction="column"
@@ -55,8 +56,8 @@ const ReviewWrite = (props) => {
           height="100%">
           <Text width="70%">
             {props.nowMusical
-              ? props.nowMusical.mname
-              : props.reviewDetail.mname}
+              ? props.nowMusical.prfnm
+              : props.reviewDetail.musical}
           </Text>
           <StarContainer>
             <Rating
@@ -70,7 +71,9 @@ const ReviewWrite = (props) => {
       <Grid margin="0 0 10px 0">
         <Text width="7%">장소</Text>
         <TextLine>
-          {props.nowMusical ? props.nowMusical.place : props.reviewDetail.place}
+          {props.nowMusical
+            ? props.nowMusical.fcltynm
+            : props.reviewDetail.place}
         </TextLine>
         {/* <Input width="25%" placeholder={props.nowMusical.place} /> */}
       </Grid>
@@ -164,7 +167,7 @@ const DeleteButtonWrapper = styled(DeleteButton)`
 `;
 const TextLine = styled.div`
   border-bottom: 1px solid;
-  width: 20.5%;
+  width: 29%;
   height: 30px;
   line-height: 35px;
   padding-left: 10px;
@@ -174,7 +177,7 @@ const DateButton = styled.button`
   border: none;
   border-bottom: 1px solid;
   background-color: #fff;
-  width: 24%;
+  width: 32.5%;
   height: 30px;
   padding-left: 15px;
   ${({ theme }) => theme.verticalCenter};

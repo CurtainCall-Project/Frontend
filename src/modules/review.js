@@ -3,17 +3,20 @@ import axios from 'axios';
 import history from '../history';
 
 const GET_MUSICAL = 'review/GET_MUSICAL';
+const GET_MUSICAL_DETAIL = 'review/GET_MUSICAL_DETAIL';
 const ADD_REVIEW = 'review/ADD_REVIEW';
 const GET_MY_REVIEW = 'review/GET_MY_REVIEW';
 const GET_REVIEW_DETAIL = 'review/GET_REVIEW_DETAIL';
 
 const initialState = {
   searchResults: [],
+  nowMusical: {},
   nowReview: {},
   myReviews: [],
   reviewDetail: {},
 };
 
+// 상세 리뷰 가져오기
 export const getReviewDetail = (reviewId) => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${reviewId}`)
@@ -24,22 +27,53 @@ export const getReviewDetail = (reviewId) => (dispatch) => {
     .catch((error) => alert(error));
 };
 
+// 나의 리뷰 리스트 가져오기
 export const getMyReview = (userId) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/myreview/${userId}`)
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/myreview`)
     .then((res) => {
       console.log(res.data);
-      dispatch({ type: GET_MY_REVIEW, payload: res.data });
+      dispatch({ type: GET_MY_REVIEW, payload: res.data.reviewList });
     })
     .catch((error) => alert(error));
 };
 
-export const addReview =
-  (musicalId, userId, rating, viewingDate, casting, content, files) =>
+// 리뷰 수정하기
+export const editReview =
+  (mname, musicalId, userId, rating, viewingDate, casting, content, files) =>
   (dispatch) => {
-    console.log(rating, viewingDate, casting, content, files);
+    const formData = new FormData();
+    formData.append('mname', mname);
+    formData.append('userId', userId);
+    formData.append('rating', rating);
+    formData.append('viewingDate', viewingDate);
+    formData.append('casting', casting);
+    formData.append('content', content);
+    formData.append('imgFiles', files);
+    axios
+      .put(
+        `${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${musicalId}`,
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: ADD_REVIEW, payload: res.data });
+        history.push('/my-review');
+      })
+      .catch((error) => alert(error));
+  };
+
+// 리뷰 추가하기
+export const addReview =
+  (mname, musicalId, userId, rating, viewingDate, casting, content, files) =>
+  (dispatch) => {
+    console.log(mname, rating, viewingDate, casting, content, files);
     console.log(files);
     const formData = new FormData();
+    formData.append('mname', mname);
     formData.append('userId', userId);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
@@ -62,6 +96,17 @@ export const addReview =
       .catch((error) => alert(error));
   };
 
+// 상세 뮤지컬 정보 가져오기
+export const getMusicalDetail = (musicalId) => (dispatch) => {
+  axios
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/musical/${musicalId}`)
+    .then((res) => {
+      dispatch({ type: GET_MUSICAL_DETAIL, payload: res.data.dbs.db });
+    })
+    .catch((error) => console.log(error));
+};
+
+// 뮤지컬 검색 결과 가져오기
 export const getMusical = (input, page) => (dispatch) => {
   console.log(input, page);
   axios
@@ -87,6 +132,10 @@ export default handleActions(
     [GET_MUSICAL]: (state, action) => ({
       ...state,
       searchResults: [...action.payload],
+    }),
+    [GET_MUSICAL_DETAIL]: (state, action) => ({
+      ...state,
+      nowMusical: { ...action.payload },
     }),
     [ADD_REVIEW]: (state, action) => ({
       ...state,

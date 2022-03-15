@@ -10,21 +10,22 @@ const ReviewDetailPage = (props) => {
 
   //현재 나의 리뷰 id 가져오기
   const reviewId = props.match.params.id;
+  // 현재 리뷰 상세 정보 가져오기
+  const reviewDetail = useSelector((state) => state.review.reviewDetail);
+
   useEffect(() => {
     dispatch(getReviewDetail(reviewId));
   }, []);
-  // 현재 리뷰 상세 정보 가져오기
-  const reviewDetail = useSelector((state) => state.review.reviewDetail);
-  // console.log(reviewDetail);
 
+  console.log(reviewDetail);
   // 수정 버튼 클릭 시 해당 뮤지컬 리뷰 작성 페이지로 이동
   const clickEditBtn = () => {
-    history.push(`/review/write/${reviewDetail.musicalId}`);
+    history.push(`/review/write/${reviewDetail.musical.mt20id}`);
   };
 
   return (
     <Wrapper>
-      {reviewDetail && (
+      {!(JSON.stringify(reviewDetail) === '{}') && (
         <ReviewDetail reviewDetail={reviewDetail} clickEditBtn={clickEditBtn} />
       )}
     </Wrapper>
