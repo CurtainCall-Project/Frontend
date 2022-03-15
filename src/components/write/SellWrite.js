@@ -32,6 +32,12 @@ const SellWrite = (props) => {
 
   return (
     <FormWrapper>
+      <Grid>
+        <Text font_weight="regular" color="gray" line_height="25px">
+          * 필수 입력 항목을 작성해야 게시글 등록이 가능합니다. (필수 입력 항목:
+          제목, 기종, 가격, 거래장소)
+        </Text>
+      </Grid>
       <Grid margin="20px 0">
         <Text width="10%" type="label">
           제목

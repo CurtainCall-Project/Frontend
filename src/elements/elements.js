@@ -32,6 +32,8 @@ const Text = styled.div`
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
+  white-space: pre-wrap;
+  ${(props) => (props.line_height ? `line-height: ${props.line_height};` : '')}
 `;
 
 // 입력(Input) 최소단위 컴포넌트

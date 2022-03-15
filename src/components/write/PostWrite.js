@@ -39,6 +39,12 @@ const PostWrite = (props) => {
   const onClick = (e) => hiddenFileInput.current.click();
   return (
     <FormWrapper>
+      <Grid margin="0 0 15px ">
+        <Text font_weight="regular" color="gray" line_height="25px">
+          * 필수 입력 항목을 작성해야 게시글 등록이 가능합니다. (필수 입력 항목:
+          게시판 선택, 제목, 내용)
+        </Text>
+      </Grid>
       <Grid>
         <SelectWrapper>
           <SelectBox onClick={props.clickSelectBox} selectBox={props.selectBox}>

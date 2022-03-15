@@ -13,8 +13,6 @@ const SellWritePage = () => {
   const [content, setContent] = useState('');
   const [imgFiles, setImgFiles] = useState([]);
 
-  const user = useSelector((state) => state.user.nickname);
-
   // 첨부 가능한 사진의 개수 설정
   const totalCount = useRef(8);
   // 사진 id 1로 설정
@@ -84,9 +82,7 @@ const SellWritePage = () => {
       return;
     }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
-    dispatch(
-      addSellPost(title, item, price, place, delivery, content, files, user)
-    );
+    dispatch(addSellPost(title, item, price, place, delivery, content, files));
   };
   return (
     <>

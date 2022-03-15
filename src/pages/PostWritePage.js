@@ -13,8 +13,6 @@ const PostWritePage = () => {
   const [imgFiles, setImgFiles] = useState([]);
   const [imgPreview, setImgPreview] = useState([]);
 
-  const user = useSelector((state) => state.user.nickname);
-
   const totalCount = useRef(8);
   const nextId = useRef(1);
 
@@ -96,7 +94,7 @@ const PostWritePage = () => {
       return;
     }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
-    dispatch(addPost(boardType, title, content, files, user));
+    dispatch(addPost(boardType, title, content, files));
     //const { dataUrl } = imgFiles.dataUrl;
     // const revokeFiles = dataUrl.map((url) => URL.revokeObjectURL(dataUrl));
   };
