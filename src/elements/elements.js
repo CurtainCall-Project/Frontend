@@ -19,6 +19,7 @@ const Grid = styled.div`
 
 // 텍스트(Text) 최소단위 컴포넌트
 const Text = styled.div`
+  //border: 1px solid;
   box-sizing: border-box;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   font-size: ${(props) =>
@@ -30,6 +31,9 @@ const Text = styled.div`
   color: ${(props) =>
     props.color === 'gray' ? `${({ theme }) => theme.borderGray}` : '#000'};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
+  ${(props) =>
+    props.margin_bottom ? `margin-bottom ${props.margin_bottom}` : ''};
+
   ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};

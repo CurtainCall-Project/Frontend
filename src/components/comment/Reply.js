@@ -12,18 +12,28 @@ const Reply = (props) => {
     <ReplyBox>
       <ProfileImg></ProfileImg>
       <Grid display="block" margin="5px 0">
-        <Text width="8%">{props.reply.nickname}</Text>
+        <Text width="8%" margin_bottom="5px">
+          {props.reply.nickname}
+        </Text>
         {props.reply.secret &&
           (props.user === props.nickname ? (
-            <Text font_weight="regular">{props.reply.replyContent}</Text>
+            <Text font_weight="regular" margin_bottom="5px">
+              {props.reply.replyContent}
+            </Text>
           ) : props.comment.id === props.reply.parentReply &&
             props.user === props.comment.nickname ? (
-            <Text font_weight="regular">{props.reply.replyContent}</Text>
+            <Text font_weight="regular" margin_bottom="5px">
+              {props.reply.replyContent}
+            </Text>
           ) : (
-            '비밀 댓글입니다.'
+            <Text font_weight="regular" margin_bottom="5px">
+              비밀 댓글입니다.
+            </Text>
           ))}
         {!props.reply.secret && (
-          <Text font_weight="regular">{props.reply.replyContent}</Text>
+          <Text font_weight="regular" margin_bottom="5px">
+            {props.reply.replyContent}
+          </Text>
         )}
         <Grid>
           <Text font_weight="regular" width="auto">
@@ -41,7 +51,6 @@ const ReplyBox = styled.div`
   border-radius: 5px;
   background-color: #e5e0f0;
   display: flex;
-  line-height: 24px;
   margin-bottom: 10px;
 `;
 
@@ -50,8 +59,7 @@ const ProfileImg = styled.div`
   height: 20px;
   background-color: gray;
   border-radius: 10px;
-  margin: 5px 10px 0 7px;
-  margin-right: 10px;
+  margin: 9px 10px 0 7px;
 `;
 
 export default Reply;

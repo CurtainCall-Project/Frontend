@@ -187,7 +187,7 @@ const PostPage = (props) => {
 };
 
 const Container = styled.div`
-  width: 1000px;
+  max-width: 1000px;
   margin: 90px auto 0 auto;
 `;
 

@@ -1,7 +1,7 @@
 import { StylesProvider } from '@material-ui/styles';
 import React from 'react';
 import styled from 'styled-components';
-
+import basicProfile from '../../../assets/default_profile.png';
 import { Grid, Text } from '../../../elements/elements';
 
 const PostInfo = (props) => {
@@ -10,8 +10,12 @@ const PostInfo = (props) => {
     <Container>
       <Text font_size="24px">{props.post.title}</Text>
       <Grid margin="20px 0 10px 0">
-        <ProfileImg src={props.post.profileImg}></ProfileImg>
-        <Text font_weight="regular" width="7%" margin_left="5px">
+        {props.post.profileImg ? (
+          <ProfileImg src={props.post.profileImg}></ProfileImg>
+        ) : (
+          <ProfileImg src={basicProfile}></ProfileImg>
+        )}
+        <Text font_weight="regular" width="auto" margin="0 15px 0 5px">
           {props.post.nickname}
         </Text>
         <Text font_weight="regular" width="18%">

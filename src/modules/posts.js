@@ -48,7 +48,10 @@ export const setPost = (id) => (dispatch) => {
       console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
     })
-    .catch((error) => alert(error));
+    .catch((error) => {
+      window.alert('존재하지 않는 게시물입니다.');
+      history.goBack();
+    });
 };
 
 // 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
