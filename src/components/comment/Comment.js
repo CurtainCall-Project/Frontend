@@ -45,18 +45,18 @@ const Comment = (props) => {
       alert('댓글을 작성해주세요.');
       return;
     }
+    // 대여, 거래 답글 작성 시 실행
     if (props.boardType === 'rent' || props.boardType === 'sell') {
       dispatch(
         addComment(newReply, props.comment.id, props.postId, replySecret)
       );
       setNewReply('');
       setReplySecret(false);
-      console.log('대여, 거래 답글을 작성했어요!');
       return;
     }
+    // 자유, 시야, 새내기 답글 작성 시 실행
     dispatch(addComment(newReply, null, props.postId));
     setNewReply('');
-    console.log('자유, 시야, 새내기 댓글을 작성했어요!');
   };
 
   return (
