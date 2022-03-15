@@ -80,6 +80,7 @@ const Button = styled.button`
   width: ${(props) => (props.width ? `${props.width}` : '71px')};
   height: ${(props) => (props.height ? `${props.height}` : '32px')};
   font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  cursor: pointer;
 `;
 
 // 이미지(Image) 최소단위 컴포넌트

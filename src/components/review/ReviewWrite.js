@@ -16,7 +16,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
 
 const ReviewWrite = (props) => {
-  console.log(props.nowMusical);
   const hiddenFileInput = useRef();
 
   const ExampleCustomInput = ({ value, onClick }) => (

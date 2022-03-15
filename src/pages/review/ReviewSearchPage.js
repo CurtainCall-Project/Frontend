@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ReviewSearchBar from '../../components/review/ReviewSearchBar';
 import PerformanceBox from '../../components/review/PerformanceBox';
-import Paging from '../../components/board/Paging';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMusical } from '../../modules/review';
 
@@ -26,7 +25,6 @@ const ReviewSearchPage = () => {
   useEffect(() => {
     if (results.length > 0) {
       setSearchResult(results);
-      console.log(searchResult);
     }
   }, [results]);
 

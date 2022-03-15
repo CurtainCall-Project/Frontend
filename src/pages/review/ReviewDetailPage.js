@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import history from '../../history';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewDetail from '../../components/review/ReviewDetail';
-import { getReviewDetail } from '../../modules/review';
+import { deleteReview, getReviewDetail } from '../../modules/review';
 
 const ReviewDetailPage = (props) => {
   const dispatch = useDispatch();
-
   //현재 나의 리뷰 id 가져오기
   const reviewId = props.match.params.id;
   // 현재 리뷰 상세 정보 가져오기
@@ -17,16 +16,24 @@ const ReviewDetailPage = (props) => {
     dispatch(getReviewDetail(reviewId));
   }, []);
 
-  console.log(reviewDetail);
   // 수정 버튼 클릭 시 해당 뮤지컬 리뷰 작성 페이지로 이동
   const clickEditBtn = () => {
     history.push(`/review/write/${reviewDetail.musical.mt20id}`);
   };
 
+  // 후기 글 삭제
+  const deleteNowReview = () => {
+    dispatch(deleteReview(reviewId));
+  };
+
   return (
     <Wrapper>
       {!(JSON.stringify(reviewDetail) === '{}') && (
-        <ReviewDetail reviewDetail={reviewDetail} clickEditBtn={clickEditBtn} />
+        <ReviewDetail
+          reviewDetail={reviewDetail}
+          clickEditBtn={clickEditBtn}
+          deleteNowReview={deleteNowReview}
+        />
       )}
     </Wrapper>
   );

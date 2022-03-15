@@ -5,6 +5,7 @@ import history from '../history';
 const GET_MUSICAL = 'review/GET_MUSICAL';
 const GET_MUSICAL_DETAIL = 'review/GET_MUSICAL_DETAIL';
 const ADD_REVIEW = 'review/ADD_REVIEW';
+const DELETE_REVIEW = 'review/DELETE_REVIEW';
 const GET_MY_REVIEW = 'review/GET_MY_REVIEW';
 const GET_REVIEW_DETAIL = 'review/GET_REVIEW_DETAIL';
 
@@ -21,21 +22,22 @@ export const getReviewDetail = (reviewId) => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${reviewId}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: GET_REVIEW_DETAIL, payload: res.data });
     })
-    .catch((error) => alert(error));
+    .catch((error) => {
+      console.log(error);
+      window.alert('존재하지 않는 리뷰입니다.');
+    });
 };
 
 // 나의 리뷰 리스트 가져오기
-export const getMyReview = (userId) => (dispatch) => {
+export const getMyReview = () => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/myreview`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: GET_MY_REVIEW, payload: res.data.reviewList });
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 // 리뷰 수정하기
@@ -59,11 +61,10 @@ export const editReview =
         }
       )
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: ADD_REVIEW, payload: res.data });
         history.push('/my-review');
       })
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
 // 리뷰 추가하기
@@ -89,12 +90,26 @@ export const addReview =
         }
       )
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: ADD_REVIEW, payload: res.data });
         history.push('/my-review');
       })
       .catch((error) => alert(error));
   };
+
+// 리뷰 글 삭제 하기
+export const deleteReview = (reviewId) => (dispatch) => {
+  axios
+    .delete(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${reviewId}`)
+    .then((res) => {
+      dispatch({ type: DELETE_REVIEW });
+      window.alert('게시글을 삭제했습니다.');
+      history.push('/my-review');
+    })
+    .catch((error) => {
+      window.alert('게시글 삭제를 실패했습니다.');
+      history.goBack();
+    });
+};
 
 // 상세 뮤지컬 정보 가져오기
 export const getMusicalDetail = (musicalId) => (dispatch) => {
@@ -140,6 +155,10 @@ export default handleActions(
     [ADD_REVIEW]: (state, action) => ({
       ...state,
       nowReview: { ...action.payload },
+    }),
+    [DELETE_REVIEW]: (state, action) => ({
+      ...state,
+      nowReview: {},
     }),
     [GET_MY_REVIEW]: (state, action) => ({
       ...state,

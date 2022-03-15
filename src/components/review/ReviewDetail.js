@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Grid, Text, Button } from '../../elements/elements';
 import { Rating } from 'react-simple-star-rating';
 
-const ReviewDetail = ({ reviewDetail, clickEditBtn }) => {
+const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
   return (
     <Container>
       <Grid margin="0 0 10px 0">
@@ -47,7 +47,12 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn }) => {
           ))}
       </Grid>
       <Grid margin="20px 0 0 0" justify_content="flex-end">
-        <Button onClick={clickEditBtn}>수정</Button>
+        <Button type="button" onClick={clickEditBtn}>
+          수정
+        </Button>
+        <DeleteButton type="button" onClick={deleteNowReview}>
+          삭제
+        </DeleteButton>
       </Grid>
     </Container>
   );
@@ -80,5 +85,11 @@ const AttachedImages = styled.img`
   max-width: 60%;
   height: auto;
   margin-bottom: 20px;
+`;
+const DeleteButton = styled(Button)`
+  color: #000;
+  background-color: ${({ theme }) => theme.darkGray};
+  margin-left: 10px;
+  cursor: pointer;
 `;
 export default ReviewDetail;

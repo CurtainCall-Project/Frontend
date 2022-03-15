@@ -8,15 +8,13 @@ import { getMyReview } from '../../modules/review';
 const ReviewsPage = () => {
   const dispatch = useDispatch();
 
-  // 사용자 Id 가져오기
-  const userId = useSelector((state) => state.user.userId);
   useEffect(() => {
-    dispatch(getMyReview(userId));
+    dispatch(getMyReview());
   }, []);
 
   // 내가 쓴 후기 리스트 가져오기
   const myReviews = useSelector((state) => state.review.myReviews);
-  console.log(myReviews);
+
   return (
     <Wrapper>
       <Text width="45%" font_size="18px">
