@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NicknameForm = ({ clicked, color, isUnique, onChange, onCheck }) => {
+const NicknameForm = ({
+  clicked,
+  color,
+  isUnique,
+  onChange,
+  onCheck,
+  userNickname,
+}) => {
   return (
     <>
       <FormContainer>
@@ -12,7 +19,12 @@ const NicknameForm = ({ clicked, color, isUnique, onChange, onCheck }) => {
           <InputFormWrapper>
             <Title>닉네임</Title>
             <InputWrapper>
-              <NicknameInput type="text" maxLength="8" onChange={onChange} />
+              <NicknameInput
+                type="text"
+                maxLength="8"
+                onChange={onChange}
+                value={userNickname}
+              />
             </InputWrapper>
             <DuplicationButton onClick={onCheck}>중복확인</DuplicationButton>
             <NicknameCheckText>

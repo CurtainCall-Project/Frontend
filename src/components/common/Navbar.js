@@ -9,7 +9,7 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isLogin, onLogOut }) => {
+const Navbar = ({ isLogin, userId, onLogOut }) => {
   // 비로그인 사용자 글쓰기 기능 접근 제한
   const controlUserAccess = (e) => {
     if (!isLogin) {
@@ -21,7 +21,6 @@ const Navbar = ({ isLogin, onLogOut }) => {
     e.target.value === 2 && history.push('/rent/write');
     e.target.value === 3 && history.push('/sell/write');
   };
-
   return (
     <>
       <TopbarContainer>
@@ -105,7 +104,9 @@ const Navbar = ({ isLogin, onLogOut }) => {
               </InnerMenu>
             </MenuItem>
             <MenuItem>
-              <MenuName>마이페이지</MenuName>
+              <StyledLink to={`/mypage/${userId}`}>
+                <MenuName>마이페이지</MenuName>
+              </StyledLink>
             </MenuItem>
             <WriteMenuItem>
               <WriteMenuName>글쓰기</WriteMenuName>
