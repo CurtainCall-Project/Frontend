@@ -27,15 +27,16 @@ export const login = (token) => (dispatch) => {
       axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
       // 처음 로그인 시 닉네임 설정 페이지로 이동
       axios
-        .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/user`)
+        .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/user`)
         .then((res) => {
-          console.log(res);
           dispatch({ type: GET_USER_SUCCESS, payload: res.data });
           res.data.nickname
             ? history.push('/')
             : history.push('/mypage/nickname');
         })
-        .catch((error) => alert('사용자 정보를 불러오는데 실패했습니다.'));
+        .catch((error) =>
+          console.log('사용자 정보를 불러오는데 실패했습니다.')
+        );
     });
 };
 
@@ -53,7 +54,7 @@ export const getUser = () => (dispatch) => {
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
   axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/user`)
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/user`)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
@@ -119,10 +120,16 @@ export const getUserPosts = (userId) => (dispatch) => {
 };
 
 const initialUser = {
-  nickname: null,
   userId: null,
-  profileImg: null,
+  nickname: null,
+  username: null,
   email: null,
+  emailVerifiedYn: null,
+  profileImg: null,
+  providerType: null,
+  roleType: null,
+  createdAt: null,
+  modifiedAt: null,
   isUnique: null,
   isLogin: false,
   userPosts: {
@@ -141,9 +148,16 @@ export default handleActions(
     }),
     [LOG_OUT]: (state, action) => ({
       ...state,
+      userId: null,
       nickname: null,
+      username: null,
       email: null,
+      emailVerifiedYn: null,
       profileImg: null,
+      providerType: null,
+      roleType: null,
+      createdAt: null,
+      modifiedAt: null,
       isUnique: null,
       isLogin: false,
       userPosts: {

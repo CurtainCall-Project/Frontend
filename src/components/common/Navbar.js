@@ -257,10 +257,11 @@ const MenuName = styled.div`
   width: 95px;
   height: 55px;
   font-weight: bold;
+  cursor: default;
 `;
 const MenuItem = styled.li`
   position: relative;
-
+  z-index: 2;
   &:hover {
     ${MenuName} {
       color: ${({ theme }) => theme.mainBlue};
@@ -307,13 +308,14 @@ const WriteMenuName = styled.div`
   width: 120px;
   height: 55px;
   font-weight: bold;
+  cursor: default;
 `;
 const WriteMenuItem = styled.li`
   position: relative;
   color: ${({ theme }) => theme.mainBlue};
   transition: 0.1s ease-out;
   border-radius: 10px 10px 0 0;
-
+  z-index: 2;
   &:hover {
     color: ${({ theme }) => theme.white};
     background-color: ${({ theme }) => theme.mainBlue};
