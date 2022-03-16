@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import LongPostBox from '../../components/mypage/LongPostBox';
+import LongPostBox from '../../components/common/LongPostBox';
 import { Text, Grid } from '../../elements/elements';
 import Paging from '../../components/board/Paging';
 import { useSelector } from 'react-redux';
