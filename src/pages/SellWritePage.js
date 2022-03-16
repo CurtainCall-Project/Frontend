@@ -13,8 +13,6 @@ const SellWritePage = () => {
   const [content, setContent] = useState('');
   const [imgFiles, setImgFiles] = useState([]);
 
-  const user = useSelector((state) => state.user.nickname);
-
   // 첨부 가능한 사진의 개수 설정
   const totalCount = useRef(8);
   // 사진 id 1로 설정
@@ -79,10 +77,12 @@ const SellWritePage = () => {
   };
 
   const onSubmit = () => {
+    if (!title || !item || !price || !place) {
+      alert('필수 작성 항목은 제목, 기종, 가격, 거래장소입니다.');
+      return;
+    }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
-    dispatch(
-      addSellPost(title, item, price, place, delivery, content, files, user)
-    );
+    dispatch(addSellPost(title, item, price, place, delivery, content, files));
   };
   return (
     <>

@@ -10,33 +10,29 @@ const ADD_SELL_POST = 'post/ADD_SELL_POST';
 const initialState = {};
 
 // 게시판 글 포스팅
-export const addPost =
-  (boardType, title, content, imgFiles, nickname) => (dispatch) => {
-    const formData = new FormData();
-    formData.append('boardType', boardType);
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('imgFiles', imgFiles);
-    formData.append('nickname', nickname);
-
-    for (var value of formData.values()) {
-      console.log(value);
-    }
-    axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/write`, formData, {
+export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
+  const formData = new FormData();
+  formData.append('boardType', boardType);
+  formData.append('title', title);
+  formData.append('content', content);
+  formData.append('imgFiles', imgFiles);
+  axios
+    .post(
+      `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}`,
+      formData,
+      {
         headers: { 'Content-Type': 'multipart/form-data' },
-      })
-      .then((res) => {
-        console.log('게시글을 저장했습니다!');
-        console.log(res.data);
-        history.push('/');
-      })
-      .catch((error) => console.log(error));
-  };
+      }
+    )
+    .then((res) => {
+      history.push(`/${res.data.boardType}/${res.data.boardId}`);
+    })
+    .catch((error) => console.log(error));
+};
 
 // 대여 글 포스팅
 export const addRentPost =
-  (title, item, price, period, place, delivery, content, imgFiles, nickname) =>
+  (title, item, price, period, place, delivery, content, imgFiles) =>
   (dispatch) => {
     const formData = new FormData();
     formData.append('title', title);
@@ -47,27 +43,19 @@ export const addRentPost =
     formData.append('delivery', delivery);
     formData.append('content', content);
     formData.append('imgFiles', imgFiles);
-    formData.append('nickname', nickname);
-
-    for (var value of formData.values()) {
-      console.log(value);
-    }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/rent/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
-        console.log('게시글을 저장했습니다!');
-        console.log(res.data);
-        history.push('/');
+        history.push(`/${res.data.boardType}/${res.data.boardId}`);
       })
       .catch((error) => console.log(error));
   };
 
 // 거래 글 포스팅
 export const addSellPost =
-  (title, item, price, place, delivery, content, imgFiles, nickname) =>
-  (dispatch) => {
+  (title, item, price, place, delivery, content, imgFiles) => (dispatch) => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('item', item);
@@ -76,19 +64,12 @@ export const addSellPost =
     formData.append('delivery', delivery);
     formData.append('content', content);
     formData.append('imgFiles', imgFiles);
-    formData.append('nickname', nickname);
-
-    for (var value of formData.values()) {
-      console.log(value);
-    }
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/sell/write`, formData, {
+      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
-        console.log('게시글을 저장했습니다!');
-        console.log(res.data);
-        history.push('/');
+        history.push(`/${res.data.boardType}/${res.data.boardId}`);
       })
       .catch((error) => console.log(error));
   };
