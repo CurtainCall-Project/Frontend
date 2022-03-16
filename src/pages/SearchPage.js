@@ -5,6 +5,7 @@ import LongPostBox from '../components/common/LongPostBox';
 import Paging from '../components/board/Paging';
 import { setSearchResults } from '../modules/posts';
 import { useLocation } from 'react-router';
+import { Text, Grid } from '../elements/elements';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,6 @@ const SearchPage = () => {
   }, [page]);
 
   useEffect(() => {
-    console.log('keyword 변경');
     setPage(1);
     dispatch(setSearchResults(keyword, page));
   }, [keyword]);
@@ -27,8 +27,7 @@ const SearchPage = () => {
   const { totalCount, list } = useSelector(
     (state) => state.posts.searchResults
   );
-  console.log(list);
-  console.log('페이지' + page);
+
   // 페이지 변경
   const changePage = (page) => {
     setPage(page);
@@ -36,15 +35,23 @@ const SearchPage = () => {
 
   return (
     <Container>
-      {list &&
+      <Text margin="0 0 20px 0">검색결과 {totalCount}</Text>
+      {!Array.isArray(list) && list.length === 0 && (
+        <Grid>
+          <Text text_align="center">검색 결과가 없습니다.</Text>
+        </Grid>
+      )}
+      {Array.isArray(list) &&
         list.length > 0 &&
         list.map((list) => <LongPostBox postInfo={list} />)}
-      <Paging
-        page={page}
-        itemsCount={10}
-        totalItemsCount={totalCount}
-        changePage={changePage}
-      />
+      {Array.isArray(list) && list.length > 0 && (
+        <Paging
+          page={page}
+          itemsCount={10}
+          totalItemsCount={totalCount}
+          changePage={changePage}
+        />
+      )}
     </Container>
   );
 };
