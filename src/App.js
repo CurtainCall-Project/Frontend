@@ -6,7 +6,7 @@ import Routes from './Routes';
 import history from './history';
 import { ConnectedRouter } from 'connected-react-router';
 import NavbarContainer from './containers/NavbarContainer';
-
+import Footer from './components/common/Footer';
 import { Router, Switch, Route } from 'react-router-dom';
 
 import { getCookie } from './Cookie';
@@ -42,6 +42,7 @@ const App = () => {
               );
             })}
           </Switch>
+          <Footer />
         </ConnectedRouter>
       </ThemeProvider>
     </>

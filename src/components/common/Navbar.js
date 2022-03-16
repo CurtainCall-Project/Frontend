@@ -34,13 +34,13 @@ const Navbar = ({
       <TopbarContainer>
         <TopbarWrapper>
           <TopbarLeftContent>
-            <IconItem>
+            <IconItem href="https://www.instagram.com/curtain_call_official/">
               <InstaIcon />
             </IconItem>
-            <IconItem>
+            <IconItem href="https://twitter.com/curtaincall780?t=XfaP4y7edcPNXlseY4fNXQ&s=09">
               <TwitterIcon />
             </IconItem>
-            <IconItem>
+            <IconItem href="https://m.blog.naver.com/curtaincall780">
               <NaverIcon />
             </IconItem>
           </TopbarLeftContent>
@@ -159,7 +159,7 @@ const TopbarLeftContent = styled.div`
   height: 51px;
   padding-left: 10px;
 `;
-const IconItem = styled.div`
+const IconItem = styled.a`
   margin-right: 10px;
 `;
 const TopbarRightContent = styled.div`
