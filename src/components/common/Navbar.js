@@ -104,10 +104,10 @@ const Navbar = ({
               <MenuName>공연후기</MenuName>
               <InnerMenu>
                 <ul>
-                  <StyledLink to="/reviews/search">
+                  <StyledLink to="/review/search">
                     <InnerMenuItem>공연후기 작성</InnerMenuItem>
                   </StyledLink>
-                  <StyledLink to="/reviews">
+                  <StyledLink to="/my-review">
                     <InnerMenuItem>내가 쓴 후기</InnerMenuItem>
                   </StyledLink>
                 </ul>

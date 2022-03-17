@@ -9,6 +9,7 @@ import PostPage from './pages/PostPage';
 import ReviewSearchPage from './pages/review/ReviewSearchPage';
 import ReviewWritePage from './pages/review/ReviewWritePage';
 import ReviewsPage from './pages/review/ReviewsPage';
+import ReviewDetailPage from './pages/review/ReviewDetailPage';
 import ReviewPage from './pages/review/ReviewPage';
 import MyPage from './pages/mypage/MyPage';
 import MyPostPage from './pages/mypage/MyPostPage';
@@ -65,19 +66,19 @@ export default [
     component: MyScrapPage,
   },
   {
-    path: '/reviews/search',
+    path: '/review/search',
     component: ReviewSearchPage,
   },
   {
-    path: '/reviews/write/:id',
+    path: '/review/write/:id',
     component: ReviewWritePage,
   },
   {
-    path: '/reviews',
+    path: '/my-review',
     component: ReviewsPage,
   },
   {
-    path: '/reviews/:id',
-    component: ReviewPage,
+    path: '/my-review/:id',
+    component: ReviewDetailPage,
   },
 ];

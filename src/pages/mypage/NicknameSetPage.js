@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NicknameButton from '../../components/common/NicknameButton';
 import NicknameForm from '../../components/common/NicknameForm';
+import { Text } from '../../elements/elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNickname, setNickname } from '../../modules/user';
+import { Link } from 'react-router-dom'
 
 const NicknameSetPage = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,10 @@ const NicknameSetPage = () => {
   const [clicked, setClicked] = useState(false);
   const [color, setColor] = useState('');
   const [isUnique, setIsUnique] = useState('');
+  const [check, setCheck] = useState(false);
+  const uniqueNickname = useSelector((state) => state.user.isUnique);
+  // 첫 회원가입 상황 확인을 위해 nickname 받아오기
+  const nickname = useSelector((state) => state.user.nickname);
   const uniqueNickname = useSelector((state) => state.user.isUnique);
   const userId = useSelector((state) => state.user.userId);
 
@@ -48,14 +54,23 @@ const NicknameSetPage = () => {
     setClicked(true);
   };
 
+  // 이용약관 체크 상태 변경
+  const handleCheckBox = () => {
+    setCheck(!check);
+  };
+
   // 닉네임 저장 버튼 클릭
   const onSave = () => {
     if (!userNickname) {
       window.alert('새로운 닉네임을 입력하세요.');
       return;
     }
+    if (!check) {
+      window.alert('이용약관에 동의해주세요.');
+      return;
+    }
     if (isUnique) {
-      dispatch(addNickname(userNickname, userId));
+      dispatch(addNickname(userNickname));
     }
   };
 
@@ -67,6 +82,20 @@ const NicknameSetPage = () => {
         isUnique={isUnique}
         onChange={onChange}
         onCheck={onCheck}
+      />
+      {!nickname && (
+        <AcceptBox>
+          <input type="checkbox" onClick={handleCheckBox} />
+          <Text width="auto" margin_left="5px">
+            회원가입 시
+            <a href="https://www.notion.so/3315a2035ee74966ad28c84695fa2161">
+              {' '}
+              이용약관
+            </a>
+            에 동의합니다
+          </Text>
+        </AcceptBox>
+      )}
         userNickname={userNickname}
       />
       <NicknameButton onSave={onSave} />
@@ -81,4 +110,16 @@ const Wrapper = styled.div`
   margin: 110px auto 0 auto;
 `;
 
+const AcceptBox = styled.div`
+  width: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+
+  a {
+    color: ${({ theme }) => theme.mainBlue};
+  }
+`;
 export default NicknameSetPage;

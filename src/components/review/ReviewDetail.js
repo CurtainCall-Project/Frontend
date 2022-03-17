@@ -3,43 +3,56 @@ import styled from 'styled-components';
 import { Grid, Text, Button } from '../../elements/elements';
 import { Rating } from 'react-simple-star-rating';
 
-const ReviewDetail = () => {
+const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
   return (
     <Container>
       <Grid margin="0 0 10px 0">
-        <MusicalImage />
+        <MusicalImage src={reviewDetail.musical.poster} />
         <Grid
           flex_direction="column"
           justify_content="flex-end"
           width="80%"
           height="100%">
           <Text width="70%" margin_left="10px">
-            공연명이 나오는 자리입니다.
+            {reviewDetail.musical.prfnm}
           </Text>
           <StarContainer>
-            <Rating size={48} ratingValue={60} readonly={true}></Rating>
+            <Rating
+              size={48}
+              ratingValue={reviewDetail.rating * 20}
+              readonly={true}></Rating>
           </StarContainer>
         </Grid>
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">장소</Text>
+        <Text font_weight="regular">{reviewDetail.place}</Text>
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">관람일</Text>
+        <Text font_weight="regular">{reviewDetail.viewingDate}</Text>
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">캐스팅</Text>
+        <Text font_weight="regular">{reviewDetail.casting}</Text>
       </Grid>
       <Grid flex_direction="column">
         <Text>후기</Text>
+        <Text font_weight="regular">{reviewDetail.content}</Text>
       </Grid>
-      <Grid flex_direction="column">
-        <AttachedImages
-          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-          alt="위키드"></AttachedImages>
+      <Grid flex_direction="column" margin="30px 0 0 0">
+        {reviewDetail.boardImgs &&
+          reviewDetail.boardImgs.map((image) => (
+            <AttachedImages src={image}></AttachedImages>
+          ))}
       </Grid>
       <Grid margin="20px 0 0 0" justify_content="flex-end">
-        <Button>수정</Button>
+        <Button type="button" onClick={clickEditBtn}>
+          수정
+        </Button>
+        <DeleteButton type="button" onClick={deleteNowReview}>
+          삭제
+        </DeleteButton>
       </Grid>
     </Container>
   );
@@ -72,5 +85,11 @@ const AttachedImages = styled.img`
   max-width: 60%;
   height: auto;
   margin-bottom: 20px;
+`;
+const DeleteButton = styled(Button)`
+  color: #000;
+  background-color: ${({ theme }) => theme.darkGray};
+  margin-left: 10px;
+  cursor: pointer;
 `;
 export default ReviewDetail;
