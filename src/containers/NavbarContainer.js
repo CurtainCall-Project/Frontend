@@ -6,8 +6,9 @@ import { logout } from '../modules/user';
 
 const NavbarContainer = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const userId = useSelector((state) => state.user.userId);
+  // const isLogin = useSelector((state) => state.user.isLogin);
+  // const userId = useSelector((state) => state.user.userId);
+  const { isLogin, userId, nickname } = useSelector((state) => state.user);
   const [input, setInput] = useState('');
 
   // 엔터 키 눌렀을 때 뮤지컬 검색 수행
@@ -35,6 +36,7 @@ const NavbarContainer = () => {
     <Navbar
       isLogin={isLogin}
       userId={userId}
+      nickname={nickname}
       onLogOut={onLogOut}
       changeInput={changeInput}
       handleEnterKey={handleEnterKey}

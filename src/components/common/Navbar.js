@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 const Navbar = ({
   isLogin,
   userId,
+  nickname,
   onLogOut,
   changeInput,
   handleEnterKey,
@@ -20,8 +21,11 @@ const Navbar = ({
   // 비로그인 사용자 글쓰기 기능 접근 제한
   const controlUserAccess = (e) => {
     if (!isLogin) {
-      alert('로그인 후 이용 가능한 서비스입니다.');
       history.push('/signin');
+      return;
+    }
+    if (isLogin || nickname) {
+      history.push('/mypage/nickname');
       return;
     }
     e.target.value === 1 && history.push('/board/write');

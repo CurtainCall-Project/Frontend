@@ -5,7 +5,7 @@ import NicknameForm from '../../components/common/NicknameForm';
 import { Text } from '../../elements/elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNickname, setNickname } from '../../modules/user';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const NicknameSetPage = () => {
   const dispatch = useDispatch();
@@ -15,10 +15,6 @@ const NicknameSetPage = () => {
   const [isUnique, setIsUnique] = useState('');
   const [check, setCheck] = useState(false);
   const uniqueNickname = useSelector((state) => state.user.isUnique);
-  // 첫 회원가입 상황 확인을 위해 nickname 받아오기
-  const nickname = useSelector((state) => state.user.nickname);
-  const uniqueNickname = useSelector((state) => state.user.isUnique);
-  const userId = useSelector((state) => state.user.userId);
 
   // 닉네임 정보 가져오기
   const nickname = useSelector((state) => state.user.nickname);
@@ -82,6 +78,7 @@ const NicknameSetPage = () => {
         isUnique={isUnique}
         onChange={onChange}
         onCheck={onCheck}
+        userNickname={userNickname}
       />
       {!nickname && (
         <AcceptBox>
@@ -96,8 +93,6 @@ const NicknameSetPage = () => {
           </Text>
         </AcceptBox>
       )}
-        userNickname={userNickname}
-      />
       <NicknameButton onSave={onSave} />
     </Wrapper>
   );

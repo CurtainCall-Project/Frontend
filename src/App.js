@@ -12,14 +12,18 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { getCookie } from './Cookie';
 import { useDispatch } from 'react-redux';
 import { getUser } from './modules/user';
+import { useSelector } from 'react-redux';
 
 const App = () => {
   const dispatch = useDispatch();
-  const cookie = getCookie('isLogin');
-
+  const nickname = useSelector((state) => state.user.nickname);
   useEffect(() => {
+    const cookie = getCookie('isLogin');
     if (cookie) {
       dispatch(getUser());
+      if (!nickname) {
+        history.push('/mypage/nickname');
+      }
     }
   }, []);
 

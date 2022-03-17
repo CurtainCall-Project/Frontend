@@ -10,7 +10,6 @@ import ReviewSearchPage from './pages/review/ReviewSearchPage';
 import ReviewWritePage from './pages/review/ReviewWritePage';
 import ReviewsPage from './pages/review/ReviewsPage';
 import ReviewDetailPage from './pages/review/ReviewDetailPage';
-import ReviewPage from './pages/review/ReviewPage';
 import MyPage from './pages/mypage/MyPage';
 import MyPostPage from './pages/mypage/MyPostPage';
 import MyScrapPage from './pages/mypage/MyScrapPage';
@@ -18,7 +17,7 @@ import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
   {
-    path: '/',
+    path: 'http://localhost:3000?token=abcdefghijklmnopqrstuvwxyz',
     component: HomePage,
   },
   {
