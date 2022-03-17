@@ -20,6 +20,16 @@ const GlobalStyles = createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  .wrapper {
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+  }
+  
+  section {
+    padding-bottom: 79px;
+  }
 `;
 
 export default GlobalStyles;

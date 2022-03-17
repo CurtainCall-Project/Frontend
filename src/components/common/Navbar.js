@@ -17,6 +17,8 @@ const Navbar = ({
   handleEnterKey,
   clickSearchBtn,
 }) => {
+  const mypageMenu = 'mypage';
+
   // 비로그인 사용자 글쓰기 기능 접근 제한
   const controlUserAccess = (e) => {
     if (!isLogin) {
@@ -55,11 +57,13 @@ const Navbar = ({
                 onKeyPress={handleEnterKey}
               />
             </SearchContainer>
-            {isLogin ? (
-              <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
-            ) : (
-              <LoginButton to="/signin">회원가입/로그인</LoginButton>
-            )}
+            <ButtonWrapper>
+              {isLogin ? (
+                <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
+              ) : (
+                <LoginButton to="/signin">회원가입/로그인</LoginButton>
+              )}
+            </ButtonWrapper>
           </TopbarRightContent>
         </TopbarWrapper>
       </TopbarContainer>
@@ -115,7 +119,7 @@ const Navbar = ({
             </MenuItem>
             <MenuItem>
               <StyledLink to={`/mypage/${userId}`}>
-                <MenuName>마이페이지</MenuName>
+                <MenuName mypageMenu={mypageMenu}>마이페이지</MenuName>
               </StyledLink>
             </MenuItem>
             <WriteMenuItem>
@@ -196,6 +200,11 @@ const SearchInput = styled.input`
   outline: none;
   font-size: 16px;
 `;
+const ButtonWrapper = styled.div`
+  width: 103px;
+  display: flex;
+  justify-content: flex-end;
+`;
 const LogoutButton = styled.div`
   color: ${({ theme }) => theme.navSignInFontGray};
   transition: 0.3s;
@@ -257,7 +266,7 @@ const MenuName = styled.div`
   width: 95px;
   height: 55px;
   font-weight: bold;
-  cursor: default;
+  cursor: ${(props) => (props.mypageMenu ? 'cursor' : 'default')};
 `;
 const MenuItem = styled.li`
   position: relative;

@@ -28,21 +28,25 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <ConnectedRouter history={history}>
-          <NavbarContainer />
-          <Switch>
-            {Routes.map((route) => {
-              return (
-                <Route
-                  key={route.path}
-                  exact
-                  path={route.path}
-                  component={route.component}>
-                  {/* <route.component /> */}
-                </Route>
-              );
-            })}
-          </Switch>
-          <Footer />
+          <div className="wrapper">
+            <NavbarContainer />
+            <section>
+              <Switch>
+                {Routes.map((route) => {
+                  return (
+                    <Route
+                      key={route.path}
+                      exact
+                      path={route.path}
+                      component={route.component}>
+                      {/* <route.component /> */}
+                    </Route>
+                  );
+                })}
+              </Switch>
+            </section>
+            <Footer />
+          </div>
         </ConnectedRouter>
       </ThemeProvider>
     </>

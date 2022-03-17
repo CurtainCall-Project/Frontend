@@ -23,13 +23,11 @@ const Footer = () => {
 const Container = styled.div`
   width: 100%;
   height: 69px;
-  background-color: #c8c8c8;
-  margin-top: 30px;
+  position: absolute;
+  bottom: 0px;
+  background-color: ${({ theme }) => theme.darkGray};
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
-  // position: absolute;
-  // bottom: 0px;
-  margin-top: 30px;
 `;
 const TextContainer = styled.div`
   width: 500px;
