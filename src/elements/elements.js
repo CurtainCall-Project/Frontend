@@ -30,8 +30,12 @@ const Text = styled.div`
   color: ${(props) =>
     props.color === 'gray' ? `${({ theme }) => theme.borderGray}` : '#000'};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
+  ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
+  white-space: pre-wrap;
+  ${(props) => (props.line_height ? `line-height: ${props.line_height};` : '')}
+  ${(props) => (props.text_align ? `text-align: ${props.text_align};` : '')}
 `;
 
 // 입력(Input) 최소단위 컴포넌트

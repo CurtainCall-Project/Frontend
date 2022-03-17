@@ -10,6 +10,10 @@ import ReviewSearchPage from './pages/review/ReviewSearchPage';
 import ReviewWritePage from './pages/review/ReviewWritePage';
 import ReviewsPage from './pages/review/ReviewsPage';
 import ReviewDetailPage from './pages/review/ReviewDetailPage';
+import ReviewPage from './pages/review/ReviewPage';
+import MyPage from './pages/mypage/MyPage';
+import MyPostPage from './pages/mypage/MyPostPage';
+import MyScrapPage from './pages/mypage/MyScrapPage';
 import NicknameSetPage from './pages/mypage/NicknameSetPage';
 
 export default [
@@ -48,6 +52,18 @@ export default [
   {
     path: '/mypage/nickname',
     component: NicknameSetPage,
+  },
+  {
+    path: '/mypage/:id',
+    component: MyPage,
+  },
+  {
+    path: '/mypage/:id/my-post',
+    component: MyPostPage,
+  },
+  {
+    path: '/mypage/:id/scrapped-post',
+    component: MyScrapPage,
   },
   {
     path: '/review/search',

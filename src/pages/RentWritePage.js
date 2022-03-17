@@ -14,8 +14,6 @@ const RentWritePage = () => {
   const [content, setContent] = useState('');
   const [imgFiles, setImgFiles] = useState([]);
 
-  const user = useSelector((state) => state.user.nickname);
-
   // 첨부 가능한 사진의 개수 설정
   const totalCount = useRef(8);
   // 사진 id 1로 설정
@@ -86,19 +84,13 @@ const RentWritePage = () => {
   };
 
   const onSubmit = () => {
+    if (!title || !item || !price || !period || !place) {
+      alert('필수 작성 항목은 제목, 기종, 가격, 대여기간, 거래장소입니다.');
+      return;
+    }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
     dispatch(
-      addRentPost(
-        title,
-        item,
-        price,
-        period,
-        place,
-        delivery,
-        content,
-        files,
-        user
-      )
+      addRentPost(title, item, price, period, place, delivery, content, files)
     );
     //const { dataUrl } = imgFiles.dataUrl;
     // const revokeFiles = dataUrl.map((url) => URL.revokeObjectURL(dataUrl));

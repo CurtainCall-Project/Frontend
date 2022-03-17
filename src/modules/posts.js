@@ -7,12 +7,29 @@ const SET_POSTS = 'posts/SET_POSTS'; // 게시글 목록 데이터를 저장하�
 const SET_POST = 'posts/SET_POST'; // 특정 id를 갖는 게시글 데이터를 저장하는 액션 타입
 const SET_LIKE = 'posts/SET_LIKE';
 const SET_SCRAP = 'posts/SET_SCRAP';
+const SET_SEARCH_RESULTS = 'posts/SET_SEARCH_RESULTS';
 
 const initialState = {
   totalCount: 0,
   posts: [],
   hotPosts: [],
   nowPost: {},
+  searchResults: {},
+};
+
+// 검색 결과를 불러와 저장
+export const setSearchResults = (input, page) => (dispatch) => {
+  axios
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/search`, {
+      params: {
+        keyword: input,
+        page: page,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: SET_SEARCH_RESULTS, payload: res.data });
+    })
+    .catch((error) => alert(error));
 };
 
 // 핫게시글 목록을 불러오고, 스토어에 핫게시글 목록을 저장하는 액션 생성함수
@@ -24,6 +41,7 @@ export const setHotPosts = (boardType) => (dispatch) => {
     })
     .catch((error) => alert(error));
 };
+
 // 게시글 목록을 불러오고, 스토어에 게시글 목록을 저장하는 액션 생성함수
 export const setPosts =
   (boardType, page = 1) =>
@@ -33,7 +51,7 @@ export const setPosts =
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/list/${boardType}?page=${page}`
       )
       .then((res) => {
-        //console.log(res.data.free);
+        console.log(res.data);
         dispatch({ type: SET_POSTS, payload: res.data });
       })
       .catch((error) => alert(error));
@@ -88,6 +106,10 @@ export const postScrap = (id, user, scrap) => (dispatch, getState) => {
 
 export default handleActions(
   {
+    [SET_SEARCH_RESULTS]: (state, action) => ({
+      ...state,
+      searchResults: { ...action.payload },
+    }),
     [SET_HOT_POSTS]: (state, action) => ({
       ...state,
       hotPosts: [...action.payload.list],

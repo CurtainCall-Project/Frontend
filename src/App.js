@@ -21,7 +21,7 @@ const App = () => {
     if (cookie) {
       dispatch(getUser());
     }
-  });
+  }, []);
 
   return (
     <>

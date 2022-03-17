@@ -5,7 +5,7 @@ import NicknameForm from '../../components/common/NicknameForm';
 import { Text } from '../../elements/elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNickname, setNickname } from '../../modules/user';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const NicknameSetPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,17 @@ const NicknameSetPage = () => {
   const uniqueNickname = useSelector((state) => state.user.isUnique);
   // 첫 회원가입 상황 확인을 위해 nickname 받아오기
   const nickname = useSelector((state) => state.user.nickname);
+  const uniqueNickname = useSelector((state) => state.user.isUnique);
+  const userId = useSelector((state) => state.user.userId);
+
+  // 닉네임 정보 가져오기
+  const nickname = useSelector((state) => state.user.nickname);
+  useEffect(() => {
+    // 이미 닉네임이 저장되어 있는 경우 저장된 닉네임으로 상태 변경
+    if (nickname) {
+      setUserNickname(nickname);
+    }
+  }, [nickname]);
 
   useEffect(() => {
     setIsUnique(uniqueNickname);
@@ -25,12 +36,17 @@ const NicknameSetPage = () => {
 
   // 닉네임 입력값 저장
   const onChange = (e) => {
+    e.preventDefault();
     setUserNickname(e.target.value);
   };
 
   // 닉네임 중복확인 버튼 눌렀을 때, 닉네임 중복여부 확인하는 리듀서 함수 호출
   const onCheck = () => {
     if (!userNickname) {
+      window.alert('새로운 닉네임을 입력하세요.');
+      return;
+    }
+    if (nickname && nickname === userNickname) {
       window.alert('새로운 닉네임을 입력하세요.');
       return;
     }
@@ -80,6 +96,8 @@ const NicknameSetPage = () => {
           </Text>
         </AcceptBox>
       )}
+        userNickname={userNickname}
+      />
       <NicknameButton onSave={onSave} />
     </Wrapper>
   );
