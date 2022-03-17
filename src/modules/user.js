@@ -27,7 +27,7 @@ export const login = (token) => (dispatch) => {
       axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
       // 처음 로그인 시 닉네임 설정 페이지로 이동
       axios
-        .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/user`)
+        .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/user`)
         .then((res) => {
           console.log(res);
           dispatch({ type: GET_USER_SUCCESS, payload: res.data });
@@ -53,7 +53,7 @@ export const getUser = () => (dispatch) => {
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
   axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/login/user`)
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/user`)
     .then((res) => {
       console.log(res);
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
