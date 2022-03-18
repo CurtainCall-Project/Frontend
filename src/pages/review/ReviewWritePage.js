@@ -109,7 +109,7 @@ const ReviewWritePage = (props) => {
       totalCount.current
     ) {
       window.alert(
-        '파일은 최대 ' + totalCount.current + '개까지 업로드할 수 있습니다.'
+        '사진은 최대 ' + totalCount.current + '장까지 업로드할 수 있습니다.'
       );
       return;
     }
@@ -130,7 +130,6 @@ const ReviewWritePage = (props) => {
   // 삭제 버튼 클릭시 미리보기 이미지를 삭제한다
   const deleteFile = (id) => {
     setImgFiles(imgFiles.filter((imgFile) => imgFile.id !== id));
-    //console.log(imgFiles);
   };
 
   // 기존의 저장된 이미지 삭제 버튼 클릭시 미리보기 이미지를 삭제한다.
@@ -140,7 +139,6 @@ const ReviewWritePage = (props) => {
       deletedImages.concat(savedImages.filter((image) => image === url))
     );
   };
-  console.log(deletedImages);
 
   return (
     <Wrapper>

@@ -92,6 +92,7 @@ const ReviewWrite = (props) => {
         <Text width="7%">캐스팅</Text>
         <Input
           width="30%"
+          placeholder="캐스팅을 입력하세요"
           value={props.casting}
           onChange={(e) => props.setCasting(e.target.value)}
         />
@@ -100,7 +101,7 @@ const ReviewWrite = (props) => {
         <Text>후기</Text>
         <InputBox
           height="130px"
-          placeholder="후기를 작성해주세요"
+          placeholder="후기를 작성하세요"
           onChange={(e) => props.setContent(e.target.value)}
           defaultValue={props.content}></InputBox>
       </Grid>
