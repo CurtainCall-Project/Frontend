@@ -16,10 +16,8 @@ const ReviewSearchPage = () => {
   const results = useSelector((state) => state.review.searchResults);
 
   useEffect(() => {
-    if (page > 0) {
-      dispatch(getMusical(input, page));
-      setSearchResult(results);
-    }
+    dispatch(getMusical(input, page));
+    setSearchResult(results);
   }, [page]);
 
   useEffect(() => {
@@ -66,8 +64,6 @@ const ReviewSearchPage = () => {
     }
     searchButton.current.click();
     setPage(1);
-    dispatch(getMusical(input, page));
-    setSearchResult(results);
   };
 
   return (
@@ -80,10 +76,11 @@ const ReviewSearchPage = () => {
         searchButton={searchButton}
       />
       {page > 0 &&
+        searchResult.length > 0 &&
         searchResult.map((result) => (
           <PerformanceBox key={result.id} result={result} />
         ))}
-      {page > 0 && (
+      {page > 0 && searchResult.length > 0 && (
         <PageContainer>
           <PageButton onClick={pageDown}>{'<'} 이전</PageButton>
           <PageButton onClick={pageUp}>다음 {'>'}</PageButton>
@@ -98,11 +95,6 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 150px auto 0 auto;
-`;
-const ImageBox = styled.img`
-  background-color: gray;
-  width: 327px;
-  height: 205px;
 `;
 const PageContainer = styled.div`
   display: flex;

@@ -25,7 +25,6 @@ export const getReviewDetail = (reviewId) => (dispatch) => {
       dispatch({ type: GET_REVIEW_DETAIL, payload: res.data });
     })
     .catch((error) => {
-      console.log(error);
       window.alert('존재하지 않는 리뷰입니다.');
     });
 };
@@ -42,9 +41,21 @@ export const getMyReview = () => (dispatch) => {
 
 // 리뷰 수정하기
 export const editReview =
-  (mname, musicalId, userId, rating, viewingDate, casting, content, files) =>
+  (
+    reviewId,
+    mname,
+    musicalId,
+    userId,
+    rating,
+    viewingDate,
+    casting,
+    content,
+    files,
+    deletedImages
+  ) =>
   (dispatch) => {
     const formData = new FormData();
+    formData.append('reviewId', reviewId);
     formData.append('mname', mname);
     formData.append('userId', userId);
     formData.append('rating', rating);
@@ -52,6 +63,7 @@ export const editReview =
     formData.append('casting', casting);
     formData.append('content', content);
     formData.append('imgFiles', files);
+    formData.append('boardImgs', deletedImages);
     axios
       .put(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${musicalId}`,
@@ -71,8 +83,6 @@ export const editReview =
 export const addReview =
   (mname, musicalId, userId, rating, viewingDate, casting, content, files) =>
   (dispatch) => {
-    console.log(mname, rating, viewingDate, casting, content, files);
-    console.log(files);
     const formData = new FormData();
     formData.append('mname', mname);
     formData.append('userId', userId);
@@ -123,7 +133,6 @@ export const getMusicalDetail = (musicalId) => (dispatch) => {
 
 // 뮤지컬 검색 결과 가져오기
 export const getMusical = (input, page) => (dispatch) => {
-  console.log(input, page);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/musical`, {
       params: {
@@ -136,7 +145,6 @@ export const getMusical = (input, page) => (dispatch) => {
         window.alert('마지막 페이지입니다.');
         return;
       }
-      console.log(res.data);
       dispatch({ type: GET_MUSICAL, payload: res.data.dbs.db });
     })
     .catch((error) => alert(error));

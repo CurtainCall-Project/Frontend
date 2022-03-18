@@ -2,9 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { Text, Button } from '../../elements/elements';
+import { useSelector } from 'react-redux';
 
 const PerformanceBox = ({ result }) => {
+  const { isLogin, nickname } = useSelector((state) => state.user);
+
   const clickReviewButton = () => {
+    if (isLogin === false && nickname === null) {
+      history.push('/signin');
+      return;
+    }
     history.push(`/review/write/${result.mt20id}`);
   };
   return (
