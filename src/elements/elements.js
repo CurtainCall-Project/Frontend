@@ -19,7 +19,6 @@ const Grid = styled.div`
 
 // 텍스트(Text) 최소단위 컴포넌트
 const Text = styled.div`
-  //border: 1px solid;
   box-sizing: border-box;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   font-size: ${(props) =>
