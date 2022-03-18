@@ -119,7 +119,20 @@ const ReviewWrite = (props) => {
         </Text>
         <Button onClick={props.submitReview}>등록</Button>
       </Grid>
-      <Images>{renderImages(props.imgFiles)}</Images>
+      <Images>
+        {props.savedImages.length > 0 &&
+          props.savedImages.map((url) => (
+            <ImageWrapper key={url}>
+              <DeleteButtonWrapper
+                key={url}
+                onClick={() =>
+                  props.deleteSavedImage(url)
+                }></DeleteButtonWrapper>
+              <Image src={url} key={url}></Image>
+            </ImageWrapper>
+          ))}
+        {renderImages(props.imgFiles)}
+      </Images>
     </FormWrapper>
   );
 };

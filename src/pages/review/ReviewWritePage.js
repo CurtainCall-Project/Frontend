@@ -11,6 +11,9 @@ const ReviewWritePage = (props) => {
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const [imgFiles, setImgFiles] = useState([]);
+  // 기존 후기 글에 저장된 사진 url 상태 관리
+  const [savedImages, setSavedImages] = useState([]);
+  const [deletedImages, setDeletedImages] = useState([]);
   const totalCount = useRef(8);
   const nextId = useRef(1);
 
@@ -39,6 +42,7 @@ const ReviewWritePage = (props) => {
       setCasting(reviewDetail.casting);
       setRating(reviewDetail.rating * 20);
       setContent(reviewDetail.content);
+      setSavedImages(reviewDetail.boardImgs);
     }
   }, [reviewDetail]);
 
@@ -52,6 +56,7 @@ const ReviewWritePage = (props) => {
     ) {
       dispatch(
         editReview(
+          reviewDetail.reviewId,
           nowMusical.prfnm,
           musicalId,
           userId,
@@ -59,7 +64,8 @@ const ReviewWritePage = (props) => {
           viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
           casting,
           content,
-          files
+          files,
+          deletedImages
         )
       );
       return;
@@ -92,8 +98,16 @@ const ReviewWritePage = (props) => {
     }
 
     const newFiles = Array.from(e.target.files);
+    // 첨부 파일 용량을 10MB로 제한한다.
+    if (newFiles.filter((file) => file.size > 10 * 1024 * 1024).length > 0) {
+      window.alert('파일 1개의 크기를 10MB 이하로 제한합니다.');
+      return;
+    }
     // 업로드 가능한 파일을 8개로 제한한다.
-    if (imgFiles.length + newFiles.length > totalCount.current) {
+    if (
+      imgFiles.length + newFiles.length + savedImages.length >
+      totalCount.current
+    ) {
       window.alert(
         '파일은 최대 ' + totalCount.current + '개까지 업로드할 수 있습니다.'
       );
@@ -119,6 +133,15 @@ const ReviewWritePage = (props) => {
     //console.log(imgFiles);
   };
 
+  // 기존의 저장된 이미지 삭제 버튼 클릭시 미리보기 이미지를 삭제한다.
+  const deleteSavedImage = (url) => {
+    setSavedImages(savedImages.filter((image) => image !== url));
+    setDeletedImages(
+      deletedImages.concat(savedImages.filter((image) => image === url))
+    );
+  };
+  console.log(deletedImages);
+
   return (
     <Wrapper>
       <ReviewWrite
@@ -128,11 +151,15 @@ const ReviewWritePage = (props) => {
         casting={casting}
         content={content}
         imgFiles={imgFiles}
+        savedImages={savedImages}
+        deletedImages={deletedImages}
         selectFiles={selectFiles}
         deleteFile={deleteFile}
+        deleteSavedImage={deleteSavedImage}
         setViewingDate={setViewingDate}
         setCasting={setCasting}
         setContent={setContent}
+        setSavedImages={setSavedImages}
         handleRating={handleRating}
         submitReview={submitReview}
         reviewDetail={reviewDetail}
