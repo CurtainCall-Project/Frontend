@@ -30,6 +30,9 @@ const Text = styled.div`
   color: ${(props) =>
     props.color === 'gray' ? `${({ theme }) => theme.borderGray}` : '#000'};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
+  ${(props) =>
+    props.margin_bottom ? `margin-bottom ${props.margin_bottom}` : ''};
+
   ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
@@ -77,6 +80,7 @@ const InputBox = styled.textarea`
 
 // 버튼(Button) 최소단위 컴포넌트
 const Button = styled.button`
+  cursor: pointer;
   border: none;
   border-radius: 15px;
   background-color: ${({ theme }) => theme.mainBlue};

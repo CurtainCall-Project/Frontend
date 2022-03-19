@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Text } from '../../elements/elements';
+import { Button } from '../../elements/elements';
 import { ReactComponent as CheckIcon } from '../../assets/check_icon.svg';
 import { ReactComponent as ActiveCheckIcon } from '../../assets/active_check_icon.svg';
 
@@ -24,6 +24,7 @@ const CommentInput = (props) => {
       )}
 
       <EnrollButton
+        type="button"
         width="60px"
         height="30px"
         onClick={props.clickSubmitButton}>
