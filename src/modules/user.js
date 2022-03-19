@@ -22,7 +22,7 @@ export const login = (token) => (dispatch) => {
     })
     .then((res) => {
       const jwtToken = res.data.token;
-      setCookie('isLogin', jwtToken);
+      setCookie('token', jwtToken);
       // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
       axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
       // 처음 로그인 시 닉네임 설정 페이지로 이동
@@ -43,14 +43,14 @@ export const login = (token) => (dispatch) => {
 // 로그인 액션 생성함수
 export const logout = () => (dispatch) => {
   dispatch({ type: LOG_OUT });
-  deleteCookie('isLogin');
+  deleteCookie('token');
   history.replace('/');
 };
 
 // 사용자 정보를 가져오는 액션 생성함수
 export const getUser = () => (dispatch) => {
   // 쿠키에서 서버와의 통신 시 사용할 토큰을 가져온다.
-  const jwtToken = getCookie('isLogin');
+  const jwtToken = getCookie('token');
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
   axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
   axios

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import history from '../../history';
 import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/twitter_icon.svg';
 import { ReactComponent as NaverIcon } from '../../assets/naver.svg';
@@ -18,18 +17,6 @@ const Navbar = ({
   clickSearchBtn,
 }) => {
   const mypageMenu = 'mypage';
-
-  // 비로그인 사용자 글쓰기 기능 접근 제한
-  const controlUserAccess = (e) => {
-    if (!isLogin) {
-      alert('로그인 후 이용 가능한 서비스입니다.');
-      history.push('/signin');
-      return;
-    }
-    e.target.value === 1 && history.push('/board/write');
-    e.target.value === 2 && history.push('/rent/write');
-    e.target.value === 3 && history.push('/sell/write');
-  };
 
   return (
     <>
@@ -125,15 +112,15 @@ const Navbar = ({
             <WriteMenuItem>
               <WriteMenuName>글쓰기</WriteMenuName>
               <WriteInnerMenu>
-                <li value="1" onClick={controlUserAccess}>
-                  게시판 글쓰기
-                </li>
-                <li value="2" onClick={controlUserAccess}>
-                  대여하기
-                </li>
-                <li value="3" onClick={controlUserAccess} className="sell">
-                  거래하기
-                </li>
+                <StyledLink to="/board/write">
+                  <li>게시판 글쓰기</li>
+                </StyledLink>
+                <StyledLink to="/rent/write">
+                  <li>대여하기</li>
+                </StyledLink>
+                <StyledLink to="/sell/write">
+                  <li>거래하기</li>
+                </StyledLink>
               </WriteInnerMenu>
             </WriteMenuItem>
           </Menu>

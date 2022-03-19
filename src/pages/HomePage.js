@@ -38,13 +38,14 @@ const HomePage = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 598px;
+  height: 449px;
   padding-bottom: 69px;
+  // border: 1px solid;
 `;
 const BannerWrapper = styled.div`
   width: 100%;
   height: auto;
-  margin: 0 auto;
+  margin: 47px auto 0 auto;
 `;
 const Banner = styled.img`
   max-width: 100%;
