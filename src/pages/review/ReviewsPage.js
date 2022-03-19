@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ReviewBox from '../../components/review/ReviewBox';
 import { Text } from '../../elements/elements';
+import { getMyReview } from '../../modules/review';
 
 const ReviewsPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyReview());
+  }, []);
+
+  // 내가 쓴 후기 리스트 가져오기
+  const myReviews = useSelector((state) => state.review.myReviews);
+
   return (
     <Wrapper>
       <Text width="45%" font_size="18px">
         내가 쓴 후기
       </Text>
-      <ReviewBox />
+      {myReviews.length > 0 &&
+        myReviews.map((review) => (
+          <ReviewBox key={review.id} review={review} />
+        ))}
     </Wrapper>
   );
 };

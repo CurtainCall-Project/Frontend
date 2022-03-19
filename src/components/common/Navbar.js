@@ -9,7 +9,14 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isLogin, userId, onLogOut }) => {
+const Navbar = ({
+  isLogin,
+  userId,
+  onLogOut,
+  changeInput,
+  handleEnterKey,
+  clickSearchBtn,
+}) => {
   // 비로그인 사용자 글쓰기 기능 접근 제한
   const controlUserAccess = (e) => {
     if (!isLogin) {
@@ -21,6 +28,7 @@ const Navbar = ({ isLogin, userId, onLogOut }) => {
     e.target.value === 2 && history.push('/rent/write');
     e.target.value === 3 && history.push('/sell/write');
   };
+
   return (
     <>
       <TopbarContainer>
@@ -38,12 +46,14 @@ const Navbar = ({ isLogin, userId, onLogOut }) => {
           </TopbarLeftContent>
           <TopbarRightContent>
             <SearchContainer>
-              <Link to="/search">
-                <SearchButton>
-                  <SearchIcon />
-                </SearchButton>
-              </Link>
-              <SearchInput placeholder="검색" />
+              <SearchButton onClick={clickSearchBtn}>
+                <SearchIcon />
+              </SearchButton>
+              <SearchInput
+                placeholder="검색"
+                onChange={changeInput}
+                onKeyPress={handleEnterKey}
+              />
             </SearchContainer>
             {isLogin ? (
               <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
@@ -94,10 +104,10 @@ const Navbar = ({ isLogin, userId, onLogOut }) => {
               <MenuName>공연후기</MenuName>
               <InnerMenu>
                 <ul>
-                  <StyledLink to="/reviews/search">
+                  <StyledLink to="/review/search">
                     <InnerMenuItem>공연후기 작성</InnerMenuItem>
                   </StyledLink>
-                  <StyledLink to="/reviews">
+                  <StyledLink to="/my-review">
                     <InnerMenuItem>내가 쓴 후기</InnerMenuItem>
                   </StyledLink>
                 </ul>

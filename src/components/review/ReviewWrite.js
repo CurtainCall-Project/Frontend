@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import {
   Grid,
@@ -11,11 +11,18 @@ import {
 import { ReactComponent as PictureButton } from '../../assets/picture_icon.svg';
 import { ReactComponent as DeleteButton } from '../../assets/delete_button.svg';
 import { Rating } from 'react-simple-star-rating';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/locale';
 
 const ReviewWrite = (props) => {
   const hiddenFileInput = useRef();
-  const [rating, setRating] = useState(0);
 
+  const ExampleCustomInput = ({ value, onClick }) => (
+    <DateButton className="example-custom-input" onClick={onClick}>
+      {value}
+    </DateButton>
+  );
   // 선택한 이미지 미리보기
   const renderImages = (previews) => {
     return previews.map((preview) => {
@@ -33,26 +40,28 @@ const ReviewWrite = (props) => {
   // 첨부 아이콘 선택 시 실제 파일 선택하는 입력 태그 동작
   const handleClick = (e) => hiddenFileInput.current.click();
 
-  // 별점 점수 담기
-  const handleRating = (rate) => {
-    const calculatedRate = rate / 20;
-    setRating(calculatedRate);
-  };
-
   return (
     <FormWrapper>
       <Grid margin="0 0 10px 0">
-        <MusicalImage />
+        {props.nowMusical ? (
+          <MusicalImage src={props.nowMusical.poster} />
+        ) : (
+          <MusicalImage src={props.reviewDetail.poster} />
+        )}
         <Grid
           flex_direction="column"
           justify_content="flex-end"
           width="80%"
           height="100%">
-          <Text width="70%">공연명이 나오는 자리입니다.</Text>
+          <Text width="70%">
+            {props.nowMusical
+              ? props.nowMusical.prfnm
+              : props.reviewDetail.musical}
+          </Text>
           <StarContainer>
             <Rating
-              onClick={handleRating}
-              ratingValue={rating}
+              onClick={props.handleRating}
+              ratingValue={props.rating}
               size={48}
               allowHalfIcon></Rating>
           </StarContainer>
@@ -60,19 +69,41 @@ const ReviewWrite = (props) => {
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">장소</Text>
-        <Input width="25%" />
+        <TextLine>
+          {props.nowMusical
+            ? props.nowMusical.fcltynm
+            : props.reviewDetail.place}
+        </TextLine>
+        {/* <Input width="25%" placeholder={props.nowMusical.place} /> */}
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">관람일</Text>
-        <Input width="25%" />
+        {/* <Input width="25%" /> */}
+        <DatePicker
+          locale={ko}
+          dateFormat="yyyy년 MM월 dd일"
+          selected={props.viewingDate}
+          onChange={(date) => props.setViewingDate(date)}
+          placeholderText="관람일을 선택해주세요"
+          customInput={<ExampleCustomInput />}
+        />
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">캐스팅</Text>
-        <Input width="25%" />
+        <Input
+          width="30%"
+          placeholder="캐스팅을 입력하세요"
+          value={props.casting}
+          onChange={(e) => props.setCasting(e.target.value)}
+        />
       </Grid>
       <Grid flex_direction="column">
         <Text>후기</Text>
-        <InputBox height="130px" placeholder="후기를 작성해주세요" />
+        <InputBox
+          height="130px"
+          placeholder="후기를 작성하세요"
+          onChange={(e) => props.setContent(e.target.value)}
+          defaultValue={props.content}></InputBox>
       </Grid>
       <Grid margin="20px 0 0 0">
         <PictureButton onClick={() => handleClick()} />
@@ -87,9 +118,22 @@ const ReviewWrite = (props) => {
         <Text margin_left="10px" color="gray">
           * 사진은 최대 8장까지 첨부 가능합니다.
         </Text>
-        <Button>등록</Button>
+        <Button onClick={props.submitReview}>등록</Button>
       </Grid>
-      <Images>{renderImages(props.imgFiles)}</Images>
+      <Images>
+        {props.savedImages.length > 0 &&
+          props.savedImages.map((url) => (
+            <ImageWrapper key={url}>
+              <DeleteButtonWrapper
+                key={url}
+                onClick={() =>
+                  props.deleteSavedImage(url)
+                }></DeleteButtonWrapper>
+              <Image src={url} key={url}></Image>
+            </ImageWrapper>
+          ))}
+        {renderImages(props.imgFiles)}
+      </Images>
     </FormWrapper>
   );
 };
@@ -132,6 +176,26 @@ const DeleteButtonWrapper = styled(DeleteButton)`
   position: absolute;
   right: -13px;
   top: -12px;
+  cursor: pointer;
+`;
+const TextLine = styled.div`
+  border-bottom: 1px solid;
+  width: 29%;
+  height: 30px;
+  line-height: 35px;
+  padding-left: 10px;
+  color: #000;
+`;
+const DateButton = styled.button`
+  border: none;
+  border-bottom: 1px solid;
+  background-color: #fff;
+  width: 32.5%;
+  height: 30px;
+  padding-left: 15px;
+  ${({ theme }) => theme.verticalCenter};
+  justify-content: flex-start;
+  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
   cursor: pointer;
 `;
 export default ReviewWrite;

@@ -73,6 +73,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   width: 155px;
   height: 155px;
-  border-radius: 3px;
+  border-radius: 5px;
+  border: 1px solid ${({ theme }) => theme.borderGray};
 `;
 export default PostBox;
