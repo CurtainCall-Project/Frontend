@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import history from '../history';
+import { getCookie } from '../Cookie';
 import PostInfo from '../components/board/post/PostInfo';
 import PostDetail from '../components/board/post/PostDetail';
 import MarketPostDetail from '../components/board/post/MarketPostDetail';
@@ -8,7 +9,6 @@ import CommentInput from '../components/comment/CommentInput';
 import Comment from '../components/comment/Comment';
 import Paging from '../components/board/Paging';
 import { Grid, Text } from '../elements/elements';
-
 import LikeButton from '../components/board/post/LikeButton';
 import ScrapButton from '../components/board/post/ScrapButton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,6 +38,7 @@ const PostPage = (props) => {
     dispatch(setComment(postId));
   }, []);
 
+  const isLogin = !!getCookie('token');
   // 유저 닉네임 불러오기
   const user = useSelector((state) => state.user.nickname);
 
@@ -88,8 +89,12 @@ const PostPage = (props) => {
 
   // 좋아요 클릭/취소
   const clickLike = (e) => {
-    if (!user) {
+    if (!isLogin) {
       history.push('/signin');
+      return;
+    }
+    if (isLogin === true && user === null) {
+      history.push('/mypage/nickname');
       return;
     }
     dispatch(postLike(postId, user, !like));
@@ -97,8 +102,12 @@ const PostPage = (props) => {
 
   // 스크랩 클릭/취소
   const clickScrap = (e) => {
-    if (!user) {
+    if (!isLogin) {
       history.push('/signin');
+      return;
+    }
+    if (isLogin === true && user === null) {
+      history.push('/mypage/nickname');
       return;
     }
     dispatch(postScrap(postId, user, !scrap));
@@ -106,6 +115,14 @@ const PostPage = (props) => {
 
   // 댓글 비공개 설정
   const clickSecret = (e) => {
+    if (!isLogin) {
+      history.push('/signin');
+      return;
+    }
+    if (isLogin === true && user === null) {
+      history.push('/mypage/nickname');
+      return;
+    }
     setSecret(!secret);
   };
 
@@ -117,8 +134,12 @@ const PostPage = (props) => {
   // 등록 버튼 클릭 시 댓글 데이터 전송
   const clickSubmitButton = (e) => {
     e.preventDefault();
-    if (!user) {
+    if (!isLogin) {
       history.push('/signin');
+      return;
+    }
+    if (isLogin === true && user === null) {
+      history.push('/mypage/nickname');
       return;
     }
     if (!newComment) {

@@ -6,11 +6,16 @@ import PostBox from '../../components/mypage/PostBox';
 import ProfileBox from '../../components/mypage/ProfileBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts, addProfileImage } from '../../modules/user';
+import { getCookie } from '../../Cookie';
 
 const MyPage = () => {
   const dispatch = useDispatch();
-
+  const isLogin = !!getCookie('token');
   useEffect(() => {
+    if (isLogin === true && nickname === null) {
+      history.push('/mypage/nickname');
+      return;
+    }
     dispatch(getUserPosts(userId));
   }, []);
 

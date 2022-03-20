@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import SigninButton from '../../components/signin/SigninButton';
 import naver_logo from '../../assets/naver_login.svg';
 import kakao_logo from '../../assets/kakao_login.svg';
-import { KAKAO_AUTH_URL } from '../../oauth/KakaoOauth';
+import google_logo from '../../assets/google_login.svg';
+import {
+  KAKAO_AUTH_URL,
+  NAVER_AUTH_URL,
+  GOOGLE_AUTH_URL,
+} from '../../oauth/oauth';
 import GoogleLogin from '../../components/signin/GoogleLogin';
 import GoogleLoginContainer from '../../containers/GoogleLoginContainer';
 
@@ -12,10 +17,18 @@ const SignInPage = () => {
     <>
       <Container>
         <Title>회원가입/로그인</Title>
-        <SigninButton logo={naver_logo} text="네이버" />
+        <a href={NAVER_AUTH_URL}>
+          <SigninButton logo={naver_logo} text="네이버" />
+        </a>
         <a href={KAKAO_AUTH_URL}>
           <SigninButton logo={kakao_logo} text="카카오" />
         </a>
+        {/* <a href={GOOGLE_AUTH_URL}>
+          <GoogleButton id="customBtn" className="customGPlusSignIn">
+            <img src={google_logo} alt="구글"></img>
+            <div className="buttonText">구글로 로그인</div>
+          </GoogleButton>
+        </a> */}
         <GoogleLoginContainer />
       </Container>
     </>
@@ -31,5 +44,22 @@ const Title = styled.div`
   padding: 10px;
   text-align: center;
 `;
+const GoogleButton = styled.div`
+  ${({ theme }) => theme.verticalCenter};
+  width: 350px;
+  height: 100px;
+  box-shadow: 5px 5px 15px #c6c6c6;
+  border-radius: 10px;
+  font-size: ${({ theme }) => theme.fontSize.signinFontSize};
+  margin-top: 30px;
+  cursor: pointer;
 
+  img {
+    margin-left: 53px;
+  }
+
+  div {
+    margin-left: 60px;
+  }
+`;
 export default SignInPage;
