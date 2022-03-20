@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Text } from '../../../elements/elements';
 
 const PostDetail = (props) => {
-  console.log(props.post);
   return (
     <Container>
       <Text font_weight="regular">{props.post.content}</Text>

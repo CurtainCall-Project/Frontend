@@ -4,6 +4,7 @@ import history from '../../history';
 import { Text, Button } from '../../elements/elements';
 import { ReactComponent as CameraIcon } from '../../assets/camera_icon.svg';
 import basicProfile from '../../assets/default_profile.png';
+
 const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
   const hiddenFileInput = useRef();
   const onClick = (e) => hiddenFileInput.current.click();

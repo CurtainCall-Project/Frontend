@@ -12,7 +12,7 @@ import { Grid, Text } from '../elements/elements';
 import LikeButton from '../components/board/post/LikeButton';
 import ScrapButton from '../components/board/post/ScrapButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPost, postLike, postScrap } from '../modules/posts';
+import { setPost, postLike, postScrap, deletePost } from '../modules/posts';
 import { addComment, setComment } from '../modules/comments';
 
 const PostPage = (props) => {
@@ -146,16 +146,21 @@ const PostPage = (props) => {
       alert('댓글을 작성해주세요.');
       return;
     }
+    // 대여, 거래 댓글 작성 시 실행
     if (boardType === 'rent' || boardType === 'sell') {
       dispatch(addComment(newComment, null, postId, secret));
       setNewComment('');
       setSecret(false);
-      console.log('대여, 거래 댓글을 작성했어요!');
       return;
     }
+    // 자유, 시야, 새내기 댓글 작성 시 실행
     dispatch(addComment(newComment, null, postId));
     setNewComment('');
-    console.log('자유, 시야, 새내기 댓글을 작성했어요!');
+  };
+
+  // 게시글 삭제
+  const deleteNowPost = () => {
+    dispatch(deletePost(postId, boardType));
   };
 
   const postDetail = {
@@ -169,7 +174,7 @@ const PostPage = (props) => {
   return (
     <Container>
       <PostContainer>
-        <PostInfo post={post} />
+        <PostInfo post={post} user={user} deleteNowPost={deleteNowPost} />
         {postDetail[boardType]}
         <Grid justify_content="center " margin="25px 0 0 0">
           <LikeButton clickLike={clickLike} like={like} likeCount={likeCount} />
@@ -208,7 +213,7 @@ const PostPage = (props) => {
 };
 
 const Container = styled.div`
-  width: 1000px;
+  max-width: 1000px;
   margin: 90px auto 0 auto;
 `;
 

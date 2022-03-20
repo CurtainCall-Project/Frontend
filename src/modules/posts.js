@@ -7,6 +7,7 @@ const SET_POSTS = 'posts/SET_POSTS'; // 게시글 목록 데이터를 저장하�
 const SET_POST = 'posts/SET_POST'; // 특정 id를 갖는 게시글 데이터를 저장하는 액션 타입
 const SET_LIKE = 'posts/SET_LIKE';
 const SET_SCRAP = 'posts/SET_SCRAP';
+const DELETE_POST = 'posts/DELETE_POST';
 const SET_SEARCH_RESULTS = 'posts/SET_SEARCH_RESULTS';
 
 const initialState = {
@@ -51,7 +52,6 @@ export const setPosts =
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/list/${boardType}?page=${page}`
       )
       .then((res) => {
-        console.log(res.data);
         dispatch({ type: SET_POSTS, payload: res.data });
       })
       .catch((error) => alert(error));
@@ -59,14 +59,30 @@ export const setPosts =
 
 // 특정 게시글을 불러오고, 스토어에 특정 게시글을 저장하는 액션 생성함수
 export const setPost = (id) => (dispatch) => {
-  console.log(id);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${id}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
     })
-    .catch((error) => alert(error));
+    .catch((error) => {
+      window.alert('존재하지 않는 게시물입니다.');
+      history.goBack();
+    });
+};
+
+// 게시글 삭제
+export const deletePost = (id, boardType) => (dispatch) => {
+  axios
+    .delete(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${id}`)
+    .then((res) => {
+      dispatch({ type: DELETE_POST });
+      window.alert('게시글을 삭제했습니다.');
+      history.push(`/${boardType}`);
+    })
+    .catch((error) => {
+      window.alert('게시글 삭제를 실패했습니다.');
+      history.goBack();
+    });
 };
 
 // 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
@@ -83,6 +99,9 @@ export const postLike = (id, user, like) => (dispatch, getState) => {
         type: SET_LIKE,
         payload: { ...res.data, likeCount: nowLikeCount },
       });
+    })
+    .catch((error) => {
+      console.log(error);
     });
 };
 
@@ -95,7 +114,6 @@ export const postScrap = (id, user, scrap) => (dispatch, getState) => {
       scrap: scrap,
     })
     .then((res) => {
-      console.log(res.data);
       nowScrapCount = res.data.scrap ? nowScrapCount + 1 : nowScrapCount - 1;
       dispatch({
         type: SET_SCRAP,
@@ -127,6 +145,10 @@ export default handleActions(
       nowPost: {
         ...action.payload,
       },
+    }),
+    [DELETE_POST]: (state, action) => ({
+      ...state,
+      nowPost: {},
     }),
     [SET_LIKE]: (state, action) => ({
       ...state,

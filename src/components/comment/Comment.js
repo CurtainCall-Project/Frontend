@@ -45,18 +45,18 @@ const Comment = (props) => {
       alert('댓글을 작성해주세요.');
       return;
     }
+    // 대여, 거래 답글 작성 시 실행
     if (props.boardType === 'rent' || props.boardType === 'sell') {
       dispatch(
         addComment(newReply, props.comment.id, props.postId, replySecret)
       );
       setNewReply('');
       setReplySecret(false);
-      console.log('대여, 거래 답글을 작성했어요!');
       return;
     }
+    // 자유, 시야, 새내기 답글 작성 시 실행
     dispatch(addComment(newReply, null, props.postId));
     setNewReply('');
-    console.log('자유, 시야, 새내기 댓글을 작성했어요!');
   };
 
   return (
@@ -66,19 +66,27 @@ const Comment = (props) => {
         <CommentBox key={props.comment.id}>
           <ProfileImg></ProfileImg>
           <Grid display="block">
-            <Text width="8%">{props.comment.nickname}</Text>
+            <Text width="8%" margin_bottom="5px">
+              {props.comment.nickname}
+            </Text>
             {props.comment.secret &&
               (props.user === props.nickname ||
               props.user === props.comment.nickname ? (
-                <Text font_weight="regular">{props.comment.replyContent}</Text>
+                <Text font_weight="regular" margin_bottom="5px">
+                  {props.comment.replyContent}
+                </Text>
               ) : (
-                '비밀 댓글입니다.'
+                <Text font_weight="regular" margin_bottom="5px">
+                  비밀 댓글입니다.
+                </Text>
               ))}
             {!props.comment.secret && (
-              <Text font_weight="regular">{props.comment.replyContent}</Text>
+              <Text font_weight="regular" margin_bottom="5px">
+                {props.comment.replyContent}
+              </Text>
             )}
             <Grid>
-              <Text font_weight="regular" width="18%">
+              <Text font_weight="regular" width="19%">
                 {registerDate}
               </Text>
               <ReplyButton onClick={clickReplyButton}>답글달기</ReplyButton>
@@ -126,10 +134,9 @@ const Container = styled.div`
   align-items: flex-end;
 `;
 const CommentBox = styled.div`
-  width: 1000px;
+  width: 999px;
   display: flex;
   margin-bottom: 10px;
-  line-height: 24px;
 `;
 const ProfileImg = styled.div`
   width: 20px;
@@ -137,13 +144,21 @@ const ProfileImg = styled.div`
   background-color: gray;
   border-radius: 10px;
   margin-right: 10px;
+  margin-top: 5px;
 `;
 const ReplyButton = styled.button`
+  box-sizing: border-box;
   border: none;
   width: 10%;
   background-color: #fff;
+  color: ${({ theme }) => theme.navSignInFontGray};
   font-weight: bold;
   font-size: ${({ theme }) => theme.smallFontSize};
+  margin-top: 4px;
   cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    color: ${({ theme }) => theme.mainBlue};
+  }
 `;
 export default Comment;
