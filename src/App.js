@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import theme from './theme';
+import theme from './styles/theme';
 import GlobalStyles from './styles/GlobalStyles';
 import privateRoutes from './routes/privateRoutes';
 import publicRoutes from './routes/publicRoutes';
@@ -26,9 +26,9 @@ const App = () => {
     if (cookie) {
       dispatch(getUser());
     }
-    // if (!nickname) {
-    //   history.push('/mypage/nickname');
-    // }
+    if (!!cookie === true && nickname === false) {
+      history.push('/mypage/nickname');
+    }
   }, []);
 
   return (

@@ -6,6 +6,7 @@ import { Grid, Text } from '../../elements/elements';
 import history from '../../history';
 import { addComment } from '../../modules/comments';
 import { useDispatch } from 'react-redux';
+import basicProfile from '../../assets/default_profile.png';
 
 const Comment = (props) => {
   const dispatch = new useDispatch();
@@ -19,6 +20,9 @@ const Comment = (props) => {
   const [newReply, setNewReply] = useState('');
   // 답글 비공개 여부 상태 관리
   const [replySecret, setReplySecret] = useState(false);
+  const profileImage = !!props.comment.profileImg
+    ? props.comment.profileImg
+    : basicProfile;
 
   // 답글달기 버튼 누름/안누름 여부
   const clickReplyButton = () => {
@@ -64,7 +68,7 @@ const Comment = (props) => {
       {/* replyList가 존재하면 대댓글을 보여준다 */}
       <Container>
         <CommentBox key={props.comment.id}>
-          <ProfileImg></ProfileImg>
+          <ProfileImg src={profileImage}></ProfileImg>
           <Grid display="block">
             <Text width="8%" margin_bottom="5px">
               {props.comment.nickname}
@@ -138,10 +142,9 @@ const CommentBox = styled.div`
   display: flex;
   margin-bottom: 10px;
 `;
-const ProfileImg = styled.div`
+const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
-  background-color: gray;
   border-radius: 10px;
   margin-right: 10px;
   margin-top: 5px;

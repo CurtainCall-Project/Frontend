@@ -83,7 +83,7 @@ const SellWrite = (props) => {
           onChange={props.changeContent}></InputBox>
       </Grid>
       <Grid>
-        <PictureButton onClick={() => onClick()}></PictureButton>
+        <UploadButton onClick={() => onClick()}></UploadButton>
         <input
           type="file"
           multiple="multiple"
@@ -146,6 +146,9 @@ const DeleteButtonWrapper = styled(DeleteButton)`
   position: absolute;
   right: -13px;
   top: -12px;
+  cursor: pointer;
+`;
+const UploadButton = styled(PictureButton)`
   cursor: pointer;
 `;
 export default SellWrite;

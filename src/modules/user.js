@@ -7,6 +7,7 @@ import { setCookie, deleteCookie, getCookie } from '../Cookie';
 const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
 const LOG_OUT = 'user/LOG_OUT';
 const CHECK_NICKNAME = 'user/CHECK_NICKNAME';
+const ADD_NICKNAME = 'user/ADD_NICKNAME';
 const SET_USER_POSTS = 'user/SET_USER_POSTS';
 const SET_PROFILEIMG = 'user/SET_PROFILEIMG';
 
@@ -82,7 +83,8 @@ export const addNickname = (nickname) => (dispatch) => {
     .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/nickname`, {
       nickname: nickname,
     })
-    .then(() => {
+    .then((res) => {
+      dispatch({ type: ADD_NICKNAME, payload: res.data.nickname });
       history.goBack();
     });
 };
@@ -163,6 +165,10 @@ export default handleActions(
     [CHECK_NICKNAME]: (state, action) => ({
       ...state,
       ...action.payload,
+    }),
+    [ADD_NICKNAME]: (state, action) => ({
+      ...state,
+      nickname: action.payload,
     }),
     [SET_USER_POSTS]: (state, action) => ({
       ...state,

@@ -12,7 +12,7 @@ const MyPage = () => {
   const dispatch = useDispatch();
   const isLogin = !!getCookie('token');
   useEffect(() => {
-    if (isLogin === true && nickname === null) {
+    if (isLogin === true && !!nickname === false) {
       history.push('/mypage/nickname');
       return;
     }
@@ -57,9 +57,11 @@ const MyPage = () => {
       <PostContainer>
         <Grid margin="0 0 15px 0">
           <Text>내가 쓴 글</Text>
-          <Text font_size="14px" width="8%" onClick={clickMorePostBtn}>
-            더보기 {'>'}
-          </Text>
+          <TextWrapper>
+            <Text font_size="14px" onClick={clickMorePostBtn}>
+              더보기 {'>'}
+            </Text>
+          </TextWrapper>
         </Grid>
         {myPost.length > 0 ? (
           <PostBox postInfo={myPost} />
@@ -68,9 +70,11 @@ const MyPage = () => {
         )}
         <Grid margin="40px 0 15px 0">
           <Text>스크랩</Text>
-          <Text font_size="14px" width="8%" onClick={clickMoreScrapBtn}>
-            더보기 {'>'}
-          </Text>
+          <TextWrapper>
+            <Text font_size="14px" onClick={clickMoreScrapBtn}>
+              더보기 {'>'}
+            </Text>
+          </TextWrapper>
         </Grid>
         {myScrap.length > 0 ? (
           <PostBox postInfo={myScrap} />
@@ -92,5 +96,8 @@ const Container = styled.div`
 const PostContainer = styled.div`
   width: 730px;
 `;
-
+const TextWrapper = styled.div`
+  cursor: pointer;
+  width: 8%;
+`;
 export default MyPage;

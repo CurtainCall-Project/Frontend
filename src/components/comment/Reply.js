@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import Comment from './Comment';
 import { Grid, Text } from '../../elements/elements';
+import basicProfile from '../../assets/default_profile.png';
 
 const Reply = (props) => {
   const registerDate = new Date(props.reply.registerDate).toLocaleString(
     'ko-KR'
   );
-
+  console.log(props.reply);
+  const profileImage = !!props.reply.profileImg
+    ? props.reply.profileImg
+    : basicProfile;
   return (
     <ReplyBox>
-      <ProfileImg></ProfileImg>
+      <ProfileImg src={profileImage}></ProfileImg>
       <Grid display="block" margin="5px 0">
         <Text width="8%" margin_bottom="5px">
           {props.reply.nickname}
@@ -54,10 +57,9 @@ const ReplyBox = styled.div`
   margin-bottom: 10px;
 `;
 
-const ProfileImg = styled.div`
+const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
-  background-color: gray;
   border-radius: 10px;
   margin: 9px 10px 0 7px;
 `;

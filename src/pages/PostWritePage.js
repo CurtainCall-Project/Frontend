@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react';
-import PostWrite from '../components/write/PostWrite';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+import history from '../history';
+import { getCookie } from '../Cookie';
+import { useDispatch, useSelector } from 'react-redux';
 import { addPost } from '../modules/post';
+import PostWrite from '../components/write/PostWrite';
 
 const PostWritePage = () => {
   const dispatch = useDispatch();
@@ -15,6 +17,16 @@ const PostWritePage = () => {
 
   const totalCount = useRef(8);
   const nextId = useRef(1);
+
+  // 로그인 후 닉네임 설정되어 있지 않을 경우 닉네임 설정 페이지로 이동
+  const isLogin = !!getCookie('token');
+  const nickname = useSelector((state) => state.user.nickname);
+  useEffect(() => {
+    if (isLogin === true && !!nickname === false) {
+      history.push('/mypage/nickname');
+      return;
+    }
+  }, []);
 
   // select box 클릭 상태 바꾸기
   const clickSelectBox = (e) => {

@@ -84,7 +84,7 @@ const PostWrite = (props) => {
           onChange={props.changeContent}></InputBox>
       </Grid>
       <Grid>
-        <PictureButton onClick={() => onClick()}></PictureButton>
+        <UploadButton onClick={() => onClick()}></UploadButton>
         <input
           type="file"
           multiple="multiple"
@@ -131,6 +131,7 @@ const SelectBox = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
+  cursor: pointer;
 `;
 const SelectedName = styled.div`
   display: flex;
@@ -157,6 +158,7 @@ const OptionBox = styled.ul`
     color: #fff;
     ${({ theme }) => theme.verticalCenter};
     justify-content: center;
+    cursor: pointer;
     &:hover {
       background-color: ${({ theme }) => theme.purple};
     }
@@ -165,6 +167,9 @@ const OptionBox = styled.ul`
     border-radius: 0 0 10px 10px;
   }
 }
+`;
+const UploadButton = styled(PictureButton)`
+  cursor: pointer;
 `;
 const Images = styled.div`
   display: flex;

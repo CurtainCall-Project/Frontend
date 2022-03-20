@@ -34,7 +34,6 @@ export const getMyReview = () => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/myreview`)
     .then((res) => {
-      console.log(res.data.reviewList);
       dispatch({ type: GET_MY_REVIEW, payload: res.data.reviewList });
     })
     .catch((error) => console.log(error));
@@ -134,6 +133,7 @@ export const getMusicalDetail = (musicalId) => (dispatch) => {
 
 // 뮤지컬 검색 결과 가져오기
 export const getMusical = (input, page) => (dispatch) => {
+  console.log(input, page);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/musical`, {
       params: {
@@ -142,13 +142,13 @@ export const getMusical = (input, page) => (dispatch) => {
       },
     })
     .then((res) => {
-      if (!res.data.dbs.db) {
+      if (res.data.dbs.db.length === 0) {
         window.alert('마지막 페이지입니다.');
         return;
       }
       dispatch({ type: GET_MUSICAL, payload: res.data.dbs.db });
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 export default handleActions(

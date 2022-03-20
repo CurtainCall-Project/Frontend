@@ -16,8 +16,10 @@ const ReviewSearchPage = () => {
   const results = useSelector((state) => state.review.searchResults);
 
   useEffect(() => {
-    dispatch(getMusical(input, page));
-    setSearchResult(results);
+    if (page > 0) {
+      dispatch(getMusical(input, page));
+      //setSearchResult(results);
+    }
   }, [page]);
 
   useEffect(() => {
@@ -25,7 +27,6 @@ const ReviewSearchPage = () => {
       setSearchResult(results);
     }
   }, [results]);
-
   const searchButton = useRef();
   // 검색 결과 상태 관리
   const [searchResult, setSearchResult] = useState([]);
@@ -64,6 +65,7 @@ const ReviewSearchPage = () => {
     }
     searchButton.current.click();
     setPage(1);
+    dispatch(getMusical(input, 1));
   };
 
   return (

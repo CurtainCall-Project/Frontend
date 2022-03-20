@@ -82,6 +82,7 @@ const AddButton = styled.div`
   position: absolute;
   top: 117px;
   left: 47px;
+  cursor: pointer;
 `;
 const NicknameContainer = styled.div`
   height: 30%;

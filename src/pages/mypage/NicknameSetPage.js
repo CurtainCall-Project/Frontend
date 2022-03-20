@@ -60,7 +60,7 @@ const NicknameSetPage = () => {
       window.alert('새로운 닉네임을 입력하세요.');
       return;
     }
-    if (!check) {
+    if (!!nickname === false && check === false) {
       window.alert('이용약관에 동의해주세요.');
       return;
     }
@@ -79,7 +79,7 @@ const NicknameSetPage = () => {
         onCheck={onCheck}
         userNickname={userNickname}
       />
-      {!nickname && (
+      {!!nickname === false && (
         <AcceptBox>
           <input type="checkbox" onClick={handleCheckBox} />
           <Text width="auto" margin_left="5px">
