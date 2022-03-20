@@ -8,6 +8,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Noto Sans", sans-serif;
     font-size: 16px;
     color: #000;
+    width: 100%;
+    height: 100%;
   }
 
   a {
@@ -17,6 +19,16 @@ const GlobalStyles = createGlobalStyle`
 
   ul {
     list-style: none;
+  }
+
+  .wrapper {
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+  }
+  
+  section {
+    padding-bottom: 79px;
   }
 `;
 

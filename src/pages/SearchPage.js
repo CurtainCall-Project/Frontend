@@ -14,7 +14,6 @@ const SearchPage = () => {
   const params = new URLSearchParams(location.search);
   const keyword = params.get('keyword');
   const [page, setPage] = useState(1);
-
   useEffect(() => {
     dispatch(setSearchResults(keyword, page));
   }, [page]);
@@ -36,7 +35,7 @@ const SearchPage = () => {
   return (
     <Container>
       <Text margin="0 0 20px 0">검색결과 {totalCount}</Text>
-      {!Array.isArray(list) && list.length === 0 && (
+      {Array.isArray(list) && list.length === 0 && (
         <Grid>
           <Text text_align="center">검색 결과가 없습니다.</Text>
         </Grid>

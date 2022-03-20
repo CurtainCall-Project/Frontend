@@ -25,19 +25,20 @@ const Navbar = ({
       return;
     }
   };
+  const mypageMenu = 'mypage';
 
   return (
     <>
       <TopbarContainer>
         <TopbarWrapper>
           <TopbarLeftContent>
-            <IconItem>
+            <IconItem href="https://www.instagram.com/curtain_call_official/">
               <InstaIcon />
             </IconItem>
-            <IconItem>
+            <IconItem href="https://twitter.com/curtaincall780?t=XfaP4y7edcPNXlseY4fNXQ&s=09">
               <TwitterIcon />
             </IconItem>
-            <IconItem>
+            <IconItem href="https://m.blog.naver.com/curtaincall780">
               <NaverIcon />
             </IconItem>
           </TopbarLeftContent>
@@ -52,11 +53,13 @@ const Navbar = ({
                 onKeyPress={handleEnterKey}
               />
             </SearchContainer>
-            {isLogin ? (
-              <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
-            ) : (
-              <LoginButton to="/signin">회원가입/로그인</LoginButton>
-            )}
+            <ButtonWrapper>
+              {isLogin ? (
+                <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
+              ) : (
+                <LoginButton to="/signin">회원가입/로그인</LoginButton>
+              )}
+            </ButtonWrapper>
           </TopbarRightContent>
         </TopbarWrapper>
       </TopbarContainer>
@@ -112,21 +115,21 @@ const Navbar = ({
             </MenuItem>
             <MenuItem>
               <StyledLink to={`/mypage/${userId}`}>
-                <MenuName>마이페이지</MenuName>
+                <MenuName mypageMenu={mypageMenu}>마이페이지</MenuName>
               </StyledLink>
             </MenuItem>
             <WriteMenuItem>
               <WriteMenuName>글쓰기</WriteMenuName>
               <WriteInnerMenu>
-                <li value="1" onClick={controlUserAccess}>
-                  게시판 글쓰기
-                </li>
-                <li value="2" onClick={controlUserAccess}>
-                  대여하기
-                </li>
-                <li value="3" onClick={controlUserAccess} className="sell">
-                  거래하기
-                </li>
+                <StyledLink to="/board/write">
+                  <li>게시판 글쓰기</li>
+                </StyledLink>
+                <StyledLink to="/rent/write">
+                  <li>대여하기</li>
+                </StyledLink>
+                <StyledLink to="/sell/write">
+                  <li>거래하기</li>
+                </StyledLink>
               </WriteInnerMenu>
             </WriteMenuItem>
           </Menu>
@@ -156,7 +159,7 @@ const TopbarLeftContent = styled.div`
   height: 51px;
   padding-left: 10px;
 `;
-const IconItem = styled.div`
+const IconItem = styled.a`
   margin-right: 10px;
 `;
 const TopbarRightContent = styled.div`
@@ -192,6 +195,11 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   font-size: 16px;
+`;
+const ButtonWrapper = styled.div`
+  width: 103px;
+  display: flex;
+  justify-content: flex-end;
 `;
 const LogoutButton = styled.div`
   color: ${({ theme }) => theme.navSignInFontGray};
@@ -254,10 +262,11 @@ const MenuName = styled.div`
   width: 95px;
   height: 55px;
   font-weight: bold;
+  cursor: ${(props) => (props.mypageMenu ? 'cursor' : 'default')};
 `;
 const MenuItem = styled.li`
   position: relative;
-
+  z-index: 2;
   &:hover {
     ${MenuName} {
       color: ${({ theme }) => theme.mainBlue};
@@ -304,13 +313,14 @@ const WriteMenuName = styled.div`
   width: 120px;
   height: 55px;
   font-weight: bold;
+  cursor: default;
 `;
 const WriteMenuItem = styled.li`
   position: relative;
   color: ${({ theme }) => theme.mainBlue};
   transition: 0.1s ease-out;
   border-radius: 10px 10px 0 0;
-
+  z-index: 2;
   &:hover {
     color: ${({ theme }) => theme.white};
     background-color: ${({ theme }) => theme.mainBlue};
