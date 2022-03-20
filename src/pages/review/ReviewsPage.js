@@ -1,14 +1,26 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import history from '../../history';
+import { getCookie } from '../../Cookie';
+import { useDispatch, useSelector } from 'react-redux';
 import ReviewBox from '../../components/review/ReviewBox';
 import { Text } from '../../elements/elements';
 import { getMyReview } from '../../modules/review';
 
 const ReviewsPage = () => {
   const dispatch = useDispatch();
+  const isLogin = !!getCookie('token');
+  const nickname = useSelector((state) => state.user.nickname);
 
   useEffect(() => {
+    if (!isLogin) {
+      history.push('/signin');
+      return;
+    }
+    if (isLogin === true && nickname === null) {
+      history.push('/mypage/nickname');
+      return;
+    }
     dispatch(getMyReview());
   }, []);
 

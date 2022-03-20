@@ -18,7 +18,7 @@ const App = () => {
   const dispatch = useDispatch();
   const nickname = useSelector((state) => state.user.nickname);
   useEffect(() => {
-    const cookie = getCookie('isLogin');
+    const cookie = getCookie('token');
     if (cookie) {
       dispatch(getUser());
       if (!nickname) {

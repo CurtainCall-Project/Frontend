@@ -1,10 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
+import { useSelector } from 'react-redux';
+import { getCookie } from '../../Cookie';
 import { Text, Button } from '../../elements/elements';
 
 const PerformanceBox = ({ result }) => {
+  const isLogin = !!getCookie('token');
+  const nickname = useSelector((state) => state.user.nickname);
+
   const clickReviewButton = () => {
+    if (!isLogin) {
+      history.push('/signin');
+      return;
+    }
+    if (isLogin === true && nickname === null) {
+      history.push('/mypage/nickname');
+      return;
+    }
     history.push(`/review/write/${result.mt20id}`);
   };
   return (

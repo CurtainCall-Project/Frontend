@@ -82,7 +82,7 @@ export const addNickname = (nickname) => (dispatch) => {
       nickname: nickname,
     })
     .then(() => {
-      history.push('/');
+      history.go(-1);
     });
 };
 

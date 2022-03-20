@@ -20,17 +20,10 @@ const Navbar = ({
 }) => {
   // 비로그인 사용자 글쓰기 기능 접근 제한
   const controlUserAccess = (e) => {
-    if (!isLogin) {
-      history.push('/signin');
-      return;
-    }
-    if (isLogin || nickname) {
+    if (!(isLogin && nickname)) {
       history.push('/mypage/nickname');
       return;
     }
-    e.target.value === 1 && history.push('/board/write');
-    e.target.value === 2 && history.push('/rent/write');
-    e.target.value === 3 && history.push('/sell/write');
   };
 
   return (
