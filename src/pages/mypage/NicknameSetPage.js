@@ -5,7 +5,6 @@ import NicknameForm from '../../components/common/NicknameForm';
 import { Text } from '../../elements/elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNickname, setNickname } from '../../modules/user';
-import { Link } from 'react-router-dom';
 
 const NicknameSetPage = () => {
   const dispatch = useDispatch();

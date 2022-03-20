@@ -18,13 +18,13 @@ const Navbar = ({
   handleEnterKey,
   clickSearchBtn,
 }) => {
-  // 비로그인 사용자 글쓰기 기능 접근 제한
-  const controlUserAccess = (e) => {
-    if (!(isLogin && nickname)) {
-      history.push('/mypage/nickname');
-      return;
-    }
-  };
+  // // 비로그인 사용자 글쓰기 기능 접근 제한
+  // const controlUserAccess = (e) => {
+  //   if (!(isLogin && nickname)) {
+  //     history.push('/mypage/nickname');
+  //     return;
+  //   }
+  // };
   const mypageMenu = 'mypage';
 
   return (

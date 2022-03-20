@@ -19,16 +19,16 @@ import { useSelector } from 'react-redux';
 
 const App = () => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.nickname);
+  const nickname = !!useSelector((state) => state.user.nickname);
 
   useEffect(() => {
     const cookie = getCookie('token');
     if (cookie) {
       dispatch(getUser());
-      if (!nickname) {
-        history.push('/mypage/nickname');
-      }
     }
+    // if (!nickname) {
+    //   history.push('/mypage/nickname');
+    // }
   }, []);
 
   return (

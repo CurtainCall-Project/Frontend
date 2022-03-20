@@ -4,7 +4,6 @@ import SignInPage from '../pages/signin/SigninPage';
 import BoardPage from '../pages/board/BoardPage';
 import PostPage from '../pages/PostPage';
 import ReviewSearchPage from '../pages/review/ReviewSearchPage';
-import NicknameSetPage from '../pages/mypage/NicknameSetPage';
 
 export default [
   {
@@ -28,11 +27,7 @@ export default [
     component: PostPage,
   },
   {
-    path: '/mypage/nickname',
-    component: NicknameSetPage,
-  },
-  {
-    path: '/reviews/search',
+    path: '/review/search',
     component: ReviewSearchPage,
   },
 ];

@@ -34,6 +34,7 @@ export const getMyReview = () => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/review/myreview`)
     .then((res) => {
+      console.log(res.data.reviewList);
       dispatch({ type: GET_MY_REVIEW, payload: res.data.reviewList });
     })
     .catch((error) => console.log(error));

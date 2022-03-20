@@ -1,12 +1,13 @@
 import PostWritePage from '../pages/PostWritePage';
 import RentWritePage from '../pages/RentWritePage';
 import SellWritePage from '../pages/SellWritePage';
+import NicknameSetPage from '../pages/mypage/NicknameSetPage';
 import MyPage from '../pages/mypage/MyPage';
 import MyPostPage from '../pages/mypage/MyPostPage';
 import MyScrapPage from '../pages/mypage/MyScrapPage';
 import ReviewWritePage from '../pages/review/ReviewWritePage';
 import ReviewsPage from '../pages/review/ReviewsPage';
-import ReviewPage from '../pages/review/ReviewPage';
+import ReviewDetailPage from '../pages/review/ReviewDetailPage';
 
 export default [
   {
@@ -22,6 +23,10 @@ export default [
     component: SellWritePage,
   },
   {
+    path: '/mypage/nickname',
+    component: NicknameSetPage,
+  },
+  {
     path: '/mypage/:id',
     component: MyPage,
   },
@@ -34,15 +39,15 @@ export default [
     component: MyScrapPage,
   },
   {
-    path: '/reviews/write/:id',
+    path: '/review/write/:id',
     component: ReviewWritePage,
   },
   {
-    path: '/reviews',
+    path: '/my-review',
     component: ReviewsPage,
   },
   {
-    path: '/reviews/:id',
-    component: ReviewPage,
+    path: '/my-review/:id',
+    component: ReviewDetailPage,
   },
 ];

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PostWrite from '../components/write/PostWrite';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addPost } from '../modules/post';
 
 const PostWritePage = () => {
