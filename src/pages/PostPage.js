@@ -28,13 +28,9 @@ const PostPage = (props) => {
   // 게시글 id 받기
   const postId = props.match.url.split('/')[2];
 
-  // 첫 렌더링 시 게시글 페이지 데이터를 불러온다.
+  // 첫 렌더링 시 게시글/댓글 데이터를 불러온다.
   useEffect(() => {
     dispatch(setPost(postId));
-  }, []);
-
-  // 댓글 데이터를 불러온다.
-  useEffect(() => {
     dispatch(setComment(postId));
   }, []);
 
@@ -97,7 +93,7 @@ const PostPage = (props) => {
       history.push('/mypage/nickname');
       return;
     }
-    dispatch(postLike(postId, user, !like));
+    dispatch(postLike(postId, !like));
   };
 
   // 스크랩 클릭/취소
@@ -110,7 +106,7 @@ const PostPage = (props) => {
       history.push('/mypage/nickname');
       return;
     }
-    dispatch(postScrap(postId, user, !scrap));
+    dispatch(postScrap(postId, !scrap));
   };
 
   // 댓글 비공개 설정
@@ -160,7 +156,9 @@ const PostPage = (props) => {
 
   // 게시글 삭제
   const deleteNowPost = () => {
-    dispatch(deletePost(postId, boardType));
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
+      dispatch(deletePost(postId, boardType));
+    }
   };
 
   const postDetail = {

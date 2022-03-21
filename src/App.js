@@ -15,19 +15,13 @@ import { Switch } from 'react-router-dom';
 import { getCookie } from './Cookie';
 import { useDispatch } from 'react-redux';
 import { getUser } from './modules/user';
-import { useSelector } from 'react-redux';
 
 const App = () => {
   const dispatch = useDispatch();
-  const nickname = !!useSelector((state) => state.user.nickname);
-
+  const cookie = getCookie('token');
   useEffect(() => {
-    const cookie = getCookie('token');
     if (cookie) {
       dispatch(getUser());
-    }
-    if (!!cookie === true && nickname === false) {
-      history.push('/mypage/nickname');
     }
   }, []);
 

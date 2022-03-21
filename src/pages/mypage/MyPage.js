@@ -6,25 +6,19 @@ import PostBox from '../../components/mypage/PostBox';
 import ProfileBox from '../../components/mypage/ProfileBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserPosts, addProfileImage } from '../../modules/user';
-import { getCookie } from '../../Cookie';
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  const isLogin = !!getCookie('token');
-  useEffect(() => {
-    if (isLogin === true && !!nickname === false) {
-      history.push('/mypage/nickname');
-      return;
-    }
-    dispatch(getUserPosts(userId));
-  }, []);
-
   // 현재 유저의 마이페이지 정보 가져오기
   const { myPost, myScrap } = useSelector((state) => state.user.userPosts);
   // 현재 유저 정보 가져오기
   const { userId, nickname, profileImg } = useSelector((state) => state.user);
   const [profileImage, setProfileImage] = useState(profileImg);
   const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    dispatch(getUserPosts());
+  }, []);
 
   // 이미지 파일 선택 시 저장하고, post하기
   const handleFileChange = (e) => {

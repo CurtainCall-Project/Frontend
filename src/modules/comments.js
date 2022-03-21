@@ -1,6 +1,8 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
+import { id } from 'date-fns/locale';
+import { responsiveFontSizes } from '@material-ui/core';
 
 const SET_COMMENT = 'comments/SET_COMMENT';
 const ADD_COMMENT = 'comments/ADD_COMMENT';
@@ -15,13 +17,30 @@ export const addComment =
   (dispatch) => {
     console.log(secret);
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`, {
-        replyContent: replyContent,
-        parentId: parentId,
-        secret: secret,
-      })
+      .post(
+        `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`,
+        {
+          replyContent: replyContent,
+          parentId: parentId,
+          secret: secret,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
       .then((res) => {
-        dispatch({ type: ADD_COMMENT, payload: res.data });
+        const newComment = {
+          id: res.data.id,
+          registerDate: res.data.registerDate,
+          replyContent: res.data.replyContent,
+          secret: res.data.secret,
+          nickname: res.data.user.nickname,
+          profileImg: res.data.user.profileImageUrl,
+          parentReply: res.data.parentReply,
+          depth: res.data.depth,
+          likeCount: res.data.likeCount,
+        };
+        dispatch({ type: ADD_COMMENT, payload: newComment });
       });
   };
 
@@ -30,7 +49,7 @@ export const setComment = (postId) => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`)
     .then((res) => {
-      dispatch({ type: SET_COMMENT, payload: res.data });
+      dispatch({ type: SET_COMMENT, payload: res.data.comments });
     });
 };
 

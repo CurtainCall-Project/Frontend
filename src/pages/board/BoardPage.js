@@ -36,11 +36,13 @@ const BoardPage = (props) => {
     <>
       <DescriptonBox boardType={boardType} />
       <BoardList posts={posts} boardType={boardType} />
-      <Paging
-        page={page}
-        totalItemsCount={totalItemsCount}
-        changePage={changePage}
-      />
+      {totalItemsCount > 0 && (
+        <Paging
+          page={page}
+          totalItemsCount={totalItemsCount}
+          changePage={changePage}
+        />
+      )}
     </>
   );
 };

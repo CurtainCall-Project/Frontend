@@ -94,6 +94,9 @@ const Comment = (props) => {
                 {registerDate}
               </Text>
               <ReplyButton onClick={clickReplyButton}>답글달기</ReplyButton>
+              {/* {props.user === props.comment.nickname && (
+                <ReplyButton>삭제</ReplyButton>
+              )} */}
             </Grid>
           </Grid>
         </CommentBox>
@@ -145,14 +148,15 @@ const CommentBox = styled.div`
 const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
-  border-radius: 10px;
+  border-radius: 11px;
+  border: 1px solid ${({ theme }) => theme.borderGray};
   margin-right: 10px;
   margin-top: 5px;
 `;
 const ReplyButton = styled.button`
   box-sizing: border-box;
   border: none;
-  width: 10%;
+  width: 70px;
   background-color: #fff;
   color: ${({ theme }) => theme.navSignInFontGray};
   font-weight: bold;

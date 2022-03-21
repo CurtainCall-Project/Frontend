@@ -13,7 +13,6 @@ const PostWritePage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [imgFiles, setImgFiles] = useState([]);
-  const [imgPreview, setImgPreview] = useState([]);
 
   const totalCount = useRef(8);
   const nextId = useRef(1);
@@ -99,11 +98,12 @@ const PostWritePage = () => {
     setImgFiles(imgFiles.concat(files));
   };
 
-  // 삭제 버튼 클릭시 미리보기 이미지를 삭제한다
+  // 삭제 버튼 클릭시 미리보기 이미지를 삭제
   const deleteFile = (id) => {
     setImgFiles(imgFiles.filter((imgFile) => imgFile.id !== id));
   };
 
+  // 글쓰기 등록 버튼 클릭 시 글쓰기 등록
   const onSubmit = () => {
     if (!boardType || !title || !content) {
       alert('게시판 선택 후 제목과 내용을 작성해주세요.');

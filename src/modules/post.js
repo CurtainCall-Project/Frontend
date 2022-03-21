@@ -12,10 +12,9 @@ const initialState = {};
 // 게시판 글 포스팅
 export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
   const formData = new FormData();
-  formData.append('boardType', boardType);
   formData.append('title', title);
   formData.append('content', content);
-  formData.append('imgFiles', imgFiles);
+  formData.append('files', imgFiles);
   axios
     .post(
       `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}`,
@@ -32,17 +31,17 @@ export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
 
 // 대여 글 포스팅
 export const addRentPost =
-  (title, item, price, period, place, delivery, content, imgFiles) =>
+  (title, product, price, term, place, delivery, content, imgFiles) =>
   (dispatch) => {
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('item', item);
+    formData.append('product', product);
     formData.append('price', price);
-    formData.append('period', period);
+    formData.append('term', term);
     formData.append('place', place);
     formData.append('delivery', delivery);
     formData.append('content', content);
-    formData.append('imgFiles', imgFiles);
+    formData.append('files', imgFiles);
     axios
       .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -55,15 +54,15 @@ export const addRentPost =
 
 // 거래 글 포스팅
 export const addSellPost =
-  (title, item, price, place, delivery, content, imgFiles) => (dispatch) => {
+  (title, product, price, place, delivery, content, imgFiles) => (dispatch) => {
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('item', item);
+    formData.append('product', product);
     formData.append('price', price);
     formData.append('place', place);
     formData.append('delivery', delivery);
     formData.append('content', content);
-    formData.append('imgFiles', imgFiles);
+    formData.append('files', imgFiles);
     axios
       .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

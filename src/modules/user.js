@@ -48,7 +48,7 @@ export const logout = () => (dispatch) => {
 };
 
 // 사용자 정보를 가져오는 액션 생성함수
-export const getUser = () => (dispatch) => {
+export const getUser = () => (dispatch, getState) => {
   // 쿠키에서 서버와의 통신 시 사용할 토큰을 가져온다.
   const jwtToken = getCookie('token');
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
@@ -56,8 +56,10 @@ export const getUser = () => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/user`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
+      if (!!jwtToken === true && !!res.data.nickname === false) {
+        history.push('/mypage/nickname');
+      }
     })
     .catch((error) => alert(error));
 };
@@ -71,7 +73,7 @@ export const setNickname = (nickname) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch({ type: CHECK_NICKNAME, payload: res.data });
+      dispatch({ type: CHECK_NICKNAME, payload: res.data.unique });
     })
     .catch((error) => alert(error));
 };
@@ -80,9 +82,15 @@ export const setNickname = (nickname) => (dispatch) => {
 export const addNickname = (nickname) => (dispatch) => {
   //dispatch({ type: ADD_NICKNAME, payload: nickname });
   axios
-    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/nickname`, {
-      nickname: nickname,
-    })
+    .post(
+      `${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/nickname`,
+      {
+        nickname: nickname,
+      },
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }
+    )
     .then((res) => {
       dispatch({ type: ADD_NICKNAME, payload: res.data.nickname });
       history.goBack();
@@ -107,9 +115,9 @@ export const addProfileImage = (file) => (dispatch) => {
 };
 
 // 내가 쓴글과 스크랩 가져와 저장
-export const getUserPosts = (userId) => (dispatch) => {
+export const getUserPosts = () => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage/${userId}`)
+    .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/mypage`)
     .then((res) => {
       dispatch({ type: SET_USER_POSTS, payload: res.data });
     })
@@ -164,7 +172,7 @@ export default handleActions(
     }),
     [CHECK_NICKNAME]: (state, action) => ({
       ...state,
-      ...action.payload,
+      isUnique: action.payload,
     }),
     [ADD_NICKNAME]: (state, action) => ({
       ...state,

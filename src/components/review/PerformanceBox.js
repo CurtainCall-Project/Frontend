@@ -8,7 +8,6 @@ import { Text, Button } from '../../elements/elements';
 const PerformanceBox = ({ result }) => {
   const isLogin = !!getCookie('token');
   const nickname = useSelector((state) => state.user.nickname);
-
   const clickReviewButton = () => {
     if (!isLogin) {
       history.push('/signin');

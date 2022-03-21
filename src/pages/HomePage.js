@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import { setCookie } from '../Cookie';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { getUser } from '../modules/user';
 import banner_1 from '../assets/banner_1.PNG';
 import banner_2 from '../assets/banner_2.PNG';
 import banner_3 from '../assets/banner_3.PNG';
@@ -14,13 +16,14 @@ import 'swiper/css/navigation';
 
 SwiperCore.use([Navigation, Autoplay]);
 const HomePage = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const token = params.get('token');
-
   useEffect(() => {
-    if (token) {
+    if (!!token) {
       setCookie('token', token);
+      dispatch(getUser());
     }
   }, []);
   const banners = [banner_1, banner_2, banner_3, banner_4];

@@ -4,33 +4,37 @@ import ReviewSearchBar from '../../components/review/ReviewSearchBar';
 import PerformanceBox from '../../components/review/PerformanceBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMusical } from '../../modules/review';
-
+import { Text } from '../../elements/elements';
 const ReviewSearchPage = () => {
   const dispatch = useDispatch();
+  const searchButton = useRef();
   // 페이지 상태 관리
   const [page, setPage] = useState(0);
   // 검색 입력값 상태 관리
   const [input, setInput] = useState('');
+  // 검색 결과 상태 관리
+  const [searchResult, setSearchResult] = useState([]);
+  // 이전 버튼 상태 관리
+  const [downDisable, setDownDisable] = useState(false);
+  const [upDisable, setUpDisable] = useState(false);
 
   // 검색 결과 가져오기
   const results = useSelector((state) => state.review.searchResults);
-
   useEffect(() => {
     if (page > 0) {
       dispatch(getMusical(input, page));
-      //setSearchResult(results);
     }
   }, [page]);
 
   useEffect(() => {
+    if (results.length === 0) {
+      setPage(page - 1);
+    }
     if (results.length > 0) {
       setSearchResult(results);
     }
   }, [results]);
-  const searchButton = useRef();
-  // 검색 결과 상태 관리
-  const [searchResult, setSearchResult] = useState([]);
-
+  console.log(typeof results);
   // 검색창에 뮤지컬 정보 입력 시 상태 변경
   const changeInput = (e) => {
     setInput(e.target.value);
@@ -47,6 +51,10 @@ const ReviewSearchPage = () => {
 
   // 다음 페이지로 이동
   const pageUp = () => {
+    // if (typeof results === 'string') {
+    //   console.log('나');
+    //   return;
+    // }
     setPage(page + 1);
   };
 
@@ -85,6 +93,7 @@ const ReviewSearchPage = () => {
       {page > 0 && searchResult.length > 0 && (
         <PageContainer>
           <PageButton onClick={pageDown}>{'<'} 이전</PageButton>
+          <Text width="auto">{page}</Text>
           <PageButton onClick={pageUp}>다음 {'>'}</PageButton>
         </PageContainer>
       )}
@@ -105,12 +114,14 @@ const PageContainer = styled.div`
   ${({ theme }) => theme.verticalCenter};
   justify-content: space-between;
 `;
-const PageButton = styled.div`
+const PageButton = styled.button`
   border-radius: 8px;
+  border: none;
   width: 80px;
   height: 30px;
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
+  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
   font-weight: bold;
   background-color: ${({ theme }) => theme.purple};
   color: #434343;

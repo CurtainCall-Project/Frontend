@@ -60,7 +60,8 @@ const ReplyBox = styled.div`
 const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
-  border-radius: 10px;
+  border-radius: 11px;
+  border: 1px solid ${({ theme }) => theme.borderGray};
   margin: 9px 10px 0 7px;
 `;
 
