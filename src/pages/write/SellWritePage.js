@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import history from '../history';
-import { getCookie } from '../Cookie';
+import history from '../../history';
+import { getCookie } from '../../Cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import RentWrite from '../components/write/RentWrite';
-import { addRentPost } from '../modules/post';
+import SellWrite from '../../components/write/SellWrite';
+import { addSellPost } from '../../modules/post';
 
-const RentWritePage = () => {
+const SellWritePage = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [item, setItem] = useState('');
   const [price, setPrice] = useState(0);
-  const [period, setPeriod] = useState('');
   const [place, setPlace] = useState('');
   const [delivery, setDelivery] = useState(false);
   const [content, setContent] = useState('');
@@ -39,13 +38,8 @@ const RentWritePage = () => {
   const changeItem = (e) => {
     setItem(e.target.value);
   };
-
   const changePrice = (e) => {
     setPrice(e.target.value);
-  };
-
-  const changePeriod = (e) => {
-    setPeriod(e.target.value);
   };
 
   const changePlace = (e) => {
@@ -97,28 +91,22 @@ const RentWritePage = () => {
   // 삭제 버튼 클릭시 미리보기 이미지를 삭제한다
   const deleteFile = (id) => {
     setImgFiles(imgFiles.filter((imgFile) => imgFile.id !== id));
-    //console.log(imgFiles);
   };
 
   const onSubmit = () => {
-    if (!title || !item || !price || !period || !place) {
-      alert('필수 작성 항목은 제목, 기종, 가격, 대여기간, 거래장소입니다.');
+    if (!title || !item || !price || !place) {
+      alert('필수 작성 항목은 제목, 기종, 가격, 거래장소입니다.');
       return;
     }
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
-    dispatch(
-      addRentPost(title, item, price, period, place, delivery, content, files)
-    );
-    //const { dataUrl } = imgFiles.dataUrl;
-    // const revokeFiles = dataUrl.map((url) => URL.revokeObjectURL(dataUrl));
+    dispatch(addSellPost(title, item, price, place, delivery, content, files));
   };
   return (
     <>
-      <RentWrite
+      <SellWrite
         changeTitle={changeTitle}
         changeItem={changeItem}
         changePrice={changePrice}
-        changePeriod={changePeriod}
         changePlace={changePlace}
         delivery={delivery}
         clickDelivery={clickDelivery}
@@ -132,4 +120,4 @@ const RentWritePage = () => {
   );
 };
 
-export default RentWritePage;
+export default SellWritePage;

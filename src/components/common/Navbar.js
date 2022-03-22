@@ -204,6 +204,9 @@ const ProfileImage = styled.img`
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.borderGray};
   margin-right: 10px;
+  background-color: #fff;
+  object-fit: cover;
+  object-position: 50% 50%;
 `;
 
 const LogoutButton = styled.div`
@@ -232,8 +235,9 @@ const LogoLink = styled(Link)`
 `;
 const LogoImage = styled(Logo)`
   width: 250px;
-  height: 65px;
+  height: 70.1px;
   margin: 0 auto;
+  //border: 1px solid;
 `;
 
 // Bottom Bar
@@ -242,10 +246,11 @@ const BottombarContainer = styled.div`
   border-bottom: 1px solid #dedede;
 `;
 const BottombarWrapper = styled.div`
+  box-sizing: border-box;
   max-width: 1256px;
-  width: 80%;
   height: 55px;
   margin: 0 auto;
+  padding-left: 10px;
 `;
 const Menu = styled.ul`
   display: flex;

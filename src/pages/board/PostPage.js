@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import history from '../history';
-import { getCookie } from '../Cookie';
-import PostInfo from '../components/board/post/PostInfo';
-import PostDetail from '../components/board/post/PostDetail';
-import MarketPostDetail from '../components/board/post/MarketPostDetail';
-import CommentInput from '../components/comment/CommentInput';
-import Comment from '../components/comment/Comment';
-import Paging from '../components/board/Paging';
-import { Grid, Text } from '../elements/elements';
-import LikeButton from '../components/board/post/LikeButton';
-import ScrapButton from '../components/board/post/ScrapButton';
+import history from '../../history';
+import { getCookie } from '../../Cookie';
+import PostInfo from '../../components/board/post/PostInfo';
+import PostDetail from '../../components/board/post/PostDetail';
+import MarketPostDetail from '../../components/board/post/MarketPostDetail';
+import CommentInput from '../../components/comment/CommentInput';
+import Comment from '../../components/comment/Comment';
+import Paging from '../../components/board/Paging';
+import { Grid, Text } from '../../elements/elements';
+import LikeButton from '../../components/board/post/LikeButton';
+import ScrapButton from '../../components/board/post/ScrapButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPost, postLike, postScrap, deletePost } from '../modules/posts';
-import { addComment, setComment } from '../modules/comments';
+import { setPost, postLike, postScrap, deletePost } from '../../modules/posts';
+import { addComment, setComment } from '../../modules/comments';
 
 const PostPage = (props) => {
   const dispatch = useDispatch();

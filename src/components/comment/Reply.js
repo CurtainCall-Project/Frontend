@@ -7,10 +7,11 @@ const Reply = (props) => {
   const registerDate = new Date(props.reply.registerDate).toLocaleString(
     'ko-KR'
   );
-  console.log(props.reply);
+
   const profileImage = !!props.reply.profileImg
     ? props.reply.profileImg
     : basicProfile;
+
   return (
     <ReplyBox>
       <ProfileImg src={profileImage}></ProfileImg>

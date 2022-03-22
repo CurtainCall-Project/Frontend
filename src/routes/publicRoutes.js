@@ -2,7 +2,7 @@ import HomePage from '../pages/HomePage';
 import SearchPage from '../pages/SearchPage';
 import SignInPage from '../pages/signin/SigninPage';
 import BoardPage from '../pages/board/BoardPage';
-import PostPage from '../pages/PostPage';
+import PostPage from '../pages/board/PostPage';
 import ReviewSearchPage from '../pages/review/ReviewSearchPage';
 
 export default [

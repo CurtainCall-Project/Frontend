@@ -14,9 +14,6 @@ const ReviewSearchPage = () => {
   const [input, setInput] = useState('');
   // 검색 결과 상태 관리
   const [searchResult, setSearchResult] = useState([]);
-  // 이전 버튼 상태 관리
-  const [downDisable, setDownDisable] = useState(false);
-  const [upDisable, setUpDisable] = useState(false);
 
   // 검색 결과 가져오기
   const results = useSelector((state) => state.review.searchResults);
@@ -34,7 +31,7 @@ const ReviewSearchPage = () => {
       setSearchResult(results);
     }
   }, [results]);
-  console.log(typeof results);
+
   // 검색창에 뮤지컬 정보 입력 시 상태 변경
   const changeInput = (e) => {
     setInput(e.target.value);
@@ -51,10 +48,6 @@ const ReviewSearchPage = () => {
 
   // 다음 페이지로 이동
   const pageUp = () => {
-    // if (typeof results === 'string') {
-    //   console.log('나');
-    //   return;
-    // }
     setPage(page + 1);
   };
 
@@ -78,7 +71,7 @@ const ReviewSearchPage = () => {
 
   return (
     <Wrapper>
-      {/* <ImageBox /> */}
+      <Text width="45%">공연검색</Text>
       <ReviewSearchBar
         handleSearch={handleSearch}
         changeInput={changeInput}

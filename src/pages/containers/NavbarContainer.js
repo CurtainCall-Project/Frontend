@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import history from '../history';
-import Navbar from '../components/common/Navbar';
-import { logout } from '../modules/user';
+import history from '../../history';
+import Navbar from '../../components/common/Navbar';
+import { logout } from '../../modules/user';
 
 const NavbarContainer = () => {
   const dispatch = useDispatch();

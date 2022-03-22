@@ -65,9 +65,7 @@ export const editReview =
     formData.append('content', content);
     formData.append('imgFiles', files);
     formData.append('boardImgs', deletedImages);
-    for (let value of formData.values()) {
-      console.log(value);
-    }
+
     axios
       .put(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${musicalId}`,
@@ -136,7 +134,6 @@ export const getMusicalDetail = (musicalId) => (dispatch) => {
 
 // 뮤지컬 검색 결과 가져오기
 export const getMusical = (input, page) => (dispatch) => {
-  console.log(input, page);
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/musical`, {
       params: {

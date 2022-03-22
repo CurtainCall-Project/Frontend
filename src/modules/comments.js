@@ -1,8 +1,5 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
-import history from '../history';
-import { id } from 'date-fns/locale';
-import { responsiveFontSizes } from '@material-ui/core';
 
 const SET_COMMENT = 'comments/SET_COMMENT';
 const ADD_COMMENT = 'comments/ADD_COMMENT';
@@ -15,7 +12,6 @@ const initialState = {
 export const addComment =
   (replyContent, parentId, postId, secret = false) =>
   (dispatch) => {
-    console.log(secret);
     axios
       .post(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/reply/${postId}`,

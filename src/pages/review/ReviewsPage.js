@@ -18,7 +18,6 @@ const ReviewsPage = () => {
       return;
     }
     if (isLogin === true && nickname === null) {
-      console.log('ㅇ');
       history.push('/mypage/nickname');
       return;
     }

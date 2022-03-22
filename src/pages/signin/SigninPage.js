@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import history from '../../history';
+import { getCookie } from '../../Cookie';
 import SigninButton from '../../components/signin/SigninButton';
 import naver_logo from '../../assets/naver_login.svg';
 import kakao_logo from '../../assets/kakao_login.svg';
@@ -9,10 +11,15 @@ import {
   NAVER_AUTH_URL,
   GOOGLE_AUTH_URL,
 } from '../../oauth/oauth';
-import GoogleLogin from '../../components/signin/GoogleLogin';
-import GoogleLoginContainer from '../../containers/GoogleLoginContainer';
+import GoogleLoginContainer from '../../pages/containers/GoogleLoginContainer';
 
 const SignInPage = () => {
+  useEffect(() => {
+    if (!!getCookie('token')) {
+      history.push('/');
+    }
+  }, []);
+
   return (
     <>
       <Container>
@@ -23,13 +30,13 @@ const SignInPage = () => {
         <a href={KAKAO_AUTH_URL}>
           <SigninButton logo={kakao_logo} text="카카오" />
         </a>
-        {/* <a href={GOOGLE_AUTH_URL}>
+        <a href={GOOGLE_AUTH_URL}>
           <GoogleButton id="customBtn" className="customGPlusSignIn">
             <img src={google_logo} alt="구글"></img>
             <div className="buttonText">구글로 로그인</div>
           </GoogleButton>
-        </a> */}
-        <GoogleLoginContainer />
+        </a>
+        {/* <GoogleLoginContainer /> */}
       </Container>
     </>
   );
