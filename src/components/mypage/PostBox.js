@@ -30,6 +30,7 @@ const Container = styled.div`
   height: 215px;
   border: 1px solid ${({ theme }) => theme.borderGray};
   border-radius: 5px;
+  cursor: pointer;
 `;
 const TextContainer = styled.div`
   box-sizing: border-box;

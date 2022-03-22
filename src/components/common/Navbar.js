@@ -1,32 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import history from '../../history';
+import { getCookie } from '../../Cookie';
 import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/twitter_icon.svg';
 import { ReactComponent as NaverIcon } from '../../assets/naver.svg';
 import { ReactComponent as SearchIcon } from '../../assets/search_icon.svg';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
+import basicProfile from '../../assets/default_profile.png';
 
 import { Link } from 'react-router-dom';
 
 const Navbar = ({
-  isLogin,
   userId,
-  nickname,
+  profileImg,
   onLogOut,
   changeInput,
   handleEnterKey,
   clickSearchBtn,
 }) => {
-  // 비로그인 사용자 글쓰기 기능 접근 제한
-  const controlUserAccess = (e) => {
-    if (!(isLogin && nickname)) {
-      history.push('/mypage/nickname');
-      return;
-    }
-  };
+  const isLogin = !!getCookie('token');
   const mypageMenu = 'mypage';
-
+  const profileImage = !!profileImg ? profileImg : basicProfile;
   return (
     <>
       <TopbarContainer>
@@ -55,7 +49,10 @@ const Navbar = ({
             </SearchContainer>
             <ButtonWrapper>
               {isLogin ? (
-                <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
+                <>
+                  <ProfileImage src={profileImage} />
+                  <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
+                </>
               ) : (
                 <LoginButton to="/signin">회원가입/로그인</LoginButton>
               )}
@@ -128,7 +125,7 @@ const Navbar = ({
                   <li>대여하기</li>
                 </StyledLink>
                 <StyledLink to="/sell/write">
-                  <li>거래하기</li>
+                  <li className="sell">거래하기</li>
                 </StyledLink>
               </WriteInnerMenu>
             </WriteMenuItem>
@@ -199,8 +196,19 @@ const SearchInput = styled.input`
 const ButtonWrapper = styled.div`
   width: 103px;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
 `;
+const ProfileImage = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.borderGray};
+  margin-right: 10px;
+  background-color: #fff;
+  object-fit: cover;
+  object-position: 50% 50%;
+`;
+
 const LogoutButton = styled.div`
   color: ${({ theme }) => theme.navSignInFontGray};
   transition: 0.3s;
@@ -227,8 +235,9 @@ const LogoLink = styled(Link)`
 `;
 const LogoImage = styled(Logo)`
   width: 250px;
-  height: 65px;
+  height: 70.1px;
   margin: 0 auto;
+  //border: 1px solid;
 `;
 
 // Bottom Bar
@@ -237,10 +246,11 @@ const BottombarContainer = styled.div`
   border-bottom: 1px solid #dedede;
 `;
 const BottombarWrapper = styled.div`
+  box-sizing: border-box;
   max-width: 1256px;
-  width: 80%;
   height: 55px;
   margin: 0 auto;
+  padding-left: 10px;
 `;
 const Menu = styled.ul`
   display: flex;

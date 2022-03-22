@@ -4,12 +4,10 @@ import history from '../../history';
 import { useSelector } from 'react-redux';
 import { getCookie } from '../../Cookie';
 import { Text, Button } from '../../elements/elements';
-import { useSelector } from 'react-redux';
 
 const PerformanceBox = ({ result }) => {
   const isLogin = !!getCookie('token');
   const nickname = useSelector((state) => state.user.nickname);
-
   const clickReviewButton = () => {
     if (!isLogin) {
       history.push('/signin');
@@ -21,7 +19,7 @@ const PerformanceBox = ({ result }) => {
     }
     history.push(`/review/write/${result.mt20id}`);
   };
-  
+
   return (
     <Container key={result.mt20id}>
       <ImageBox src={result.poster} />

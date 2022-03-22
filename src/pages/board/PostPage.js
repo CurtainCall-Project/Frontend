@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import history from '../history';
-import { getCookie } from '../Cookie';
-import PostInfo from '../components/board/post/PostInfo';
-import PostDetail from '../components/board/post/PostDetail';
-import MarketPostDetail from '../components/board/post/MarketPostDetail';
-import CommentInput from '../components/comment/CommentInput';
-import Comment from '../components/comment/Comment';
-import Paging from '../components/board/Paging';
-import { Grid, Text } from '../elements/elements';
-import LikeButton from '../components/board/post/LikeButton';
-import ScrapButton from '../components/board/post/ScrapButton';
+import history from '../../history';
+import { getCookie } from '../../Cookie';
+import PostInfo from '../../components/board/post/PostInfo';
+import PostDetail from '../../components/board/post/PostDetail';
+import MarketPostDetail from '../../components/board/post/MarketPostDetail';
+import CommentInput from '../../components/comment/CommentInput';
+import Comment from '../../components/comment/Comment';
+import Paging from '../../components/board/Paging';
+import { Grid, Text } from '../../elements/elements';
+import LikeButton from '../../components/board/post/LikeButton';
+import ScrapButton from '../../components/board/post/ScrapButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPost, postLike, postScrap, deletePost } from '../modules/posts';
-import { addComment, setComment } from '../modules/comments';
+import { setPost, postLike, postScrap, deletePost } from '../../modules/posts';
+import { addComment, setComment } from '../../modules/comments';
 
 const PostPage = (props) => {
   const dispatch = useDispatch();
@@ -28,13 +28,9 @@ const PostPage = (props) => {
   // 게시글 id 받기
   const postId = props.match.url.split('/')[2];
 
-  // 첫 렌더링 시 게시글 페이지 데이터를 불러온다.
+  // 첫 렌더링 시 게시글/댓글 데이터를 불러온다.
   useEffect(() => {
     dispatch(setPost(postId));
-  }, []);
-
-  // 댓글 데이터를 불러온다.
-  useEffect(() => {
     dispatch(setComment(postId));
   }, []);
 
@@ -97,7 +93,7 @@ const PostPage = (props) => {
       history.push('/mypage/nickname');
       return;
     }
-    dispatch(postLike(postId, user, !like));
+    dispatch(postLike(postId, !like));
   };
 
   // 스크랩 클릭/취소
@@ -110,7 +106,7 @@ const PostPage = (props) => {
       history.push('/mypage/nickname');
       return;
     }
-    dispatch(postScrap(postId, user, !scrap));
+    dispatch(postScrap(postId, !scrap));
   };
 
   // 댓글 비공개 설정
@@ -160,7 +156,9 @@ const PostPage = (props) => {
 
   // 게시글 삭제
   const deleteNowPost = () => {
-    dispatch(deletePost(postId, boardType));
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
+      dispatch(deletePost(postId, boardType));
+    }
   };
 
   const postDetail = {

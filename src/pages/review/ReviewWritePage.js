@@ -48,7 +48,6 @@ const ReviewWritePage = (props) => {
 
   // 리뷰 등록하기
   const submitReview = () => {
-    console.log('등록');
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
     if (
       !(JSON.stringify(reviewDetail) === '{}') &&

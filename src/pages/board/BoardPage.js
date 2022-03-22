@@ -25,7 +25,6 @@ const BoardPage = (props) => {
   }, [boardType, page]);
 
   const posts = useSelector((state) => state.posts);
-  console.log(posts);
   const totalItemsCount = posts.totalCount;
 
   const changePage = (page) => {
@@ -36,11 +35,13 @@ const BoardPage = (props) => {
     <>
       <DescriptonBox boardType={boardType} />
       <BoardList posts={posts} boardType={boardType} />
-      <Paging
-        page={page}
-        totalItemsCount={totalItemsCount}
-        changePage={changePage}
-      />
+      {totalItemsCount > 0 && (
+        <Paging
+          page={page}
+          totalItemsCount={totalItemsCount}
+          changePage={changePage}
+        />
+      )}
     </>
   );
 };

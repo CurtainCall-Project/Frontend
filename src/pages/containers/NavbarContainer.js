@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import history from '../history';
-import Navbar from '../components/common/Navbar';
-import { logout } from '../modules/user';
+import history from '../../history';
+import Navbar from '../../components/common/Navbar';
+import { logout } from '../../modules/user';
 
 const NavbarContainer = () => {
   const dispatch = useDispatch();
-  // const isLogin = useSelector((state) => state.user.isLogin);
-  // const userId = useSelector((state) => state.user.userId);
-  const { isLogin, userId, nickname } = useSelector((state) => state.user);
+  const { userId, profileImg } = useSelector((state) => state.user);
   const [input, setInput] = useState('');
 
   // 엔터 키 눌렀을 때 뮤지컬 검색 수행
@@ -34,9 +32,8 @@ const NavbarContainer = () => {
 
   return (
     <Navbar
-      isLogin={isLogin}
       userId={userId}
-      nickname={nickname}
+      profileImg={profileImg}
       onLogOut={onLogOut}
       changeInput={changeInput}
       handleEnterKey={handleEnterKey}

@@ -27,6 +27,7 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.borderGray};
   border-radius: 5px;
   margin: 0 auto 20px 0;
+  cursor: pointer;
 `;
 const TextContainer = styled.div`
   box-sizing: border-box;

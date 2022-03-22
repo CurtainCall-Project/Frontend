@@ -23,7 +23,9 @@ const ReviewDetailPage = (props) => {
 
   // 후기 글 삭제
   const deleteNowReview = () => {
-    dispatch(deleteReview(reviewId));
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
+      dispatch(deleteReview(reviewId));
+    }
   };
 
   return (

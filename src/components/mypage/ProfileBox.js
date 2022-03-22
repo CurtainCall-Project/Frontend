@@ -68,7 +68,6 @@ const ImageWrapper = styled.div`
 const ProfileImage = styled.img`
   width: 135px;
   height: 135px;
-  // border: 1px solid ${({ theme }) => theme.borderGray};
   border-radius: 68px;
   overflow: hidden;
 `;
@@ -82,6 +81,7 @@ const AddButton = styled.div`
   position: absolute;
   top: 117px;
   left: 47px;
+  cursor: pointer;
 `;
 const NicknameContainer = styled.div`
   height: 30%;

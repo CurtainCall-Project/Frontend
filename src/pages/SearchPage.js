@@ -35,7 +35,7 @@ const SearchPage = () => {
   return (
     <Container>
       <Text margin="0 0 20px 0">검색결과 {totalCount}</Text>
-      {Array.isArray(list) && list.length === 0 && (
+      {!Array.isArray(list) && (
         <Grid>
           <Text text_align="center">검색 결과가 없습니다.</Text>
         </Grid>

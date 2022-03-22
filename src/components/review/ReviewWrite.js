@@ -106,7 +106,7 @@ const ReviewWrite = (props) => {
           defaultValue={props.content}></InputBox>
       </Grid>
       <Grid margin="20px 0 0 0">
-        <PictureButton onClick={() => handleClick()} />
+        <UploadButton onClick={() => handleClick()} />
         <input
           type="file"
           multiple="multiple"
@@ -196,6 +196,9 @@ const DateButton = styled.button`
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-start;
   font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  cursor: pointer;
+`;
+const UploadButton = styled(PictureButton)`
   cursor: pointer;
 `;
 export default ReviewWrite;

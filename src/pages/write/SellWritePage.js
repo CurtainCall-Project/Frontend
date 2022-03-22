@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import history from '../../history';
+import { getCookie } from '../../Cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import SellWrite from '../components/write/SellWrite';
-import { addSellPost } from '../modules/post';
+import SellWrite from '../../components/write/SellWrite';
+import { addSellPost } from '../../modules/post';
 
 const SellWritePage = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,16 @@ const SellWritePage = () => {
   const totalCount = useRef(8);
   // 사진 id 1로 설정
   const nextId = useRef(1);
+
+  // 로그인 후 닉네임 설정되어 있지 않을 경우 닉네임 설정 페이지로 이동
+  const isLogin = !!getCookie('token');
+  const nickname = useSelector((state) => state.user.nickname);
+  useEffect(() => {
+    if (isLogin === true && !!nickname === false) {
+      history.push('/mypage/nickname');
+      return;
+    }
+  }, []);
 
   // 제목 작성 시 제목 저장하는 함수
   const changeTitle = (e) => {

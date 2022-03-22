@@ -28,6 +28,7 @@ export const setSearchResults = (input, page) => (dispatch) => {
       },
     })
     .then((res) => {
+      console.log(res);
       dispatch({ type: SET_SEARCH_RESULTS, payload: res.data });
     })
     .catch((error) => alert(error));
@@ -62,6 +63,7 @@ export const setPost = (id) => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${id}`)
     .then((res) => {
+      console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
     })
     .catch((error) => {
@@ -75,29 +77,35 @@ export const deletePost = (id, boardType) => (dispatch) => {
   axios
     .delete(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${id}`)
     .then((res) => {
+      console.log(res.data);
       dispatch({ type: DELETE_POST });
       window.alert('게시글을 삭제했습니다.');
       history.push(`/${boardType}`);
     })
     .catch((error) => {
       window.alert('게시글 삭제를 실패했습니다.');
-      history.goBack();
     });
 };
 
 // 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
-export const postLike = (id, user, like) => (dispatch, getState) => {
+export const postLike = (id, like) => (dispatch, getState) => {
   let nowLikeCount = getState().posts.nowPost.likeCount;
+  console.log(nowLikeCount);
   axios
-    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/like/${id}`, {
-      nickname: user,
-      lke: like,
-    })
+    .post(
+      `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/like/${id}`,
+      {
+        like: like,
+      },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    )
     .then((res) => {
       nowLikeCount = res.data.like ? nowLikeCount + 1 : nowLikeCount - 1;
       dispatch({
         type: SET_LIKE,
-        payload: { ...res.data, likeCount: nowLikeCount },
+        payload: { like: like, likeCount: nowLikeCount },
       });
     })
     .catch((error) => {
@@ -106,18 +114,23 @@ export const postLike = (id, user, like) => (dispatch, getState) => {
 };
 
 // 스크랩 눌렀을 때 데이터 보내는 액션 생성함수
-export const postScrap = (id, user, scrap) => (dispatch, getState) => {
+export const postScrap = (id, scrap) => (dispatch, getState) => {
   let nowScrapCount = getState().posts.nowPost.scrapCount;
   axios
-    .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/scrap/${id}`, {
-      nickname: user,
-      scrap: scrap,
-    })
+    .post(
+      `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/scrap/${id}`,
+      {
+        scrap: scrap,
+      },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    )
     .then((res) => {
       nowScrapCount = res.data.scrap ? nowScrapCount + 1 : nowScrapCount - 1;
       dispatch({
         type: SET_SCRAP,
-        payload: { ...res.data, scrapCount: nowScrapCount },
+        payload: { scrap: scrap, scrapCount: nowScrapCount },
       });
     });
 };

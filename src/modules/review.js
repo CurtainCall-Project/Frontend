@@ -26,6 +26,7 @@ export const getReviewDetail = (reviewId) => (dispatch) => {
     })
     .catch((error) => {
       window.alert('존재하지 않는 리뷰입니다.');
+      history.goBack();
     });
 };
 
@@ -60,10 +61,11 @@ export const editReview =
     formData.append('userId', userId);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
-    formData.append('casting', casting);
+    formData.append('cast', casting);
     formData.append('content', content);
     formData.append('imgFiles', files);
     formData.append('boardImgs', deletedImages);
+
     axios
       .put(
         `${process.env.REACT_APP_MOCK_SERVER_URL2}/review/${musicalId}`,
@@ -73,7 +75,6 @@ export const editReview =
         }
       )
       .then((res) => {
-        dispatch({ type: ADD_REVIEW, payload: res.data });
         history.push('/my-review');
       })
       .catch((error) => console.log(error));
@@ -88,7 +89,7 @@ export const addReview =
     formData.append('userId', userId);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
-    formData.append('casting', casting);
+    formData.append('cast', casting);
     formData.append('content', content);
     formData.append('imgFiles', files);
     axios
@@ -141,20 +142,19 @@ export const getMusical = (input, page) => (dispatch) => {
       },
     })
     .then((res) => {
-      if (!res.data.dbs.db) {
+      if (res.data.dbs.db.length === 0) {
         window.alert('마지막 페이지입니다.');
-        return;
       }
       dispatch({ type: GET_MUSICAL, payload: res.data.dbs.db });
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 export default handleActions(
   {
     [GET_MUSICAL]: (state, action) => ({
       ...state,
-      searchResults: [...action.payload],
+      searchResults: action.payload,
     }),
     [GET_MUSICAL_DETAIL]: (state, action) => ({
       ...state,

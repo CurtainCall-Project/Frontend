@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import theme from './theme';
+import theme from './styles/theme';
 import GlobalStyles from './styles/GlobalStyles';
 import privateRoutes from './routes/privateRoutes';
 import publicRoutes from './routes/publicRoutes';
@@ -8,26 +8,20 @@ import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
 import history from './history';
 import { ConnectedRouter } from 'connected-react-router';
-import NavbarContainer from './containers/NavbarContainer';
+import NavbarContainer from './pages/containers/NavbarContainer';
 import Footer from './components/common/Footer';
 import { Switch } from 'react-router-dom';
 
 import { getCookie } from './Cookie';
 import { useDispatch } from 'react-redux';
 import { getUser } from './modules/user';
-import { useSelector } from 'react-redux';
 
 const App = () => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.nickname);
-
+  const cookie = getCookie('token');
   useEffect(() => {
-    const cookie = getCookie('token');
     if (cookie) {
       dispatch(getUser());
-      if (!nickname) {
-        history.push('/mypage/nickname');
-      }
     }
   }, []);
 
