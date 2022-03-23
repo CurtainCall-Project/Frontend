@@ -71,7 +71,6 @@ const ReviewSearchPage = () => {
 
   return (
     <Wrapper>
-      <Text width="45%">공연검색</Text>
       <ReviewSearchBar
         handleSearch={handleSearch}
         changeInput={changeInput}
