@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
+import { config } from '../config';
 
 const SET_HOT_POSTS = 'posts/SET_HOT_POSTS';
 const SET_POSTS = 'posts/SET_POSTS'; // 게시글 목록 데이터를 저장하는 액션 타입
@@ -21,7 +22,7 @@ const initialState = {
 // 검색 결과를 불러와 저장
 export const setSearchResults = (input, page) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/search`, {
+    .get(`${config.SERVER_URL}/search`, {
       params: {
         keyword: input,
         page: page,
@@ -37,7 +38,7 @@ export const setSearchResults = (input, page) => (dispatch) => {
 // 핫게시글 목록을 불러오고, 스토어에 핫게시글 목록을 저장하는 액션 생성함수
 export const setHotPosts = (boardType) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/board/hot/${boardType}`)
+    .get(`${config.SERVER_URL}/board/hot/${boardType}`)
     .then((res) => {
       dispatch({ type: SET_HOT_POSTS, payload: res.data });
     })
@@ -49,9 +50,7 @@ export const setPosts =
   (boardType, page = 1) =>
   (dispatch) => {
     axios
-      .get(
-        `${process.env.REACT_APP_SERVER_URL}/board/list/${boardType}?page=${page}`
-      )
+      .get(`${config.SERVER_URL}/board/list/${boardType}?page=${page}`)
       .then((res) => {
         dispatch({ type: SET_POSTS, payload: res.data });
       })
@@ -61,7 +60,7 @@ export const setPosts =
 // 특정 게시글을 불러오고, 스토어에 특정 게시글을 저장하는 액션 생성함수
 export const setPost = (id) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/board/${id}`)
+    .get(`${config.SERVER_URL}/board/${id}`)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
@@ -75,7 +74,7 @@ export const setPost = (id) => (dispatch) => {
 // 게시글 삭제
 export const deletePost = (id, boardType) => (dispatch) => {
   axios
-    .delete(`${process.env.REACT_APP_SERVER_URL}/board/${id}`)
+    .delete(`${config.SERVER_URL}/board/${id}`)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: DELETE_POST });
@@ -93,7 +92,7 @@ export const postLike = (id, like) => (dispatch, getState) => {
   console.log(nowLikeCount);
   axios
     .post(
-      `${process.env.REACT_APP_SERVER_URL}/board/like/${id}`,
+      `${config.SERVER_URL}/board/like/${id}`,
       {
         like: like,
       },
@@ -118,7 +117,7 @@ export const postScrap = (id, scrap) => (dispatch, getState) => {
   let nowScrapCount = getState().posts.nowPost.scrapCount;
   axios
     .post(
-      `${process.env.REACT_APP_SERVER_URL}/board/scrap/${id}`,
+      `${config.SERVER_URL}/board/scrap/${id}`,
       {
         scrap: scrap,
       },

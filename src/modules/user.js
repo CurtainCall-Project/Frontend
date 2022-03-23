@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
 import { setCookie, deleteCookie, getCookie } from '../Cookie';
+import { config } from '../config';
 
 // 액션 타입 정의
 const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
@@ -14,7 +15,7 @@ const SET_PROFILEIMG = 'user/SET_PROFILEIMG';
 // 로그인 액션 생성함수
 export const login = (token) => (dispatch) => {
   axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/login/google`, {
+    .post(`${config.SERVER_URL}/login/google`, {
       headers: {
         Authorization: token,
         'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ export const getUser = () => (dispatch, getState) => {
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
   axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/user`)
+    .get(`${config.SERVER_URL}/user`)
     .then((res) => {
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
       if (!!jwtToken === true && !!res.data.nickname === false) {
@@ -54,7 +55,7 @@ export const getUser = () => (dispatch, getState) => {
 // nickname 중복 확인하는 액션 생성함수
 export const setNickname = (nickname) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/mypage/nickname`, {
+    .get(`${config.SERVER_URL}/mypage/nickname`, {
       params: {
         nickname: nickname,
       },
@@ -70,7 +71,7 @@ export const addNickname = (nickname) => (dispatch) => {
   //dispatch({ type: ADD_NICKNAME, payload: nickname });
   axios
     .post(
-      `${process.env.REACT_APP_SERVER_URL}/mypage/nickname`,
+      `${config.SERVER_URL}/mypage/nickname`,
       {
         nickname: nickname,
       },
@@ -89,7 +90,7 @@ export const addProfileImage = (file) => (dispatch) => {
   const formData = new FormData();
   formData.append('imgFile', file);
   axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/mypage/profileImg`, formData, {
+    .post(`${config.SERVER_URL}/mypage/profileImg`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((res) => {
@@ -100,7 +101,7 @@ export const addProfileImage = (file) => (dispatch) => {
 // 내가 쓴글과 스크랩 가져와 저장
 export const getUserPosts = () => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/mypage`)
+    .get(`${config.SERVER_URL}/mypage`)
     .then((res) => {
       dispatch({ type: SET_USER_POSTS, payload: res.data });
     })

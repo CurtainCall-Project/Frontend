@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
+import { config } from '../config';
 
 const GET_MUSICAL = 'review/GET_MUSICAL';
 const GET_MUSICAL_DETAIL = 'review/GET_MUSICAL_DETAIL';
@@ -20,7 +21,7 @@ const initialState = {
 // 상세 리뷰 가져오기
 export const getReviewDetail = (reviewId) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/review/${reviewId}`)
+    .get(`${config.SERVER_URL}/review/${reviewId}`)
     .then((res) => {
       dispatch({ type: GET_REVIEW_DETAIL, payload: res.data });
     })
@@ -33,7 +34,7 @@ export const getReviewDetail = (reviewId) => (dispatch) => {
 // 나의 리뷰 리스트 가져오기
 export const getMyReview = () => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/review/myreview`)
+    .get(`${config.SERVER_URL}/review/myreview`)
     .then((res) => {
       dispatch({ type: GET_MY_REVIEW, payload: res.data.reviewList });
     })
@@ -67,13 +68,9 @@ export const editReview =
     formData.append('boardImgs', deletedImages);
 
     axios
-      .put(
-        `${process.env.REACT_APP_SERVER_URL}/review/${musicalId}`,
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      )
+      .put(`${config.SERVER_URL}/review/${musicalId}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
       .then((res) => {
         history.push('/my-review');
       })
@@ -93,13 +90,9 @@ export const addReview =
     formData.append('content', content);
     formData.append('imgFiles', files);
     axios
-      .post(
-        `${process.env.REACT_APP_SERVER_URL}/review/${musicalId}`,
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      )
+      .post(`${config.SERVER_URL}/review/${musicalId}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
       .then((res) => {
         dispatch({ type: ADD_REVIEW, payload: res.data });
         history.push('/my-review');
@@ -110,7 +103,7 @@ export const addReview =
 // 리뷰 글 삭제 하기
 export const deleteReview = (reviewId) => (dispatch) => {
   axios
-    .delete(`${process.env.REACT_APP_SERVER_URL}/review/${reviewId}`)
+    .delete(`${config.SERVER_URL}/review/${reviewId}`)
     .then((res) => {
       dispatch({ type: DELETE_REVIEW });
       window.alert('게시글을 삭제했습니다.');
@@ -125,7 +118,7 @@ export const deleteReview = (reviewId) => (dispatch) => {
 // 상세 뮤지컬 정보 가져오기
 export const getMusicalDetail = (musicalId) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/musical/${musicalId}`)
+    .get(`${config.SERVER_URL}/musical/${musicalId}`)
     .then((res) => {
       dispatch({ type: GET_MUSICAL_DETAIL, payload: res.data.dbs.db });
     })
@@ -135,7 +128,7 @@ export const getMusicalDetail = (musicalId) => (dispatch) => {
 // 뮤지컬 검색 결과 가져오기
 export const getMusical = (input, page) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/musical`, {
+    .get(`${config.SERVER_URL}/musical`, {
       params: {
         keyword: input,
         page: page,

@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
+import { config } from '../config';
 
 // 액션 타입 정의
 const ADD_POST = 'post/ADD_POST';
@@ -16,7 +17,7 @@ export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
   formData.append('content', content);
   formData.append('files', imgFiles);
   axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/board/${boardType}`, formData, {
+    .post(`${config.SERVER_URL}/board/${boardType}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((res) => {
@@ -39,7 +40,7 @@ export const addRentPost =
     formData.append('content', content);
     formData.append('files', imgFiles);
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/board/rent`, formData, {
+      .post(`${config.SERVER_URL}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
@@ -60,7 +61,7 @@ export const addSellPost =
     formData.append('content', content);
     formData.append('files', imgFiles);
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/board/sell`, formData, {
+      .post(`${config.SERVER_URL}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
