@@ -17,6 +17,8 @@ import { useDispatch } from 'react-redux';
 import { getUser } from './modules/user';
 
 const App = () => {
+  console.log(process.env.NODE_ENV);
+  console.log(process.env.REACT_APP_SERVER_URL);
   const dispatch = useDispatch();
   const cookie = getCookie('token');
   useEffect(() => {
