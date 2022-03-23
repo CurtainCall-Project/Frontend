@@ -24,7 +24,7 @@ const SignInPage = () => {
     <>
       <Container>
         <Title>회원가입/로그인</Title>
-        <a href={NAVER_AUTH_URL}>
+        <a href={`${process.env.REACT_APP_SERVER_URL}` + '/' + NAVER_AUTH_URL}>
           <SigninButton logo={naver_logo} text="네이버" />
         </a>
         <a href={KAKAO_AUTH_URL}>
