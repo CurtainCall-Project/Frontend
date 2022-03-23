@@ -16,13 +16,9 @@ export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
   formData.append('content', content);
   formData.append('files', imgFiles);
   axios
-    .post(
-      `${process.env.REACT_APP_MOCK_SERVER_URL2}/board/${boardType}`,
-      formData,
-      {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      }
-    )
+    .post(`${process.env.REACT_APP_SERVER_URL}/board/${boardType}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
     .then((res) => {
       history.push(`/${res.data.boardType}/${res.data.boardId}`);
     })
@@ -43,7 +39,7 @@ export const addRentPost =
     formData.append('content', content);
     formData.append('files', imgFiles);
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/rent`, formData, {
+      .post(`${process.env.REACT_APP_SERVER_URL}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
@@ -64,7 +60,7 @@ export const addSellPost =
     formData.append('content', content);
     formData.append('files', imgFiles);
     axios
-      .post(`${process.env.REACT_APP_MOCK_SERVER_URL2}/board/sell`, formData, {
+      .post(`${process.env.REACT_APP_SERVER_URL}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
