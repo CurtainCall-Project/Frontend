@@ -25,18 +25,33 @@ export const addComment =
         }
       )
       .then((res) => {
-        const newComment = {
-          id: res.data.id,
-          registerDate: res.data.registerDate,
-          replyContent: res.data.replyContent,
-          secret: res.data.secret,
-          nickname: res.data.user.nickname,
-          profileImg: res.data.user.profileImageUrl,
-          parentReply: res.data.parentReply,
-          depth: res.data.depth,
-          likeCount: res.data.likeCount,
-        };
-        dispatch({ type: ADD_COMMENT, payload: newComment });
+        if (res.data.parentReply === null) {
+          const newComment = {
+            id: res.data.id,
+            registerDate: res.data.registerDate,
+            replyContent: res.data.replyContent,
+            secret: res.data.secret,
+            nickname: res.data.user.nickname,
+            profileImg: res.data.user.profileImageUrl,
+            parentReply: res.data.parentReply,
+            depth: res.data.depth,
+            likeCount: res.data.likeCount,
+          };
+          dispatch({ type: ADD_COMMENT, payload: newComment });
+        } else {
+          const newReply = {
+            id: res.data.id,
+            registerDate: res.data.registerDate,
+            replyContent: res.data.replyContent,
+            secret: res.data.secret,
+            nickname: res.data.nickname,
+            profileImg: res.data.profileImg,
+            parentReply: res.data.parentReply,
+            depth: res.data.depth,
+            likeCount: res.data.likeCount,
+          };
+          dispatch({ type: ADD_COMMENT, payload: newReply });
+        }
       });
   };
 

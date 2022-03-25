@@ -4,7 +4,7 @@ const dev = {
 };
 
 const prod = {
-  SERVER_URL: 'https://15.164.228.216',
+  SERVER_URL: 'https://server.curtain-call.kr',
   REDIRECT_URL: 'https://curtain-call.kr',
 };
 

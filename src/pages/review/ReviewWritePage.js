@@ -19,12 +19,8 @@ const ReviewWritePage = (props) => {
 
   // 기존 리뷰 글 수정 시 상세 리뷰 정보 가져오기
   const reviewDetail = useSelector((state) => state.review.reviewDetail);
-  // 현재 로그인한 사용자 id 가져오기
-  const userId = useSelector((state) => state.user.userId);
   // 현재 리뷰를 작성할 뮤지컬 id 가져오기
   const musicalId = props.match.params.id;
-  // 뮤지컬 검색 결과 리스트 가져오기
-  const results = useSelector((state) => state.review.searchResults);
   // 현재 뮤지컬 id에 해당하는 뮤지컬 정보 가져오기
   const nowMusical = useSelector((state) => state.review.nowMusical);
 
@@ -58,7 +54,6 @@ const ReviewWritePage = (props) => {
           reviewDetail.reviewId,
           nowMusical.prfnm,
           musicalId,
-          userId,
           rating,
           viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
           casting,
@@ -73,7 +68,6 @@ const ReviewWritePage = (props) => {
       addReview(
         nowMusical.prfnm,
         musicalId,
-        userId,
         rating,
         viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
         casting,

@@ -4,10 +4,10 @@ import history from '../../history';
 
 const PostBox = (props) => {
   const renderingPost = props.postInfo[0];
-  const { boardType, id } = renderingPost;
+  const { boardType, boardId } = renderingPost;
 
   const clickPost = () => {
-    history.push(`/${boardType}/${id}`);
+    history.push(`/${boardType}/${boardId}`);
   };
 
   return (

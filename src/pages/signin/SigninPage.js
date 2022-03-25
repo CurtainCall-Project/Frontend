@@ -24,13 +24,13 @@ const SignInPage = () => {
     <>
       <Container>
         <Title>회원가입/로그인</Title>
-        <a href={`${config.SERVER_URL}` + '/' + NAVER_AUTH_URL}>
+        <a href={`${config.SERVER_URL}/` + NAVER_AUTH_URL}>
           <SigninButton logo={naver_logo} text="네이버" />
         </a>
-        <a href={`${config.SERVER_URL}` + '/' + KAKAO_AUTH_URL}>
+        <a href={`${config.SERVER_URL}/` + KAKAO_AUTH_URL}>
           <SigninButton logo={kakao_logo} text="카카오" />
         </a>
-        <a href={`${config.SERVER_URL}` + '/' + NAVER_AUTH_URL}>
+        <a href={`${config.SERVER_URL}/` + GOOGLE_AUTH_URL}>
           <GoogleButton id="customBtn" className="customGPlusSignIn">
             <img src={google_logo} alt="구글"></img>
             <div className="buttonText">구글로 로그인</div>

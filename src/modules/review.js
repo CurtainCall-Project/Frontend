@@ -47,7 +47,6 @@ export const editReview =
     reviewId,
     mname,
     musicalId,
-    userId,
     rating,
     viewingDate,
     casting,
@@ -59,14 +58,21 @@ export const editReview =
     const formData = new FormData();
     formData.append('reviewId', reviewId);
     formData.append('mname', mname);
-    formData.append('userId', userId);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
     formData.append('cast', casting);
     formData.append('content', content);
-    formData.append('imgFiles', files);
     formData.append('boardImgs', deletedImages);
+    files.map((file) => formData.append('imgFiles', file));
+    // FormData의 key 확인
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
 
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
     axios
       .put(`${config.SERVER_URL}/review/${musicalId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -79,16 +85,15 @@ export const editReview =
 
 // 리뷰 추가하기
 export const addReview =
-  (mname, musicalId, userId, rating, viewingDate, casting, content, files) =>
+  (mname, musicalId, rating, viewingDate, casting, content, files) =>
   (dispatch) => {
     const formData = new FormData();
     formData.append('mname', mname);
-    formData.append('userId', userId);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
     formData.append('cast', casting);
     formData.append('content', content);
-    formData.append('imgFiles', files);
+    files.map((file) => formData.append('imgFiles', file));
     axios
       .post(`${config.SERVER_URL}/review/${musicalId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

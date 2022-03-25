@@ -24,12 +24,11 @@ export const setSearchResults = (input, page) => (dispatch) => {
   axios
     .get(`${config.SERVER_URL}/search`, {
       params: {
-        keyword: input,
+        keyword: encodeURIComponent(input),
         page: page,
       },
     })
     .then((res) => {
-      console.log(res);
       dispatch({ type: SET_SEARCH_RESULTS, payload: res.data });
     })
     .catch((error) => alert(error));
@@ -62,7 +61,6 @@ export const setPost = (id) => (dispatch) => {
   axios
     .get(`${config.SERVER_URL}/board/${id}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
     })
     .catch((error) => {
@@ -76,7 +74,6 @@ export const deletePost = (id, boardType) => (dispatch) => {
   axios
     .delete(`${config.SERVER_URL}/board/${id}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: DELETE_POST });
       window.alert('게시글을 삭제했습니다.');
       history.push(`/${boardType}`);
@@ -88,8 +85,7 @@ export const deletePost = (id, boardType) => (dispatch) => {
 
 // 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
 export const postLike = (id, like) => (dispatch, getState) => {
-  let nowLikeCount = getState().posts.nowPost.likeCount;
-  console.log(nowLikeCount);
+  const likeCount = getState().posts.nowPost.likeCount;
   axios
     .post(
       `${config.SERVER_URL}/board/like/${id}`,
@@ -101,20 +97,26 @@ export const postLike = (id, like) => (dispatch, getState) => {
       }
     )
     .then((res) => {
-      nowLikeCount = res.data.like ? nowLikeCount + 1 : nowLikeCount - 1;
-      dispatch({
-        type: SET_LIKE,
-        payload: { like: like, likeCount: nowLikeCount },
-      });
+      if (like === true) {
+        dispatch({
+          type: SET_LIKE,
+          payload: { like: like, likeCount: res.data.board.likeCount },
+        });
+      } else {
+        dispatch({
+          type: SET_LIKE,
+          payload: { like: like, likeCount: likeCount - 1 },
+        });
+      }
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error, '좋아요 실패');
     });
 };
 
 // 스크랩 눌렀을 때 데이터 보내는 액션 생성함수
 export const postScrap = (id, scrap) => (dispatch, getState) => {
-  let nowScrapCount = getState().posts.nowPost.scrapCount;
+  const scrapCount = getState().posts.nowPost.scrapCount;
   axios
     .post(
       `${config.SERVER_URL}/board/scrap/${id}`,
@@ -126,11 +128,20 @@ export const postScrap = (id, scrap) => (dispatch, getState) => {
       }
     )
     .then((res) => {
-      nowScrapCount = res.data.scrap ? nowScrapCount + 1 : nowScrapCount - 1;
-      dispatch({
-        type: SET_SCRAP,
-        payload: { scrap: scrap, scrapCount: nowScrapCount },
-      });
+      if (scrap === true) {
+        dispatch({
+          type: SET_SCRAP,
+          payload: { scrap: scrap, scrapCount: res.data.board.scrapCount },
+        });
+      } else {
+        dispatch({
+          type: SET_SCRAP,
+          payload: { scrap: scrap, scrapCount: scrapCount - 1 },
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error, '스크랩 실패');
     });
 };
 
@@ -144,14 +155,12 @@ export default handleActions(
       ...state,
       hotPosts: [...action.payload.list],
     }),
-    [SET_POSTS]: (state, action) =>
-      // (state = state.posts.concat(action.payload.free)),
-      ({
-        ...state,
-        totalCount: action.payload.totalCount,
-        posts: [...action.payload.list],
-        nowPost: { ...state.nowPost },
-      }),
+    [SET_POSTS]: (state, action) => ({
+      ...state,
+      totalCount: action.payload.totalCount,
+      posts: [...action.payload.list],
+      nowPost: { ...state.nowPost },
+    }),
     [SET_POST]: (state, action) => ({
       ...state,
       nowPost: {

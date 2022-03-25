@@ -36,7 +36,8 @@ const NicknameSetPage = () => {
   };
 
   // 닉네임 중복확인 버튼 눌렀을 때, 닉네임 중복여부 확인하는 리듀서 함수 호출
-  const onCheck = () => {
+  const onCheck = (e) => {
+    e.preventDefault();
     if (!userNickname) {
       window.alert('새로운 닉네임을 입력하세요.');
       return;
@@ -50,12 +51,13 @@ const NicknameSetPage = () => {
   };
 
   // 이용약관 체크 상태 변경
-  const handleCheckBox = () => {
+  const handleCheckBox = (e) => {
     setCheck(!check);
   };
 
   // 닉네임 저장 버튼 클릭
-  const onSave = () => {
+  const onSave = (e) => {
+    e.preventDefault();
     if (!userNickname) {
       window.alert('새로운 닉네임을 입력하세요.');
       return;

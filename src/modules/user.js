@@ -22,8 +22,8 @@ export const login = (token) => (dispatch) => {
       },
     })
     .then((res) => {
-      const jwtToken = res.data.token;
-      setCookie('token', jwtToken);
+      const bearerToken = res.data.token;
+      setCookie('token', bearerToken);
       history.push('/');
     });
 };
@@ -36,20 +36,20 @@ export const logout = () => (dispatch) => {
 };
 
 // 사용자 정보를 가져오는 액션 생성함수
-export const getUser = () => (dispatch, getState) => {
+export const getUser = () => (dispatch) => {
   // 쿠키에서 서버와의 통신 시 사용할 토큰을 가져온다.
-  const jwtToken = getCookie('token');
+  const bearerToken = getCookie('token');
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
-  axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
   axios
     .get(`${config.SERVER_URL}/user`)
     .then((res) => {
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
-      if (!!jwtToken === true && !!res.data.nickname === false) {
+      if (!!bearerToken === true && !!res.data.nickname === false) {
         history.push('/mypage/nickname');
       }
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 // nickname 중복 확인하는 액션 생성함수
@@ -57,18 +57,19 @@ export const setNickname = (nickname) => (dispatch) => {
   axios
     .get(`${config.SERVER_URL}/mypage/nickname`, {
       params: {
-        nickname: nickname,
+        nickname: encodeURIComponent(nickname),
       },
     })
     .then((res) => {
       dispatch({ type: CHECK_NICKNAME, payload: res.data.unique });
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 // nickname 변경 시 닉네임을 서버로 보내는 액션 생성함수
 export const addNickname = (nickname) => (dispatch) => {
-  //dispatch({ type: ADD_NICKNAME, payload: nickname });
+  const bearerToken = getCookie('token');
+  axios.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
   axios
     .post(
       `${config.SERVER_URL}/mypage/nickname`,
@@ -76,13 +77,14 @@ export const addNickname = (nickname) => (dispatch) => {
         nickname: nickname,
       },
       {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { 'Content-Type': 'application/json' },
       }
     )
     .then((res) => {
       dispatch({ type: ADD_NICKNAME, payload: res.data.nickname });
       history.goBack();
-    });
+    })
+    .catch((error) => alert('닉네임을 변경하는데 실패했습니다.'));
 };
 
 // 프로필 이미지 변경
@@ -95,7 +97,8 @@ export const addProfileImage = (file) => (dispatch) => {
     })
     .then((res) => {
       dispatch({ type: SET_PROFILEIMG, payload: res.data });
-    });
+    })
+    .catch((error) => alert('프로필 이미지를 변경하는데 실패했습니다.'));
 };
 
 // 내가 쓴글과 스크랩 가져와 저장
@@ -105,7 +108,7 @@ export const getUserPosts = () => (dispatch) => {
     .then((res) => {
       dispatch({ type: SET_USER_POSTS, payload: res.data });
     })
-    .catch((error) => alert(error));
+    .catch((error) => alert('마이페이지 정보를 불러오는데 실패했습니다.'));
 };
 
 const initialUser = {

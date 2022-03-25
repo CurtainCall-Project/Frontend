@@ -13,7 +13,6 @@ const Comment = (props) => {
   const registerDate = new Date(props.comment.registerDate).toLocaleString(
     'ko-KR'
   );
-
   // 답글 달기 버튼 누름/안누름 상태관리
   const [clicked, setClicked] = useState(false);
   // 답글 입력 상태 관리
@@ -59,7 +58,7 @@ const Comment = (props) => {
       return;
     }
     // 자유, 시야, 새내기 답글 작성 시 실행
-    dispatch(addComment(newReply, null, props.postId));
+    dispatch(addComment(newReply, props.comment.id, props.postId));
     setNewReply('');
   };
 
@@ -111,6 +110,7 @@ const Comment = (props) => {
                 handleComment={handleReply}
                 clickSubmitButton={clickSubmitButton}
                 boardType={props.boardType}
+                parentReply={props.comment.id}
               />
             </Grid>
           ) : null}
