@@ -7,7 +7,6 @@ const Reply = (props) => {
   const registerDate = new Date(props.reply.registerDate).toLocaleString(
     'ko-KR'
   );
-
   const profileImage = !!props.reply.profileImg
     ? props.reply.profileImg
     : basicProfile;

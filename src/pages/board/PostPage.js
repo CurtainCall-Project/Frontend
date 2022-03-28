@@ -23,8 +23,6 @@ const PostPage = (props) => {
   const [secret, setSecret] = useState(false);
   // 댓글 페이지 상태관리
   const [page, setPage] = useState(1);
-  // 현재 게시판 타입 받기
-  const nowBoardType = props.match.path.split('/')[1];
   // 게시글 id 받기
   const postId = props.match.url.split('/')[2];
 
@@ -41,7 +39,6 @@ const PostPage = (props) => {
   // 게시글 정보 불러오기
   const post = useSelector((state) => state.posts.nowPost);
   const { boardType, nickname, likeCount, scrapCount, like, scrap } = post;
-
   // 댓글 리스트 가져오기
   const comments = useSelector((state) => state.comments.commentList);
 

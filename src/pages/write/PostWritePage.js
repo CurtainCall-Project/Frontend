@@ -104,7 +104,8 @@ const PostWritePage = () => {
   };
 
   // 글쓰기 등록 버튼 클릭 시 글쓰기 등록
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (!boardType || !title || !content) {
       alert('게시판 선택 후 제목과 내용을 작성해주세요.');
       return;

@@ -20,11 +20,12 @@ const HomePage = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const token = params.get('token');
+
   useEffect(() => {
     if (!!token) {
       setCookie('token', token);
-      dispatch(getUser());
     }
+    dispatch(getUser());
   }, []);
   const banners = [banner_1, banner_2, banner_3, banner_4];
 

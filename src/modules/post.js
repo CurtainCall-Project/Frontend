@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
+import { config } from '../config';
 
 // 액션 타입 정의
 const ADD_POST = 'post/ADD_POST';
@@ -10,13 +11,13 @@ const ADD_SELL_POST = 'post/ADD_SELL_POST';
 const initialState = {};
 
 // 게시판 글 포스팅
-export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
+export const addPost = (boardType, title, content, files) => (dispatch) => {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('content', content);
-  formData.append('files', imgFiles);
+  files.map((file) => formData.append('files', file));
   axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/board/${boardType}`, formData, {
+    .post(`${config.SERVER_URL}/board/${boardType}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((res) => {
@@ -27,7 +28,7 @@ export const addPost = (boardType, title, content, imgFiles) => (dispatch) => {
 
 // 대여 글 포스팅
 export const addRentPost =
-  (title, product, price, term, place, delivery, content, imgFiles) =>
+  (title, product, price, term, place, delivery, content, files) =>
   (dispatch) => {
     const formData = new FormData();
     formData.append('title', title);
@@ -37,9 +38,9 @@ export const addRentPost =
     formData.append('place', place);
     formData.append('delivery', delivery);
     formData.append('content', content);
-    formData.append('files', imgFiles);
+    files.map((file) => formData.append('files', file));
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/board/rent`, formData, {
+      .post(`${config.SERVER_URL}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
@@ -50,7 +51,7 @@ export const addRentPost =
 
 // 거래 글 포스팅
 export const addSellPost =
-  (title, product, price, place, delivery, content, imgFiles) => (dispatch) => {
+  (title, product, price, place, delivery, content, files) => (dispatch) => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('product', product);
@@ -58,9 +59,9 @@ export const addSellPost =
     formData.append('place', place);
     formData.append('delivery', delivery);
     formData.append('content', content);
-    formData.append('files', imgFiles);
+    files.map((file) => formData.append('files', file));
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/board/sell`, formData, {
+      .post(`${config.SERVER_URL}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {

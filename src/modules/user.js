@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
 import { setCookie, deleteCookie, getCookie } from '../Cookie';
+import { config } from '../config';
 
 // 액션 타입 정의
 const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
@@ -14,15 +15,15 @@ const SET_PROFILEIMG = 'user/SET_PROFILEIMG';
 // 로그인 액션 생성함수
 export const login = (token) => (dispatch) => {
   axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/login/google`, {
+    .post(`${config.SERVER_URL}/login/google`, {
       headers: {
         Authorization: token,
         'Content-Type': 'application/json',
       },
     })
     .then((res) => {
-      const jwtToken = res.data.token;
-      setCookie('token', jwtToken);
+      const bearerToken = res.data.token;
+      setCookie('token', bearerToken);
       history.push('/');
     });
 };
@@ -35,53 +36,55 @@ export const logout = () => (dispatch) => {
 };
 
 // 사용자 정보를 가져오는 액션 생성함수
-export const getUser = () => (dispatch, getState) => {
+export const getUser = () => (dispatch) => {
   // 쿠키에서 서버와의 통신 시 사용할 토큰을 가져온다.
-  const jwtToken = getCookie('token');
+  const bearerToken = getCookie('token');
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
-  axios.defaults.headers.common['Authorization'] = `${jwtToken}`;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/user`)
+    .get(`${config.SERVER_URL}/user`)
     .then((res) => {
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
-      if (!!jwtToken === true && !!res.data.nickname === false) {
+      if (!!bearerToken === true && !!res.data.nickname === false) {
         history.push('/mypage/nickname');
       }
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 // nickname 중복 확인하는 액션 생성함수
 export const setNickname = (nickname) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/mypage/nickname`, {
+    .get(`${config.SERVER_URL}/mypage/nickname`, {
       params: {
-        nickname: nickname,
+        nickname: encodeURIComponent(nickname),
       },
     })
     .then((res) => {
       dispatch({ type: CHECK_NICKNAME, payload: res.data.unique });
     })
-    .catch((error) => alert(error));
+    .catch((error) => console.log(error));
 };
 
 // nickname 변경 시 닉네임을 서버로 보내는 액션 생성함수
 export const addNickname = (nickname) => (dispatch) => {
-  //dispatch({ type: ADD_NICKNAME, payload: nickname });
+  const bearerToken = getCookie('token');
+  axios.defaults.headers.common['Authorization'] = `Bearer ${bearerToken}`;
   axios
     .post(
-      `${process.env.REACT_APP_SERVER_URL}/mypage/nickname`,
+      `${config.SERVER_URL}/mypage/nickname`,
       {
         nickname: nickname,
       },
       {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { 'Content-Type': 'application/json' },
       }
     )
     .then((res) => {
       dispatch({ type: ADD_NICKNAME, payload: res.data.nickname });
       history.goBack();
-    });
+    })
+    .catch((error) => alert('닉네임을 변경하는데 실패했습니다.'));
 };
 
 // 프로필 이미지 변경
@@ -89,22 +92,23 @@ export const addProfileImage = (file) => (dispatch) => {
   const formData = new FormData();
   formData.append('imgFile', file);
   axios
-    .post(`${process.env.REACT_APP_SERVER_URL}/mypage/profileImg`, formData, {
+    .post(`${config.SERVER_URL}/mypage/profileImg`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((res) => {
       dispatch({ type: SET_PROFILEIMG, payload: res.data });
-    });
+    })
+    .catch((error) => alert('프로필 이미지를 변경하는데 실패했습니다.'));
 };
 
 // 내가 쓴글과 스크랩 가져와 저장
 export const getUserPosts = () => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/mypage`)
+    .get(`${config.SERVER_URL}/mypage`)
     .then((res) => {
       dispatch({ type: SET_USER_POSTS, payload: res.data });
     })
-    .catch((error) => alert(error));
+    .catch((error) => alert('마이페이지 정보를 불러오는데 실패했습니다.'));
 };
 
 const initialUser = {

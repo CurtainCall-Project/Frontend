@@ -14,20 +14,21 @@ const MyPage = () => {
   // 현재 유저 정보 가져오기
   const { userId, nickname, profileImg } = useSelector((state) => state.user);
   const [profileImage, setProfileImage] = useState(profileImg);
-  const [file, setFile] = useState(null);
 
   useEffect(() => {
+    if (nickname === null) {
+      history.push('/mypage/nickname');
+    }
     dispatch(getUserPosts());
   }, []);
 
   // 이미지 파일 선택 시 저장하고, post하기
   const handleFileChange = (e) => {
     e.preventDefault();
-    setFile(e.target.files[0]);
     let reader = new FileReader();
     reader.onloadend = () => {
       setProfileImage(reader.result);
-      dispatch(addProfileImage(file));
+      dispatch(addProfileImage(e.target.files[0]));
     };
     reader.readAsDataURL(e.target.files[0]);
   };

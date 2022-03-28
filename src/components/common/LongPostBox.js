@@ -4,7 +4,7 @@ import history from '../../history';
 
 const LongPostBox = ({ postInfo }) => {
   const clickPost = () => {
-    history.push(`/${postInfo.boardType}/${postInfo.id}`);
+    history.push(`/${postInfo.boardType}/${postInfo.boardId}`);
   };
   return (
     <Container onClick={clickPost}>

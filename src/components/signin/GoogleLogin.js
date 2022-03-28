@@ -23,7 +23,7 @@ const GoogleLogin = ({ onLogin }) => {
   const googleSignIn = () => {
     window.gapi.load('auth2', () => {
       const auth2 = gapi.auth2.init({
-        client_id: `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`,
+        client_id: `${process.env.REACT_APP_CLIENT_ID}`,
         scope: 'email',
       });
       console.log('api inited');

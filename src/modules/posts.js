@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
+import { config } from '../config';
 
 const SET_HOT_POSTS = 'posts/SET_HOT_POSTS';
 const SET_POSTS = 'posts/SET_POSTS'; // 게시글 목록 데이터를 저장하는 액션 타입
@@ -21,14 +22,13 @@ const initialState = {
 // 검색 결과를 불러와 저장
 export const setSearchResults = (input, page) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/search`, {
+    .get(`${config.SERVER_URL}/search`, {
       params: {
-        keyword: input,
+        keyword: encodeURIComponent(input),
         page: page,
       },
     })
     .then((res) => {
-      console.log(res);
       dispatch({ type: SET_SEARCH_RESULTS, payload: res.data });
     })
     .catch((error) => alert(error));
@@ -37,7 +37,7 @@ export const setSearchResults = (input, page) => (dispatch) => {
 // 핫게시글 목록을 불러오고, 스토어에 핫게시글 목록을 저장하는 액션 생성함수
 export const setHotPosts = (boardType) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/board/hot/${boardType}`)
+    .get(`${config.SERVER_URL}/board/hot/${boardType}`)
     .then((res) => {
       dispatch({ type: SET_HOT_POSTS, payload: res.data });
     })
@@ -49,9 +49,7 @@ export const setPosts =
   (boardType, page = 1) =>
   (dispatch) => {
     axios
-      .get(
-        `${process.env.REACT_APP_SERVER_URL}/board/list/${boardType}?page=${page}`
-      )
+      .get(`${config.SERVER_URL}/board/list/${boardType}?page=${page}`)
       .then((res) => {
         dispatch({ type: SET_POSTS, payload: res.data });
       })
@@ -61,9 +59,8 @@ export const setPosts =
 // 특정 게시글을 불러오고, 스토어에 특정 게시글을 저장하는 액션 생성함수
 export const setPost = (id) => (dispatch) => {
   axios
-    .get(`${process.env.REACT_APP_SERVER_URL}/board/${id}`)
+    .get(`${config.SERVER_URL}/board/${id}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: SET_POST, payload: res.data });
     })
     .catch((error) => {
@@ -75,9 +72,8 @@ export const setPost = (id) => (dispatch) => {
 // 게시글 삭제
 export const deletePost = (id, boardType) => (dispatch) => {
   axios
-    .delete(`${process.env.REACT_APP_SERVER_URL}/board/${id}`)
+    .delete(`${config.SERVER_URL}/board/${id}`)
     .then((res) => {
-      console.log(res.data);
       dispatch({ type: DELETE_POST });
       window.alert('게시글을 삭제했습니다.');
       history.push(`/${boardType}`);
@@ -89,11 +85,10 @@ export const deletePost = (id, boardType) => (dispatch) => {
 
 // 좋아요 눌렀을 때 데이터 보내는 액션 생성함수
 export const postLike = (id, like) => (dispatch, getState) => {
-  let nowLikeCount = getState().posts.nowPost.likeCount;
-  console.log(nowLikeCount);
+  const likeCount = getState().posts.nowPost.likeCount;
   axios
     .post(
-      `${process.env.REACT_APP_SERVER_URL}/board/like/${id}`,
+      `${config.SERVER_URL}/board/like/${id}`,
       {
         like: like,
       },
@@ -102,23 +97,29 @@ export const postLike = (id, like) => (dispatch, getState) => {
       }
     )
     .then((res) => {
-      nowLikeCount = res.data.like ? nowLikeCount + 1 : nowLikeCount - 1;
-      dispatch({
-        type: SET_LIKE,
-        payload: { like: like, likeCount: nowLikeCount },
-      });
+      if (like === true) {
+        dispatch({
+          type: SET_LIKE,
+          payload: { like: like, likeCount: res.data.board.likeCount },
+        });
+      } else {
+        dispatch({
+          type: SET_LIKE,
+          payload: { like: like, likeCount: likeCount - 1 },
+        });
+      }
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error, '좋아요 실패');
     });
 };
 
 // 스크랩 눌렀을 때 데이터 보내는 액션 생성함수
 export const postScrap = (id, scrap) => (dispatch, getState) => {
-  let nowScrapCount = getState().posts.nowPost.scrapCount;
+  const scrapCount = getState().posts.nowPost.scrapCount;
   axios
     .post(
-      `${process.env.REACT_APP_SERVER_URL}/board/scrap/${id}`,
+      `${config.SERVER_URL}/board/scrap/${id}`,
       {
         scrap: scrap,
       },
@@ -127,11 +128,20 @@ export const postScrap = (id, scrap) => (dispatch, getState) => {
       }
     )
     .then((res) => {
-      nowScrapCount = res.data.scrap ? nowScrapCount + 1 : nowScrapCount - 1;
-      dispatch({
-        type: SET_SCRAP,
-        payload: { scrap: scrap, scrapCount: nowScrapCount },
-      });
+      if (scrap === true) {
+        dispatch({
+          type: SET_SCRAP,
+          payload: { scrap: scrap, scrapCount: res.data.board.scrapCount },
+        });
+      } else {
+        dispatch({
+          type: SET_SCRAP,
+          payload: { scrap: scrap, scrapCount: scrapCount - 1 },
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error, '스크랩 실패');
     });
 };
 
@@ -145,14 +155,12 @@ export default handleActions(
       ...state,
       hotPosts: [...action.payload.list],
     }),
-    [SET_POSTS]: (state, action) =>
-      // (state = state.posts.concat(action.payload.free)),
-      ({
-        ...state,
-        totalCount: action.payload.totalCount,
-        posts: [...action.payload.list],
-        nowPost: { ...state.nowPost },
-      }),
+    [SET_POSTS]: (state, action) => ({
+      ...state,
+      totalCount: action.payload.totalCount,
+      posts: [...action.payload.list],
+      nowPost: { ...state.nowPost },
+    }),
     [SET_POST]: (state, action) => ({
       ...state,
       nowPost: {

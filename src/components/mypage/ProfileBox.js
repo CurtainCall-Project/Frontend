@@ -7,7 +7,9 @@ import basicProfile from '../../assets/default_profile.png';
 
 const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
   const hiddenFileInput = useRef();
-  const onClick = (e) => hiddenFileInput.current.click();
+  const onClick = (e) => {
+    hiddenFileInput.current.click();
+  };
 
   const clickButton = () => {
     history.push('/mypage/nickname');
@@ -55,7 +57,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-const ImageContainer = styled.div`
+const ImageContainer = styled.form`
   position: relative;
   height: auto;
 `;
