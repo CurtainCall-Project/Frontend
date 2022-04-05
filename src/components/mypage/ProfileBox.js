@@ -57,7 +57,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-const ImageContainer = styled.form`
+const ImageContainer = styled.div`
   position: relative;
   height: auto;
 `;

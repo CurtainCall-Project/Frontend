@@ -73,6 +73,7 @@ const PostWritePage = () => {
     }
 
     const newFiles = Array.from(e.target.files);
+    console.log(newFiles);
     // 첨부 파일 용량을 10MB로 제한한다.
     if (newFiles.filter((file) => file.size > 10 * 1024 * 1024).length > 0) {
       window.alert('파일 1개의 크기를 10MB 이하로 제한합니다.');

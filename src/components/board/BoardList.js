@@ -5,7 +5,7 @@ import { ReactComponent as BestIcon } from '../../assets/best_icon.svg';
 
 const BoardList = (props) => {
   const lists = props.posts;
-  console.log(lists);
+
   return (
     <Table>
       <Heading>번호</Heading>
@@ -16,8 +16,8 @@ const BoardList = (props) => {
       {lists.hotPosts.map((list) => (
         <BestRow
           onClick={() => history.push(`/${props.boardType}/${list.boardId}`)}
-          key={list.id}>
-          <Column key={list.id}>
+          key={list.boardId}>
+          <Column key={list.boardId}>
             <IconContainer>
               <BestIcon />
             </IconContainer>
@@ -37,8 +37,8 @@ const BoardList = (props) => {
       {lists.posts.map((list) => (
         <Row
           onClick={() => history.push(`/${props.boardType}/${list.boardId}`)}
-          key={list.id}>
-          <Column key={list.id}>{list.id}</Column>
+          key={list.boardId}>
+          <Column key={list.boardId}>{list.boardId}</Column>
           <Column key={list.title}>
             <div>{list.title}</div>
           </Column>

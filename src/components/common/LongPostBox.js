@@ -13,27 +13,32 @@ const LongPostBox = ({ postInfo }) => {
         <Content>{postInfo.content}</Content>
         <Nickname>{postInfo.nickname}</Nickname>
       </TextContainer>
-      <ImageContainer>
-        <Image src={postInfo.img} />
-      </ImageContainer>
+      {postInfo.img === null || (
+        <ImageContainer noImage={postInfo.img}>
+          <Image src={postInfo.img} />
+        </ImageContainer>
+      )}
     </Container>
   );
 };
 
 const Container = styled.div`
+  box-sizing: border-box;
   ${({ theme }) => theme.verticalCenter};
-  width: 1000px;
+  width: 900px;
   height: 166px;
   border: 1px solid ${({ theme }) => theme.borderGray};
   border-radius: 5px;
   margin: 0 auto 20px 0;
   cursor: pointer;
+  padding: 20px;
 `;
 const TextContainer = styled.div`
   box-sizing: border-box;
-  width: 85%;
+  width: 100%;
+  // width: ${(props) => (props.noImage === null ? '100%' : '75%')};
   height: 115px;
-  padding: 0 20px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -65,7 +70,7 @@ const Nickname = styled.div`
   font-size: ${({ theme }) => theme.fontSize.smallFontSize};
 `;
 const ImageContainer = styled.div`
-  width: 25%;
+  width: 125px;
   height: auto;
 `;
 const Image = styled.img`

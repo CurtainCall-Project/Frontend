@@ -57,6 +57,6 @@ const SearchPage = () => {
 
 const Container = styled.div`
   margin: 90px auto 0 auto;
-  max-width: 1000px;
+  max-width: 900px;
 `;
 export default SearchPage;

@@ -5,21 +5,23 @@ import history from '../../history';
 const PostBox = (props) => {
   const renderingPost = props.postInfo[0];
   const { boardType, boardId } = renderingPost;
-
+  console.log(boardId);
   const clickPost = () => {
     history.push(`/${boardType}/${boardId}`);
   };
 
   return (
     <Container onClick={clickPost}>
-      <TextContainer>
+      <TextContainer noImage={renderingPost.img}>
         <Title>{renderingPost.title}</Title>
         <Content>{renderingPost.content}</Content>
         <Nickname>{renderingPost.nickname}</Nickname>
       </TextContainer>
-      <ImageContainer>
-        <Image src={renderingPost.img} />
-      </ImageContainer>
+      {renderingPost.img === null || (
+        <ImageContainer>
+          <Image src={renderingPost.img} />
+        </ImageContainer>
+      )}
     </Container>
   );
 };
@@ -34,7 +36,7 @@ const Container = styled.div`
 `;
 const TextContainer = styled.div`
   box-sizing: border-box;
-  width: 75%;
+  width: ${(props) => (props.noImage === null ? '100%' : '75%')};
   height: 125px;
   padding: 0 20px;
   display: flex;

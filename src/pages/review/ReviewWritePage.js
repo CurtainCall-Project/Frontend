@@ -32,7 +32,7 @@ const ReviewWritePage = (props) => {
     // 사용자가 리뷰를 작성한 뮤지컬이라면 뮤지컬 정보를 저장하기
     if (
       !(JSON.stringify(reviewDetail) === '{}') &&
-      reviewDetail.musical.mt20id === musicalId
+      reviewDetail.musical.musicalId === musicalId
     ) {
       setViewingDate(new Date(reviewDetail.viewingDate));
       setCasting(reviewDetail.casting);

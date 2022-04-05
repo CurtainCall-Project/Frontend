@@ -60,19 +60,10 @@ export const editReview =
     formData.append('mname', mname);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
-    formData.append('cast', casting);
+    formData.append('casting', casting);
     formData.append('content', content);
     formData.append('boardImgs', deletedImages);
     files.map((file) => formData.append('imgFiles', file));
-    // FormData의 key 확인
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
     axios
       .put(`${config.SERVER_URL}/review/${musicalId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -91,7 +82,7 @@ export const addReview =
     formData.append('mname', mname);
     formData.append('rating', rating);
     formData.append('viewingDate', viewingDate);
-    formData.append('cast', casting);
+    formData.append('casting', casting);
     formData.append('content', content);
     files.map((file) => formData.append('imgFiles', file));
     axios
@@ -140,7 +131,7 @@ export const getMusical = (input, page) => (dispatch) => {
       },
     })
     .then((res) => {
-      if (res.data.dbs.db.length === 0) {
+      if (res.data.dbs.db === '') {
         window.alert('마지막 페이지입니다.');
       }
       dispatch({ type: GET_MUSICAL, payload: res.data.dbs.db });

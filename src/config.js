@@ -1,10 +1,10 @@
 const dev = {
-  SERVER_URL: 'https://5cd22098-97e5-48c9-8b3e-58670e61a142.mock.pstmn.io',
+  SERVER_URL: `${process.env.REACT_APP_DEV_SERVER_URL}`,
   REDIRECT_URL: 'http://localhost:3000',
 };
 
 const prod = {
-  SERVER_URL: 'https://server.curtain-call.kr',
+  SERVER_URL: `${process.env.REACT_APP_PROD_SERVER_URL}`,
   REDIRECT_URL: 'https://curtain-call.kr',
 };
 

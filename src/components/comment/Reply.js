@@ -15,7 +15,7 @@ const Reply = (props) => {
     <ReplyBox>
       <ProfileImg src={profileImage}></ProfileImg>
       <Grid display="block" margin="5px 0">
-        <Text width="8%" margin_bottom="5px">
+        <Text width="auto" margin_bottom="5px">
           {props.reply.nickname}
         </Text>
         {props.reply.secret &&

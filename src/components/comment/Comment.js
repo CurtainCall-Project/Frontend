@@ -69,7 +69,7 @@ const Comment = (props) => {
         <CommentBox key={props.comment.id}>
           <ProfileImg src={profileImage}></ProfileImg>
           <Grid display="block">
-            <Text width="8%" margin_bottom="5px">
+            <Text width="auto" margin_bottom="5px">
               {props.comment.nickname}
             </Text>
             {props.comment.secret &&

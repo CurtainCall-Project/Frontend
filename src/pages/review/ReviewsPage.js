@@ -29,7 +29,7 @@ const ReviewsPage = () => {
 
   return (
     <Wrapper>
-      <Text width="45%" font_size="18px">
+      <Text width="60%" font_size="18px">
         내가 쓴 후기
       </Text>
       {myReviews.length > 0 &&

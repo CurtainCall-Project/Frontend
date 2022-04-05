@@ -96,7 +96,7 @@ const PostWrite = (props) => {
   );
 };
 
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   box-sizing: border-box;
   width: 1000px;
   height: 70%;

@@ -30,18 +30,20 @@ const MyPostPage = () => {
         <Text>내가 쓴 글</Text>
       </Grid>
       {myPost.length > 0 && changeMyPost(startIndex)}
-      <Paging
-        page={page}
-        itemsCount={8}
-        totalItemsCount={myPost.length}
-        changePage={changePage}
-      />
+      {myPost.length > 0 && (
+        <Paging
+          page={page}
+          itemsCount={8}
+          totalItemsCount={myPost.length}
+          changePage={changePage}
+        />
+      )}
     </Container>
   );
 };
 
 const Container = styled.div`
   margin: 90px auto 0 auto;
-  max-width: 1000px;
+  max-width: 900px;
 `;
 export default MyPostPage;

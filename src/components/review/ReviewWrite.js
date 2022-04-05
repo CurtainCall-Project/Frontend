@@ -17,7 +17,8 @@ import { ko } from 'date-fns/locale';
 
 const ReviewWrite = (props) => {
   const hiddenFileInput = useRef();
-
+  console.log(props.nowMusical);
+  console.log(props.reviewDetail);
   const ExampleCustomInput = ({ value, onClick }) => (
     <DateButton className="example-custom-input" onClick={onClick}>
       {value}
@@ -56,7 +57,7 @@ const ReviewWrite = (props) => {
           <Text width="70%">
             {props.nowMusical
               ? props.nowMusical.prfnm
-              : props.reviewDetail.musical}
+              : props.reviewDetail.musical.prfnm}
           </Text>
           <StarContainer>
             <Rating
