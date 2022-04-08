@@ -53,9 +53,8 @@ const HomePage = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 449px;
+  height: auto;
   padding-bottom: 69px;
-  // border: 1px solid;
 `;
 const BannerWrapper = styled.div`
   width: 100%;
