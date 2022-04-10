@@ -8,6 +8,7 @@ import banner_1 from '../assets/banner_1.PNG';
 import banner_2 from '../assets/banner_2.PNG';
 import banner_3 from '../assets/banner_3.PNG';
 import banner_4 from '../assets/banner_4.PNG';
+import banner_5 from '../assets/banner_5.PNG';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from 'swiper/core';
 
@@ -27,7 +28,7 @@ const HomePage = () => {
     }
     dispatch(getUser());
   }, []);
-  const banners = [banner_1, banner_2, banner_3, banner_4];
+  const banners = [banner_1, banner_2, banner_3, banner_4, banner_5];
 
   return (
     <Container>

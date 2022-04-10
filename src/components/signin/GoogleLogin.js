@@ -30,9 +30,7 @@ const GoogleLogin = ({ onLogin }) => {
       auth2.attachClickHandler(googleButton.current, {}, (googleUser) => {
         // 구글이 발급한 요청 토큰을 따로 저장한다.
         const user_token = googleUser.getAuthResponse().id_token;
-        //console.log(user_token);
         onLogin(user_token);
-        // getUserInfo();
       });
     });
   };

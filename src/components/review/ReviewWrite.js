@@ -17,8 +17,7 @@ import { ko } from 'date-fns/locale';
 
 const ReviewWrite = (props) => {
   const hiddenFileInput = useRef();
-  console.log(props.nowMusical);
-  console.log(props.reviewDetail);
+
   const ExampleCustomInput = ({ value, onClick }) => (
     <DateButton className="example-custom-input" onClick={onClick}>
       {value}
@@ -75,11 +74,9 @@ const ReviewWrite = (props) => {
             ? props.nowMusical.fcltynm
             : props.reviewDetail.place}
         </TextLine>
-        {/* <Input width="25%" placeholder={props.nowMusical.place} /> */}
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">관람일</Text>
-        {/* <Input width="25%" /> */}
         <DatePicker
           locale={ko}
           dateFormat="yyyy년 MM월 dd일"
@@ -94,8 +91,8 @@ const ReviewWrite = (props) => {
         <Input
           width="30%"
           placeholder="캐스팅을 입력하세요"
-          value={props.casting}
-          onChange={(e) => props.setCasting(e.target.value)}
+          value={props.cast}
+          onChange={(e) => props.setCast(e.target.value)}
         />
       </Grid>
       <Grid flex_direction="column">

@@ -21,16 +21,6 @@ const RentWritePage = () => {
   // 사진 id 1로 설정
   const nextId = useRef(1);
 
-  // 로그인 후 닉네임 설정되어 있지 않을 경우 닉네임 설정 페이지로 이동
-  const isLogin = !!getCookie('token');
-  const nickname = useSelector((state) => state.user.nickname);
-  useEffect(() => {
-    if (isLogin === true && !!nickname === false) {
-      history.push('/mypage/nickname');
-      return;
-    }
-  }, []);
-
   // 제목 작성 시 제목 저장하는 함수
   const changeTitle = (e) => {
     setTitle(e.target.value);
@@ -97,7 +87,6 @@ const RentWritePage = () => {
   // 삭제 버튼 클릭시 미리보기 이미지를 삭제한다
   const deleteFile = (id) => {
     setImgFiles(imgFiles.filter((imgFile) => imgFile.id !== id));
-    //console.log(imgFiles);
   };
 
   const onSubmit = () => {

@@ -7,7 +7,6 @@ import { getMusical } from '../../modules/review';
 import { Text } from '../../elements/elements';
 const ReviewSearchPage = () => {
   const dispatch = useDispatch();
-  const searchButton = useRef();
   // 페이지 상태 관리
   const [page, setPage] = useState(0);
   // 검색 입력값 상태 관리
@@ -20,8 +19,8 @@ const ReviewSearchPage = () => {
 
   useEffect(() => {
     // 마지막 페이지인경우 페이지 원래대로 되돌리기
-    if (!Array.isArray(results) && results === '') {
-      setPage(page - 1);
+    if (!Array.isArray(results)) {
+      results === '' ? setPage(page - 1) : setSearchResult([results]);
     }
     if (Array.isArray(results) && results.length > 0) {
       setSearchResult(results);
@@ -52,7 +51,8 @@ const ReviewSearchPage = () => {
   // 엔터 키 눌렀을 때 뮤지컬 검색 수행
   const handleEnterKey = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      setPage(1);
+      dispatch(getMusical(input, 1));
     }
   };
 
@@ -62,7 +62,6 @@ const ReviewSearchPage = () => {
       window.alert('공연 제목을 입력하세요');
       return;
     }
-    searchButton.current.click();
     setPage(1);
     dispatch(getMusical(input, 1));
   };
@@ -73,7 +72,6 @@ const ReviewSearchPage = () => {
         handleSearch={handleSearch}
         changeInput={changeInput}
         handleEnterKey={handleEnterKey}
-        searchButton={searchButton}
       />
       {page > 0 &&
         searchResult.length > 0 &&

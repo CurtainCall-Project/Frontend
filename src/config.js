@@ -4,7 +4,7 @@ const dev = {
 };
 
 const prod = {
-  SERVER_URL: `${process.env.REACT_APP_PROD_SERVER_URL}`,
+  SERVER_URL: 'https://server.curtain-call.kr',
   REDIRECT_URL: 'https://curtain-call.kr',
 };
 

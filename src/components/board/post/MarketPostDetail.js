@@ -34,7 +34,9 @@ const MarketPostDetail = (props) => {
           {props.post.place} {props.post.delivery ? '/ 택배가능' : null}
         </Text>
       </Grid>
-      <Text font_weight="regular">{props.post.content}</Text>
+      <Text line_height="21px" font_weight="regular">
+        {props.post.content}
+      </Text>
       {props.post.boardImgs.map((image) => (
         <Image src={image} />
       ))}
@@ -46,7 +48,8 @@ const Container = styled.div`
   width: 1000px;
   margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: no-wrap;
 `;
 const Image = styled.img`
   max-width: 60%;

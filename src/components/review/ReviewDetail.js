@@ -34,7 +34,7 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
       </Grid>
       <Grid margin="0 0 10px 0">
         <Text width="7%">캐스팅</Text>
-        <Text font_weight="regular">{reviewDetail.casting}</Text>
+        <Text font_weight="regular">{reviewDetail.cast}</Text>
       </Grid>
       <Grid flex_direction="column">
         <Text>후기</Text>

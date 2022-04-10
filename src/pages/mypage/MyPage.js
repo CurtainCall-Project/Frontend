@@ -12,13 +12,12 @@ const MyPage = () => {
   // 현재 유저의 마이페이지 정보 가져오기
   const { myPost, myScrap } = useSelector((state) => state.user.userPosts);
   // 현재 유저 정보 가져오기
-  const { userId, nickname, profileImg } = useSelector((state) => state.user);
+  const { userId, nickname, email, profileImg } = useSelector(
+    (state) => state.user
+  );
   const [profileImage, setProfileImage] = useState(profileImg);
 
   useEffect(() => {
-    if (nickname === null) {
-      history.push('/mypage/nickname');
-    }
     dispatch(getUserPosts());
   }, []);
 
@@ -47,6 +46,7 @@ const MyPage = () => {
       <ProfileBox
         nickname={nickname}
         profileImage={profileImage}
+        email={email}
         handleFileChange={handleFileChange}
       />
       <PostContainer>

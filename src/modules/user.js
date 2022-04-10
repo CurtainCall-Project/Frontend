@@ -36,7 +36,7 @@ export const logout = () => (dispatch) => {
 };
 
 // 사용자 정보를 가져오는 액션 생성함수
-export const getUser = () => (dispatch) => {
+export const getUser = () => async (dispatch) => {
   // 쿠키에서 서버와의 통신 시 사용할 토큰을 가져온다.
   const bearerToken = getCookie('token');
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다
@@ -102,13 +102,13 @@ export const addProfileImage = (file) => (dispatch) => {
 };
 
 // 내가 쓴글과 스크랩 가져와 저장
-export const getUserPosts = () => (dispatch) => {
-  axios
-    .get(`${config.SERVER_URL}/mypage`)
-    .then((res) => {
-      dispatch({ type: SET_USER_POSTS, payload: res.data });
-    })
-    .catch((error) => alert('마이페이지 정보를 불러오는데 실패했습니다.'));
+export const getUserPosts = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${config.SERVER_URL}/mypage`);
+    dispatch({ type: SET_USER_POSTS, payload: res.data });
+  } catch (error) {
+    alert('마이페이지 정보를 불러오는데 실패했습니다.');
+  }
 };
 
 const initialUser = {

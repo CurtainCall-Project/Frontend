@@ -18,7 +18,7 @@ const ReviewBox = ({ review }) => {
         <StarIcon />
         <MusicalRating>{review.rating}</MusicalRating>
         <h1>{review.viewingDate}</h1>
-        <h1>{review.casting}</h1>
+        <h1>{review.cast}</h1>
       </InfoWrapper>
     </Container>
   );

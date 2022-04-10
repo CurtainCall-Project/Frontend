@@ -16,15 +16,6 @@ export const addPost = (boardType, title, content, files) => (dispatch) => {
   formData.append('title', title);
   formData.append('content', content);
   files.map((file) => formData.append('files', file));
-  // FormData의 key 확인
-  for (let key of formData.keys()) {
-    console.log(key);
-  }
-
-  // FormData의 value 확인
-  for (let value of formData.values()) {
-    console.log(value);
-  }
 
   axios
     .post(`${config.SERVER_URL}/board/${boardType}`, formData, {
@@ -49,15 +40,6 @@ export const addRentPost =
     formData.append('delivery', delivery);
     formData.append('content', content);
     files.map((file) => formData.append('files', file));
-    // FormData의 key 확인
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
 
     axios
       .post(`${config.SERVER_URL}/board/rent`, formData, {
@@ -80,15 +62,6 @@ export const addSellPost =
     formData.append('delivery', delivery);
     formData.append('content', content);
     files.map((file) => formData.append('files', file));
-    // FormData의 key 확인
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
 
     axios
       .post(`${config.SERVER_URL}/board/sell`, formData, {
