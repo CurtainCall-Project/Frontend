@@ -16,7 +16,7 @@ const ScrapButton = (props) => {
 const Button = styled.div`
   width: 65px;
   height: 65px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 35px;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ const ScrapIconWrapper = styled(ScrapIcon)`
   margin-bottom: 4px;
 `;
 const ScrapCount = styled.span`
-  font-size: ${({ theme }) => theme.smallFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   text-align: center;
 `;
 export default ScrapButton;

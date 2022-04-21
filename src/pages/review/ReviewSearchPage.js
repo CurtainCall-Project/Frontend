@@ -113,14 +113,14 @@ const PageButton = styled.button`
   height: 30px;
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  font-size: ${({ theme }) => theme.fontSize.base};
   font-weight: bold;
-  background-color: ${({ theme }) => theme.purple};
+  background-color: ${({ theme }) => theme.lightPurple};
   color: #434343;
   transition: 0.3s;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.mainBlue};
+    background-color: ${({ theme }) => theme.colors.purple};
     color: #fff;
   }
 `;

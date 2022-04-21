@@ -23,12 +23,14 @@ const Text = styled.div`
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   font-size: ${(props) =>
     props.font_size
-      ? `${props.font_size}`
-      : `${({ theme }) => theme.fontSize.middleFontSize}`};
+      ? `${props.font_size / 16}rem`
+      : `${({ theme }) => theme.fontSize.base}`};
   font-weight: ${(props) =>
     props.font_weight ? `${props.font_weight}` : 'bold'};
   color: ${(props) =>
-    props.color === 'gray' ? `${({ theme }) => theme.borderGray}` : '#000'};
+    props.color === 'gray'
+      ? `${({ theme }) => theme.colors.borderGray}`
+      : '#000'};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
   ${(props) =>
     props.margin_bottom ? `margin-bottom ${props.margin_bottom}` : ''};
@@ -36,7 +38,7 @@ const Text = styled.div`
   ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
-  white-space: pre-wrap;
+  .colors.white-space: pre-wrap;
   ${(props) => (props.line_height ? `line-height: ${props.line_height};` : '')}
   ${(props) => (props.text_align ? `text-align: ${props.text_align};` : '')}
 `;
@@ -45,7 +47,7 @@ const Text = styled.div`
 const Input = styled.input`
   box-sizing: border-box;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  font-size: ${({ theme }) => theme.fontSize.base};
   height: 30px;
   border: none;
   outline: none;
@@ -59,8 +61,8 @@ const InputBox = styled.textarea`
   display: block;
   width: 100%;
   height: ${(props) => (props.height ? `${props.height}` : '285px')};
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  font-size: ${({ theme }) => theme.fontSize.base};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 10px;
   padding-left: 10px;
   padding-top: 10px;
@@ -83,11 +85,11 @@ const Button = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 15px;
-  background-color: ${({ theme }) => theme.mainBlue};
-  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colors.purple};
+  color: ${({ theme }) => theme.colors.white};
   width: ${(props) => (props.width ? `${props.width}` : '71px')};
   height: ${(props) => (props.height ? `${props.height}` : '32px')};
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  font-size: ${({ theme }) => theme.fontSize.base};
   cursor: pointer;
 `;
 

@@ -25,7 +25,7 @@ const Container = styled.div`
   height: 69px;
   position: absolute;
   bottom: 0px;
-  background-color: ${({ theme }) => theme.darkGray};
+  background-color: ${({ theme }) => theme.colors.darkGray};
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
 `;
@@ -35,7 +35,7 @@ const TextContainer = styled.div`
   justify-content: space-between;
   margin-right: 30px;
   a {
-    font-size: ${({ theme }) => theme.middleFontSize};
+    font-size: ${({ theme }) => theme.fontSize.base};
     &:hover {
       text-decoration: underline;
     }

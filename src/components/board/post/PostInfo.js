@@ -34,7 +34,7 @@ const PostInfo = ({ post, user, deleteNowPost }) => {
 
 const Container = styled.div`
   width: 1000px;
-  border-bottom: 1px solid ${({ theme }) => theme.borderGray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderGray};
   position: relative;
 `;
 
@@ -49,7 +49,7 @@ const DeleteButton = styled(Button)`
   position: absolute;
   right: 5px;
   bottom: 5px;
-  background-color: ${({ theme }) => theme.darkGray};
+  background-color: ${({ theme }) => theme.colors.darkGray};
   color: #000;
 `;
 export default PostInfo;

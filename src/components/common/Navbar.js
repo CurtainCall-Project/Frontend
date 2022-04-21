@@ -139,7 +139,7 @@ const Navbar = ({
 // Top Bar
 const TopbarContainer = styled.div`
   height: 51px;
-  background-color: ${({ theme }) => theme.purple};
+  background-color: ${({ theme }) => theme.colors.lightPurple};
 `;
 const TopbarWrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
@@ -173,7 +173,7 @@ const SearchContainer = styled.div`
   height: 38px;
   margin-right: 36px;
   border-radius: 30px;
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 const SearchButton = styled.button`
   position: absolute;
@@ -202,7 +202,7 @@ const ProfileImage = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   margin-right: 10px;
   background-color: #fff;
   object-fit: cover;
@@ -210,18 +210,18 @@ const ProfileImage = styled.img`
 `;
 
 const LogoutButton = styled.div`
-  color: ${({ theme }) => theme.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.navSignInFontGray};
   transition: 0.3s;
   cursor: pointer;
   &:hover {
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 const LoginButton = styled(Link)`
-  color: ${({ theme }) => theme.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.navSignInFontGray};
   transition: 0.3s;
   &:hover {
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -279,12 +279,12 @@ const MenuItem = styled.li`
   z-index: 2;
   &:hover {
     ${MenuName} {
-      color: ${({ theme }) => theme.mainBlue};
+      color: ${({ theme }) => theme.colors.purple};
       text-shadow: 1px 2px 2px #c2c4db;
     }
     ${InnerMenu} {
       display: block;
-      background-color: ${({ theme }) => theme.navInnerMenuGray};
+      background-color: ${({ theme }) => theme.colors.navInnerMenuGray};
     }
   }
 `;
@@ -292,7 +292,7 @@ const InnerMenuItem = styled.li`
   margin-top: 10px;
 
   &:hover {
-    color: ${({ theme }) => theme.mainBlue};
+    color: ${({ theme }) => theme.colors.purple};
   }
 `;
 const WriteInnerMenu = styled.ul`
@@ -300,17 +300,17 @@ const WriteInnerMenu = styled.ul`
   display: none;
   position: absolute;
   left: 0px;
-  background-color: ${({ theme }) => theme.mainBlue};
+  background-color: ${({ theme }) => theme.colors.purple};
   border-radius: 0 0 10px 10px;
   font-size: 14px;
   text-align: center;
 
   li {
     cursor: pointer;
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.colors.white};
     padding: 8px 0;
     &:hover {
-      background-color: ${({ theme }) => theme.purple};
+      background-color: ${({ theme }) => theme.colors.lightPurple};
     }
   }
   li.sell {
@@ -327,13 +327,13 @@ const WriteMenuName = styled.div`
 `;
 const WriteMenuItem = styled.li`
   position: relative;
-  color: ${({ theme }) => theme.mainBlue};
+  color: ${({ theme }) => theme.colors.purple};
   transition: 0.1s ease-out;
   border-radius: 10px 10px 0 0;
   z-index: 2;
   &:hover {
-    color: ${({ theme }) => theme.white};
-    background-color: ${({ theme }) => theme.mainBlue};
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.purple};
     //border-radius: 10px 10px 0 0;
     ${WriteInnerMenu} {
       display: block;

@@ -17,7 +17,7 @@ const Button = styled.div`
   width: 65px;
   height: 65px;
   margin-right: 30px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 35px;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ const HeartIconWrapper = styled(HeartIcon)`
   margin-top: 4px;
 `;
 const LikeCount = styled.span`
-  font-size: ${({ theme }) => theme.smallFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   text-align: center;
 `;
 export default LikeButton;

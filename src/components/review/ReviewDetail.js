@@ -65,7 +65,7 @@ const Container = styled.div`
   overflow: auto;
   border: 1px solid;
   border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  color: ${({ theme }) => theme.colors.borderGray};
   display: flex;
   flex-wrap: wrap;
   padding: 37px 65px;
@@ -88,7 +88,7 @@ const AttachedImages = styled.img`
 `;
 const DeleteButton = styled(Button)`
   color: #000;
-  background-color: ${({ theme }) => theme.darkGray};
+  background-color: ${({ theme }) => theme.colors.darkGray};
   margin-left: 10px;
   cursor: pointer;
 `;

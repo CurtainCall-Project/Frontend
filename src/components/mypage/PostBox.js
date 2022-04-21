@@ -28,7 +28,7 @@ const Container = styled.div`
   ${({ theme }) => theme.verticalCenter};
   width: 730px;
   height: 215px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -44,20 +44,20 @@ const TextContainer = styled.div`
 const Title = styled.div`
   width: 100%;
   line-height: 1.2;
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  font-size: ${({ theme }) => theme.fontSize.base};
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  .colors.white-space: nowrap;
 `;
 const Content = styled.div`
   width: 100%;
   line-height: 1.2;
-  font-size: ${({ theme }) => theme.fontSize.smallFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   color: #323232;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal;
+  .colors.white-space: normal;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -65,7 +65,7 @@ const Content = styled.div`
 `;
 const Nickname = styled.div`
   color: #323232;
-  font-size: ${({ theme }) => theme.fontSize.smallFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;
 const ImageContainer = styled.div`
   width: 25%;
@@ -75,6 +75,6 @@ const Image = styled.img`
   width: 155px;
   height: 155px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
 `;
 export default PostBox;

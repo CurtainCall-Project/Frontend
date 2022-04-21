@@ -115,7 +115,7 @@ const AcceptBox = styled.div`
   margin-bottom: 30px;
 
   a {
-    color: ${({ theme }) => theme.mainBlue};
+    color: ${({ theme }) => theme.colors.purple};
   }
 `;
 export default NicknameSetPage;

@@ -116,7 +116,7 @@ const FormWrapper = styled.div`
   overflow: auto;
   border: 1px solid;
   border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  color: ${({ theme }) => theme.colors.borderGray};
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -133,8 +133,8 @@ const DeliveryButton = styled.button`
   height: 35px;
   cursor: pointer;
   background-color: ${(props) => (props.delivery ? '#6166b3' : '#b0b0b0')};
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
-  color: ${({ theme }) => theme.white};
+  font-size: ${({ theme }) => theme.fontSize.base};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const Images = styled.div`

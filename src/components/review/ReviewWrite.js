@@ -145,7 +145,7 @@ const FormWrapper = styled.div`
   overflow: auto;
   border: 1px solid;
   border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  color: ${({ theme }) => theme.colors.borderGray};
   display: flex;
   flex-wrap: wrap;
   padding: 37px 65px;
@@ -195,7 +195,7 @@ const DateButton = styled.button`
   padding-left: 15px;
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-start;
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  font-size: ${({ theme }) => theme.fontSize.base};
   cursor: pointer;
 `;
 const UploadButton = styled(PictureButton)`

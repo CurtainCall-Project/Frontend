@@ -1,5 +1,5 @@
 const dev = {
-  SERVER_URL: 'https://5cd22098-97e5-48c9-8b3e-58670e61a142.mock.pstmn.io',
+  SERVER_URL: `${process.env.REACT_APP_DEV_SERVER_URL}`,
   REDIRECT_URL: 'http://localhost:3000',
 };
 

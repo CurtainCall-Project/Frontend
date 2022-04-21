@@ -46,7 +46,7 @@ const FormContainer = styled.div`
   width: 623px;
   height: 233px;
   border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  color: ${({ theme }) => theme.colors.borderGray};
   font-size: 18px;
   border: 1px solid;
   margin: 0px auto 30px auto;
@@ -91,8 +91,8 @@ const DuplicationButton = styled.button`
   height: 32px;
   border-radius: 8px;
   font-size: 18px;
-  color: ${({ theme }) => theme.white};
-  background-color: ${({ theme }) => theme.mainBlue};
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.purple};
   opacity: 70%;
   border: none;
   cursor: pointer;
@@ -101,6 +101,6 @@ const NicknameCheckText = styled.div`
   position: absolute;
   top: 40px;
   left: 162px;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;
 export default NicknameForm;

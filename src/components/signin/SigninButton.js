@@ -38,7 +38,7 @@ const TitleWrapper = styled.div`
 `;
 const Title = styled.div`
   width: 70%;
-  font-size: ${({ theme }) => theme.fontSize.signinFontSize};
+  font-size: ${({ theme }) => theme.fontSize.lg};
   text-align: center;
 `;
 

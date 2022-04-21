@@ -13,7 +13,7 @@ const Button = styled.button`
   height: 54px;
   border: none;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.mainBlue};
+  background-color: ${({ theme }) => theme.colors.purple};
   opacity: 70%;
   color: #fff;
   font-size: 16px;

@@ -15,7 +15,7 @@ const Reply = (props) => {
     <ReplyBox>
       <ProfileImg src={profileImage}></ProfileImg>
       <Grid display="block" margin="5px 0">
-        <Text width="8%" margin_bottom="5px">
+        <Text width="auto" margin_bottom="5px">
           {props.reply.nickname}
         </Text>
         {props.reply.secret &&
@@ -39,7 +39,7 @@ const Reply = (props) => {
           </Text>
         )}
         <Grid>
-          <Text font_weight="regular" width="auto">
+          <Text font_size="14" font_weight="regular" width="auto">
             {registerDate}
           </Text>
         </Grid>
@@ -61,7 +61,7 @@ const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 11px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   margin: 9px 10px 0 7px;
 `;
 

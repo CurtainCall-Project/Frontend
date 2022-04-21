@@ -47,7 +47,7 @@ const InfoWrapper = styled.div`
   margin-left: 20px;
 `;
 const MusicalRating = styled.span`
-  font-size: ${({ theme }) => theme.middleFontSize};
+  font-size: ${({ theme }) => theme.base};
   padding-left: 5px;
 `;
 export default ReviewBox;

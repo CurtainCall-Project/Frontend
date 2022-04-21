@@ -59,7 +59,7 @@ const Table = styled.div`
   margin: 20px auto;
   display: table;
   width: 1000px;
-  border: 1px solid ${({ theme }) => theme.darkGray};
+  border: 1px solid ${({ theme }) => theme.colors.darkGray};
 `;
 const Heading = styled.div`
   display: table-cell;
@@ -71,9 +71,9 @@ const Heading = styled.div`
 const Row = styled.div`
   display: table-row;
   line-height: 50px;
-  background-color: ${({ theme }) => theme.lightGray};
+  background-color: ${({ theme }) => theme.colors.lightGray};
   &:hover {
-    background-color: ${({ theme }) => theme.darkGray};
+    background-color: ${({ theme }) => theme.colors.darkGray};
   }
 `;
 const BestRow = styled.div`
@@ -86,7 +86,7 @@ const BestRow = styled.div`
 `;
 const Column = styled.div`
   display: table-cell;
-  border-top: 1px solid ${({ theme }) => theme.white};
+  border-top: 1px solid ${({ theme }) => theme.colors.white};
   text-align: center;
 
   &:first-child {
@@ -100,7 +100,7 @@ const Column = styled.div`
       margin: 0 auto;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      .colors.white-space: nowrap;
     }
   }
   &:nth-child(3) {

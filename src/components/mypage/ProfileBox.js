@@ -51,7 +51,7 @@ const Container = styled.div`
   padding: 20px;
   width: 270px;
   height: 320px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 5px;
   ${({ theme }) => theme.verticalCenter};
   flex-direction: column;
@@ -64,7 +64,7 @@ const ImageContainer = styled.form`
 const ImageWrapper = styled.div`
   width: 135px;
   height: 135px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 68px;
 `;
 const ProfileImage = styled.img`
@@ -74,7 +74,7 @@ const ProfileImage = styled.img`
   overflow: hidden;
 `;
 const AddButton = styled.div`
-  background-color: ${({ theme }) => theme.mainBlue};
+  background-color: ${({ theme }) => theme.colors.purple};
   width: 36px;
   height: 36px;
   border-radius: 18px;

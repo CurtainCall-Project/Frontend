@@ -79,14 +79,14 @@ const Box = styled.div`
   flex-direction: column;
   margin: 50px auto 0 auto;
   padding: 10px;
-  border: 1px solid ${({ theme }) => theme.darkGray};
+  border: 1px solid ${({ theme }) => theme.colors.darkGray};
   width: 1000px;
   height: auto;
-  white-space: pre-wrap;
+  .colors.white-space: pre-wrap;
 
   span {
-    font-size: ${({ theme }) => theme.fontSize.smallFontSize};
-    color: ${({ theme }) => theme.borderGray};
+    font-size: ${({ theme }) => theme.fontSize.sm};
+    color: ${({ theme }) => theme.colors.borderGray};
   }
 `;
 

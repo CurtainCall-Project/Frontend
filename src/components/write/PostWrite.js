@@ -103,7 +103,7 @@ const FormWrapper = styled.form`
   overflow: auto;
   border: 1px solid;
   border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  color: ${({ theme }) => theme.colors.borderGray};
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -117,8 +117,8 @@ const SelectWrapper = styled.div`
 const SelectBox = styled.div`
   width: 120px;
   height: 35px;
-  background-color: ${({ theme }) => theme.mainBlue};
-  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.colors.purple};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: ${(props) => (props.selectBox ? '10px 10px 0 0 ' : '10px')};
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
@@ -139,7 +139,7 @@ const Name = styled.div`
 const OptionBox = styled.ul`
   width: 120px;
   border-radius: 0 0 10px 10px;
-  background-color: ${({ theme }) => theme.mainBlue};
+  background-color: ${({ theme }) => theme.colors.purple};
   postion: absolute;
   top: 0;
   left: 0;
@@ -153,7 +153,7 @@ const OptionBox = styled.ul`
     justify-content: center;
     cursor: pointer;
     &:hover {
-      background-color: ${({ theme }) => theme.purple};
+      background-color: ${({ theme }) => theme.lightPurple};
     }
   }
   li:last-child {

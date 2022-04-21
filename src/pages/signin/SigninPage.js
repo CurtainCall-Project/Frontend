@@ -47,7 +47,7 @@ const Container = styled.div`
   margin: 60px auto 0 auto;
 `;
 const Title = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.signinFontSize};
+  font-size: ${({ theme }) => theme.fontSize.lg};
   padding: 10px;
   text-align: center;
 `;
@@ -57,7 +57,7 @@ const GoogleButton = styled.div`
   height: 100px;
   box-shadow: 5px 5px 15px #c6c6c6;
   border-radius: 10px;
-  font-size: ${({ theme }) => theme.fontSize.signinFontSize};
+  font-size: ${({ theme }) => theme.fontSize.lg};
   margin-top: 30px;
   cursor: pointer;
 

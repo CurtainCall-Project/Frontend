@@ -216,6 +216,6 @@ const PostContainer = styled.div`
   margin-bottom: 20px;
 `;
 const CommentContainer = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.borderGray};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderGray};
 `;
 export default PostPage;

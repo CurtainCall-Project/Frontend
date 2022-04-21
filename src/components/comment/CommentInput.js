@@ -39,9 +39,9 @@ const Container = styled.div`
   width: ${(props) => (props.width ? `${props.width}` : '1000px')};
   height: 35px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   overflow: hidden;
-  font-size: ${({ theme }) => theme.middleFontSize};
+  font-size: ${({ theme }) => theme.base};
   ${({ theme }) => theme.verticalCenter};
   position: relative;
 `;
@@ -52,7 +52,7 @@ const InputBox = styled.input`
   outline: none;
   margin-right: 10px;
   padding-left: 5px;
-  font-size: ${({ theme }) => theme.middleFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;
 
 const SecretBox = styled.div`

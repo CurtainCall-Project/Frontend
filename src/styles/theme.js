@@ -1,8 +1,9 @@
 import { css } from 'styled-components';
 
+const calcRem = (size) => `${size / 16}rem`;
 const colors = {
-  mainBlue: '#6166b3',
-  purple: '#baabda',
+  purple: '#6166b3',
+  lightPurple: '#baabda',
   white: '#ffffff',
   navInnerMenuGray: '#fafafa',
   navSignInFontGray: '#595858',
@@ -12,9 +13,11 @@ const colors = {
 };
 
 const fontSize = {
-  signinFontSize: '20px',
-  middleFontSize: '16px',
-  smallFontSize: '14px',
+  lg: calcRem(20),
+  base: calcRem(16),
+  sm: calcRem(14),
+  xs: calcRem(12),
+  xxs: calcRem(10),
 };
 
 const verticalCenter = css`
@@ -22,9 +25,22 @@ const verticalCenter = css`
   align-items: center;
 `;
 
+const deviceSize = {
+  desktop: '1024px',
+  tablet: '768px',
+};
+
+const device = {
+  desktop: `only screen and (max-width: ${deviceSize.desktop})`,
+  tablet: `only screen and (max-width: ${deviceSize.tablet})`,
+};
+
 const theme = {
-  ...colors,
+  colors,
   fontSize,
   verticalCenter,
+  deviceSize,
+  device,
 };
+
 export default theme;

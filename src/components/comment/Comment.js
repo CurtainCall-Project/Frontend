@@ -69,7 +69,7 @@ const Comment = (props) => {
         <CommentBox key={props.comment.id}>
           <ProfileImg src={profileImage}></ProfileImg>
           <Grid display="block">
-            <Text width="8%" margin_bottom="5px">
+            <Text width="auto" margin_bottom="5px">
               {props.comment.nickname}
             </Text>
             {props.comment.secret &&
@@ -89,7 +89,7 @@ const Comment = (props) => {
               </Text>
             )}
             <Grid>
-              <Text font_weight="regular" width="19%">
+              <Text font_size="14" font_weight="regular" width="17%">
                 {registerDate}
               </Text>
               <ReplyButton onClick={clickReplyButton}>답글달기</ReplyButton>
@@ -149,7 +149,7 @@ const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 11px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   margin-right: 10px;
   margin-top: 5px;
 `;
@@ -158,14 +158,14 @@ const ReplyButton = styled.button`
   border: none;
   width: 70px;
   background-color: #fff;
-  color: ${({ theme }) => theme.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.navSignInFontGray};
   font-weight: bold;
-  font-size: ${({ theme }) => theme.smallFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   margin-top: 4px;
   cursor: pointer;
   transition: 0.2s;
   &:hover {
-    color: ${({ theme }) => theme.mainBlue};
+    color: ${({ theme }) => theme.colors.purple};
   }
 `;
 export default Comment;

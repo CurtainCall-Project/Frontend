@@ -23,7 +23,7 @@ const ReviewSearchBar = (props) => {
 
 const Container = styled.div`
   ${({ theme }) => theme.verticalCenter}
-  border: 3px solid ${({ theme }) => theme.mainBlue};
+  border: 3px solid ${({ theme }) => theme.colors.purple};
   width: 750px;
   height: 51px;
   margin: 35px 0;
