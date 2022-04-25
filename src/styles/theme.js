@@ -28,11 +28,13 @@ const verticalCenter = css`
 const deviceSize = {
   desktop: '1024px',
   tablet: '768px',
+  mobile: '480px',
 };
 
 const device = {
   desktop: `only screen and (max-width: ${deviceSize.desktop})`,
   tablet: `only screen and (max-width: ${deviceSize.tablet})`,
+  mobile: `only screen and (max-width: ${deviceSize.mobile})`,
 };
 
 const theme = {

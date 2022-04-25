@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import NicknameButton from '../../components/common/NicknameButton';
-import NicknameForm from '../../components/common/NicknameForm';
+import NicknameButton from '../../components/mypage/NicknameButton';
+import NicknameForm from '../../components/mypage/NicknameForm';
 import { Text } from '../../elements/elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNickname, setNickname } from '../../modules/user';

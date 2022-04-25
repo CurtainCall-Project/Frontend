@@ -8,7 +8,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
 import history from './history';
 import { ConnectedRouter } from 'connected-react-router';
-import NavbarContainer from './pages/containers/NavbarContainer';
+import Header from './pages/containers/Header';
 import Footer from './components/common/Footer';
 import { Switch } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ const App = () => {
         <GlobalStyles />
         <ConnectedRouter history={history}>
           <div className="wrapper">
-            <NavbarContainer />
+            <Header />
             <section>
               <Switch>
                 {privateRoutes.map((route) => (
