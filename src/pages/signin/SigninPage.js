@@ -44,12 +44,20 @@ const SignInPage = () => {
 
 const Container = styled.div`
   width: 350px;
-  margin: 60px auto 0 auto;
+  margin: 60px auto 20px auto;
+  display: flex;
+  flex-direction: column;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 200px;
+  }
 `;
 const Title = styled.div`
   font-size: ${({ theme }) => theme.fontSize.lg};
   padding: 10px;
   text-align: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.sm};
+  }
 `;
 const GoogleButton = styled.div`
   ${({ theme }) => theme.verticalCenter};
@@ -67,6 +75,21 @@ const GoogleButton = styled.div`
 
   div {
     margin-left: 60px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 200px;
+    height: 65px;
+    box-shadow: 3px 3px 10px #c6c6c6;
+    border-radius: 10px;
+    font-size: ${({ theme }) => theme.fontSize.sm};
+    img {
+      margin-left: 20px;
+      width: 2rem;
+    }
+
+    div {
+      margin-left: 50px;
+    }
   }
 `;
 export default SignInPage;
