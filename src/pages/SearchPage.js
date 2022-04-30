@@ -34,7 +34,7 @@ const SearchPage = () => {
 
   return (
     <Container>
-      <Text margin="0 0 20px 0">검색결과 {totalCount}</Text>
+      <Text margin="0 0 1rem 0">검색결과 {totalCount}</Text>
       {!Array.isArray(list) && (
         <Grid>
           <Text text_align="center">검색 결과가 없습니다.</Text>
@@ -56,7 +56,7 @@ const SearchPage = () => {
 };
 
 const Container = styled.div`
-  margin: 90px auto 0 auto;
-  max-width: 1000px;
+  margin: 5em auto 0 auto;
+  width: 80vw;
 `;
 export default SearchPage;

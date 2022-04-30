@@ -9,68 +9,81 @@ const LongPostBox = ({ postInfo }) => {
   return (
     <Container onClick={clickPost}>
       <TextContainer>
-        <Title>{postInfo.title}</Title>
-        <Content>{postInfo.content}</Content>
+        <Wrapper>
+          <Title>{postInfo.title}</Title>
+          <Content>{postInfo.content}</Content>
+        </Wrapper>
         <Nickname>{postInfo.nickname}</Nickname>
       </TextContainer>
-      <ImageContainer>
-        <Image src={postInfo.img} />
-      </ImageContainer>
+      <Image src={postInfo.img} />
     </Container>
   );
 };
 
 const Container = styled.div`
+  box-sizing: border-box;
   ${({ theme }) => theme.verticalCenter};
-  width: 1000px;
-  height: 166px;
-  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
   border-radius: 5px;
-  margin: 0 auto 20px 0;
+  margin-bottom: 1rem;
+  padding: 1em 1.5em;
   cursor: pointer;
+  box-shadow: 0.2em 0.2em 0.2em 0.2em ${({ theme }) => theme.colors.lightGray};
 `;
 const TextContainer = styled.div`
-  box-sizing: border-box;
-  width: 85%;
-  height: 115px;
-  padding: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 80%;
+  height: 5em;
+  box-sizing: border-box;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 70%;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 60%;
 `;
+const Wrapper = styled.div``;
 const Title = styled.div`
   width: 100%;
-  line-height: 1.2;
-  font-size: ${({ theme }) => theme.fontSize.base};
+  margin-bottom: 0.5em;
+  font-size: 1em;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
-  .colors.white-space: nowrap;
+  white-space: nowrap;
 `;
 const Content = styled.div`
   width: 100%;
-  line-height: 1.2;
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: #323232;
   overflow: hidden;
   text-overflow: ellipsis;
-  .colors.white-space: normal;
+  white-space: normal;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.xxs};
 `;
 const Nickname = styled.div`
   color: #323232;
   font-size: ${({ theme }) => theme.fontSize.sm};
-`;
-const ImageContainer = styled.div`
-  width: 25%;
-  height: auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.xxs};
 `;
 const Image = styled.img`
-  width: 125px;
-  height: 125px;
+  width: 7em;
+  height: 7em;
   border-radius: 3px;
 `;
 export default LongPostBox;
