@@ -1,20 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
-import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
-import { ReactComponent as TwitterIcon } from '../../assets/twitter_icon.svg';
-import { ReactComponent as NaverIcon } from '../../assets/naver.svg';
 import { FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import SnsButton from './SnsButton';
 
-const Sidebar = ({ userId, sidebar, showSidebar }) => {
+const Sidebar = ({
+  userId,
+  sidebar,
+  showSidebar,
+  handleEnterKey,
+  clickSearchBtn,
+  changeInput,
+}) => {
   return (
     <Container sidebar={sidebar}>
       <ButtonWrapper>
         <HideButton onClick={showSidebar} />
       </ButtonWrapper>
       <SearchWrapper>
-        <SearchInput />
+        <SearchInput
+          handleEnterKey={handleEnterKey}
+          clickSearchBtn={clickSearchBtn}
+          changeInput={changeInput}
+        />
       </SearchWrapper>
       <MenuWrapper>
         <MenuName>게시판</MenuName>
@@ -64,15 +73,7 @@ const Sidebar = ({ userId, sidebar, showSidebar }) => {
         </Menu>
       </MenuWrapper>
       <SnsWrapper>
-        <a href="https://www.instagram.com/curtain_call_official/">
-          <InstaIcon />
-        </a>
-        <a href="https://twitter.com/curtaincall780?t=XfaP4y7edcPNXlseY4fNXQ&s=09">
-          <TwitterIcon />
-        </a>
-        <a href="https://m.blog.naver.com/curtaincall780">
-          <NaverIcon />
-        </a>
+        <SnsButton />
       </SnsWrapper>
     </Container>
   );
@@ -155,7 +156,7 @@ const SnsWrapper = styled.div`
   padding-top: 20px;
   display: flex;
   justify-content: flex-end;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
   a {
     margin-right: 5px;
   }

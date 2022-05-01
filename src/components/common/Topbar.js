@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getCookie } from '../../Cookie';
-import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
-import { ReactComponent as TwitterIcon } from '../../assets/twitter_icon.svg';
-import { ReactComponent as NaverIcon } from '../../assets/naver.svg';
 import basicProfile from '../../assets/default_profile.png';
 import { FaBars } from 'react-icons/fa';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
+import SnsButton from './SnsButton';
 
 const Topbar = ({
   profileImg,
@@ -23,15 +21,7 @@ const Topbar = ({
     <TopbarContainer>
       <TopbarWrapper>
         <TopbarLeftContent>
-          <IconItem href="https://www.instagram.com/curtain_call_official/">
-            <InstaIcon />
-          </IconItem>
-          <IconItem href="https://twitter.com/curtaincall780?t=XfaP4y7edcPNXlseY4fNXQ&s=09">
-            <TwitterIcon />
-          </IconItem>
-          <IconItem href="https://m.blog.naver.com/curtaincall780">
-            <NaverIcon />
-          </IconItem>
+          <SnsButton />
         </TopbarLeftContent>
         <TopbarRightContent>
           <SearchContainer>
@@ -81,16 +71,12 @@ const TopbarWrapper = styled.div`
 
 const TopbarLeftContent = styled.div`
   ${({ theme }) => theme.verticalCenter};
-  //justify-content: flex-start;
+  justify-content: flex-start;
   width: auto;
   height: 100%;
-  padding-left: 10px;
   @media ${({ theme }) => theme.device.tablet} {
     display: none;
   }
-`;
-const IconItem = styled.a`
-  margin-right: 10px;
 `;
 const TopbarRightContent = styled.div`
   ${({ theme }) => theme.verticalCenter};

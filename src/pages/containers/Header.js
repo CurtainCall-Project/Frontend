@@ -50,7 +50,14 @@ const Header = () => {
       />
       <Logobar />
       <Menubar userId={userId} />
-      <Sidebar userId={userId} sidebar={sidebar} showSidebar={showSidebar} />
+      <Sidebar
+        userId={userId}
+        sidebar={sidebar}
+        showSidebar={showSidebar}
+        handleEnterKey={handleEnterKey}
+        clickSearchBtn={clickSearchBtn}
+        changeInput={changeInput}
+      />
     </Container>
   );
 };
