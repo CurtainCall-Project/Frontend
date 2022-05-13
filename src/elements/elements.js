@@ -38,7 +38,7 @@ const Text = styled.div`
   ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
-  .colors.white-space: pre-wrap;
+  white-space: pre-wrap;
   ${(props) => (props.line_height ? `line-height: ${props.line_height};` : '')}
   ${(props) => (props.text_align ? `text-align: ${props.text_align};` : '')}
 `;

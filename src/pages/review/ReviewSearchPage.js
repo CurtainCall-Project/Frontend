@@ -85,7 +85,7 @@ const ReviewSearchPage = () => {
       {page > 0 && searchResult.length > 0 && (
         <PageContainer>
           <PageButton onClick={pageDown}>{'<'} 이전</PageButton>
-          <Text width="auto">{page}</Text>
+          <span>{page}</span>
           <PageButton onClick={pageUp}>다음 {'>'}</PageButton>
         </PageContainer>
       )}
@@ -100,20 +100,23 @@ const Wrapper = styled.div`
   margin: 150px auto 0 auto;
 `;
 const PageContainer = styled.div`
-  display: flex;
-  width: 220px;
-  height: 40px;
-  ${({ theme }) => theme.verticalCenter};
-  justify-content: space-between;
-`;
-const PageButton = styled.button`
-  border-radius: 8px;
-  border: none;
-  width: 80px;
-  height: 30px;
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.base};
+  height: 2em;
+  & > span {
+    font-weight: bold;
+    width: 4em;
+    text-align: center;
+  }
+`;
+const PageButton = styled.button`
+  border-radius: 0.5em;
+  border: none;
+  width: 5em;
+  height: 2em;
+  ${({ theme }) => theme.verticalCenter};
+  justify-content: center;
+  font-size: 1em;
   font-weight: bold;
   background-color: ${({ theme }) => theme.lightPurple};
   color: #434343;
