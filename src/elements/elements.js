@@ -22,9 +22,7 @@ const Text = styled.div`
   box-sizing: border-box;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   font-size: ${(props) =>
-    props.font_size
-      ? `${props.font_size / 16}rem`
-      : `${({ theme }) => theme.fontSize.base}`};
+    props.font_size ? `${props.font_size / 16}rem` : '1em'};
   font-weight: ${(props) =>
     props.font_weight ? `${props.font_weight}` : 'bold'};
   color: ${(props) =>
@@ -84,12 +82,12 @@ const InputBox = styled.textarea`
 const Button = styled.button`
   cursor: pointer;
   border: none;
-  border-radius: 15px;
+  border-radius: 1em;
   background-color: ${({ theme }) => theme.colors.purple};
   color: ${({ theme }) => theme.colors.white};
-  width: ${(props) => (props.width ? `${props.width}` : '71px')};
-  height: ${(props) => (props.height ? `${props.height}` : '32px')};
-  font-size: ${({ theme }) => theme.fontSize.base};
+  width: ${(props) => (props.width ? `${props.width}` : '4.5em')};
+  height: ${(props) => (props.height ? `${props.height}` : '2em')};
+  font-size: 1em;
   cursor: pointer;
 `;
 
