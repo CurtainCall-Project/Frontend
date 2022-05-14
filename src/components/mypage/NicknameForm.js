@@ -12,21 +12,18 @@ const NicknameForm = ({
   return (
     <>
       <FormContainer>
-        <ContentWrapper>
-          <GuideText>
-            닉네임을 설정해주세요. 최대 8글자까지 설정 가능합니다.
-          </GuideText>
-          <InputFormWrapper>
-            <Title>닉네임</Title>
-            <InputWrapper>
-              <NicknameInput
-                type="text"
-                maxLength="8"
-                onChange={onChange}
-                value={userNickname}
-              />
-            </InputWrapper>
-            <DuplicationButton onClick={onCheck}>중복확인</DuplicationButton>
+        <GuideText>
+          닉네임을 설정해주세요. 최대 8글자까지 설정 가능합니다.
+        </GuideText>
+        <InputFormWrapper>
+          <Title>닉네임</Title>
+          <InputWrapper>
+            <NicknameInput
+              type="text"
+              maxLength="8"
+              onChange={onChange}
+              value={userNickname}
+            />
             <NicknameCheckText>
               {clicked &&
                 (isUnique ? (
@@ -35,62 +32,73 @@ const NicknameForm = ({
                   <span style={{ color: color }}>중복된 닉네임입니다.</span>
                 ))}
             </NicknameCheckText>
-          </InputFormWrapper>
-        </ContentWrapper>
+          </InputWrapper>
+          <DuplicationButton onClick={onCheck}>중복확인</DuplicationButton>
+        </InputFormWrapper>
       </FormContainer>
     </>
   );
 };
 
 const FormContainer = styled.div`
+  box-sizing: border-box;
   width: 623px;
-  height: 233px;
-  border-radius: 10px;
+  height: auto;
+  padding: 5em 3em;
+  border-radius: 0.6em;
   color: ${({ theme }) => theme.colors.borderGray};
-  font-size: 18px;
   border: 1px solid;
-  margin: 0px auto 30px auto;
+  margin: 0px auto 2em auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 70vw;
+    padding 3em 1.5em;
+    font-size: ${({ theme }) => theme.fontSize.base};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 3em 1.5em;
+    width: 80vw;
+    font-size: ${({ theme }) => theme.fontSize.sm};
+  }
 `;
-
-const ContentWrapper = styled.div`
-  width: 100%;
-  display: inline-block;
-  margin-top: 77px;
-`;
-
 const GuideText = styled.div`
   text-align: center;
 `;
-
 const InputFormWrapper = styled.div`
-  display: flex;
+  ${({ theme }) => theme.verticalCenter}
   justify-content: center;
-  position: relative;
-  margin-top: 30px;
+  margin-top: 2em;
 `;
 const Title = styled.div`
   ${({ theme }) => theme.verticalCenter};
+  @media ${({ theme }) => theme.device.tablet} {
+    display: none;
+  }
 `;
-
 const InputWrapper = styled.div`
   border: 1px solid;
-  border-radius: 10px;
-  width: 249px;
-  height: 31px;
-  margin: 0 15px;
+  border-radius: 0.5em;
+  width: 14em;
+  height: 2em;
+  margin: 0 1em;
+  position: relative;
+  ${({ theme }) => theme.verticalCenter};
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 0 0.5em 0 0;
+  }
 `;
 const NicknameInput = styled.input`
-  width: 90%;
+  width: 70%;
+  height: 1em;
   border: none;
   outline: none;
-  font-size: 18px;
-  margin: 4px 5px;
+  margin: 0.5em;
+  font-size: 1em;
 `;
 const DuplicationButton = styled.button`
-  width: 99px;
-  height: 32px;
-  border-radius: 8px;
-  font-size: 18px;
+  width: 6em;
+  height: 2em;
+  border-radius: 0.5em;
+  font-size: 1em;
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.purple};
   opacity: 70%;
@@ -98,9 +106,18 @@ const DuplicationButton = styled.button`
   cursor: pointer;
 `;
 const NicknameCheckText = styled.div`
+  margin-left: 9em;
   position: absolute;
-  top: 40px;
-  left: 162px;
+  top: 3em;
+  left: -8em;
   font-size: ${({ theme }) => theme.fontSize.sm};
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+    top: 3.5em;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.xxs};
+  }
 `;
+
 export default NicknameForm;

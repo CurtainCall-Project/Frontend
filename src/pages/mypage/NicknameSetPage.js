@@ -84,10 +84,9 @@ const NicknameSetPage = () => {
       {!!nickname === false && (
         <AcceptBox>
           <input type="checkbox" onClick={handleCheckBox} />
-          <Text width="auto" margin_left="5px">
-            회원가입 시
+          <Text width="auto" margin="0 0 0.3em 0.4em">
+            회원가입 시{' '}
             <a href="https://www.notion.so/3315a2035ee74966ad28c84695fa2161">
-              {' '}
               이용약관
             </a>
             에 동의합니다
@@ -100,22 +99,17 @@ const NicknameSetPage = () => {
 };
 
 const Wrapper = styled.div`
-  width: 623px;
   ${({ theme }) => theme.verticalCenter};
   flex-direction: column;
-  margin: 110px auto 0 auto;
+  margin: 6em auto 0 auto;
 `;
-
 const AcceptBox = styled.div`
-  width: 500px;
-  height: auto;
-  display: flex;
+  ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-
+  margin-bottom: 2em;
   a {
     color: ${({ theme }) => theme.colors.purple};
   }
 `;
+
 export default NicknameSetPage;
