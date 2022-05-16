@@ -9,10 +9,10 @@ const LongPostBox = ({ postInfo }) => {
   return (
     <Container onClick={clickPost}>
       <TextContainer>
-        <Wrapper>
+        <div>
           <Title>{postInfo.title}</Title>
           <Content>{postInfo.content}</Content>
-        </Wrapper>
+        </div>
         <Nickname>{postInfo.nickname}</Nickname>
       </TextContainer>
       <Image src={postInfo.img} />
@@ -30,7 +30,7 @@ const Container = styled.div`
   margin-bottom: 1rem;
   padding: 1em 1.5em;
   cursor: pointer;
-  box-shadow: 0.2em 0.2em 0.2em 0.2em ${({ theme }) => theme.colors.lightGray};
+  box-shadow: 0 0 0.7em #dedede;
 `;
 const TextContainer = styled.div`
   display: flex;
@@ -44,8 +44,8 @@ const TextContainer = styled.div`
   }
   @media ${({ theme }) => theme.device.mobile} {
     width: 60%;
+  }
 `;
-const Wrapper = styled.div``;
 const Title = styled.div`
   width: 100%;
   margin-bottom: 0.5em;

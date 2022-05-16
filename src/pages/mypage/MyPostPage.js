@@ -41,7 +41,7 @@ const MyPostPage = () => {
 };
 
 const Container = styled.div`
-  margin: 90px auto 0 auto;
-  max-width: 1000px;
+  margin: 5em auto 0 auto;
+  width: 80vw;
 `;
 export default MyPostPage;
