@@ -14,14 +14,13 @@ const PostDetail = (props) => {
 };
 
 const Container = styled.div`
-  width: 1000px;
-  margin-top: 20px;
+  margin-top: 1em;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 `;
 const Image = styled.img`
   max-width: 60%;
   height: auto;
-  margin: 20px 0;
+  margin: 1em 0;
 `;
 export default PostDetail;

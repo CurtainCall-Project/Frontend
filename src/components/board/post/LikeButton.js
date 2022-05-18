@@ -14,11 +14,11 @@ const LikeButton = (props) => {
 };
 
 const Button = styled.div`
-  width: 65px;
-  height: 65px;
-  margin-right: 30px;
+  width: 4em;
+  height: 4em;
+  margin-right: 2em;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
-  border-radius: 35px;
+  border-radius: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,10 +31,10 @@ const Button = styled.div`
 `;
 
 const HeartIconWrapper = styled(HeartIcon)`
-  margin-top: 4px;
+  margin-top: 0.25em;
 `;
 const LikeCount = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: 1em;
   text-align: center;
 `;
 export default LikeButton;

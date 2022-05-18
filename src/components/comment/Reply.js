@@ -14,27 +14,27 @@ const Reply = (props) => {
   return (
     <ReplyBox>
       <ProfileImg src={profileImage}></ProfileImg>
-      <Grid display="block" margin="5px 0">
+      <Grid display="block">
         <Text width="auto" margin_bottom="5px">
           {props.reply.nickname}
         </Text>
         {props.reply.secret &&
           (props.user === props.nickname ? (
-            <Text font_weight="regular" margin_bottom="5px">
+            <Text font_weight="regular" margin_bottom="0.25em">
               {props.reply.replyContent}
             </Text>
           ) : props.comment.id === props.reply.parentReply &&
             props.user === props.comment.nickname ? (
-            <Text font_weight="regular" margin_bottom="5px">
+            <Text font_weight="regular" margin_bottom="0.25em">
               {props.reply.replyContent}
             </Text>
           ) : (
-            <Text font_weight="regular" margin_bottom="5px">
+            <Text font_weight="regular" margin_bottom="0.25em">
               비밀 댓글입니다.
             </Text>
           ))}
         {!props.reply.secret && (
-          <Text font_weight="regular" margin_bottom="5px">
+          <Text font_weight="regular" margin_bottom="0.25em">
             {props.reply.replyContent}
           </Text>
         )}
@@ -49,12 +49,13 @@ const Reply = (props) => {
 };
 
 const ReplyBox = styled.div`
-  width: 980px;
-  float: right;
+  box-sizing: border-box;
+  width: 100%;
   border-radius: 5px;
   background-color: #e5e0f0;
   display: flex;
   margin-bottom: 10px;
+  padding: 0.4em 0.6em;
 `;
 
 const ProfileImg = styled.img`
@@ -62,7 +63,11 @@ const ProfileImg = styled.img`
   height: 20px;
   border-radius: 11px;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
-  margin: 9px 10px 0 7px;
+  margin: 0.25em 0.5em 0 0;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 export default Reply;

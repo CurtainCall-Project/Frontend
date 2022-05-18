@@ -22,7 +22,7 @@ const Text = styled.div`
   box-sizing: border-box;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
   font-size: ${(props) =>
-    props.font_size ? `${props.font_size / 16}rem` : '1em'};
+    props.font_size ? `${props.font_size / 16}em` : '1em'};
   font-weight: ${(props) =>
     props.font_weight ? `${props.font_weight}` : 'bold'};
   color: ${(props) =>
@@ -32,7 +32,6 @@ const Text = styled.div`
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
   ${(props) =>
     props.margin_bottom ? `margin-bottom ${props.margin_bottom}` : ''};
-
   ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};

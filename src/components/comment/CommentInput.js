@@ -8,68 +8,82 @@ const CommentInput = (props) => {
   return (
     <Container width={props.width}>
       <InputBox
-        width={props.width}
         placeholder="댓글 남기기"
         value={props.newComment}
         onChange={props.handleComment}
       />
-      {(props.boardType === 'rent' || props.boardType === 'sell') && (
-        <SecretBox
-          width={props.width}
-          secret={props.secret}
-          onClick={props.clickSecret}>
-          {props.secret ? <ActiveCheckIcon /> : <CheckIcon />}
-          <Name>비밀</Name>
-        </SecretBox>
-      )}
+      <Wrapper>
+        {(props.boardType === 'rent' || props.boardType === 'sell') && (
+          <SecretBox
+            width={props.width}
+            secret={props.secret}
+            onClick={props.clickSecret}>
+            {props.secret ? <ActiveCheckIcon /> : <CheckIcon />}
+            <Name>비밀</Name>
+          </SecretBox>
+        )}
 
-      <EnrollButton
-        type="button"
-        width="60px"
-        height="30px"
-        onClick={props.clickSubmitButton}>
-        등록
-      </EnrollButton>
+        <Button
+          type="button"
+          width="4em"
+          height="2em"
+          onClick={props.clickSubmitButton}>
+          등록
+        </Button>
+      </Wrapper>
     </Container>
   );
 };
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: ${(props) => (props.width ? `${props.width}` : '1000px')};
-  height: 35px;
+  width: 100%;
+  height: 2.5em;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
   overflow: hidden;
   font-size: ${({ theme }) => theme.base};
   ${({ theme }) => theme.verticalCenter};
-  position: relative;
+  justify-content: space-between;
+  padding: 0 0.4em;
+`;
+const Wrapper = styled.div`
+  ${({ theme }) => theme.verticalCenter};
 `;
 const InputBox = styled.input`
-  width: ${(props) => (props.width ? '835px' : '855px')};
-  height: 33px;
+  width: 75%;
+  height: 2em;
   border: none;
   outline: none;
-  margin-right: 10px;
-  padding-left: 5px;
   font-size: ${({ theme }) => theme.fontSize.sm};
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 70%;
+    font-size: ${({ theme }) => theme.fontSize.xs};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 60%;
+    font-size: ${({ theme }) => theme.fontSize.xxs};
+  }
 `;
 
 const SecretBox = styled.div`
+  ${({ theme }) => theme.verticalCenter};
   cursor: pointer;
-  width: 7%;
   color: ${(props) => (props.secret ? '#6166b3' : '#bbbbbb')};
   text-align: center;
-  ${({ theme }) => theme.verticalCenter}
+  margin-right: 3px;
+  height: 33px;
 `;
 
 const Name = styled.div`
-  margin-left: 6px;
-  margin-top: 4px;
-  text-align: center;
-`;
-const EnrollButton = styled(Button)`
-  position: absolute;
-  right: 3px;
+  margin-left: 0.4em;
+  margin-top: 0.1em;
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.xxs};
+  }
 `;
 export default CommentInput;

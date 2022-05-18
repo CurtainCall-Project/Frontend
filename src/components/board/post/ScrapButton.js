@@ -14,10 +14,10 @@ const ScrapButton = (props) => {
 };
 
 const Button = styled.div`
-  width: 65px;
-  height: 65px;
+  width: 4em;
+  height: 4em;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
-  border-radius: 35px;
+  border-radius: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,11 +30,11 @@ const Button = styled.div`
 `;
 
 const ScrapIconWrapper = styled(ScrapIcon)`
-  margin-top: 3px;
-  margin-bottom: 4px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 `;
 const ScrapCount = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: 1em;
   text-align: center;
 `;
 export default ScrapButton;
