@@ -11,6 +11,8 @@ const Grid = styled.div`
   flex-direction: ${(props) => (props.flex_direction ? 'column' : 'row')};
   justify-content: ${(props) =>
     props.justify_content ? props.justify_content : 'flex-start'};
+  ${(props) => (props.line_height ? `line-height: ${props.line_height};` : '')};
+
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')};
   ${(props) => (props.margin_left ? `margin: ${props.margin_left};` : '')};
   align-items: ${(props) =>
