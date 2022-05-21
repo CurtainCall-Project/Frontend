@@ -161,8 +161,10 @@ const ReviewWritePage = (props) => {
 
 const Wrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
+  width: 80vw;
+  max-width: 1000px;
   justify-content: center;
   flex-direction: column;
-  margin: 60px auto 0 auto;
+  margin: 4em auto 0 auto;
 `;
 export default ReviewWritePage;

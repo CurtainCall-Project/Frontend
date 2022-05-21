@@ -21,7 +21,11 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
         </div>
       </MusicalWrapper>
       <ContentWrapper>
-        <Grid flex_direction="column" width="15%" line_height="1.5em">
+        <Grid
+          flex_direction="column"
+          width="auto"
+          line_height="1.5em"
+          margin="0 1em 0 0">
           <Text width="auto">장소</Text>
           <Text width="auto">관람일</Text>
           <Text width="auto">캐스팅</Text>
@@ -53,6 +57,7 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
 };
 
 const Container = styled.div`
+  width: 100%;
   box-sizing: border-box;
   overflow: auto;
   border: 1px solid;

@@ -46,11 +46,11 @@ const Text = styled.div`
 const Input = styled.input`
   box-sizing: border-box;
   width: ${(props) => (props.width ? `${props.width}` : '100%')};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  height: 30px;
+  font-size: 1em;
+  height: 2em;
   border: none;
   outline: none;
-  padding-left: 10px;
+  padding-left: 1em;
   border-bottom: 1px solid;
 `;
 
@@ -60,22 +60,22 @@ const InputBox = styled.textarea`
   display: block;
   width: 100%;
   height: ${(props) => (props.height ? `${props.height}` : '285px')};
-  font-size: ${({ theme }) => theme.fontSize.base};
+  font-size: 1em;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
-  border-radius: 10px;
+  border-radius: 0.5em;
   padding-left: 10px;
   padding-top: 10px;
-  margin-top: 15px;
+  margin-top: 1em;
   outline: none;
   overflow: auto;
   resize: none;
   &&::-webkit-scrollbar {
-    width: 6px;
+    width: 0.4em;
     border-radius: 6px;
   }
   &&::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: gray;
+    background-color: ${({ theme }) => theme.colors.borderGray};
   }
 `;
 
@@ -94,8 +94,8 @@ const Button = styled.button`
 
 // 이미지(Image) 최소단위 컴포넌트
 const Image = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 11em;
+  height: 11em;
   border-radius: 10px;
 `;
 
