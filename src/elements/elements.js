@@ -38,6 +38,7 @@ const Text = styled.div`
   padding-top: ${(props) =>
     props.padding_top ? `${props.padding_top}` : '7px'};
   white-space: pre-wrap;
+  ${(props) => (props.float ? `float: ${props.float};` : '')}
   ${(props) => (props.line_height ? `line-height: ${props.line_height};` : '')}
   ${(props) => (props.text_align ? `text-align: ${props.text_align};` : '')}
 `;
@@ -59,7 +60,7 @@ const InputBox = styled.textarea`
   box-sizing: border-box;
   display: block;
   width: 100%;
-  height: ${(props) => (props.height ? `${props.height}` : '285px')};
+  height: ${(props) => (props.height ? `${props.height}` : '17em')};
   font-size: 1em;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 0.5em;
