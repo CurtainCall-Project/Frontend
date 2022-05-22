@@ -32,13 +32,13 @@ const PostWrite = (props) => {
   const onClick = (e) => hiddenFileInput.current.click();
   return (
     <FormWrapper>
-      <Grid margin="0 0 15px ">
-        <Text font_weight="regular" color="gray" line_height="25px">
+      <Grid margin="0 0 1em">
+        <Text font_weight="regular" color="gray">
           * 필수 입력 항목을 작성해야 게시글 등록이 가능합니다. (필수 입력 항목:
           게시판 선택, 제목, 내용)
         </Text>
       </Grid>
-      <Grid>
+      <TitleWrapper>
         <SelectWrapper>
           <SelectBox onClick={props.clickSelectBox} selectBox={props.selectBox}>
             <SelectedName>
@@ -60,17 +60,16 @@ const PostWrite = (props) => {
             </li>
           </OptionBox>
         </SelectWrapper>
-
-        <Grid margin="0 0 0 35px">
-          <Text width="7%" type="label">
+        <Grid>
+          <Text width="10%" margin="0 0.2em 0 0 ">
             제목
           </Text>
           <Input
             placeholder="제목을 입력해주세요"
             onChange={props.changeTitle}></Input>
         </Grid>
-      </Grid>
-      <Grid flex_direction="column" margin="45px 0">
+      </TitleWrapper>
+      <Grid flex_direction="column" margin="2em 0">
         <Text type="label">내용</Text>
         <InputBox
           placeholder="내용을 입력해주세요"
@@ -86,7 +85,7 @@ const PostWrite = (props) => {
           style={{ display: 'none' }}
           onChange={props.selectFiles}
         />
-        <Text margin_left="10px" color="gray">
+        <Text margin_left="10px" color="gray" font_size="13">
           * 사진은 최대 8장까지 첨부 가능합니다.
         </Text>
         <Button onClick={props.onSubmit}>등록</Button>
@@ -98,8 +97,8 @@ const PostWrite = (props) => {
 
 const FormWrapper = styled.form`
   box-sizing: border-box;
-  width: 1000px;
-  height: 70%;
+  width: 80vw;
+  max-width: 1000px;
   overflow: auto;
   border: 1px solid;
   border-radius: 10px;
@@ -107,23 +106,38 @@ const FormWrapper = styled.form`
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  margin: 70px auto 0 auto;
-  padding: 37px 65px;
+  margin: 4em auto 0 auto;
+  padding: 2em 3em;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 85vw;
+    margin-top: 2em;
+    border: none;
+    padding: 0;
+  }
+`;
+const TitleWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  @media ${({ theme }) => theme.device.tablet} {
+    flex-direction: column;
+  }
 `;
 const SelectWrapper = styled.div`
   position: relative;
-  height: 35px;
+  height: 2em;
+  margin-right: 2em;
+  @media ${({ theme }) => theme.device.tablet} {
+    margin-bottom: 1em;
+  }
 `;
 const SelectBox = styled.div`
-  width: 120px;
-  height: 35px;
-  background-color: ${({ theme }) => theme.colors.purple};
-  color: ${({ theme }) => theme.colors.white};
-  border-radius: ${(props) => (props.selectBox ? '10px 10px 0 0 ' : '10px')};
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  flex-wrap: wrap;
-  text-align: center;
+  width: 8em;
+  height: 2em;
+  background-color: ${({ theme }) => theme.colors.purple};
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: ${(props) => (props.selectBox ? '9px 9px 0 0 ' : '9px')};
   cursor: pointer;
 `;
 const SelectedName = styled.div`
@@ -137,7 +151,7 @@ const Name = styled.div`
   margin-right: 5px;
 `;
 const OptionBox = styled.ul`
-  width: 120px;
+  width: 8em;
   border-radius: 0 0 10px 10px;
   background-color: ${({ theme }) => theme.colors.purple};
   postion: absolute;
@@ -146,8 +160,8 @@ const OptionBox = styled.ul`
   ${(props) => props.selectBox || 'display: none'};
 
   li {
-    width: 120px;
-    height: 30px;
+    width: 8em;
+    height: 2em;
     color: #fff;
     ${({ theme }) => theme.verticalCenter};
     justify-content: center;
@@ -157,7 +171,7 @@ const OptionBox = styled.ul`
     }
   }
   li:last-child {
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 9px 9px;
   }
 }
 `;
@@ -171,13 +185,13 @@ const Images = styled.div`
 `;
 const ImageWrapper = styled.div`
   position: relative;
-  margin-right: 20px;
-  margin-top: 20px;
+  margin-right: 1em;
+  margin-top: 1em;
 `;
 const DeleteButtonWrapper = styled(DeleteButton)`
   position: absolute;
-  right: -13px;
-  top: -12px;
+  right: -0.8em;
+  top: -0.8em;
   cursor: pointer;
 `;
 

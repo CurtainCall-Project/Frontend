@@ -129,11 +129,12 @@ const FormWrapper = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   margin: 4em auto 0 auto;
-  padding: 2em 4em;
+  padding: 2em 3em;
   @media ${({ theme }) => theme.device.mobile} {
+    width: 85vw;
     margin-top: 2em;
     border: none;
-    padding: 2em 1em;
+    padding: 0;
   }
 `;
 const Wrapper = styled.div`
@@ -161,27 +162,27 @@ const DeliveryButton = styled.button`
   box-sizing: border-box;
   border: none;
   border-radius: 2em;
-  margin-left: 0.25em;
+  margin-left: 1em;
   width: 6em;
-  height: 2em;
+  height: 2.2em;
   cursor: pointer;
   font-size: 1em;
   background-color: ${(props) => (props.delivery ? '#6166b3' : '#b0b0b0')};
   color: ${({ theme }) => theme.colors.white};
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-left: 0;
+  }
 `;
-
 const Images = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
 `;
-
 const ImageWrapper = styled.div`
   position: relative;
   margin-right: 1em;
   margin-top: 1em;
 `;
-
 const DeleteButtonWrapper = styled(DeleteButton)`
   position: absolute;
   right: -0.8em;
