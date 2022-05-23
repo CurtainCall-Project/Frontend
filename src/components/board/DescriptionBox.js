@@ -80,13 +80,17 @@ const Box = styled.div`
   margin: 50px auto 0 auto;
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors.darkGray};
-  width: 1000px;
+  width: 70vw;
+  max-width: 1000px;
   height: auto;
-  .colors.white-space: pre-wrap;
+  white-space: pre-wrap;
 
   span {
-    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-size: 0.7em;
     color: ${({ theme }) => theme.colors.borderGray};
+  }
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75vw;
   }
 `;
 
