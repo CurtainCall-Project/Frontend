@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import history from '../../history';
@@ -7,6 +7,7 @@ import Logobar from '../../components/common/Logobar';
 import Menubar from '../../components/common/Menubar';
 import Sidebar from '../../components/common/Sidebar';
 import { logout } from '../../modules/user';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,11 @@ const Header = () => {
   // fabar icon 클릭 이벤트에 따른 사이드바 여부
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  const location = useLocation();
+
+  useEffect(() => {
+    setSidebar(false);
+  }, [location]);
 
   // 엔터 키 눌렀을 때 뮤지컬 검색 수행
   const handleEnterKey = (e) => {
@@ -53,6 +59,7 @@ const Header = () => {
       <Sidebar
         userId={userId}
         sidebar={sidebar}
+        setSidebar={setSidebar}
         showSidebar={showSidebar}
         handleEnterKey={handleEnterKey}
         clickSearchBtn={clickSearchBtn}

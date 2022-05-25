@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
 import { FaTimes } from 'react-icons/fa';
@@ -8,13 +8,30 @@ import SnsButton from './SnsButton';
 const Sidebar = ({
   userId,
   sidebar,
+  setSidebar,
   showSidebar,
   handleEnterKey,
   clickSearchBtn,
   changeInput,
 }) => {
+  const side = useRef();
+  // 사이드바 외부 클릭시 닫히는 함수
+  const handleClose = async (e) => {
+    let sideArea = side.current;
+    let sideCildren = side.current.contains(e.target);
+    if (sidebar && (!sideArea || !sideCildren)) {
+      await setSidebar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleClose);
+    return () => {
+      window.removeEventListener('click', handleClose);
+    };
+  });
   return (
-    <Container sidebar={sidebar}>
+    <Container sidebar={sidebar} ref={side}>
       <ButtonWrapper>
         <HideButton onClick={showSidebar} />
       </ButtonWrapper>
