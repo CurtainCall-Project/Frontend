@@ -54,6 +54,7 @@ const ProfileImg = styled.img`
     width: 1em;
     height: 1em;
     border-radius: 0.6em;
+    margin-top: 5px;
   }
 `;
 const DeleteButton = styled(Button)`

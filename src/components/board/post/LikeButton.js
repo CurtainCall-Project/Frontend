@@ -28,6 +28,11 @@ const Button = styled.div`
     transition: 0.2s;
   }
   ${(props) => props.like && `background-color: #fccadc`};
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 3em;
+    height: 3em;
+    margin-right: 1em;
+  }
 `;
 
 const HeartIconWrapper = styled(HeartIcon)`

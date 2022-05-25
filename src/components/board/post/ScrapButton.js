@@ -27,6 +27,11 @@ const Button = styled.div`
     transition: 0.2s;
   }
   ${(props) => props.scrap && `background-color: #dddcf0`};
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 3em;
+    height: 3em;
+    margin-right: 1em;
+  }
 `;
 
 const ScrapIconWrapper = styled(ScrapIcon)`

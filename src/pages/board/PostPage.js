@@ -214,6 +214,7 @@ const PostPage = (props) => {
 const Container = styled.div`
   margin: 5em auto 0 auto;
   width: 70vw;
+  max-width: 1000px;
   @media ${({ theme }) => theme.device.tablet} {
     margin-top: 2em;
     width: 80vw;
