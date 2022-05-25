@@ -12,7 +12,6 @@ import {
   NAVER_AUTH_URL,
   GOOGLE_AUTH_URL,
 } from '../../oauth/oauth';
-import GoogleLoginContainer from '../../pages/containers/GoogleLoginContainer';
 
 const SignInPage = () => {
   useEffect(() => {
@@ -36,7 +35,6 @@ const SignInPage = () => {
             <div className="buttonText">구글로 로그인</div>
           </GoogleButton>
         </a>
-        {/* <GoogleLoginContainer /> */}
       </Container>
     </>
   );
