@@ -22,7 +22,9 @@ const PerformanceBox = ({ result }) => {
 
   return (
     <Container key={result.mt20id}>
-      <ImageBox src={result.poster} />
+      <div>
+        <ImageBox src={result.poster} />
+      </div>
       <InfoWrapper>
         <Text>{result.prfnm}</Text>
         <Text font_weight="regular">
@@ -41,20 +43,17 @@ const PerformanceBox = ({ result }) => {
 
 const Container = styled.div`
   ${({ theme }) => theme.verticalCenter};
-  width: 65vw;
+  width: 100%;
   height: auto;
   box-shadow: 0 0 0.5em #dedede;
   border-radius: 0.3em;
   box-sizing: border-box;
   margin-bottom: 20px;
   padding: 1em;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 70vw;
-  }
 `;
 const ImageBox = styled.img`
-  width: 6.3em;
-  height: 7.5em;
+  width: 6em;
+  height: 7em;
   object-fit: cover;
 `;
 const InfoWrapper = styled.div`

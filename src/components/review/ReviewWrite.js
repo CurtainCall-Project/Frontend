@@ -156,7 +156,7 @@ const Container = styled.div`
   margin-bottom: 1em;
   @media ${({ theme }) => theme.device.tablet} {
     flex-direction: column;
-    margin: 0 auto;
+    margin: 0 auto 1em auto;
     justify-content: flex-end;
     align-items: center;
   }

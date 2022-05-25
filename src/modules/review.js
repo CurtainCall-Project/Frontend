@@ -64,15 +64,6 @@ export const editReview =
     formData.append('content', content);
     formData.append('boardImgs', deletedImages);
     files.map((file) => formData.append('imgFiles', file));
-    // FormData의 key 확인
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
     axios
       .put(`${config.SERVER_URL}/review/${musicalId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

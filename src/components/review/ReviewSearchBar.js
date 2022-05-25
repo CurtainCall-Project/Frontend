@@ -24,12 +24,9 @@ const ReviewSearchBar = (props) => {
 const Container = styled.div`
   ${({ theme }) => theme.verticalCenter}
   border: 3px solid ${({ theme }) => theme.colors.purple};
-  width: 65vw;
+  width: 100%;
   height: 3.1em;
   margin: 1em 0;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 70vw;
-  }
 `;
 const TitleInput = styled.input`
   width: 95%;
@@ -39,6 +36,9 @@ const TitleInput = styled.input`
   border: none;
   outline: none;
   font-size: 1.2em;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 1em;
+  }
 `;
 const SearchButton = styled.div`
   ${({ theme }) => theme.verticalCenter};

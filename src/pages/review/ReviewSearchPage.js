@@ -4,7 +4,7 @@ import ReviewSearchBar from '../../components/review/ReviewSearchBar';
 import PerformanceBox from '../../components/review/PerformanceBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMusical } from '../../modules/review';
-import { Text } from '../../elements/elements';
+
 const ReviewSearchPage = () => {
   const dispatch = useDispatch();
   const searchButton = useRef();
@@ -97,7 +97,15 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
   flex-direction: column;
-  margin: 150px auto 0 auto;
+  margin: 9em auto 0 auto;
+  width: 65vw;
+  max-width: 1000px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75vw;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 80vw;
+  }
 `;
 const PageContainer = styled.div`
   ${({ theme }) => theme.verticalCenter};
