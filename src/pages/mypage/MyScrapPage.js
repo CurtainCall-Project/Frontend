@@ -43,5 +43,6 @@ const MyScrapPage = () => {
 const Container = styled.div`
   margin: 5em auto 0 auto;
   width: 80vw;
+  max-width: 1152px;
 `;
 export default MyScrapPage;

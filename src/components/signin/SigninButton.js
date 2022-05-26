@@ -21,18 +21,16 @@ const LoginButton = styled.div`
   justify-content: center;
   width: 350px;
   height: 100px;
-  box-shadow: 5px 5px 15px #c6c6c6;
+  box-shadow: 4px 4px 13px #c6c6c6;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 2em;
   @media ${({ theme }) => theme.device.mobile} {
     width: 200px;
     height: 65px;
     box-shadow: 3px 3px 10px #c6c6c6;
-
     border-radius: 5px;
   }
 `;
-
 const ContentWrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
   width: 80%;

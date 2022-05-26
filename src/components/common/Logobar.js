@@ -24,10 +24,11 @@ const LogoLink = styled(Link)`
   margin: 0 auto;
 `;
 const LogoImage = styled(Logo)`
-  width: 250px;
+  width: 15em;
   height: 70.1px;
   margin: 0 auto;
   @media ${({ theme }) => theme.device.tablet} {
+    width: 10em;
     height: 38px;
   }
 `;

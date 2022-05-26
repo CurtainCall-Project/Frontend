@@ -30,10 +30,7 @@ const SignInPage = () => {
           <SigninButton logo={kakao_logo} text="카카오" />
         </a>
         <a href={`${config.SERVER_URL}/` + GOOGLE_AUTH_URL}>
-          <GoogleButton id="customBtn" className="customGPlusSignIn">
-            <img src={google_logo} alt="구글"></img>
-            <div className="buttonText">구글로 로그인</div>
-          </GoogleButton>
+          <SigninButton logo={google_logo} text="구글" />
         </a>
       </Container>
     </>
@@ -42,7 +39,7 @@ const SignInPage = () => {
 
 const Container = styled.div`
   width: 350px;
-  margin: 60px auto 20px auto;
+  margin: 50px auto 10px auto;
   display: flex;
   flex-direction: column;
   @media ${({ theme }) => theme.device.mobile} {
@@ -51,43 +48,9 @@ const Container = styled.div`
 `;
 const Title = styled.div`
   font-size: ${({ theme }) => theme.fontSize.lg};
-  padding: 10px;
   text-align: center;
   @media ${({ theme }) => theme.device.mobile} {
     font-size: ${({ theme }) => theme.fontSize.sm};
-  }
-`;
-const GoogleButton = styled.div`
-  ${({ theme }) => theme.verticalCenter};
-  width: 350px;
-  height: 100px;
-  box-shadow: 5px 5px 15px #c6c6c6;
-  border-radius: 10px;
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  margin-top: 30px;
-  cursor: pointer;
-
-  img {
-    margin-left: 53px;
-  }
-
-  div {
-    margin-left: 60px;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 200px;
-    height: 65px;
-    box-shadow: 3px 3px 10px #c6c6c6;
-    border-radius: 10px;
-    font-size: ${({ theme }) => theme.fontSize.sm};
-    img {
-      margin-left: 20px;
-      width: 2rem;
-    }
-
-    div {
-      margin-left: 50px;
-    }
   }
 `;
 export default SignInPage;
