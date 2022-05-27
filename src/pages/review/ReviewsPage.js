@@ -28,22 +28,22 @@ const ReviewsPage = () => {
   const myReviews = useSelector((state) => state.review.myReviews);
 
   return (
-    <Wrapper>
-      <Text width="45%" font_size="18px">
-        내가 쓴 후기
-      </Text>
+    <Container>
+      <Text margin="0 0 1rem 0">내가 쓴 후기</Text>
       {myReviews.length > 0 &&
         myReviews.map((review) => (
           <ReviewBox key={review.id} review={review} />
         ))}
-    </Wrapper>
+    </Container>
   );
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
+  max-width: 1256px;
+  width: 70vw;
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
   flex-direction: column;
-  margin: 60px auto 0 auto;
+  margin: 4em auto 0 auto;
 `;
 export default ReviewsPage;

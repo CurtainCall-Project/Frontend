@@ -69,7 +69,7 @@ const Comment = (props) => {
         <CommentBox key={props.comment.id}>
           <ProfileImg src={profileImage}></ProfileImg>
           <Grid display="block">
-            <Text width="8%" margin_bottom="5px">
+            <Text width="auto" margin_bottom="5px">
               {props.comment.nickname}
             </Text>
             {props.comment.secret &&
@@ -89,7 +89,7 @@ const Comment = (props) => {
               </Text>
             )}
             <Grid>
-              <Text font_weight="regular" width="19%">
+              <Text font_size="14" font_weight="regular" width="auto">
                 {registerDate}
               </Text>
               <ReplyButton onClick={clickReplyButton}>답글달기</ReplyButton>
@@ -99,36 +99,37 @@ const Comment = (props) => {
             </Grid>
           </Grid>
         </CommentBox>
-        <div>
-          {clicked ? (
-            <Grid margin="0 0 20px 0">
-              <CommentInput
-                width="980px"
-                newComment={newReply}
-                secret={replySecret}
-                clickSecret={clickReplySecret}
-                handleComment={handleReply}
-                clickSubmitButton={clickSubmitButton}
-                boardType={props.boardType}
-                parentReply={props.comment.id}
-              />
-            </Grid>
-          ) : null}
-        </div>
-        {props.replies.length > 0 && (
-          <>
-            {props.replies.map((reply) => (
-              <Reply
-                reply={reply}
-                key={reply.id}
-                replies={[]}
-                user={props.user}
-                nickname={props.nickname}
-                comment={props.comment}
-              />
-            ))}
-          </>
-        )}
+        <RepliesBox>
+          <div>
+            {clicked ? (
+              <Grid margin="0 0 1em 0">
+                <CommentInput
+                  newComment={newReply}
+                  secret={replySecret}
+                  clickSecret={clickReplySecret}
+                  handleComment={handleReply}
+                  clickSubmitButton={clickSubmitButton}
+                  boardType={props.boardType}
+                  parentReply={props.comment.id}
+                />
+              </Grid>
+            ) : null}
+          </div>
+          {props.replies.length > 0 && (
+            <>
+              {props.replies.map((reply) => (
+                <Reply
+                  reply={reply}
+                  key={reply.id}
+                  replies={[]}
+                  user={props.user}
+                  nickname={props.nickname}
+                  comment={props.comment}
+                />
+              ))}
+            </>
+          )}
+        </RepliesBox>
       </Container>
     </>
   );
@@ -141,31 +142,48 @@ const Container = styled.div`
   align-items: flex-end;
 `;
 const CommentBox = styled.div`
-  width: 999px;
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   margin-bottom: 10px;
+  padding: 0.4em 0.6em;
 `;
 const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 11px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
-  margin-right: 10px;
-  margin-top: 5px;
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  margin: 0.25em 0.5em 0 0;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 16px;
+    height: 16px;
+  }
 `;
 const ReplyButton = styled.button`
   box-sizing: border-box;
   border: none;
-  width: 70px;
+  width: 5em;
   background-color: #fff;
-  color: ${({ theme }) => theme.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.navSignInFontGray};
   font-weight: bold;
-  font-size: ${({ theme }) => theme.smallFontSize};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   margin-top: 4px;
   cursor: pointer;
   transition: 0.2s;
   &:hover {
-    color: ${({ theme }) => theme.mainBlue};
+    color: ${({ theme }) => theme.colors.purple};
+  }
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.xs};
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.xxs};
+  }
+`;
+const RepliesBox = styled.div`
+  width: 96%;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 92%;
   }
 `;
 export default Comment;

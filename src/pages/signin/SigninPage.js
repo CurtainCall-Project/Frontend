@@ -12,7 +12,6 @@ import {
   NAVER_AUTH_URL,
   GOOGLE_AUTH_URL,
 } from '../../oauth/oauth';
-import GoogleLoginContainer from '../../pages/containers/GoogleLoginContainer';
 
 const SignInPage = () => {
   useEffect(() => {
@@ -31,12 +30,8 @@ const SignInPage = () => {
           <SigninButton logo={kakao_logo} text="카카오" />
         </a>
         <a href={`${config.SERVER_URL}/` + GOOGLE_AUTH_URL}>
-          <GoogleButton id="customBtn" className="customGPlusSignIn">
-            <img src={google_logo} alt="구글"></img>
-            <div className="buttonText">구글로 로그인</div>
-          </GoogleButton>
+          <SigninButton logo={google_logo} text="구글" />
         </a>
-        {/* <GoogleLoginContainer /> */}
       </Container>
     </>
   );
@@ -44,29 +39,18 @@ const SignInPage = () => {
 
 const Container = styled.div`
   width: 350px;
-  margin: 60px auto 0 auto;
+  margin: 50px auto 10px auto;
+  display: flex;
+  flex-direction: column;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 200px;
+  }
 `;
 const Title = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.signinFontSize};
-  padding: 10px;
+  font-size: ${({ theme }) => theme.fontSize.lg};
   text-align: center;
-`;
-const GoogleButton = styled.div`
-  ${({ theme }) => theme.verticalCenter};
-  width: 350px;
-  height: 100px;
-  box-shadow: 5px 5px 15px #c6c6c6;
-  border-radius: 10px;
-  font-size: ${({ theme }) => theme.fontSize.signinFontSize};
-  margin-top: 30px;
-  cursor: pointer;
-
-  img {
-    margin-left: 53px;
-  }
-
-  div {
-    margin-left: 60px;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.sm};
   }
 `;
 export default SignInPage;

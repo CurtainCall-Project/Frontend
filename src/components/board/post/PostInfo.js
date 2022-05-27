@@ -6,22 +6,24 @@ import { Grid, Text, Button } from '../../../elements/elements';
 const PostInfo = ({ post, user, deleteNowPost }) => {
   return (
     <Container>
-      <Text font_size="24px">{post.title}</Text>
-      <Grid margin="20px 0 10px 0">
-        {post.profileImg ? (
-          <ProfileImg src={post.profileImg}></ProfileImg>
-        ) : (
-          <ProfileImg src={basicProfile}></ProfileImg>
-        )}
-        <Text font_weight="regular" width="auto" margin="0 15px 0 5px">
-          {post.nickname}
-        </Text>
-        <Text font_weight="regular" width="18%">
-          {new Date(post.registerDate).toLocaleString('ko-KR')}
-        </Text>
-        <Text font_weight="regular" width="auto">
-          조회수 {post.views + 1}
-        </Text>
+      <Text font_size="18">{post.title}</Text>
+      <Grid margin="1em 0 1em 0" justify_content="space-between">
+        <LeftContainer>
+          {post.profileImg ? (
+            <ProfileImg src={post.profileImg}></ProfileImg>
+          ) : (
+            <ProfileImg src={basicProfile}></ProfileImg>
+          )}
+          <Text font_weight="regular" width="auto" margin="0 1em 0 0.25em">
+            {post.nickname}
+          </Text>
+          <Text font_weight="regular" width="auto" margin="0 1em 0 0">
+            {new Date(post.registerDate).toLocaleString('ko-KR')}
+          </Text>
+          <Text font_weight="regular" width="auto">
+            조회수 {post.views + 1}
+          </Text>
+        </LeftContainer>
         {user === post.nickname && (
           <DeleteButton type="button" onClick={deleteNowPost}>
             삭제
@@ -33,23 +35,30 @@ const PostInfo = ({ post, user, deleteNowPost }) => {
 };
 
 const Container = styled.div`
-  width: 1000px;
-  border-bottom: 1px solid ${({ theme }) => theme.borderGray};
-  position: relative;
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderGray};
 `;
-
-// 프로필 이미지 나중에 img 태그로 수정할 것
+const LeftContainer = styled.div`
+  ${({ theme }) => theme.verticalCenter};
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 10px;
+  }
+`;
 const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 10px;
+  border: 0.5px solid;
   background-position: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 1em;
+    height: 1em;
+    border-radius: 0.6em;
+    margin-top: 5px;
+  }
 `;
 const DeleteButton = styled(Button)`
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  background-color: ${({ theme }) => theme.darkGray};
+  background-color: ${({ theme }) => theme.colors.darkGray};
   color: #000;
 `;
 export default PostInfo;

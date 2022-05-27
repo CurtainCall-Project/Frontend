@@ -39,18 +39,18 @@ const PaginationWrapper = styled.div`
     cursor: pointer;
 
     &:hover a {
-      color: ${({ theme }) => theme.mainBlue};
+      color: ${({ theme }) => theme.colors.purple};
     }
   }
 
   ul.pagination li a {
     text-decoration: none;
     color: #000;
-    font-size: ${({ theme }) => theme.smallFontSize};
+    font-size: ${({ theme }) => theme.fontSize.sm};
     font-weight: bold;
   }
   ul.pagination li.active {
-    background-color: ${({ theme }) => theme.purple};
+    background-color: ${({ theme }) => theme.colors.lightPurple};
     border-radius: 4px;
   }
   ul.pagination li.active a {

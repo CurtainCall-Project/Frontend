@@ -25,23 +25,33 @@ const Container = styled.div`
   height: 69px;
   position: absolute;
   bottom: 0px;
-  background-color: ${({ theme }) => theme.darkGray};
+  background-color: ${({ theme }) => theme.colors.darkGray};
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 40px;
+  }
 `;
 const TextContainer = styled.div`
-  width: 500px;
+  width: auto;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   margin-right: 30px;
   a {
-    font-size: ${({ theme }) => theme.middleFontSize};
+    padding-right: 1rem;
     &:hover {
       text-decoration: underline;
     }
   }
-  a:last-child {
-    text-decoration: none;
+  @media ${({ theme }) => theme.device.mobile} {
+    line-height: 1rem;
+    justify-content: flex-end;
+    a:nth-child(3) {
+      padding-right: 0;
+    }
+    span {
+      font-size: ${({ theme }) => theme.fontSize.xxs};
+    }
   }
 `;
 

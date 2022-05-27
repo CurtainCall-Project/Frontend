@@ -50,10 +50,10 @@ const MyPage = () => {
         handleFileChange={handleFileChange}
       />
       <PostContainer>
-        <Grid margin="0 0 15px 0">
-          <Text>내가 쓴 글</Text>
+        <Grid margin="0 0 15px 0" justify_content="space-between">
+          <Text width="auto">내가 쓴 글</Text>
           <TextWrapper>
-            <Text font_size="14px" onClick={clickMorePostBtn}>
+            <Text font_size="1em" width="auto" onClick={clickMorePostBtn}>
               더보기 {'>'}
             </Text>
           </TextWrapper>
@@ -63,10 +63,10 @@ const MyPage = () => {
         ) : (
           <Text font_weight="regular">아직 작성한 글이 없어요</Text>
         )}
-        <Grid margin="40px 0 15px 0">
-          <Text>스크랩</Text>
+        <Grid margin="2em 0 1em 0" justify_content="space-between">
+          <Text width="auto">스크랩</Text>
           <TextWrapper>
-            <Text font_size="14px" onClick={clickMoreScrapBtn}>
+            <Text font_size="1em" width="auto" onClick={clickMoreScrapBtn}>
               더보기 {'>'}
             </Text>
           </TextWrapper>
@@ -82,17 +82,22 @@ const MyPage = () => {
 };
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 90px auto 0 auto;
+  justify-content: center;
+  margin: 5em auto 0 auto;
+  gap: 6em;
+  padding: 0 1em;
   max-width: 1256px;
+  flex-wrap: wrap;
 `;
 const PostContainer = styled.div`
-  width: 730px;
+  max-width: 730px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 80vw;
+  }
 `;
 const TextWrapper = styled.div`
   cursor: pointer;
-  width: 8%;
 `;
 export default MyPage;

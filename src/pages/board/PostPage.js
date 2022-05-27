@@ -182,10 +182,14 @@ const PostPage = (props) => {
       </PostContainer>
       <CommentContainer>
         <Grid margin="15px 0">
-          <Text width="4%">댓글</Text>
-          <Text font_weight="regular">{comments.length}</Text>
+          <Text width="auto" margin="0 10px 0 0">
+            댓글
+          </Text>
+          <Text width="auto" font_weight="regular">
+            {comments.length}
+          </Text>
         </Grid>
-        <Grid margin="0 0 25px 0">
+        <Grid margin="0 0 1em 0">
           <CommentInput
             newComment={newComment}
             secret={secret}
@@ -208,14 +212,19 @@ const PostPage = (props) => {
 };
 
 const Container = styled.div`
+  margin: 5em auto 0 auto;
+  width: 70vw;
   max-width: 1000px;
-  margin: 90px auto 0 auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    margin-top: 2em;
+    width: 80vw;
+  }
 `;
 
 const PostContainer = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 1em;
 `;
 const CommentContainer = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.borderGray};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderGray};
 `;
 export default PostPage;

@@ -9,31 +9,36 @@ const MarketPostDetail = (props) => {
   };
   return (
     <Container>
-      <Grid>
-        <Text width="7%">기종</Text>
-        <Text width="30%" font_weight="regular">
-          {props.post.product}
-        </Text>
-        <Text width="7%">가격</Text>
-        <Text width="30%" font_weight="regular">
-          {priceWithCommas(props.post.price)}원
-        </Text>
-      </Grid>
-      <Grid margin="15px 0">
+      <Wrapper>
+        <Grid width="40%">
+          <Text width="20%">기종</Text>
+          <Text width="auto" font_weight="regular">
+            {props.post.product}
+          </Text>
+        </Grid>
+        <Grid width="40%">
+          <Text width="20%">가격</Text>
+          <Text width="auto" font_weight="regular">
+            {priceWithCommas(props.post.price)}원
+          </Text>
+        </Grid>
+      </Wrapper>
+      <Wrapper>
         {props.boardType === 'rent' && (
-          <>
-            <Text width="7%">대여기간</Text>
-            <Text width="30%" font_weight="regular">
+          <Grid width="40%">
+            <Text width="20%">대여기간</Text>
+            <Text width="auto" font_weight="regular">
               {props.post.term}
             </Text>
-          </>
+          </Grid>
         )}
-
-        <Text width="7%">거래장소</Text>
-        <Text width="30%" font_weight="regular">
-          {props.post.place} {props.post.delivery ? '/ 택배가능' : null}
-        </Text>
-      </Grid>
+        <Grid width="40%">
+          <Text width="20%">거래장소</Text>
+          <Text width="auto" font_weight="regular">
+            {props.post.place} {props.post.delivery ? '/ 택배가능' : null}
+          </Text>
+        </Grid>
+      </Wrapper>
       <Text font_weight="regular">{props.post.content}</Text>
       {props.post.boardImgs.map((image) => (
         <Image src={image} />
@@ -43,14 +48,24 @@ const MarketPostDetail = (props) => {
 };
 
 const Container = styled.div`
-  width: 1000px;
-  margin-top: 20px;
+  margin-top: 1em;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  margin-bottom: 1em;
+  gap: 1em;
+  @media only screen and (max-width: 1000px) {
+    flex-direction: column;
+    & > div {
+      width: auto;
+    }
+  }
 `;
 const Image = styled.img`
   max-width: 60%;
   height: auto;
-  margin: 20px 0;
+  margin: 1em 0;
 `;
 export default MarketPostDetail;

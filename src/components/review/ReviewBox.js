@@ -15,8 +15,10 @@ const ReviewBox = ({ review }) => {
       <ImageBox src={review.musical.poster} />
       <InfoWrapper>
         <Text>{review.musical.prfnm}</Text>
-        <StarIcon />
-        <MusicalRating>{review.rating}</MusicalRating>
+        <Wrapper>
+          <StarIcon />
+          <MusicalRating>{review.rating}</MusicalRating>
+        </Wrapper>
         <h1>{review.viewingDate}</h1>
         <h1>{review.casting}</h1>
       </InfoWrapper>
@@ -26,28 +28,31 @@ const ReviewBox = ({ review }) => {
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: 900px;
-  height: 153px;
+  width: 100%;
+  height: auto;
+  padding: 1em 1.5em;
   border-radius: 5px;
-  box-shadow: 5px 5px 5px #dedede;
-  ${({ theme }) => theme.verticalCenter}
-  position: relative;
-  margin: 15px 0;
+  box-shadow: 0 0 0.7em #dedede;
+  display: flex;
+  margin-bottom: 1.5em;
   cursor: pointer;
 `;
 const ImageBox = styled.img`
-  width: 100px;
-  height: 122px;
-  margin-left: 20px;
+  width: 6em;
+  height: 8em;
+  object-fit: cover;
 `;
 const InfoWrapper = styled.div`
-  width: 70%;
-  height: 122px;
-  line-height: 28px;
-  margin-left: 20px;
+  height: auto;
+  line-height: 1.8em;
+  margin-left: 1em;
 `;
-const MusicalRating = styled.span`
-  font-size: ${({ theme }) => theme.middleFontSize};
-  padding-left: 5px;
+const Wrapper = styled.div`
+  ${({ theme }) => theme.verticalCenter};
+`;
+const MusicalRating = styled.div`
+  box-sizing: border-box;
+  padding-left: 0.25em;
+  padding-top: 0.25em;
 `;
 export default ReviewBox;

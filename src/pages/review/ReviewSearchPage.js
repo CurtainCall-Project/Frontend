@@ -4,7 +4,7 @@ import ReviewSearchBar from '../../components/review/ReviewSearchBar';
 import PerformanceBox from '../../components/review/PerformanceBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMusical } from '../../modules/review';
-import { Text } from '../../elements/elements';
+
 const ReviewSearchPage = () => {
   const dispatch = useDispatch();
   const searchButton = useRef();
@@ -85,7 +85,7 @@ const ReviewSearchPage = () => {
       {page > 0 && searchResult.length > 0 && (
         <PageContainer>
           <PageButton onClick={pageDown}>{'<'} 이전</PageButton>
-          <Text width="auto">{page}</Text>
+          <span>{page}</span>
           <PageButton onClick={pageUp}>다음 {'>'}</PageButton>
         </PageContainer>
       )}
@@ -97,30 +97,41 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
   flex-direction: column;
-  margin: 150px auto 0 auto;
+  margin: 9em auto 0 auto;
+  width: 65vw;
+  max-width: 1000px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75vw;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 80vw;
+  }
 `;
 const PageContainer = styled.div`
-  display: flex;
-  width: 220px;
-  height: 40px;
-  ${({ theme }) => theme.verticalCenter};
-  justify-content: space-between;
-`;
-const PageButton = styled.button`
-  border-radius: 8px;
-  border: none;
-  width: 80px;
-  height: 30px;
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
+  height: 2em;
+  & > span {
+    font-weight: bold;
+    width: 4em;
+    text-align: center;
+  }
+`;
+const PageButton = styled.button`
+  border-radius: 0.5em;
+  border: none;
+  width: 5em;
+  height: 2em;
+  ${({ theme }) => theme.verticalCenter};
+  justify-content: center;
+  font-size: 1em;
   font-weight: bold;
-  background-color: ${({ theme }) => theme.purple};
+  background-color: ${({ theme }) => theme.lightPurple};
   color: #434343;
   transition: 0.3s;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.mainBlue};
+    background-color: ${({ theme }) => theme.colors.purple};
     color: #fff;
   }
 `;

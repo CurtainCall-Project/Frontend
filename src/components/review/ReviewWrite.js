@@ -42,18 +42,14 @@ const ReviewWrite = (props) => {
 
   return (
     <FormWrapper>
-      <Grid margin="0 0 10px 0">
+      <Container>
         {props.nowMusical ? (
           <MusicalImage src={props.nowMusical.poster} />
         ) : (
           <MusicalImage src={props.reviewDetail.poster} />
         )}
-        <Grid
-          flex_direction="column"
-          justify_content="flex-end"
-          width="80%"
-          height="100%">
-          <Text width="70%">
+        <TitleWrapper>
+          <Text width="auto">
             {props.nowMusical
               ? props.nowMusical.prfnm
               : props.reviewDetail.musical}
@@ -62,50 +58,52 @@ const ReviewWrite = (props) => {
             <Rating
               onClick={props.handleRating}
               ratingValue={props.rating}
-              size={48}
+              size={36}
               allowHalfIcon></Rating>
           </StarContainer>
+        </TitleWrapper>
+      </Container>
+      <WriteContainer>
+        <Grid
+          flex_direction="column"
+          width="auto"
+          line_height="1.7em"
+          margin="0 1em 0 0">
+          <Text width="auto" margin="0 1em 0 0">
+            장소
+          </Text>
+          <Text width="auto">관람일</Text>
+          <Text width="auto">캐스팅</Text>
+          <Text>후기</Text>
         </Grid>
-      </Grid>
-      <Grid margin="0 0 10px 0">
-        <Text width="7%">장소</Text>
-        <TextLine>
-          {props.nowMusical
-            ? props.nowMusical.fcltynm
-            : props.reviewDetail.place}
-        </TextLine>
-        {/* <Input width="25%" placeholder={props.nowMusical.place} /> */}
-      </Grid>
-      <Grid margin="0 0 10px 0">
-        <Text width="7%">관람일</Text>
-        {/* <Input width="25%" /> */}
-        <DatePicker
-          locale={ko}
-          dateFormat="yyyy년 MM월 dd일"
-          selected={props.viewingDate}
-          onChange={(date) => props.setViewingDate(date)}
-          placeholderText="관람일을 선택해주세요"
-          customInput={<ExampleCustomInput />}
-        />
-      </Grid>
-      <Grid margin="0 0 10px 0">
-        <Text width="7%">캐스팅</Text>
-        <Input
-          width="30%"
-          placeholder="캐스팅을 입력하세요"
-          value={props.casting}
-          onChange={(e) => props.setCasting(e.target.value)}
-        />
-      </Grid>
-      <Grid flex_direction="column">
-        <Text>후기</Text>
-        <InputBox
-          height="130px"
-          placeholder="후기를 작성하세요"
-          onChange={(e) => props.setContent(e.target.value)}
-          defaultValue={props.content}></InputBox>
-      </Grid>
-      <Grid margin="20px 0 0 0">
+        <Grid flex_direction="column" width="auto" line_height="2.7em">
+          <TextLine>
+            {props.nowMusical
+              ? props.nowMusical.fcltynm
+              : props.reviewDetail.place}
+          </TextLine>
+          <DatePicker
+            locale={ko}
+            dateFormat="yyyy년 MM월 dd일"
+            selected={props.viewingDate}
+            onChange={(date) => props.setViewingDate(date)}
+            placeholderText="관람일을 선택해주세요"
+            customInput={<ExampleCustomInput />}
+          />
+          <Input
+            width="15em"
+            placeholder="캐스팅을 입력하세요"
+            value={props.casting}
+            onChange={(e) => props.setCasting(e.target.value)}
+          />
+        </Grid>
+      </WriteContainer>
+      <InputBox
+        height="8em"
+        placeholder="후기를 작성하세요"
+        onChange={(e) => props.setContent(e.target.value)}
+        defaultValue={props.content}></InputBox>
+      <Grid margin="1em 0 0 0">
         <UploadButton onClick={() => handleClick()} />
         <input
           type="file"
@@ -115,7 +113,7 @@ const ReviewWrite = (props) => {
           style={{ display: 'none' }}
           onChange={props.selectFiles}
         />
-        <Text margin_left="10px" color="gray">
+        <Text margin_left="0.5em" color="gray" font_size="13">
           * 사진은 최대 8장까지 첨부 가능합니다.
         </Text>
         <Button onClick={props.submitReview}>등록</Button>
@@ -139,63 +137,88 @@ const ReviewWrite = (props) => {
 };
 
 const FormWrapper = styled.div`
+  width: 100%;
   box-sizing: border-box;
-  width: 1000px;
-  height: 70%;
   overflow: auto;
   border: 1px solid;
-  border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  border-radius: 0.5em;
+  color: ${({ theme }) => theme.colors.borderGray};
   display: flex;
-  flex-wrap: wrap;
-  padding: 37px 65px;
+  flex-direction: column;
+  padding: 2em 4em;
+  @media ${({ theme }) => theme.device.mobile} {
+    border: none;
+    padding: 2em 1em;
+  }
+`;
+const Container = styled.div`
+  display: flex;
+  margin-bottom: 1em;
+  @media ${({ theme }) => theme.device.tablet} {
+    flex-direction: column;
+    margin: 0 auto 1em auto;
+    justify-content: flex-end;
+    align-items: center;
+  }
+`;
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 1em;
+  @media ${({ theme }) => theme.device.tablet} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+  }
 `;
 const MusicalImage = styled.img`
-  width: 180px;
-  height: 240px;
-  margin-right: 20px;
+  width: 11em;
+  height: 15em;
 `;
 const StarContainer = styled.div`
-  width: 250px;
-  height: 50px;
-  margin-top: 10px;
-  position: relative;
+  margin-top: 1em;
+`;
+const WriteContainer = styled.div`
+  display: flex;
 `;
 const Images = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
 `;
-
 const ImageWrapper = styled.div`
   position: relative;
-  margin-right: 20px;
-  margin-top: 20px;
+  margin-right: 1em;
+  margin-top: 1em;
 `;
 const DeleteButtonWrapper = styled(DeleteButton)`
   position: absolute;
-  right: -13px;
-  top: -12px;
+  right: -0.8em;
+  top: -0.8em;
   cursor: pointer;
 `;
 const TextLine = styled.div`
+  box-sizing: border-box;
   border-bottom: 1px solid;
-  width: 29%;
-  height: 30px;
-  line-height: 35px;
-  padding-left: 10px;
+  width: 15em;
+  height: 2em;
+  line-height: 2em;
+  padding-left: 1em;
   color: #000;
 `;
 const DateButton = styled.button`
+  box-sizing: border-box;
   border: none;
   border-bottom: 1px solid;
   background-color: #fff;
-  width: 32.5%;
-  height: 30px;
-  padding-left: 15px;
+  width: 15em;
+  height: 2em;
+  padding-left: 1em;
   ${({ theme }) => theme.verticalCenter};
+  font-size: 1em;
   justify-content: flex-start;
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
   cursor: pointer;
 `;
 const UploadButton = styled(PictureButton)`

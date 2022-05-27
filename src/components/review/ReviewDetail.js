@@ -6,40 +6,38 @@ import { Rating } from 'react-simple-star-rating';
 const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
   return (
     <Container>
-      <Grid margin="0 0 10px 0">
+      <MusicalWrapper>
         <MusicalImage src={reviewDetail.musical.poster} />
-        <Grid
-          flex_direction="column"
-          justify_content="flex-end"
-          width="80%"
-          height="100%">
-          <Text width="70%" margin_left="10px">
+        <div>
+          <Text width="auto" margin_left="10px">
             {reviewDetail.musical.prfnm}
           </Text>
           <StarContainer>
             <Rating
-              size={48}
+              size={36}
               ratingValue={reviewDetail.rating * 20}
               readonly={true}></Rating>
           </StarContainer>
+        </div>
+      </MusicalWrapper>
+      <ContentWrapper>
+        <Grid
+          flex_direction="column"
+          width="auto"
+          line_height="1.5em"
+          margin="0 1em 0 0">
+          <Text width="auto">장소</Text>
+          <Text width="auto">관람일</Text>
+          <Text width="auto">캐스팅</Text>
+          <Text>후기</Text>
         </Grid>
-      </Grid>
-      <Grid margin="0 0 10px 0">
-        <Text width="7%">장소</Text>
-        <Text font_weight="regular">{reviewDetail.place}</Text>
-      </Grid>
-      <Grid margin="0 0 10px 0">
-        <Text width="7%">관람일</Text>
-        <Text font_weight="regular">{reviewDetail.viewingDate}</Text>
-      </Grid>
-      <Grid margin="0 0 10px 0">
-        <Text width="7%">캐스팅</Text>
-        <Text font_weight="regular">{reviewDetail.casting}</Text>
-      </Grid>
-      <Grid flex_direction="column">
-        <Text>후기</Text>
-        <Text font_weight="regular">{reviewDetail.content}</Text>
-      </Grid>
+        <Grid flex_direction="column" width="auto" line_height="1.5em">
+          <Text font_weight="regular">{reviewDetail.place}</Text>
+          <Text font_weight="regular">{reviewDetail.viewingDate}</Text>
+          <Text font_weight="regular">{reviewDetail.casting}</Text>
+        </Grid>
+      </ContentWrapper>
+      <Text font_weight="regular">{reviewDetail.content}</Text>
       <Grid flex_direction="column" margin="30px 0 0 0">
         {reviewDetail.boardImgs &&
           reviewDetail.boardImgs.map((image) => (
@@ -59,37 +57,61 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
 };
 
 const Container = styled.div`
+  width: 100%;
   box-sizing: border-box;
-  width: 1000px;
-  height: 70%;
   overflow: auto;
   border: 1px solid;
   border-radius: 10px;
-  color: ${({ theme }) => theme.borderGray};
+  color: ${({ theme }) => theme.colors.borderGray};
   display: flex;
-  flex-wrap: wrap;
-  padding: 37px 65px;
+  flex-direction: column;
+  padding: 2em 4em;
+  @media ${({ theme }) => theme.device.mobile} {
+    border: none;
+    padding: 2em 1em;
+  }
+`;
+const MusicalWrapper = styled.div`
+  display: flex;
+  margin-bottom: 1em;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 1em;
+  }
+  @media ${({ theme }) => theme.device.tablet} {
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+      margin-top: 1em;
+    }
+  }
 `;
 const MusicalImage = styled.img`
-  width: 180px;
-  height: 240px;
-  margin-right: 20px;
+  width: 11em;
+  height: 15em;
 `;
 const StarContainer = styled.div`
-  width: 250px;
-  height: 50px;
-  margin-top: 10px;
-  position: relative;
+  margin-top: 1em;
+`;
+const ContentWrapper = styled.div`
+  display: flex;
 `;
 const AttachedImages = styled.img`
-  max-width: 60%;
+  width: 60%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 1em;
 `;
 const DeleteButton = styled(Button)`
   color: #000;
-  background-color: ${({ theme }) => theme.darkGray};
-  margin-left: 10px;
+  background-color: ${({ theme }) => theme.colors.darkGray};
+  margin-left: 0.7em;
   cursor: pointer;
 `;
 export default ReviewDetail;

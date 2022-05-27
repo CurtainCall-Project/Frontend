@@ -37,7 +37,7 @@ const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
         />
       </ImageContainer>
       <NicknameContainer>
-        <Text text_align="center" margin="0 0 15px 0">
+        <Text text_align="center" margin="0 0 1em 0">
           {nickname}
         </Text>
         <Button onClick={clickButton}>변경</Button>
@@ -47,42 +47,42 @@ const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
 };
 
 const Container = styled.div`
-  box-sizing: border-box;
-  padding: 20px;
-  width: 270px;
-  height: 320px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
-  border-radius: 5px;
   ${({ theme }) => theme.verticalCenter};
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1.2em;
+  width: 17em;
+  height: 20em;
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  border-radius: 0.3em;
 `;
 const ImageContainer = styled.form`
   position: relative;
   height: auto;
 `;
 const ImageWrapper = styled.div`
-  width: 135px;
-  height: 135px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
-  border-radius: 68px;
+  width: 8em;
+  height: 8em;
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  border-radius: 4em;
 `;
 const ProfileImage = styled.img`
-  width: 135px;
-  height: 135px;
-  border-radius: 68px;
+  width: 8em;
+  height: 8em;
+  border-radius: 4em;
   overflow: hidden;
 `;
 const AddButton = styled.div`
-  background-color: ${({ theme }) => theme.mainBlue};
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
+  background-color: ${({ theme }) => theme.colors.purple};
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 1.1em;
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
   position: absolute;
-  top: 117px;
-  left: 47px;
+  top: 6.9em;
+  left: 2.9em;
   cursor: pointer;
 `;
 const NicknameContainer = styled.div`

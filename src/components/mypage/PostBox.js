@@ -17,47 +17,49 @@ const PostBox = (props) => {
         <Content>{renderingPost.content}</Content>
         <Nickname>{renderingPost.nickname}</Nickname>
       </TextContainer>
-      <ImageContainer>
-        <Image src={renderingPost.img} />
-      </ImageContainer>
+      <Image src={renderingPost.img} />
     </Container>
   );
 };
 
 const Container = styled.div`
+  box-sizing: border-box;
   ${({ theme }) => theme.verticalCenter};
-  width: 730px;
-  height: 215px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  justify-content: space-between;
+  width: 44em;
+  height: auto;
+  padding: 1em;
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 5px;
   cursor: pointer;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80vw;
+  }
 `;
 const TextContainer = styled.div`
   box-sizing: border-box;
-  width: 75%;
-  height: 125px;
-  padding: 0 20px;
+  width: 70%;
+  height: 7em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 45%;
+  }
 `;
 const Title = styled.div`
-  width: 100%;
-  line-height: 1.2;
-  font-size: ${({ theme }) => theme.fontSize.middleFontSize};
   font-weight: bold;
+  line-height: 1.2em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 const Content = styled.div`
-  width: 100%;
-  line-height: 1.2;
-  font-size: ${({ theme }) => theme.fontSize.smallFontSize};
+  font-size: 0.8em;
   color: #323232;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal;
+  .colors.white-space: normal;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -65,16 +67,16 @@ const Content = styled.div`
 `;
 const Nickname = styled.div`
   color: #323232;
-  font-size: ${({ theme }) => theme.fontSize.smallFontSize};
-`;
-const ImageContainer = styled.div`
-  width: 25%;
-  height: auto;
+  font-size: 0.8em;
 `;
 const Image = styled.img`
-  width: 155px;
-  height: 155px;
-  border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.borderGray};
+  width: 9.7em;
+  height: 9.7em;
+  border-radius: 0.3em;
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 8em;
+    height: 8em;
+  }
 `;
 export default PostBox;

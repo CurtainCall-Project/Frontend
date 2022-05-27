@@ -22,49 +22,64 @@ const PerformanceBox = ({ result }) => {
 
   return (
     <Container key={result.mt20id}>
-      <ImageBox src={result.poster} />
+      <div>
+        <ImageBox src={result.poster} />
+      </div>
       <InfoWrapper>
         <Text>{result.prfnm}</Text>
         <Text font_weight="regular">
-          기간|{' '}
           {result.prfpdfrom === result.prfpdto
             ? result.prfpdfrom
             : `${result.prfpdfrom}~${result.prfpdto}`}
         </Text>
-        <Text font_weight="regular">장소| {result.fcltynm}</Text>
+        <Wrapper>
+          <Text font_weight="regular">{result.fcltynm}</Text>
+          <StyledButton onClick={clickReviewButton}>후기 작성하기</StyledButton>
+        </Wrapper>
       </InfoWrapper>
-      <StyledButton onClick={clickReviewButton}>후기 작성하기</StyledButton>
     </Container>
   );
 };
 
 const Container = styled.div`
+  ${({ theme }) => theme.verticalCenter};
+  width: 100%;
+  height: auto;
+  box-shadow: 0 0 0.5em #dedede;
+  border-radius: 0.3em;
   box-sizing: border-box;
-  width: 900px;
-  height: 153px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px #dedede;
-  ${({ theme }) => theme.verticalCenter}
-  position: relative;
   margin-bottom: 20px;
+  padding: 1em;
 `;
 const ImageBox = styled.img`
-  width: 100px;
-  height: 122px;
-  margin-left: 20px;
+  width: 6em;
+  height: 7em;
+  object-fit: cover;
 `;
 const InfoWrapper = styled.div`
-  width: 70%;
-  height: 122px;
-  line-height: 35px;
-  margin-left: 20px;
+  width: 100%;
+  height: auto;
+  line-height: 2.1em;
+  margin-left: 1em;
+  @media ${({ theme }) => theme.device.mobile} {
+    line-height: 1.2em;
+  }
+`;
+const Wrapper = styled.div`
+  ${({ theme }) => theme.verticalCenter};
+  jusitfy-content: space-between;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: block;
+  }
 `;
 const StyledButton = styled(Button)`
-  border: 1px solid;
-  width: 120px;
-  position: absolute;
-  right: 15px;
-  bottom: 13px;
+  font-size: 1em;
+  width: 9em;
   cursor: pointer;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 3px;
+    width: 7em;
+    height: 2em;
+  }
 `;
 export default PerformanceBox;

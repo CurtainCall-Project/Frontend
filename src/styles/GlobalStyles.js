@@ -6,10 +6,16 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSize.base};
     color: #000;
     width: 100%;
     height: 100%;
+    @media ${({ theme }) => theme.device.tablet} {
+      font-size: ${({ theme }) => theme.fontSize.sm};
+    }
+    @media ${({ theme }) => theme.device.mobile} {
+      font-size: ${({ theme }) => theme.fontSize.xs};
+    }
   }
 
   a {
