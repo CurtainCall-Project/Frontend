@@ -56,7 +56,7 @@ const Wrapper = styled.div`
   display: flex;
   margin-bottom: 1em;
   gap: 1em;
-  @media ${({ theme }) => theme.device.tablet} {
+  @media only screen and (max-width: 1000px) {
     flex-direction: column;
     & > div {
       width: auto;

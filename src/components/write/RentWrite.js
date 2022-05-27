@@ -141,8 +141,8 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   margin-bottom: 1em;
-  gap: 8em;
-  @media ${({ theme }) => theme.device.tablet} {
+  gap: 6em;
+  @media only screen and (max-width: 1000px) {
     flex-direction: column;
     gap: 1em;
     & > div {
