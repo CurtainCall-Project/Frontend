@@ -9,18 +9,8 @@ import { getMyReview } from '../../modules/review';
 
 const ReviewsPage = () => {
   const dispatch = useDispatch();
-  const isLogin = !!getCookie('token');
-  const nickname = useSelector((state) => state.user.nickname);
 
   useEffect(() => {
-    if (!isLogin) {
-      history.push('/signin');
-      return;
-    }
-    if (isLogin === true && nickname === null) {
-      history.push('/mypage/nickname');
-      return;
-    }
     dispatch(getMyReview());
   }, []);
 

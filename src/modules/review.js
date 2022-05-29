@@ -47,6 +47,7 @@ export const editReview =
     reviewId,
     mname,
     musicalId,
+    place,
     rating,
     viewingDate,
     casting,
@@ -59,8 +60,9 @@ export const editReview =
     formData.append('reviewId', reviewId);
     formData.append('mname', mname);
     formData.append('rating', rating);
+    formData.append('place', place);
     formData.append('viewingDate', viewingDate);
-    formData.append('cast', casting);
+    formData.append('casting', casting);
     formData.append('content', content);
     formData.append('boardImgs', deletedImages);
     files.map((file) => formData.append('imgFiles', file));
@@ -76,13 +78,14 @@ export const editReview =
 
 // 리뷰 추가하기
 export const addReview =
-  (mname, musicalId, rating, viewingDate, casting, content, files) =>
+  (mname, musicalId, rating, place, viewingDate, cast, content, files) =>
   (dispatch) => {
     const formData = new FormData();
     formData.append('mname', mname);
     formData.append('rating', rating);
+    formData.append('place', place);
     formData.append('viewingDate', viewingDate);
-    formData.append('cast', casting);
+    formData.append('cast', cast);
     formData.append('content', content);
     files.map((file) => formData.append('imgFiles', file));
     axios
@@ -126,13 +129,17 @@ export const getMusical = (input, page) => (dispatch) => {
   axios
     .get(`${config.SERVER_URL}/musical`, {
       params: {
-        keyword: input,
+        keyword: encodeURIComponent(input),
         page: page,
       },
     })
     .then((res) => {
-      if (res.data.dbs.db.length === 0) {
-        window.alert('마지막 페이지입니다.');
+      if (res.data.dbs === '') {
+        page === 1
+          ? window.alert('검색 결과가 없습니다')
+          : window.alert('마지막 페이지입니다.');
+        dispatch({ type: GET_MUSICAL, payload: res.data.dbs });
+        return;
       }
       dispatch({ type: GET_MUSICAL, payload: res.data.dbs.db });
     })

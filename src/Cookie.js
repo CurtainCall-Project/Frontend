@@ -3,7 +3,7 @@ export const setCookie = (name, value, exp = 1) => {
   let date = new Date();
 
   // 쿠키 유효기간 설정 (3시간)
-  date.setTime(date.getTime() + exp * 1000 * 60 * 60 * 3);
+  date.setTime(date.getTime() + exp * 1000 * 60 * 60 * 5);
   document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
 };
 

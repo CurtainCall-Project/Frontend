@@ -7,7 +7,6 @@ import { getMusical } from '../../modules/review';
 
 const ReviewSearchPage = () => {
   const dispatch = useDispatch();
-  const searchButton = useRef();
   // 페이지 상태 관리
   const [page, setPage] = useState(0);
   // 검색 입력값 상태 관리
@@ -17,17 +16,13 @@ const ReviewSearchPage = () => {
 
   // 검색 결과 가져오기
   const results = useSelector((state) => state.review.searchResults);
-  useEffect(() => {
-    if (page > 0) {
-      dispatch(getMusical(input, page));
-    }
-  }, [page]);
 
   useEffect(() => {
-    if (results.length === 0) {
-      setPage(page - 1);
+    // 마지막 페이지인경우 페이지 원래대로 되돌리기
+    if (!Array.isArray(results)) {
+      results === '' ? setPage(page - 1) : setSearchResult([results]);
     }
-    if (results.length > 0) {
+    if (Array.isArray(results) && results.length > 0) {
       setSearchResult(results);
     }
   }, [results]);
@@ -44,17 +39,20 @@ const ReviewSearchPage = () => {
       return;
     }
     setPage(page - 1);
+    dispatch(getMusical(input, page - 1));
   };
 
   // 다음 페이지로 이동
   const pageUp = () => {
     setPage(page + 1);
+    dispatch(getMusical(input, page + 1));
   };
 
   // 엔터 키 눌렀을 때 뮤지컬 검색 수행
   const handleEnterKey = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      setPage(1);
+      dispatch(getMusical(input, 1));
     }
   };
 
@@ -64,7 +62,6 @@ const ReviewSearchPage = () => {
       window.alert('공연 제목을 입력하세요');
       return;
     }
-    searchButton.current.click();
     setPage(1);
     dispatch(getMusical(input, 1));
   };
@@ -75,12 +72,11 @@ const ReviewSearchPage = () => {
         handleSearch={handleSearch}
         changeInput={changeInput}
         handleEnterKey={handleEnterKey}
-        searchButton={searchButton}
       />
       {page > 0 &&
         searchResult.length > 0 &&
         searchResult.map((result) => (
-          <PerformanceBox key={result.id} result={result} />
+          <PerformanceBox key={result.mt20id} result={result} />
         ))}
       {page > 0 && searchResult.length > 0 && (
         <PageContainer>

@@ -15,7 +15,7 @@ const LongPostBox = ({ postInfo }) => {
         </div>
         <Nickname>{postInfo.nickname}</Nickname>
       </TextContainer>
-      <Image src={postInfo.img} />
+      {postInfo.img === null || <Image src={postInfo.img} />}
     </Container>
   );
 };

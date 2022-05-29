@@ -52,7 +52,7 @@ const ReviewWrite = (props) => {
           <Text width="auto">
             {props.nowMusical
               ? props.nowMusical.prfnm
-              : props.reviewDetail.musical}
+              : props.reviewDetail.musical.prfnm}
           </Text>
           <StarContainer>
             <Rating

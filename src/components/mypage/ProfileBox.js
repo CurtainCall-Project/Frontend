@@ -5,7 +5,7 @@ import { Text, Button } from '../../elements/elements';
 import { ReactComponent as CameraIcon } from '../../assets/camera_icon.svg';
 import basicProfile from '../../assets/default_profile.png';
 
-const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
+const ProfileBox = ({ nickname, profileImage, email, handleFileChange }) => {
   const hiddenFileInput = useRef();
   const onClick = (e) => {
     hiddenFileInput.current.click();
@@ -40,6 +40,9 @@ const ProfileBox = ({ nickname, profileImage, handleFileChange }) => {
         <Text text_align="center" margin="0 0 1em 0">
           {nickname}
         </Text>
+        <Text font_weight="regular" text_align="center" margin="0 0 15px 0">
+          {email}
+        </Text>
         <Button onClick={clickButton}>변경</Button>
       </NicknameContainer>
     </Container>
@@ -57,7 +60,7 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 0.3em;
 `;
-const ImageContainer = styled.form`
+const ImageContainer = styled.div`
   position: relative;
   height: auto;
 `;
@@ -86,6 +89,8 @@ const AddButton = styled.div`
   cursor: pointer;
 `;
 const NicknameContainer = styled.div`
-  height: 30%;
+  height: 40%;
+  ${({ theme }) => theme.verticalCenter};
+  flex-direction: column;
 `;
 export default ProfileBox;

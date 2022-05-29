@@ -5,7 +5,9 @@ import { Text } from '../../../elements/elements';
 const PostDetail = (props) => {
   return (
     <Container>
-      <Text font_weight="regular">{props.post.content}</Text>
+      <Text line_height="21px" font_weight="regular">
+        {props.post.content}
+      </Text>
       {props.post.boardImgs.map((image) => (
         <Image src={image} />
       ))}

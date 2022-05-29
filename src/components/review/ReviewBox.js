@@ -20,7 +20,7 @@ const ReviewBox = ({ review }) => {
           <MusicalRating>{review.rating}</MusicalRating>
         </Wrapper>
         <h1>{review.viewingDate}</h1>
-        <h1>{review.casting}</h1>
+        <h1>{review.cast}</h1>
       </InfoWrapper>
     </Container>
   );

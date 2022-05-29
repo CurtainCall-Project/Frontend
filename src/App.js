@@ -24,7 +24,6 @@ const App = () => {
       dispatch(getUser());
     }
   }, []);
-
   return (
     <>
       <ThemeProvider theme={theme}>

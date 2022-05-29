@@ -30,12 +30,14 @@ const MyScrapPage = () => {
         <Text>스크랩</Text>
       </Grid>
       {myScrap.length > 0 && changeMyScrap(startIndex)}
-      <Paging
-        page={page}
-        itemsCount={8}
-        totalItemsCount={myScrap.length}
-        changePage={changePage}
-      />
+      {myScrap.length > 0 && (
+        <Paging
+          page={page}
+          itemsCount={8}
+          totalItemsCount={myScrap.length}
+          changePage={changePage}
+        />
+      )}
     </Container>
   );
 };

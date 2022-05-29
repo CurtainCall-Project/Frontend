@@ -7,7 +7,7 @@ import { addReview, editReview, getMusicalDetail } from '../../modules/review';
 const ReviewWritePage = (props) => {
   const dispatch = useDispatch();
   const [viewingDate, setViewingDate] = useState(new Date());
-  const [casting, setCasting] = useState('');
+  const [cast, setCast] = useState('');
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const [imgFiles, setImgFiles] = useState([]);
@@ -23,7 +23,6 @@ const ReviewWritePage = (props) => {
   const musicalId = props.match.params.id;
   // 현재 뮤지컬 id에 해당하는 뮤지컬 정보 가져오기
   const nowMusical = useSelector((state) => state.review.nowMusical);
-
   useEffect(() => {
     dispatch(getMusicalDetail(musicalId));
   }, []);
@@ -32,10 +31,10 @@ const ReviewWritePage = (props) => {
     // 사용자가 리뷰를 작성한 뮤지컬이라면 뮤지컬 정보를 저장하기
     if (
       !(JSON.stringify(reviewDetail) === '{}') &&
-      reviewDetail.musical.mt20id === musicalId
+      reviewDetail.musical.musicalId === musicalId
     ) {
       setViewingDate(new Date(reviewDetail.viewingDate));
-      setCasting(reviewDetail.casting);
+      setCast(reviewDetail.cast);
       setRating(reviewDetail.rating * 20);
       setContent(reviewDetail.content);
       setSavedImages(reviewDetail.boardImgs);
@@ -47,16 +46,17 @@ const ReviewWritePage = (props) => {
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
     if (
       !(JSON.stringify(reviewDetail) === '{}') &&
-      reviewDetail.musical.mt20id === musicalId
+      reviewDetail.musical.musicalId === musicalId
     ) {
       dispatch(
         editReview(
           reviewDetail.reviewId,
           nowMusical.prfnm,
           musicalId,
+          nowMusical.fcltynm,
           rating,
           viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
-          casting,
+          cast,
           content,
           files,
           deletedImages
@@ -69,8 +69,9 @@ const ReviewWritePage = (props) => {
         nowMusical.prfnm,
         musicalId,
         rating,
+        nowMusical.fcltynm,
         viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
-        casting,
+        cast,
         content,
         files
       )
@@ -139,7 +140,7 @@ const ReviewWritePage = (props) => {
         nowMusical={nowMusical}
         viewingDate={viewingDate}
         rating={rating}
-        casting={casting}
+        cast={cast}
         content={content}
         imgFiles={imgFiles}
         savedImages={savedImages}
@@ -148,7 +149,7 @@ const ReviewWritePage = (props) => {
         deleteFile={deleteFile}
         deleteSavedImage={deleteSavedImage}
         setViewingDate={setViewingDate}
-        setCasting={setCasting}
+        setCast={setCast}
         setContent={setContent}
         setSavedImages={setSavedImages}
         handleRating={handleRating}

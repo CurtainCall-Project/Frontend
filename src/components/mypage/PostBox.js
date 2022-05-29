@@ -5,19 +5,18 @@ import history from '../../history';
 const PostBox = (props) => {
   const renderingPost = props.postInfo[0];
   const { boardType, boardId } = renderingPost;
-
   const clickPost = () => {
     history.push(`/${boardType}/${boardId}`);
   };
 
   return (
     <Container onClick={clickPost}>
-      <TextContainer>
+      <TextContainer noImage={renderingPost.img}>
         <Title>{renderingPost.title}</Title>
         <Content>{renderingPost.content}</Content>
         <Nickname>{renderingPost.nickname}</Nickname>
       </TextContainer>
-      <Image src={renderingPost.img} />
+      {renderingPost.img === null || <Image src={renderingPost.img} />}
     </Container>
   );
 };

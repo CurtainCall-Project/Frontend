@@ -16,6 +16,7 @@ export const addPost = (boardType, title, content, files) => (dispatch) => {
   formData.append('title', title);
   formData.append('content', content);
   files.map((file) => formData.append('files', file));
+
   axios
     .post(`${config.SERVER_URL}/board/${boardType}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -39,6 +40,7 @@ export const addRentPost =
     formData.append('delivery', delivery);
     formData.append('content', content);
     files.map((file) => formData.append('files', file));
+
     axios
       .post(`${config.SERVER_URL}/board/rent`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -60,6 +62,7 @@ export const addSellPost =
     formData.append('delivery', delivery);
     formData.append('content', content);
     files.map((file) => formData.append('files', file));
+
     axios
       .post(`${config.SERVER_URL}/board/sell`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

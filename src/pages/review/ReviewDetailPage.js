@@ -18,7 +18,7 @@ const ReviewDetailPage = (props) => {
 
   // 수정 버튼 클릭 시 해당 뮤지컬 리뷰 작성 페이지로 이동
   const clickEditBtn = () => {
-    history.push(`/review/write/${reviewDetail.musical.mt20id}`);
+    history.push(`/review/write/${reviewDetail.musical.musicalId}`);
   };
 
   // 후기 글 삭제

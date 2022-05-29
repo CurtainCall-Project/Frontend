@@ -200,12 +200,14 @@ const PostPage = (props) => {
         </Grid>
         {/* comment_list 존재하면 Commnet 컴포넌트를 보여준다 */}
         {comments.length > 0 && changeComments(startIndex)}
-        <Paging
-          page={page}
-          itemsCount={5}
-          totalItemsCount={parentComment.length}
-          changePage={changePage}
-        />
+        {comments.length > 0 && (
+          <Paging
+            page={page}
+            itemsCount={5}
+            totalItemsCount={parentComment.length}
+            changePage={changePage}
+          />
+        )}
       </CommentContainer>
     </Container>
   );

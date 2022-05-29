@@ -19,7 +19,7 @@ const NicknameSetPage = () => {
   const nickname = useSelector((state) => state.user.nickname);
   useEffect(() => {
     // 이미 닉네임이 저장되어 있는 경우 저장된 닉네임으로 상태 변경
-    if (nickname) {
+    if (!!nickname) {
       setUserNickname(nickname);
     }
   }, [nickname]);

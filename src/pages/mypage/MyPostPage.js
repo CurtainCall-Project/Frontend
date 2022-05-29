@@ -30,12 +30,14 @@ const MyPostPage = () => {
         <Text>내가 쓴 글</Text>
       </Grid>
       {myPost.length > 0 && changeMyPost(startIndex)}
-      <Paging
-        page={page}
-        itemsCount={8}
-        totalItemsCount={myPost.length}
-        changePage={changePage}
-      />
+      {myPost.length > 0 && (
+        <Paging
+          page={page}
+          itemsCount={8}
+          totalItemsCount={myPost.length}
+          changePage={changePage}
+        />
+      )}
     </Container>
   );
 };
