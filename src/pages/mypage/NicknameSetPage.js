@@ -102,6 +102,9 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
   flex-direction: column;
   margin: 6em auto 0 auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 2em;
+  }
 `;
 const AcceptBox = styled.div`
   ${({ theme }) => theme.verticalCenter};

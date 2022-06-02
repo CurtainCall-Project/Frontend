@@ -167,5 +167,8 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 4em auto 0 auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 85vw;
+    margin-top: 2em;
 `;
 export default ReviewWritePage;
