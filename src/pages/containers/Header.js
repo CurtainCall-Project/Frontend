@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteCookie } from '../../Cookie';
 import history from '../../history';
 import Topbar from '../../components/common/Topbar';
 import Logobar from '../../components/common/Logobar';
@@ -41,6 +42,7 @@ const Header = () => {
   };
 
   const onLogOut = () => {
+    deleteCookie('token');
     dispatch(logout());
   };
 

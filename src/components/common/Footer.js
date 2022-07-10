@@ -47,7 +47,7 @@ const TextContainer = styled.div`
     line-height: 1rem;
     justify-content: flex-end;
     a:nth-child(3) {
-      padding-right: 0;
+      padding-right: 10px;
     }
     span {
       font-size: ${({ theme }) => theme.fontSize.xxs};

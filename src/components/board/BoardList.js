@@ -28,13 +28,18 @@ const BoardList = (props) => {
           <Column key={list.title}>
             <div>{list.title}</div>
           </Column>
-          <Column key={list.nickname}>{list.nickname}</Column>
+          <Column key={list.nickname}>
+            <div>{list.nickname}</div>
+          </Column>
           <Column key={list.registerDate}>
             {new Date(list.registerDate)
               .toLocaleDateString('ko-KR')
               .slice(0, -1)}
           </Column>
-          <Column key={list.likeCount}>{list.likeCount}</Column>
+          <Column key={list.likeCount}>
+            <HeartWrapper />
+            <div>{list.likeCount}</div>
+          </Column>
         </BestRow>
       ))}
       {lists.posts.map((list) => (
@@ -45,7 +50,9 @@ const BoardList = (props) => {
           <Column key={list.title}>
             <div>{list.title}</div>
           </Column>
-          <Column key={list.nickname}>{list.nickname}</Column>
+          <Column key={list.nickname}>
+            <div>{list.nickname}</div>
+          </Column>
           <Column key={list.registerDate}>
             {new Date(list.registerDate)
               .toLocaleDateString('ko-KR')
@@ -68,6 +75,9 @@ const Table = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.darkGray};
   @media ${({ theme }) => theme.device.tablet} {
     width: 75vw;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 85vw;
   }
 `;
 const Headings = styled.div`
@@ -107,7 +117,7 @@ const BestRow = styled.div`
   }
   @media ${({ theme }) => theme.device.mobile} {
     box-sizing: border-box;
-    padding: 3px 0 3px 10px;
+    padding: 6px 0 5px 20px;
     height: 40px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: start;
@@ -131,7 +141,7 @@ const Row = styled.div`
     box-sizing: border-box;
     padding: 6px 0 5px 20px;
     height: 40px;
-    grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: start;
   }
 `;
@@ -157,8 +167,14 @@ const Column = styled.div`
       }
     }
   }
-  @media ${({ theme }) => theme.device.mobile} {
-    &:nth-child(3) {
+  &:nth-child(3) {
+    & > div {
+      margin: 0 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    @media ${({ theme }) => theme.device.mobile} {
       grid-row: 2 / 3;
       grid-column: span 1;
       color: ${({ theme }) => theme.colors.navSignInFontGray};
@@ -167,6 +183,8 @@ const Column = styled.div`
       white-space: nowrap;
       font-size: ${({ theme }) => theme.fontSize.xxs};
     }
+  }
+  @media ${({ theme }) => theme.device.mobile} {
     &:nth-child(4) {
       grid-row: 2 / 3;
       grid-column: span 2;
@@ -193,5 +211,7 @@ const HeartWrapper = styled(HeartIcon)`
 const IconContainer = styled.div`
   ${({ theme }) => theme.verticalCenter};
   justify-content: center;
+  box-sizing: border-box;
+  padding: 0 5px;
 `;
 export default BoardList;
