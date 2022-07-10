@@ -35,7 +35,7 @@ const ReviewWritePage = (props) => {
     ) {
       setViewingDate(new Date(reviewDetail.viewingDate));
       setCast(reviewDetail.cast);
-      setRating(reviewDetail.rating * 20);
+      setRating(reviewDetail.rating);
       setContent(reviewDetail.content);
       setSavedImages(reviewDetail.boardImgs);
     }
@@ -80,8 +80,7 @@ const ReviewWritePage = (props) => {
 
   // 별점 점수 담기
   const handleRating = (rate) => {
-    const calculatedRate = rate / 20;
-    setRating(calculatedRate);
+    setRating(rate);
   };
 
   // 이미지 파일 선택 시 이미지를 저장하고, 미리보기를 보여주는 함수

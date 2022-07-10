@@ -15,7 +15,7 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
           <StarContainer>
             <Rating
               size={36}
-              ratingValue={reviewDetail.rating * 20}
+              ratingValue={reviewDetail.rating}
               readonly={true}></Rating>
           </StarContainer>
         </div>
