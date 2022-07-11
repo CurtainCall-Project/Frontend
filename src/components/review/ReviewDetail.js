@@ -34,7 +34,7 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
         <Grid flex_direction="column" width="auto" line_height="1.5em">
           <Text font_weight="regular">{reviewDetail.place}</Text>
           <Text font_weight="regular">{reviewDetail.viewingDate}</Text>
-          <Text font_weight="regular">{reviewDetail.casting}</Text>
+          <Text font_weight="regular">{reviewDetail.cast}</Text>
         </Grid>
       </ContentWrapper>
       <Text font_weight="regular">{reviewDetail.content}</Text>

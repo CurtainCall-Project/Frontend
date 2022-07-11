@@ -44,6 +44,8 @@ const ReviewWritePage = (props) => {
   // 리뷰 등록하기
   const submitReview = () => {
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
+    const offset = viewingDate.getTimezoneOffset() * 60000;
+
     if (
       !(JSON.stringify(reviewDetail) === '{}') &&
       reviewDetail.musical.musicalId === musicalId
@@ -55,7 +57,10 @@ const ReviewWritePage = (props) => {
           musicalId,
           nowMusical.fcltynm,
           rating,
-          viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
+          new Date(viewingDate.getTime() - offset)
+            .toISOString()
+            .split('T')[0]
+            .replace(/-/g, '.'),
           cast,
           content,
           files,
@@ -70,7 +75,10 @@ const ReviewWritePage = (props) => {
         musicalId,
         rating,
         nowMusical.fcltynm,
-        viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
+        new Date(viewingDate.getTime() - offset)
+          .toISOString()
+          .split('T')[0]
+          .replace(/-/g, '.'),
         cast,
         content,
         files
