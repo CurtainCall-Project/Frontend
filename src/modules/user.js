@@ -31,8 +31,7 @@ export const login = (token) => (dispatch) => {
 // 로그인 액션 생성함수
 export const logout = () => (dispatch) => {
   dispatch({ type: LOG_OUT });
-  deleteCookie('token');
-  history.replace('/');
+  history.push('/');
 };
 
 // 사용자 정보를 가져오는 액션 생성함수

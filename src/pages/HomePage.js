@@ -25,8 +25,8 @@ const HomePage = () => {
   useEffect(() => {
     if (!!token) {
       setCookie('token', token);
+      dispatch(getUser());
     }
-    dispatch(getUser());
   }, []);
   const banners = [banner_1, banner_2, banner_3, banner_4, banner_5];
 
@@ -60,7 +60,7 @@ const Container = styled.div`
 const BannerWrapper = styled.div`
   width: 100%;
   height: auto;
-  margin: 47px auto 0 auto;
+  margin: 2em auto 0 auto;
 `;
 const Banner = styled.img`
   max-width: 100%;

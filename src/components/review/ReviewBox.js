@@ -17,7 +17,7 @@ const ReviewBox = ({ review }) => {
         <Text>{review.musical.prfnm}</Text>
         <Wrapper>
           <StarIcon />
-          <MusicalRating>{review.rating}</MusicalRating>
+          <MusicalRating>{review.rating / 20}</MusicalRating>
         </Wrapper>
         <h1>{review.viewingDate}</h1>
         <h1>{review.cast}</h1>

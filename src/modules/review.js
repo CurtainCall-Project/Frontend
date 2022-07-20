@@ -50,7 +50,7 @@ export const editReview =
     place,
     rating,
     viewingDate,
-    casting,
+    cast,
     content,
     files,
     deletedImages
@@ -62,7 +62,7 @@ export const editReview =
     formData.append('rating', rating);
     formData.append('place', place);
     formData.append('viewingDate', viewingDate);
-    formData.append('casting', casting);
+    formData.append('cast', cast);
     formData.append('content', content);
     formData.append('boardImgs', deletedImages);
     files.map((file) => formData.append('imgFiles', file));

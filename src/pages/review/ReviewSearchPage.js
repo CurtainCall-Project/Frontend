@@ -101,6 +101,7 @@ const Wrapper = styled.div`
   }
   @media ${({ theme }) => theme.device.mobile} {
     width: 80vw;
+    margin-top: 2em;
   }
 `;
 const PageContainer = styled.div`

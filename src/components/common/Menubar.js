@@ -33,7 +33,7 @@ const Menubar = ({ userId }) => {
                   <InnerMenuItem>오페라글라스 대여</InnerMenuItem>
                 </StyledLink>
                 <StyledLink to="/sell">
-                  <InnerMenuItem>굿즈거래</InnerMenuItem>
+                  <InnerMenuItem>중고거래</InnerMenuItem>
                 </StyledLink>
               </ul>
             </InnerMenu>
@@ -95,14 +95,21 @@ const Menu = styled.ul`
   justify-content: space-between;
 `;
 const InnerMenu = styled.div`
+  box-sizing: border-box;
   display: none;
-  width: 112px;
+  width: 135px;
+  //min-width: 144px;
   position: absolute;
   top: 56px;
-  left: 0px;
+  left: 20px;
   font-size: 14px;
-  padding-left: 18px;
+  padding-left: 1em;
   padding-bottom: 10px;
+
+  & > ul {
+    display: inline-block;
+    width: 100%;
+  }
 `;
 const MenuName = styled.div`
   ${({ theme }) => theme.verticalCenter};
@@ -128,7 +135,6 @@ const MenuItem = styled.li`
 `;
 const InnerMenuItem = styled.li`
   margin-top: 10px;
-
   &:hover {
     color: ${({ theme }) => theme.colors.purple};
   }
@@ -181,8 +187,9 @@ const WriteMenuItem = styled.li`
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
+  display: block;
   color: #000;
   width: 100%;
-  height: 100%;
+  //border: 1px solid green;
 `;
 export default Menubar;

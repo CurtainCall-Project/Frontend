@@ -100,7 +100,7 @@ export const postLike = (id, like) => (dispatch, getState) => {
       if (like === true) {
         dispatch({
           type: SET_LIKE,
-          payload: { like: like, likeCount: res.data.board.likeCount },
+          payload: { like: like, likeCount: res.data.likeCount },
         });
       } else {
         dispatch({
@@ -131,7 +131,7 @@ export const postScrap = (id, scrap) => (dispatch, getState) => {
       if (scrap === true) {
         dispatch({
           type: SET_SCRAP,
-          payload: { scrap: scrap, scrapCount: res.data.board.scrapCount },
+          payload: { scrap: scrap, scrapCount: res.data.scrapCount },
         });
       } else {
         dispatch({

@@ -8,7 +8,7 @@ const LongPostBox = ({ postInfo }) => {
   };
   return (
     <Container onClick={clickPost}>
-      <TextContainer>
+      <TextContainer isImg={postInfo.img}>
         <div>
           <Title>{postInfo.title}</Title>
           <Content>{postInfo.content}</Content>
@@ -25,7 +25,7 @@ const Container = styled.div`
   ${({ theme }) => theme.verticalCenter};
   justify-content: space-between;
   width: 100%;
-  height: auto;
+  height: 9em;
   border-radius: 5px;
   margin-bottom: 1rem;
   padding: 1em 1.5em;
@@ -36,7 +36,7 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
+  width: ${(props) => (props.isImg === null ? '100%' : '80%')};
   height: 5em;
   box-sizing: border-box;
   @media ${({ theme }) => theme.device.tablet} {

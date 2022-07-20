@@ -61,7 +61,7 @@ const Sidebar = ({
             <MenuItem>오페라글라스 대여</MenuItem>
           </StyledLink>
           <StyledLink to="/sell">
-            <MenuItem>굿즈거래</MenuItem>
+            <MenuItem>중고거래</MenuItem>
           </StyledLink>
         </Menu>
         <MenuName>공연후기</MenuName>

@@ -39,11 +39,12 @@ const SignInPage = () => {
 
 const Container = styled.div`
   width: 350px;
-  margin: 50px auto 10px auto;
+  margin: 3em auto 10px auto;
   display: flex;
   flex-direction: column;
   @media ${({ theme }) => theme.device.mobile} {
     width: 200px;
+    margin-top: 2em;
   }
 `;
 const Title = styled.div`

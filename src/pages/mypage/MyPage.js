@@ -5,7 +5,7 @@ import { Text, Grid } from '../../elements/elements';
 import PostBox from '../../components/mypage/PostBox';
 import ProfileBox from '../../components/mypage/ProfileBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserPosts, addProfileImage } from '../../modules/user';
+import { getUserPosts, addProfileImage, getUser } from '../../modules/user';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const MyPage = () => {
   const [profileImage, setProfileImage] = useState(profileImg);
 
   useEffect(() => {
+    dispatch(getUser());
     dispatch(getUserPosts());
   }, []);
 
@@ -90,8 +91,12 @@ const Container = styled.div`
   padding: 0 1em;
   max-width: 1256px;
   flex-wrap: wrap;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 2em;
+  }
 `;
 const PostContainer = styled.div`
+  width: 80%;
   max-width: 730px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 80vw;
