@@ -93,8 +93,8 @@ const ReviewWrite = (props) => {
           <Input
             width="15em"
             placeholder="캐스팅을 입력하세요"
-            value={props.casting}
-            onChange={(e) => props.setCasting(e.target.value)}
+            value={props.cast || ''}
+            onChange={(e) => props.setCast(e.target.value)}
           />
         </Grid>
       </WriteContainer>

@@ -25,7 +25,7 @@ const Container = styled.div`
   box-sizing: border-box;
   ${({ theme }) => theme.verticalCenter};
   justify-content: space-between;
-  width: 44em;
+  width: 100%;
   height: auto;
   padding: 1em;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};

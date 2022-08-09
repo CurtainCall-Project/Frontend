@@ -219,7 +219,7 @@ const Container = styled.div`
   max-width: 1000px;
   @media ${({ theme }) => theme.device.tablet} {
     margin-top: 2em;
-    width: 80vw;
+    width: 85vw;
   }
 `;
 

@@ -35,7 +35,7 @@ const ReviewWritePage = (props) => {
     ) {
       setViewingDate(new Date(reviewDetail.viewingDate));
       setCast(reviewDetail.cast);
-      setRating(reviewDetail.rating * 20);
+      setRating(reviewDetail.rating);
       setContent(reviewDetail.content);
       setSavedImages(reviewDetail.boardImgs);
     }
@@ -44,6 +44,8 @@ const ReviewWritePage = (props) => {
   // 리뷰 등록하기
   const submitReview = () => {
     const files = imgFiles.map((imgFile) => imgFile.imgFile);
+    const offset = viewingDate.getTimezoneOffset() * 60000;
+
     if (
       !(JSON.stringify(reviewDetail) === '{}') &&
       reviewDetail.musical.musicalId === musicalId
@@ -55,7 +57,10 @@ const ReviewWritePage = (props) => {
           musicalId,
           nowMusical.fcltynm,
           rating,
-          viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
+          new Date(viewingDate.getTime() - offset)
+            .toISOString()
+            .split('T')[0]
+            .replace(/-/g, '.'),
           cast,
           content,
           files,
@@ -70,7 +75,10 @@ const ReviewWritePage = (props) => {
         musicalId,
         rating,
         nowMusical.fcltynm,
-        viewingDate.toISOString().split('T')[0].replace(/-/g, '.'),
+        new Date(viewingDate.getTime() - offset)
+          .toISOString()
+          .split('T')[0]
+          .replace(/-/g, '.'),
         cast,
         content,
         files
@@ -80,8 +88,7 @@ const ReviewWritePage = (props) => {
 
   // 별점 점수 담기
   const handleRating = (rate) => {
-    const calculatedRate = rate / 20;
-    setRating(calculatedRate);
+    setRating(rate);
   };
 
   // 이미지 파일 선택 시 이미지를 저장하고, 미리보기를 보여주는 함수
@@ -167,5 +174,8 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 4em auto 0 auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 85vw;
+    margin-top: 2em;
 `;
 export default ReviewWritePage;
