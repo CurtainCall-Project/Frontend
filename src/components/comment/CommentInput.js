@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../../elements/elements';
-import { ReactComponent as CheckIcon } from '../../assets/check_icon.svg';
-import { ReactComponent as ActiveCheckIcon } from '../../assets/active_check_icon.svg';
+import { ReactComponent as CheckIcon } from '../../assets/board/check_icon.svg';
+import { ReactComponent as ActiveCheckIcon } from '../../assets/board/active_check_icon.svg';
 
 const CommentInput = (props) => {
   return (

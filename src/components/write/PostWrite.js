@@ -8,9 +8,9 @@ import {
   Button,
   Image,
 } from '../../elements/elements';
-import { ReactComponent as PictureButton } from '../../assets/picture_icon.svg';
-import { ReactComponent as DeleteButton } from '../../assets/delete_button.svg';
-import { ReactComponent as TriangleIcon } from '../../assets/select_icon.svg';
+import { ReactComponent as PictureButton } from '../../assets/write/picture_icon.svg';
+import { ReactComponent as DeleteButton } from '../../assets/write/delete_button.svg';
+import { ReactComponent as TriangleIcon } from '../../assets/write/select_icon.svg';
 
 const PostWrite = (props) => {
   const hiddenFileInput = useRef();

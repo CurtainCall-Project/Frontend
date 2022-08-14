@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
-import { ReactComponent as BestIcon } from '../../assets/best_icon.svg';
-import { ReactComponent as HeartIcon } from '../../assets/heart_icon.svg';
+import { ReactComponent as BestIcon } from '../../assets/board/best_icon.svg';
+import { ReactComponent as HeartIcon } from '../../assets/board/heart_icon.svg';
 
 const BoardList = (props) => {
   const lists = props.posts;

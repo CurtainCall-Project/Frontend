@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { Text } from '../../elements/elements';
-import { ReactComponent as StarIcon } from '../../assets/star_icon.svg';
+import { ReactComponent as StarIcon } from '../../assets/review/star_icon.svg';
 
 const ReviewBox = ({ review }) => {
   // 후기 상세 페이지로 이동

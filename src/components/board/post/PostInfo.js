@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import basicProfile from '../../../assets/default_profile.png';
+import basicProfile from '../../../assets/mypage/default_profile.png';
 import { Grid, Text, Button } from '../../../elements/elements';
 
 const PostInfo = ({ post, user, deleteNowPost }) => {

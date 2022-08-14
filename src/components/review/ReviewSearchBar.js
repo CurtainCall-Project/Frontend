@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as SearchIcon } from '../../assets/search_icon.svg';
+import { ReactComponent as SearchIcon } from '../../assets/common/search_icon.svg';
 
 const ReviewSearchBar = (props) => {
   return (

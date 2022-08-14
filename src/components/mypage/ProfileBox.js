@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { Text, Button } from '../../elements/elements';
-import { ReactComponent as CameraIcon } from '../../assets/camera_icon.svg';
-import basicProfile from '../../assets/default_profile.png';
+import { ReactComponent as CameraIcon } from '../../assets/mypage/camera_icon.svg';
+import basicProfile from '../../assets/mypage/default_profile.png';
 
 const ProfileBox = ({ nickname, profileImage, email, handleFileChange }) => {
   const hiddenFileInput = useRef();

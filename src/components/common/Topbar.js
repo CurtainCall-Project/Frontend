@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getCookie } from '../../Cookie';
-import basicProfile from '../../assets/default_profile.png';
+import basicProfile from '../../assets/mypage/default_profile.png';
 import { FaBars } from 'react-icons/fa';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
