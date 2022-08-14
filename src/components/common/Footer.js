@@ -28,9 +28,6 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.darkGray};
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
-  @media ${({ theme }) => theme.device.mobile} {
-    height: 40px;
-  }
 `;
 const TextContainer = styled.div`
   width: auto;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Background from '../../assets/landing_imgs/main_bg.svg';
+import WavesBg from '../../assets/landing_imgs/waves_bg.svg';
 import Logo from '../../assets/landing_imgs/logo.svg';
 
 const MainSection = () => {
@@ -9,6 +10,9 @@ const MainSection = () => {
       <MainBg>
         <ImageBg src={Background}></ImageBg>
       </MainBg>
+      <WavesWrapper>
+        <Waves src={WavesBg} />
+      </WavesWrapper>
       <MainContent>
         <MainP>All-in-One!</MainP>
         <Wrapper>
@@ -23,7 +27,6 @@ const MainSection = () => {
 const Container = styled.div`
   height: 612px;
   position: relative;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,9 +42,26 @@ const MainBg = styled.div`
   right: 0;
   overflow: hidden;
 `;
-
 const ImageBg = styled.img`
+  width: 100%;
   height: 100%;
+  object-fit: cover;
+`;
+const WavesWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+`;
+const Waves = styled.img`
+  display: block;
+  width: calc(126% + 1.3px);
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: calc(160% + 1.3px);
+  }
 `;
 
 const MainContent = styled.div`

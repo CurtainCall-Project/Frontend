@@ -38,15 +38,14 @@ const HomePage = () => {
     }
   }, []);
   const banners = [banner_1, banner_2, banner_3, banner_4, banner_5];
-  console.log(objOne);
   return (
-    <>
+    <Container>
       <MainSection />
       <InfoSection {...objOne} />
       <InfoSection {...objTwo} />
       <InfoSection {...objThree} />
       <InfoSection {...objFour} />
-    </>
+    </Container>
     // <Container>
     //   <BannerWrapper>
     //     <Swiper
@@ -68,11 +67,7 @@ const HomePage = () => {
   );
 };
 
-// const Container = styled.div`
-//   width: 100%;
-//   height: auto;
-//   //padding-bottom: 69px;
-// `;
+const Container = styled.div``;
 // const BannerWrapper = styled.div`
 //   width: 100%;
 //   height: auto;
