@@ -58,31 +58,28 @@ const TopbarContainer = styled.div`
 `;
 const TopbarWrapper = styled.div`
   ${({ theme }) => theme.verticalCenter};
-  max-width: 1256px;
-  width: 80%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
   justify-content: space-between;
+  max-width: 1080px;
+  width: 100%;
+  height: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+  margin: 0 auto;
+
   @media ${({ theme }) => theme.device.tablet} {
     justify-content: flex-end;
   }
 `;
 
 const TopbarLeftContent = styled.div`
-  ${({ theme }) => theme.verticalCenter};
-  justify-content: flex-start;
   width: auto;
-  height: 100%;
   @media ${({ theme }) => theme.device.tablet} {
     display: none;
   }
 `;
 const TopbarRightContent = styled.div`
   ${({ theme }) => theme.verticalCenter};
-  justify-content: flex-end;
   width: auto;
-  height: 100%;
 `;
 const SearchContainer = styled.div`
   margin-right: 36px;
@@ -92,9 +89,10 @@ const SearchContainer = styled.div`
   }
 `;
 const ButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding-right: 10px;
+  ${({ theme }) => theme.verticalCenter};
+  @media ${({ theme }) => theme.device.tablet} {
+    margin-right: 6px;
+  }
 `;
 const ProfileImage = styled.img`
   width: 30px;

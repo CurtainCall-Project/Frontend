@@ -45,7 +45,7 @@ const ImageBg = styled.img`
 `;
 
 const MainContent = styled.div`
-  z-index: 3;
+  z-index: 1;
   max-width: 1200px;
   padding: 8px 24px;
   display: flex;
