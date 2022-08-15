@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../../elements/elements';
-import basicProfile from '../../assets/default_profile.png';
+import basicProfile from '../../assets/mypage/default_profile.png';
 
 const Reply = (props) => {
   const registerDate = new Date(props.reply.registerDate).toLocaleString(

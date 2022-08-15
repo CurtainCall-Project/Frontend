@@ -6,7 +6,7 @@ import { Grid, Text } from '../../elements/elements';
 import history from '../../history';
 import { addComment } from '../../modules/comments';
 import { useDispatch } from 'react-redux';
-import basicProfile from '../../assets/default_profile.png';
+import basicProfile from '../../assets/mypage/default_profile.png';
 
 const Comment = (props) => {
   const dispatch = new useDispatch();

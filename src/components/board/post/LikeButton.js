@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as HeartIcon } from '../../../assets/heart_icon.svg';
+import { ReactComponent as HeartIcon } from '../../../assets/board/heart_icon.svg';
 
 const LikeButton = (props) => {
   return (

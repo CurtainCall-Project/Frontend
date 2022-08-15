@@ -22,15 +22,12 @@ const Footer = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 69px;
+  height: 78px;
   position: absolute;
   bottom: 0px;
   background-color: ${({ theme }) => theme.colors.darkGray};
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
-  @media ${({ theme }) => theme.device.mobile} {
-    height: 40px;
-  }
 `;
 const TextContainer = styled.div`
   width: auto;

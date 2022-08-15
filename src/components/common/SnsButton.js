@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as InstaIcon } from '../../assets/insta_icon.svg';
+import { ReactComponent as InstaIcon } from '../../assets/common/insta_icon.svg';
 
 const SnsButton = () => {
   return (

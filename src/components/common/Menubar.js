@@ -85,10 +85,9 @@ const BottombarContainer = styled.div`
 `;
 const BottombarWrapper = styled.div`
   box-sizing: border-box;
-  max-width: 1256px;
+  max-width: 1080px;
   height: 55px;
   margin: 0 auto;
-  padding-left: 10px;
 `;
 const Menu = styled.ul`
   display: flex;

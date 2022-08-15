@@ -4,9 +4,9 @@ import history from '../../history';
 import { config } from '../../config';
 import { getCookie } from '../../Cookie';
 import SigninButton from '../../components/signin/SigninButton';
-import naver_logo from '../../assets/naver_login.svg';
-import kakao_logo from '../../assets/kakao_login.svg';
-import google_logo from '../../assets/google_login.svg';
+import naver_logo from '../../assets/signin/naver_login.svg';
+import kakao_logo from '../../assets/signin/kakao_login.svg';
+import google_logo from '../../assets/signin/google_login.svg';
 import {
   KAKAO_AUTH_URL,
   NAVER_AUTH_URL,

@@ -63,12 +63,19 @@ const DescriptonBox = (props) => {
         <Box>
           <Text margin_bottom="0.25em">중고거래</Text>
           <Text font_weight="regular" margin_bottom="0.25em" font_size="14">
-            공연 MD 등 판매글을 올려 중고거래 할 수 있습니다. 거래 시 선입금
-            요구나 외부 메신저 유도에 주의하세요!
+            중고거래 시 티켓 거래는 불가능합니다. 거래 시 선입금 요구나 외부
+            메신저 유도에 주의하세요!
           </Text>
           <span>
             (커튼콜은 서비스 이용 과정에서 발생하는 손해에 대하여 책임지지
-            않습니다. 모든 거래 당사자는 이용약관에 동의한 것으로 간주합니다.)
+            않습니다. 모든 거래 당사자는{' '}
+            <a
+              href="https://harmonious-wildebeest-a5c.notion.site/3315a2035ee74966ad28c84695fa2161"
+              target="_blank"
+              rel="noreferrer">
+              이용약관
+            </a>
+            에 동의한 것으로 간주합니다.)
           </span>
         </Box>
       );

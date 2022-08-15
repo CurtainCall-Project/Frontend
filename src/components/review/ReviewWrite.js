@@ -8,8 +8,8 @@ import {
   Button,
   Image,
 } from '../../elements/elements';
-import { ReactComponent as PictureButton } from '../../assets/picture_icon.svg';
-import { ReactComponent as DeleteButton } from '../../assets/delete_button.svg';
+import { ReactComponent as PictureButton } from '../../assets/write/picture_icon.svg';
+import { ReactComponent as DeleteButton } from '../../assets/write/delete_button.svg';
 import { Rating } from 'react-simple-star-rating';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
