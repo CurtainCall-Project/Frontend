@@ -142,7 +142,7 @@ const ReviewWritePage = (props) => {
   };
 
   return (
-    <Wrapper>
+    <>
       <ReviewWrite
         nowMusical={nowMusical}
         viewingDate={viewingDate}
@@ -163,7 +163,7 @@ const ReviewWritePage = (props) => {
         submitReview={submitReview}
         reviewDetail={reviewDetail}
       />
-    </Wrapper>
+    </>
   );
 };
 

@@ -117,7 +117,9 @@ export const deleteReview = (reviewId) => (dispatch) => {
 // 상세 뮤지컬 정보 가져오기
 export const getMusicalDetail = (musicalId) => (dispatch) => {
   axios
-    .get(`${config.SERVER_URL}/musical/${musicalId}`)
+    .get(
+      `https://56bcad8a-18fa-40c6-8dea-5044dfcd2998.mock.pstmn.io/musical/${musicalId}`
+    )
     .then((res) => {
       dispatch({ type: GET_MUSICAL_DETAIL, payload: res.data.dbs.db });
     })
@@ -127,7 +129,7 @@ export const getMusicalDetail = (musicalId) => (dispatch) => {
 // 뮤지컬 검색 결과 가져오기
 export const getMusical = (input, page) => (dispatch) => {
   axios
-    .get(`${config.SERVER_URL}/musical`, {
+    .get(`https://56bcad8a-18fa-40c6-8dea-5044dfcd2998.mock.pstmn.io/musical`, {
       params: {
         keyword: encodeURIComponent(input),
         page: page,

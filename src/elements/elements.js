@@ -64,8 +64,7 @@ const InputBox = styled.textarea`
   font-size: 1em;
   border: 1px solid ${({ theme }) => theme.colors.borderGray};
   border-radius: 0.5em;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 12px 1em;
   margin-top: 1em;
   outline: none;
   overflow: auto;
@@ -95,9 +94,37 @@ const Button = styled.button`
 
 // 이미지(Image) 최소단위 컴포넌트
 const Image = styled.img`
-  width: 11em;
-  height: 11em;
+  width: 10em;
+  height: 10em;
   border-radius: 10px;
 `;
+const ReviewInput = styled.input`
+  width: 100%;
+  height: 45px;
+  border: 1px solid #dbdbdb;
+  font-size: 1em;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 0 1em;
+  margin-top: 11px;
+  @media ${({ theme }) => theme.device.tablet} {
+    height: 40px;
+  }
+`;
+const SaveButton = styled.button`
+  width: 100%;
+  height: 45px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.lightPurple};
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.1s;
 
-export { Grid, Text, Input, InputBox, Button, Image };
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.purple};
+  }
+`;
+export { Grid, Text, Input, InputBox, Button, Image, ReviewInput, SaveButton };
