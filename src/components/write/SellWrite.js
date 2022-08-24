@@ -100,7 +100,11 @@ const SellWrite = (props) => {
           style={{ display: 'none' }}
           onChange={props.selectFiles}
         />
-        <Text margin_left="0.5em" color="gray" font_size="13">
+        <Text
+          margin_left="0.5em"
+          color="gray"
+          font_size="13"
+          font_weight="regular">
           * 사진은 최대 8장까지 첨부 가능합니다.
         </Text>
         <Button onClick={props.onSubmit}>등록</Button>

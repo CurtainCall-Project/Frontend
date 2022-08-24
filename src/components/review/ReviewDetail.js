@@ -57,18 +57,22 @@ const ReviewDetail = ({ reviewDetail, clickEditBtn, deleteNowReview }) => {
 };
 
 const Container = styled.div`
+  max-width: 1000px;
   width: 100%;
-  box-sizing: border-box;
-  overflow: auto;
+  margin: 4em auto;
   border: 1px solid;
-  border-radius: 10px;
+  overflow: auto;
   color: ${({ theme }) => theme.colors.borderGray};
+  border-radius: 8px;
+  padding: 2em 4em;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 2em 4em;
-  @media ${({ theme }) => theme.device.mobile} {
+
+  @media ${({ theme }) => theme.device.tablet} {
     border: none;
-    padding: 2em 1em;
+    padding: 2em 3em;
+    margin: 1em auto;
   }
 `;
 const MusicalWrapper = styled.div`

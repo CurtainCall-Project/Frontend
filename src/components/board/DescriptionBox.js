@@ -54,7 +54,14 @@ const DescriptonBox = (props) => {
           </Text>
           <span>
             (커튼콜은 서비스 이용 과정에서 발생하는 손해에 대하여 책임지지
-            않습니다. 모든 거래 당사자는 이용약관에 동의한 것으로 간주합니다.)
+            않습니다. 모든 거래 당사자는{' '}
+            <a
+              href="https://harmonious-wildebeest-a5c.notion.site/3315a2035ee74966ad28c84695fa2161"
+              target="_blank"
+              rel="noreferrer">
+              이용약관
+            </a>
+            에 동의한 것으로 간주합니다.)
           </span>
         </Box>
       );
@@ -90,7 +97,7 @@ const Box = styled.div`
   flex-direction: column;
   margin: 3em auto 0 auto;
   padding: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.darkGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   width: 70vw;
   max-width: 1000px;
   height: auto;
@@ -98,7 +105,7 @@ const Box = styled.div`
 
   span {
     font-size: 0.9em;
-    color: ${({ theme }) => theme.colors.borderGray};
+    color: #949494;
     @media ${({ theme }) => theme.device.mobile} {
       display: none;
     }

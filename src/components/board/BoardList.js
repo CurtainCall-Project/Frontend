@@ -177,7 +177,7 @@ const Column = styled.div`
     @media ${({ theme }) => theme.device.mobile} {
       grid-row: 2 / 3;
       grid-column: span 1;
-      color: ${({ theme }) => theme.colors.navSignInFontGray};
+      color: ${({ theme }) => theme.colors.textGray};
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -188,7 +188,7 @@ const Column = styled.div`
     &:nth-child(4) {
       grid-row: 2 / 3;
       grid-column: span 2;
-      color: ${({ theme }) => theme.colors.navSignInFontGray};
+      color: ${({ theme }) => theme.colors.textGray};
       font-size: ${({ theme }) => theme.fontSize.xxs};
     }
     &:last-child {

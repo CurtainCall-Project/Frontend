@@ -25,7 +25,7 @@ const Container = styled.div`
   height: 78px;
   position: absolute;
   bottom: 0px;
-  background-color: ${({ theme }) => theme.colors.darkGray};
+  background-color: ${({ theme }) => theme.colors.borderGray};
   ${({ theme }) => theme.verticalCenter};
   justify-content: flex-end;
 `;

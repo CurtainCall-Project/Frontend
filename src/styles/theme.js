@@ -6,10 +6,11 @@ const colors = {
   lightPurple: '#baabda',
   white: '#ffffff',
   navInnerMenuGray: '#fafafa',
-  navSignInFontGray: '#595858',
-  borderGray: '#9b9b9b',
+  textGray: '#595858',
+  borderGray: '#eaeaea',
   lightGray: '#f0f0f0',
   darkGray: '#e1e1e1',
+  inputGray: '#dbdbdb',
 };
 
 const fontSize = {

@@ -98,7 +98,6 @@ const ProfileImage = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.borderGray};
   margin-right: 10px;
   background-color: #fff;
   object-fit: cover;
@@ -109,7 +108,7 @@ const ProfileImage = styled.img`
 `;
 
 const LogoutButton = styled.div`
-  color: ${({ theme }) => theme.colors.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.textGray};
   transition: 0.3s;
   cursor: pointer;
   &:hover {
@@ -120,7 +119,7 @@ const LogoutButton = styled.div`
   }
 `;
 const LoginButton = styled(Link)`
-  color: ${({ theme }) => theme.colors.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.textGray};
   transition: 0.3s;
   &:hover {
     color: ${({ theme }) => theme.colors.white};
@@ -131,7 +130,7 @@ const LoginButton = styled(Link)`
 `;
 const FaBarIcon = styled(FaBars)`
   display: none;
-  color: ${({ theme }) => theme.colors.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.textGray};
   transition: 0.3s;
   cursor: pointer;
   &:hover {

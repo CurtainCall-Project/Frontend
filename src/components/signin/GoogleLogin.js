@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import google_logo from '../../assets/google_login.svg';
+import google_logo from '../../assets/signin/google_login.svg';
 
 const GoogleLogin = ({ onLogin }) => {
   const googleButton = useRef(null);

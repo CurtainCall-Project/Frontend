@@ -1,5 +1,4 @@
 // 최소단위 컴포넌트
-import React from 'react';
 import styled from 'styled-components';
 
 // 여백(Grid) 최소단위 컴포넌트
@@ -27,10 +26,7 @@ const Text = styled.div`
     props.font_size ? `${props.font_size / 16}em` : '1em'};
   font-weight: ${(props) =>
     props.font_weight ? `${props.font_weight}` : 'bold'};
-  color: ${(props) =>
-    props.color === 'gray'
-      ? `${({ theme }) => theme.colors.borderGray}`
-      : '#000'};
+  color: ${(props) => (props.color === 'gray' ? '#595858' : '#000')};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
   ${(props) =>
     props.margin_bottom ? `margin-bottom ${props.margin_bottom}` : ''};
@@ -62,10 +58,9 @@ const InputBox = styled.textarea`
   width: 100%;
   height: ${(props) => (props.height ? `${props.height}` : '17em')};
   font-size: 1em;
-  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
   border-radius: 0.5em;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 12px 1em;
   margin-top: 1em;
   outline: none;
   overflow: auto;
@@ -95,9 +90,38 @@ const Button = styled.button`
 
 // 이미지(Image) 최소단위 컴포넌트
 const Image = styled.img`
-  width: 11em;
-  height: 11em;
+  width: 10em;
+  height: 10em;
   border-radius: 10px;
 `;
+const ReviewInput = styled.input`
+  width: 100%;
+  height: 45px;
+  outline: none;
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
+  font-size: 1em;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 0 1em;
+  margin-top: 11px;
+  @media ${({ theme }) => theme.device.tablet} {
+    height: 40px;
+  }
+`;
+const SaveButton = styled.button`
+  width: 100%;
+  height: 45px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.lightPurple};
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.1s;
 
-export { Grid, Text, Input, InputBox, Button, Image };
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.purple};
+  }
+`;
+export { Grid, Text, Input, InputBox, Button, Image, ReviewInput, SaveButton };

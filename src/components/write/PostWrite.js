@@ -33,7 +33,7 @@ const PostWrite = (props) => {
   return (
     <FormWrapper>
       <Grid margin="0 0 1em">
-        <Text font_weight="regular" color="gray">
+        <Text font_weight="regular" color="gray" font_size="13">
           * 필수 입력 항목을 작성해야 게시글 등록이 가능합니다. (필수 입력 항목:
           게시판 선택, 제목, 내용)
         </Text>
@@ -85,7 +85,11 @@ const PostWrite = (props) => {
           style={{ display: 'none' }}
           onChange={props.selectFiles}
         />
-        <Text margin_left="10px" color="gray" font_size="13">
+        <Text
+          margin_left="10px"
+          color="gray"
+          font_size="13"
+          font_weight="regular">
           * 사진은 최대 8장까지 첨부 가능합니다.
         </Text>
         <Button onClick={props.onSubmit}>등록</Button>

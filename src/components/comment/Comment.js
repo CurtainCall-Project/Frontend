@@ -152,7 +152,7 @@ const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 11px;
-  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  border: 0.5px solid;
   margin: 0.25em 0.5em 0 0;
   @media ${({ theme }) => theme.device.tablet} {
     width: 16px;
@@ -164,7 +164,7 @@ const ReplyButton = styled.button`
   border: none;
   width: 5em;
   background-color: #fff;
-  color: ${({ theme }) => theme.colors.navSignInFontGray};
+  color: ${({ theme }) => theme.colors.textGray};
   font-weight: bold;
   font-size: ${({ theme }) => theme.fontSize.sm};
   margin-top: 4px;
