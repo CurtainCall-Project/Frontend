@@ -101,6 +101,7 @@ const Image = styled.img`
 const ReviewInput = styled.input`
   width: 100%;
   height: 45px;
+  outline: none;
   border: 1px solid #dbdbdb;
   font-size: 1em;
   border-radius: 6px;

@@ -1,11 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import styled from 'styled-components';
 import {
-  Grid,
   Text,
-  Input,
   InputBox,
-  Button,
   Image,
   ReviewInput,
   SaveButton,
@@ -15,16 +12,34 @@ import { ReactComponent as DeleteButton } from '../../assets/write/delete_button
 import { Rating } from 'react-simple-star-rating';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { getYear, getMonth } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
+const _ = require('lodash');
 const ReviewWrite = (props) => {
   const hiddenFileInput = useRef();
 
-  const ExampleCustomInput = ({ value, onClick }) => (
-    <DateButton className="example-custom-input" onClick={onClick}>
+  const years = _.range(1990, getYear(new Date()) + 1, 1);
+  const months = [
+    '1월',
+    '2월',
+    '3월',
+    '4월',
+    '5월',
+    '6월',
+    '7월',
+    '8월',
+    '9월',
+    '10월',
+    '11월',
+    '12월',
+  ];
+
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <DateButton onClick={onClick} ref={ref}>
       {value}
     </DateButton>
-  );
+  ));
   // 선택한 이미지 미리보기
   const renderImages = (previews) => {
     return previews.map((preview) => {
@@ -80,11 +95,54 @@ const ReviewWrite = (props) => {
             onChange={(date) => props.setViewingDate(date)}
             placeholderText="관람일을 선택해주세요"
             customInput={<ExampleCustomInput />}
+            renderCustomHeader={({
+              date,
+              changeYear,
+              changeMonth,
+              decreaseMonth,
+              increaseMonth,
+              prevMonthButtonDisabled,
+              nextMonthButtonDisabled,
+            }) => (
+              <DatePickerHeader>
+                <DatePickerArrowBtn
+                  onClick={decreaseMonth}
+                  disabled={prevMonthButtonDisabled}>
+                  {'<'}
+                </DatePickerArrowBtn>
+                <select
+                  value={getYear(date)}
+                  onChange={({ target: { value } }) => changeYear(value)}>
+                  {years.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={months[getMonth(date)]}
+                  onChange={({ target: { value } }) =>
+                    changeMonth(months.indexOf(value))
+                  }>
+                  {months.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <DatePickerArrowBtn
+                  onClick={increaseMonth}
+                  disabled={nextMonthButtonDisabled}>
+                  {'>'}
+                </DatePickerArrowBtn>
+              </DatePickerHeader>
+            )}
           />
         </Section>
         <Section>
           <Text>캐스팅</Text>
           <ReviewInput
+            spellCheck="false"
             placeholder="출연진을 입력하세요"
             value={props.cast || ''}
             onChange={(e) => props.setCast(e.target.value)}
@@ -94,6 +152,7 @@ const ReviewWrite = (props) => {
           <Text>후기</Text>
           <InputBox
             height="8em"
+            spellCheck="false"
             placeholder="나만의 후기를 작성하세요!"
             onChange={(e) => props.setContent(e.target.value)}
             defaultValue={props.content}></InputBox>
@@ -126,7 +185,7 @@ const ReviewWrite = (props) => {
             {renderImages(props.imgFiles)}
           </Images>
         </Section>
-        <SaveButton>등록</SaveButton>
+        <SaveButton onClick={props.submitReview}>등록</SaveButton>
       </FormWrapper>
     </FormContainer>
   );
@@ -222,6 +281,14 @@ const DateButton = styled.button`
   @media ${({ theme }) => theme.device.tablet} {
     height: 40px;
   }
+`;
+const DatePickerHeader = styled.div`
+margin: 10,
+display: 'flex',
+justifyContent: 'center',
+`;
+const DatePickerArrowBtn = styled.button`
+  border: none;
 `;
 const ButtonWrapper = styled.div`
   display: flex;
