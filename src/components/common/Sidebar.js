@@ -140,7 +140,7 @@ const MenuWrapper = styled.div`
   margin: 0 auto;
 `;
 const MenuName = styled.div`
-  color: ${({ theme }) => theme.colors.borderGray};
+  color: ${({ theme }) => theme.colors.textGray};
   padding: 15px 0px 5px 7px;
 `;
 const MypageMenu = styled.div`

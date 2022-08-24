@@ -271,7 +271,7 @@ const DateButton = styled.button`
   width: 100%;
   height: 45px;
   background-color: #fff;
-  border: 1px solid #dbdbdb;
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
   font-size: 1em;
   border-radius: 6px;
   box-sizing: border-box;
@@ -305,7 +305,7 @@ const UploadButton = styled(PictureButton)`
   }
 `;
 const Description = styled.span`
-  color: ${({ theme }) => theme.colors.borderGray};
+  color: ${({ theme }) => theme.colors.textGray};
   font-size: 13px;
   margin-left: 8px;
 `;

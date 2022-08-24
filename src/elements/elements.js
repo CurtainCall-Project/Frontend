@@ -1,5 +1,4 @@
 // 최소단위 컴포넌트
-import React from 'react';
 import styled from 'styled-components';
 
 // 여백(Grid) 최소단위 컴포넌트
@@ -27,10 +26,7 @@ const Text = styled.div`
     props.font_size ? `${props.font_size / 16}em` : '1em'};
   font-weight: ${(props) =>
     props.font_weight ? `${props.font_weight}` : 'bold'};
-  color: ${(props) =>
-    props.color === 'gray'
-      ? `${({ theme }) => theme.colors.borderGray}`
-      : '#000'};
+  color: ${(props) => (props.color === 'gray' ? '#595858' : '#000')};
   ${(props) => (props.margin_left ? `margin-left: ${props.margin_left}` : '')};
   ${(props) =>
     props.margin_bottom ? `margin-bottom ${props.margin_bottom}` : ''};
@@ -62,7 +58,7 @@ const InputBox = styled.textarea`
   width: 100%;
   height: ${(props) => (props.height ? `${props.height}` : '17em')};
   font-size: 1em;
-  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
   border-radius: 0.5em;
   padding: 12px 1em;
   margin-top: 1em;
@@ -102,7 +98,7 @@ const ReviewInput = styled.input`
   width: 100%;
   height: 45px;
   outline: none;
-  border: 1px solid #dbdbdb;
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
   font-size: 1em;
   border-radius: 6px;
   box-sizing: border-box;

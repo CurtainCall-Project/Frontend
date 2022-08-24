@@ -58,7 +58,7 @@ const ProfileImg = styled.img`
   }
 `;
 const DeleteButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.darkGray};
+  background-color: ${({ theme }) => theme.colors.borderGray};
   color: #000;
 `;
 export default PostInfo;

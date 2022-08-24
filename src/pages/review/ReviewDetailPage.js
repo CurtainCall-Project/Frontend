@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import history from '../../history';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewDetail from '../../components/review/ReviewDetail';
@@ -29,7 +28,7 @@ const ReviewDetailPage = (props) => {
   };
 
   return (
-    <Wrapper>
+    <>
       {!(JSON.stringify(reviewDetail) === '{}') && (
         <ReviewDetail
           reviewDetail={reviewDetail}
@@ -37,16 +36,8 @@ const ReviewDetailPage = (props) => {
           deleteNowReview={deleteNowReview}
         />
       )}
-    </Wrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div`
-  ${({ theme }) => theme.verticalCenter};
-  width: 80vw;
-  max-width: 1000px;
-  justify-content: center;
-  flex-direction: column;
-  margin: 4em auto 0 auto;
-`;
 export default ReviewDetailPage;

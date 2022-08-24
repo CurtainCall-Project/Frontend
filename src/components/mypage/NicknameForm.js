@@ -46,8 +46,8 @@ const FormContainer = styled.div`
   height: auto;
   padding: 5em 3em;
   border-radius: 0.6em;
-  color: ${({ theme }) => theme.colors.borderGray};
-  border: 1px solid;
+  color: ${({ theme }) => theme.colors.textGray};
+  border: 1px solid ${({ theme }) => theme.colors.borderGray};;
   margin: 0px auto 2em auto;
   @media ${({ theme }) => theme.device.tablet} {
     width: 70vw;
@@ -75,7 +75,7 @@ const Title = styled.div`
   }
 `;
 const InputWrapper = styled.div`
-  border: 1px solid;
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
   border-radius: 0.5em;
   width: 14em;
   height: 2em;

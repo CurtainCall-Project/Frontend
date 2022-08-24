@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import ReviewWrite from '../../components/review/ReviewWrite';
 import { addReview, editReview, getMusicalDetail } from '../../modules/review';
 
@@ -167,15 +166,4 @@ const ReviewWritePage = (props) => {
   );
 };
 
-const Wrapper = styled.div`
-  ${({ theme }) => theme.verticalCenter};
-  width: 80vw;
-  max-width: 1000px;
-  justify-content: center;
-  flex-direction: column;
-  margin: 4em auto 0 auto;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 85vw;
-    margin-top: 2em;
-`;
 export default ReviewWritePage;

@@ -40,7 +40,7 @@ const Container = styled.div`
   width: 100%;
   height: 2.5em;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.colors.borderGray};
+  border: 1px solid ${({ theme }) => theme.colors.inputGray};
   overflow: hidden;
   font-size: ${({ theme }) => theme.base};
   ${({ theme }) => theme.verticalCenter};
