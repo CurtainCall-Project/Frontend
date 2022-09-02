@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { Text, Button } from '../../elements/elements';
@@ -10,15 +10,25 @@ const ProfileBox = ({ nickname, profileImage, email, handleFileChange }) => {
   const onClick = (e) => {
     hiddenFileInput.current.click();
   };
-
   const clickButton = () => {
     history.push('/mypage/nickname');
   };
 
-  return (
+  const [isImageScaleUp, setIsImageScaleUp] = useState(false);
+
+  return isImageScaleUp ? (
+    <ScaleImageWrapper className="imgWrapper">
+      <ScaleImageCloseBtn onClick={() => setIsImageScaleUp(false)}>
+        x
+      </ScaleImageCloseBtn>
+      <ScaleImageInner>
+        <img src={basicProfile} alt="" />
+      </ScaleImageInner>
+    </ScaleImageWrapper>
+  ) : (
     <Container>
       <ImageContainer>
-        <ImageWrapper>
+        <ImageWrapper onClick={() => setIsImageScaleUp(true)}>
           {profileImage ? (
             <ProfileImage src={profileImage} />
           ) : (
@@ -48,6 +58,41 @@ const ProfileBox = ({ nickname, profileImage, email, handleFileChange }) => {
     </Container>
   );
 };
+
+const ScaleImageWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #353535;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* text-align: center;
+   */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const ScaleImageCloseBtn = styled.div`
+  color: #fff;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  font-size: 30px;
+`;
+
+const ScaleImageInner = styled.div`
+  width: 40%;
+  min-width: 200px;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+`;
 
 const Container = styled.div`
   ${({ theme }) => theme.verticalCenter};
