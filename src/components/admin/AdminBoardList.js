@@ -94,6 +94,8 @@ const Headings = styled.div`
   height: 50px;
   text-align: center;
   grid-template-columns: 10% 50% 15% 25%;
+  font-size: 14px;
+
   @media ${({ theme }) => theme.device.tablet} {
     grid-template-columns: 40% 20% 20% 20%;
   }
@@ -141,6 +143,7 @@ const Row = styled.div`
   text-align: center;
   border-top: 1px solid ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.lightGray};
+  font-size: 14px;
   &:hover {
     background-color: ${({ theme }) => theme.colors.darkGray};
   }
