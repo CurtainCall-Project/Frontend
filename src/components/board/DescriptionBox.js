@@ -86,6 +86,12 @@ const DescriptonBox = (props) => {
           </span>
         </Box>
       );
+    case 'admin':
+      return (
+        <Box>
+          <Text margin_bottom="0.25em">관리자용 페이지</Text>
+        </Box>
+      );
     default:
       return null;
   }

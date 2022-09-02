@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Pagination from 'react-js-pagination';
 
-const Paging = (props) => {
+const Paging = ({ page, itemsCount, totalItemsCount, changePage }) => {
   const [itemCount, setItemCount] = useState(5);
   return (
     <PaginationWrapper>
       <Pagination
-        activePage={props.page}
-        itemsCountPerPage={props.itemsCount || 13}
-        totalItemsCount={props.totalItemsCount}
+        activePage={page}
+        itemsCountPerPage={itemsCount || 13}
+        totalItemsCount={totalItemsCount}
         pageRangeDisplayed={itemCount}
         prevPageText={'<'}
         nextPageText={'>'}
-        onChange={props.changePage}
+        onChange={changePage}
       />
     </PaginationWrapper>
   );
