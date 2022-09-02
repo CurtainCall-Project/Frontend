@@ -26,17 +26,27 @@ function AdminBoardList({ posts, boardType }) {
           key={list.boardId}
           item={list}
           handleItemClick={() => history.push(`/${boardType}/${list.boardId}`)}
+          handleBorderItemDelete={() =>
+            console.log('게시글 삭제', list.boardId)
+          }
+          handleUserDelete={() => console.log('유저 삭제')}
         />
       ))}
     </Table>
   );
 }
 
-const BoardItem = ({ item, handleItemClick, isHotBoard = false }) => {
+const BoardItem = ({
+  item,
+  handleItemClick,
+  handleBorderItemDelete,
+  handleUserDelete,
+  isHotBoard = false,
+}) => {
   // NOTE : BestRow 인경우에 스타일이 조금다른것 같은데, 테스트가 불가능하므로 나중에 처리하도록 계획
   return (
-    <Row onClick={handleItemClick} key={item.boardId}>
-      <Column key={item.boardId}>
+    <Row>
+      <Column key={item.boardId} onClick={handleItemClick}>
         {isHotBoard ? (
           <IconContainer>
             <BestIcon />
@@ -45,15 +55,17 @@ const BoardItem = ({ item, handleItemClick, isHotBoard = false }) => {
           item.boardId
         )}
       </Column>
-      <Column key={item.title}>
+      <Column onClick={handleItemClick}>
         <div>{item.title}</div>
       </Column>
-      <Column key={item.nickname}>
+      <Column onClick={handleItemClick}>
         <div>{item.nickname}</div>
       </Column>
       <Column>
-        <ManageButton>게시글 삭제</ManageButton>
-        <ManageButton>유저 삭제</ManageButton>
+        <ManageButton onClick={handleBorderItemDelete}>
+          게시글 삭제
+        </ManageButton>
+        <ManageButton onClick={handleUserDelete}>유저 삭제</ManageButton>
       </Column>
     </Row>
   );
@@ -144,6 +156,7 @@ const Row = styled.div`
   }
 `;
 const Column = styled.div`
+  cursor: pointer;
   @media ${({ theme }) => theme.device.tablet} {
     &:first-child {
       display: none;
