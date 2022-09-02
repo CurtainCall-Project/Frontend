@@ -16,7 +16,7 @@ const BoardList = (props) => {
         <Heading>작성일</Heading>
         <Heading>공감수</Heading>
       </Headings>
-      {lists.hotPosts.map((list) => (
+      {lists.hotPosts?.map((list) => (
         <BestRow
           onClick={() => history.push(`/${props.boardType}/${list.boardId}`)}
           key={list.boardId}>
@@ -42,7 +42,7 @@ const BoardList = (props) => {
           </Column>
         </BestRow>
       ))}
-      {lists.posts.map((list) => (
+      {lists.posts?.map((list) => (
         <Row
           onClick={() => history.push(`/${props.boardType}/${list.boardId}`)}
           key={list.boardId}>
