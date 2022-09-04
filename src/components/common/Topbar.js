@@ -6,6 +6,7 @@ import { FaBars } from 'react-icons/fa';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
 import SnsButton from './SnsButton';
+import ProfileImage from '../ProfileImage';
 
 const Topbar = ({
   profileImg,
@@ -34,7 +35,13 @@ const Topbar = ({
           <ButtonWrapper>
             {isLogin ? (
               <>
-                <ProfileImage src={profileImage} />
+                <ProfileImageWrapper>
+                  <ProfileImage
+                    src={profileImage}
+                    size="30px"
+                    isBorder={false}
+                  />
+                </ProfileImageWrapper>
                 <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
               </>
             ) : (
@@ -94,18 +101,18 @@ const ButtonWrapper = styled.div`
     margin-right: 6px;
   }
 `;
-const ProfileImage = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 16px;
-  margin-right: 10px;
-  background-color: #fff;
-  object-fit: cover;
-  object-position: 50% 50%;
-  @media ${({ theme }) => theme.device.tablet} {
-    display: none;
-  }
-`;
+// const ProfileImage = styled.img`
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 16px;
+//   margin-right: 10px;
+//   background-color: #fff;
+//   object-fit: cover;
+//   object-position: 50% 50%;
+//   @media ${({ theme }) => theme.device.tablet} {
+//     /* display: none; */
+//   }
+// `;
 
 const LogoutButton = styled.div`
   color: ${({ theme }) => theme.colors.textGray};
@@ -140,5 +147,8 @@ const FaBarIcon = styled(FaBars)`
     display: block;
     margin-bottom: 2px;
   }
+`;
+const ProfileImageWrapper = styled.div`
+  margin: 5px 8px;
 `;
 export default Topbar;

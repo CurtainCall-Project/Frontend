@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../../elements/elements';
 import basicProfile from '../../assets/mypage/default_profile.png';
+import ProfileImage from '../ProfileImage';
 
 const Reply = (props) => {
   const registerDate = new Date(props.reply.registerDate).toLocaleString(
@@ -13,7 +14,9 @@ const Reply = (props) => {
 
   return (
     <ReplyBox>
-      <ProfileImg src={profileImage}></ProfileImg>
+      <ProfileImageWrapper>
+        <ProfileImage src={profileImage}></ProfileImage>
+      </ProfileImageWrapper>
       <Grid display="block">
         <Text width="auto" margin_bottom="5px">
           {props.reply.nickname}
@@ -57,17 +60,19 @@ const ReplyBox = styled.div`
   margin-bottom: 10px;
   padding: 0.4em 0.6em;
 `;
-
-const ProfileImg = styled.img`
-  width: 20px;
-  height: 20px;
-  border-radius: 11px;
-  border: 0.5px solid;
+const ProfileImageWrapper = styled.div`
   margin: 0.25em 0.5em 0 0;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 16px;
-    height: 16px;
-  }
 `;
+// const ProfileImg = styled.img`
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 11px;
+//   border: 0.5px solid;
+//   margin: 0.25em 0.5em 0 0;
+//   @media ${({ theme }) => theme.device.tablet} {
+//     width: 16px;
+//     height: 16px;
+//   }
+// `;
 
 export default Reply;

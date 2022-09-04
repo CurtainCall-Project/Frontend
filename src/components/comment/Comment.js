@@ -7,6 +7,7 @@ import history from '../../history';
 import { addComment } from '../../modules/comments';
 import { useDispatch } from 'react-redux';
 import basicProfile from '../../assets/mypage/default_profile.png';
+import ProfileImage from '../ProfileImage';
 
 const Comment = (props) => {
   const dispatch = new useDispatch();
@@ -67,7 +68,9 @@ const Comment = (props) => {
       {/* replyList가 존재하면 대댓글을 보여준다 */}
       <Container>
         <CommentBox key={props.comment.id}>
-          <ProfileImg src={profileImage}></ProfileImg>
+          <ProfileImageWrapper>
+            <ProfileImage src={profileImage}></ProfileImage>
+          </ProfileImageWrapper>
           <Grid display="block">
             <Text width="auto" margin_bottom="5px">
               {props.comment.nickname}
@@ -148,16 +151,8 @@ const CommentBox = styled.div`
   margin-bottom: 10px;
   padding: 0.4em 0.6em;
 `;
-const ProfileImg = styled.img`
-  width: 20px;
-  height: 20px;
-  border-radius: 11px;
-  border: 0.5px solid;
+const ProfileImageWrapper = styled.div`
   margin: 0.25em 0.5em 0 0;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 16px;
-    height: 16px;
-  }
 `;
 const ReplyButton = styled.button`
   box-sizing: border-box;

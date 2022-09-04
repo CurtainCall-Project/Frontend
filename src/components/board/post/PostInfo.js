@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import basicProfile from '../../../assets/mypage/default_profile.png';
 import { Grid, Text, Button } from '../../../elements/elements';
+import ProfileImage from '../../ProfileImage';
 
 const PostInfo = ({ post, user, deleteNowPost }) => {
   return (
@@ -9,11 +10,10 @@ const PostInfo = ({ post, user, deleteNowPost }) => {
       <Text font_size="18">{post.title}</Text>
       <Grid margin="1em 0 1em 0" justify_content="space-between">
         <LeftContainer>
-          {post.profileImg ? (
-            <ProfileImg src={post.profileImg}></ProfileImg>
-          ) : (
-            <ProfileImg src={basicProfile}></ProfileImg>
-          )}
+          <ProfileImageWrapper>
+            <ProfileImage src={post.profileImg ?? basicProfile}></ProfileImage>
+          </ProfileImageWrapper>
+
           <Text font_weight="regular" width="auto" margin="0 1em 0 0.25em">
             {post.nickname}
           </Text>
@@ -44,19 +44,11 @@ const LeftContainer = styled.div`
     font-size: 10px;
   }
 `;
-const ProfileImg = styled.img`
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  border: 0.5px solid;
-  background-position: center;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 1em;
-    height: 1em;
-    border-radius: 0.6em;
-    margin-top: 5px;
-  }
+const ProfileImageWrapper = styled.div`
+  position: relative;
+  top: 3px;
 `;
+
 const DeleteButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.borderGray};
   color: #000;
