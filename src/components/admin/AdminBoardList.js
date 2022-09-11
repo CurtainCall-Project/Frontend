@@ -4,7 +4,7 @@ import history from '../../history';
 import { ReactComponent as BestIcon } from '../../assets/board/best_icon.svg';
 import { ReactComponent as HeartIcon } from '../../assets/board/heart_icon.svg';
 
-function AdminBoardList({ posts, boardType }) {
+function AdminBoardList({ posts }) {
   return (
     <Table>
       <Headings>
@@ -13,19 +13,13 @@ function AdminBoardList({ posts, boardType }) {
         <Heading>글쓴이</Heading>
         <Heading>관리</Heading>
       </Headings>
-      {/* {posts.hotPosts?.map((list) => (
-        <BoardItem
-          key={list.boardId}
-          item={list}
-          isHotBoard={true}
-          handleItemClick={() => history.push(`/${boardType}/${list.boardId}`)}
-        />
-      ))} */}
       {posts.posts?.map((list) => (
         <BoardItem
           key={list.boardId}
           item={list}
-          handleItemClick={() => history.push(`/${boardType}/${list.boardId}`)}
+          handleItemClick={() =>
+            history.push(`/${list.boardType}/${list.boardId}`)
+          }
           handleBorderItemDelete={() =>
             console.log('게시글 삭제', list.boardId)
           }

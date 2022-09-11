@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BoardList from '../../components/board/BoardList';
 import Paging from '../../components/board/Paging';
-import DescriptonBox from '../../components/board/DescriptionBox';
-import { setHotPosts, setPosts } from '../../modules/posts';
+// import { setPosts, deletePost, deleteUser } from '../../modules/admin';
+import { setPosts } from '../../modules/posts';
 import AdminBoardList from '../../components/admin/AdminBoardList';
 import styled from 'styled-components';
 
@@ -41,22 +41,16 @@ function AdminPage() {
   // NOTE : 아직 API가 없으므로, 더미데이터 사용
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const [boardType, setBoardType] = useState('admin');
 
   useEffect(() => {
-    // dispatch(setHotPosts(boardType));
-    setPage(1);
-  }, [boardType]);
-
-  useEffect(() => {
-    // dispatch(setPosts(boardType, page));
-  }, [boardType, page]);
+    // dispatch(setPosts(page));
+  }, [page]);
 
   const changePage = (page) => {
     setPage(page);
   };
 
-  // const posts = useSelector((state) => state.posts);
+  // const { totalCount, posts } = useSelector((state) => state.admin);
   const posts = PAGE_DUMMY_DATA;
   const totalItemsCount = posts.totalCount;
 
@@ -64,13 +58,12 @@ function AdminPage() {
     <div>
       <>
         {/* NOTE : 관리자용 페이지 헤더에느 board가 없으나, 일단은 다른 공통 컴포넌트와 같이 사용하기 위해 보더를 삭제하지 않았습니다.  */}
-        <DescriptonBox boardType={boardType} />
         {totalItemsCount > 0 ? (
           <>
-            <AdminBoardList posts={posts} boardType={boardType} />
+            <AdminBoardList posts={posts} />
             <Paging
               page={page}
-              totalItemsCount={totalItemsCount}
+              totalCount={totalItemsCount}
               changePage={changePage}
             />
           </>

@@ -4,8 +4,10 @@ import theme from './styles/theme';
 import GlobalStyles from './styles/GlobalStyles';
 import privateRoutes from './routes/privateRoutes';
 import publicRoutes from './routes/publicRoutes';
+import adminRoutes from './routes/adminRoutes';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
+import AdminRoute from './routes/AdminRoute';
 import history from './history';
 import { ConnectedRouter } from 'connected-react-router';
 import Header from './pages/containers/Header';
@@ -43,6 +45,14 @@ const App = () => {
                 ))}
                 {publicRoutes.map((route) => (
                   <PublicRoute
+                    key={route.path}
+                    exact
+                    path={route.path}
+                    component={route.component}
+                  />
+                ))}
+                {adminRoutes.map((route) => (
+                  <AdminRoute
                     key={route.path}
                     exact
                     path={route.path}
