@@ -2,9 +2,6 @@ import { handleActions } from 'redux-actions';
 import axios from 'axios';
 import history from '../history';
 import { config } from '../config';
-import user from './user';
-import { act } from 'react-dom/test-utils';
-import { startOfMinute } from 'date-fns';
 
 const GET_POSTS = 'admin/GET_POSTS';
 const DELETE_POST = 'admin/DELETE_POST';
@@ -26,11 +23,16 @@ export const setPosts =
       .catch();
   };
 
-export const deletePost = (id) => (dispatch) => {
+export const deletePost = (id, page) => (dispatch) => {
   axios
     .delete(`${config.SERVER_URL}/admin/boards?boardId=${id}`)
     .then((res) => {
       dispatch({ type: DELETE_POST });
+      axios
+        .get(`${config.SERVER_URL}/admin/boards?page=${page}`)
+        .then((res) => {
+          dispatch({ type: GET_POSTS, payload: res.data });
+        });
     });
 };
 
@@ -50,7 +52,6 @@ export default handleActions(
     }),
     [DELETE_POST]: (state, action) => ({
       ...state,
-      // posts: [],
     }),
   },
   state

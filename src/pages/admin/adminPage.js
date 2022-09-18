@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import BoardList from '../../components/board/BoardList';
 import Paging from '../../components/board/Paging';
-import { setPosts, deletePost, deleteUser } from '../../modules/admin';
+import { setPosts } from '../../modules/admin';
 import AdminBoardList from '../../components/admin/AdminBoardList';
 import styled from 'styled-components';
 
@@ -59,7 +58,7 @@ function AdminPage() {
         {/* NOTE : 관리자용 페이지 헤더에느 board가 없으나, 일단은 다른 공통 컴포넌트와 같이 사용하기 위해 보더를 삭제하지 않았습니다.  */}
         {totalItemsCount > 0 ? (
           <>
-            <AdminBoardList posts={posts} />
+            <AdminBoardList posts={posts} page={page} />
             <Paging
               page={page}
               totalItemsCount={totalItemsCount}

@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../modules/admin';
+
 import { ReactComponent as BestIcon } from '../../assets/board/best_icon.svg';
 import { ReactComponent as HeartIcon } from '../../assets/board/heart_icon.svg';
 
-function AdminBoardList({ posts }) {
+function AdminBoardList({ posts, page }) {
+  const dispatch = useDispatch();
   return (
     <Table>
       <Headings>
@@ -21,7 +25,7 @@ function AdminBoardList({ posts }) {
             history.push(`/${list.boardType}/${list.boardId}`)
           }
           handleBorderItemDelete={() =>
-            console.log('게시글 삭제', list.boardId)
+            dispatch(deletePost(list.boardId, page))
           }
           handleUserDelete={() => console.log('유저 삭제')}
         />
