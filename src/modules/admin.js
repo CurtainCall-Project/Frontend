@@ -36,11 +36,20 @@ export const deletePost = (id, page) => (dispatch) => {
     });
 };
 
-export const deleteUser = (userId) => (dispatch) => {
+export const deleteUser = (nickname, page) => (dispatch) => {
   axios
-    .delete(`${config.SERVER_URL}/admin/user?userId=${userId}`)
+    .delete(`${config.SERVER_URL}/admin/user/nickname`, {
+      params: {
+        nickname: encodeURIComponent(nickname),
+      },
+    })
     .then((res) => {
-      // 유저 삭제하면 어케할거야..?
+      dispatch({ type: DELETE_USER });
+      axios
+        .get(`${config.SERVER_URL}/admin/boards?page=${page}`)
+        .then((res) => {
+          dispatch({ type: GET_POSTS, payload: res.data });
+        });
     });
 };
 
@@ -51,6 +60,9 @@ export default handleActions(
       posts: [...action.payload.list],
     }),
     [DELETE_POST]: (state, action) => ({
+      ...state,
+    }),
+    [DELETE_USER]: (state, action) => ({
       ...state,
     }),
   },

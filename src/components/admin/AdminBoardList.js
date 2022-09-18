@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../modules/admin';
+import { deletePost, deleteUser } from '../../modules/admin';
 
 import { ReactComponent as BestIcon } from '../../assets/board/best_icon.svg';
 import { ReactComponent as HeartIcon } from '../../assets/board/heart_icon.svg';
@@ -27,7 +27,7 @@ function AdminBoardList({ posts, page }) {
           handleBorderItemDelete={() =>
             dispatch(deletePost(list.boardId, page))
           }
-          handleUserDelete={() => console.log('유저 삭제')}
+          handleUserDelete={() => dispatch(deleteUser(list.nickname, page))}
         />
       ))}
     </Table>
