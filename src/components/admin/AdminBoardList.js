@@ -13,7 +13,7 @@ function AdminBoardList({ posts }) {
         <Heading>글쓴이</Heading>
         <Heading>관리</Heading>
       </Headings>
-      {posts.posts?.map((list) => (
+      {posts.map((list) => (
         <BoardItem
           key={list.boardId}
           item={list}

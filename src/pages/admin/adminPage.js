@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BoardList from '../../components/board/BoardList';
 import Paging from '../../components/board/Paging';
-// import { setPosts, deletePost, deleteUser } from '../../modules/admin';
-import { setPosts } from '../../modules/posts';
+import { setPosts, deletePost, deleteUser } from '../../modules/admin';
 import AdminBoardList from '../../components/admin/AdminBoardList';
 import styled from 'styled-components';
 
@@ -43,16 +42,16 @@ function AdminPage() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    // dispatch(setPosts(page));
+    dispatch(setPosts(page));
   }, [page]);
 
   const changePage = (page) => {
     setPage(page);
   };
 
-  // const { totalCount, posts } = useSelector((state) => state.admin);
-  const posts = PAGE_DUMMY_DATA;
-  const totalItemsCount = posts.totalCount;
+  const { totalItemsCount, posts } = useSelector((state) => state.admin);
+  // const posts = PAGE_DUMMY_DATA;
+  // const totalItemsCount = posts.totalCount;
 
   return (
     <div>
@@ -63,7 +62,7 @@ function AdminPage() {
             <AdminBoardList posts={posts} />
             <Paging
               page={page}
-              totalCount={totalItemsCount}
+              totalItemsCount={totalItemsCount}
               changePage={changePage}
             />
           </>
