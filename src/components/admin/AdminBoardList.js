@@ -57,13 +57,13 @@ const BoardItem = ({
         <div>{item.title}</div>
       </Column>
       <Column onClick={handleItemClick}>
-        <div>{item.nickname === null ? '삭제된 유저' : item.nickname}</div>
+        <div>{'nickname' in item ? item.nickname : '삭제된 유저'}</div>
       </Column>
       <Column>
         <ManageButton onClick={handleBorderItemDelete}>
           게시글 삭제
         </ManageButton>
-        {item.nickname === null || (
+        {'nickname' in item && (
           <ManageButton onClick={handleUserDelete}>유저 삭제</ManageButton>
         )}
       </Column>
