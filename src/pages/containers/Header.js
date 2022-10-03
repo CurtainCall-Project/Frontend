@@ -48,9 +48,7 @@ const Header = () => {
 
   const clickAdminBtn = () => {
     if (roleType === 'ADMIN') {
-      if (prompt('입력') === `${process.env.REACT_APP_ADMIN_PW}`) {
-        history.push('/admin');
-      }
+      history.push('/admin');
       return;
     }
     alert('접근 권한이 없는 페이지 입니다.');
