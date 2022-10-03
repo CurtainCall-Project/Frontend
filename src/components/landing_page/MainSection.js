@@ -6,21 +6,26 @@ import Logo from '../../assets/landing_imgs/logo.svg';
 
 const MainSection = () => {
   return (
-    <Container>
-      <MainBg>
-        <ImageBg src={Background}></ImageBg>
-      </MainBg>
-      <WavesWrapper>
-        <Waves src={WavesBg} />
-      </WavesWrapper>
-      <MainContent>
-        <MainP>All-in-One!</MainP>
-        <Wrapper>
-          <MainH1>뮤지컬 종합 플랫폼 커튼콜</MainH1>
-          <MainLogo src={Logo}></MainLogo>
-        </Wrapper>
-      </MainContent>
-    </Container>
+    <a
+      href="https://harmonious-wildebeest-a5c.notion.site/809f9abab4e34803a5644686fe9a27ed"
+      target="_blank"
+      rel="noreferrer">
+      <Container>
+        <MainBg>
+          <ImageBg src={Background}></ImageBg>
+        </MainBg>
+        <WavesWrapper>
+          <Waves src={WavesBg} />
+        </WavesWrapper>
+        <MainContent>
+          <MainP>All-in-One!</MainP>
+          <Wrapper>
+            <MainH1>뮤지컬 종합 플랫폼 커튼콜</MainH1>
+            <MainLogo src={Logo}></MainLogo>
+          </Wrapper>
+        </MainContent>
+      </Container>
+    </a>
   );
 };
 
