@@ -15,7 +15,7 @@ const PostInfo = ({ post, user, deleteNowPost }) => {
           </ProfileImageWrapper>
 
           <Text font_weight="regular" width="auto" margin="0 1em 0 0.25em">
-            {post.nickname}
+            {'nickname' in post ? post.nickname : '삭제된 유저'}
           </Text>
           <Text font_weight="regular" width="auto" margin="0 1em 0 0">
             {new Date(post.registerDate).toLocaleString('ko-KR')}

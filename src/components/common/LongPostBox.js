@@ -13,7 +13,7 @@ const LongPostBox = ({ postInfo }) => {
           <Title>{postInfo.title}</Title>
           <Content>{postInfo.content}</Content>
         </div>
-        <Nickname>{postInfo.nickname}</Nickname>
+        <Nickname>{postInfo.nickname || '삭제된 유저'}</Nickname>
       </TextContainer>
       {postInfo.img === null || <Image src={postInfo.img} />}
     </Container>

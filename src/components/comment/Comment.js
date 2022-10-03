@@ -73,7 +73,7 @@ const Comment = (props) => {
           </ProfileImageWrapper>
           <Grid display="block">
             <Text width="auto" margin_bottom="5px">
-              {props.comment.nickname}
+              {props.comment.nickname || '삭제된 유저'}
             </Text>
             {props.comment.secret &&
               (props.user === props.nickname ||

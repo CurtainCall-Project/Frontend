@@ -51,7 +51,7 @@ const BoardList = (props) => {
             <div>{list.title}</div>
           </Column>
           <Column key={list.nickname}>
-            <div>{list.nickname}</div>
+            <div>{'nickname' in list ? list.nickname : '삭제된 유저'}</div>
           </Column>
           <Column key={list.registerDate}>
             {new Date(list.registerDate)
