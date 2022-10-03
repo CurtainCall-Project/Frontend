@@ -1,6 +1,5 @@
 import { handleActions } from 'redux-actions';
 import axios from 'axios';
-import history from '../history';
 import { config } from '../config';
 
 const GET_POSTS = 'admin/GET_POSTS';
@@ -16,7 +15,7 @@ export const setPosts =
   (page = 1) =>
   (dispatch) => {
     axios
-      .get(`${config.SERVER_URL}/admin/boards?page=${page}`)
+      .get(`${config.SERVER_URL}/boards/all?page=${page}`)
       .then((res) => {
         dispatch({ type: GET_POSTS, payload: res.data });
       })
@@ -24,32 +23,18 @@ export const setPosts =
   };
 
 export const deletePost = (id, page) => (dispatch) => {
-  axios
-    .delete(`${config.SERVER_URL}/admin/boards?boardId=${id}`)
-    .then((res) => {
-      dispatch({ type: DELETE_POST });
-      axios
-        .get(`${config.SERVER_URL}/admin/boards?page=${page}`)
-        .then((res) => {
-          dispatch({ type: GET_POSTS, payload: res.data });
-        });
-    });
+  axios.delete(`${config.SERVER_URL}/deletePost?boardId=${id}`).then((res) => {
+    dispatch({ type: DELETE_POST });
+    window.location.replace('/admin');
+  });
 };
 
 export const deleteUser = (nickname, page) => (dispatch) => {
   axios
-    .delete(`${config.SERVER_URL}/admin/user/nickname`, {
-      params: {
-        nickname: encodeURIComponent(nickname),
-      },
-    })
+    .put(`${config.SERVER_URL}/deleteUser/${encodeURIComponent(nickname)}`)
     .then((res) => {
       dispatch({ type: DELETE_USER });
-      axios
-        .get(`${config.SERVER_URL}/admin/boards?page=${page}`)
-        .then((res) => {
-          dispatch({ type: GET_POSTS, payload: res.data });
-        });
+      window.location.replace('/admin');
     });
 };
 
@@ -57,7 +42,7 @@ export default handleActions(
   {
     [GET_POSTS]: (state, action) => ({
       totalItemsCount: action.payload.totalCount,
-      posts: [...action.payload.list],
+      posts: [...action.payload.allPosts],
     }),
     [DELETE_POST]: (state, action) => ({
       ...state,
