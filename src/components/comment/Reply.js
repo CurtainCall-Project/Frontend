@@ -19,7 +19,7 @@ const Reply = (props) => {
       </ProfileImageWrapper>
       <Grid display="block">
         <Text width="auto" margin_bottom="5px">
-          {props.reply.nickname}
+          {props.reply.nickname || '삭제된 유저'}
         </Text>
         {props.reply.secret &&
           (props.user === props.nickname ? (
