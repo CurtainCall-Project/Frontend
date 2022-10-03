@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { userId, profileImg } = useSelector((state) => state.user);
+  const { userId, profileImg, roleType } = useSelector((state) => state.user);
   const [input, setInput] = useState('');
 
   // fabar icon 클릭 이벤트에 따른 사이드바 여부
@@ -46,15 +46,24 @@ const Header = () => {
     dispatch(logout());
   };
 
+  const clickAdminBtn = () => {
+    if (roleType === 'ADMIN') {
+      history.push('/admin');
+      return;
+    }
+    alert('접근 권한이 없는 페이지 입니다.');
+  };
   return (
     <Container>
       <Topbar
         profileImg={profileImg}
+        roleType={roleType}
         onLogOut={onLogOut}
         changeInput={changeInput}
         handleEnterKey={handleEnterKey}
         clickSearchBtn={clickSearchBtn}
         showSidebar={showSidebar}
+        clickAdminBtn={clickAdminBtn}
       />
       <Logobar />
       <Menubar userId={userId} />
@@ -74,4 +83,5 @@ const Header = () => {
 const Container = styled.div`
   position: relative;
 `;
+
 export default Header;

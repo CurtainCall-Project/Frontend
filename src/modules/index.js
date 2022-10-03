@@ -5,6 +5,7 @@ import post from './post';
 import posts from './posts';
 import comments from './comments';
 import review from './review';
+import admin from './admin';
 import history from '../history';
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
   posts,
   comments,
   review,
+  admin,
   router: connectRouter(history),
 });

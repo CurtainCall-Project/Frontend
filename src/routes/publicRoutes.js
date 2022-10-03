@@ -4,7 +4,6 @@ import SignInPage from '../pages/signin/SigninPage';
 import BoardPage from '../pages/board/BoardPage';
 import PostPage from '../pages/board/PostPage';
 import ReviewSearchPage from '../pages/review/ReviewSearchPage';
-import AdminPage from '../pages/admin/adminPage';
 
 export default [
   {
@@ -30,9 +29,5 @@ export default [
   {
     path: '/review/search',
     component: ReviewSearchPage,
-  },
-  {
-    path: '/admin',
-    component: AdminPage,
   },
 ];

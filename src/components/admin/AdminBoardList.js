@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
+import { useDispatch } from 'react-redux';
+import { deletePost, deleteUser } from '../../modules/admin';
+
 import { ReactComponent as BestIcon } from '../../assets/board/best_icon.svg';
 import { ReactComponent as HeartIcon } from '../../assets/board/heart_icon.svg';
 
-function AdminBoardList({ posts, boardType }) {
+function AdminBoardList({ posts, page }) {
+  const dispatch = useDispatch();
   return (
     <Table>
       <Headings>
@@ -13,23 +17,17 @@ function AdminBoardList({ posts, boardType }) {
         <Heading>글쓴이</Heading>
         <Heading>관리</Heading>
       </Headings>
-      {/* {posts.hotPosts?.map((list) => (
+      {posts.map((list) => (
         <BoardItem
           key={list.boardId}
           item={list}
-          isHotBoard={true}
-          handleItemClick={() => history.push(`/${boardType}/${list.boardId}`)}
-        />
-      ))} */}
-      {posts.posts?.map((list) => (
-        <BoardItem
-          key={list.boardId}
-          item={list}
-          handleItemClick={() => history.push(`/${boardType}/${list.boardId}`)}
-          handleBorderItemDelete={() =>
-            console.log('게시글 삭제', list.boardId)
+          handleItemClick={() =>
+            history.push(`/${list.boardType}/${list.boardId}`)
           }
-          handleUserDelete={() => console.log('유저 삭제')}
+          handleBorderItemDelete={() =>
+            dispatch(deletePost(list.boardId, page))
+          }
+          handleUserDelete={() => dispatch(deleteUser(list.nickname, page))}
         />
       ))}
     </Table>
@@ -59,13 +57,15 @@ const BoardItem = ({
         <div>{item.title}</div>
       </Column>
       <Column onClick={handleItemClick}>
-        <div>{item.nickname}</div>
+        <div>{'nickname' in item ? item.nickname : '삭제된 유저'}</div>
       </Column>
       <Column>
         <ManageButton onClick={handleBorderItemDelete}>
           게시글 삭제
         </ManageButton>
-        <ManageButton onClick={handleUserDelete}>유저 삭제</ManageButton>
+        {'nickname' in item && (
+          <ManageButton onClick={handleUserDelete}>유저 삭제</ManageButton>
+        )}
       </Column>
     </Row>
   );

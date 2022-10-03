@@ -35,7 +35,7 @@ export const logout = () => (dispatch) => {
 };
 
 // 사용자 정보를 가져오는 액션 생성함수
-export const getUser = () => async (dispatch) => {
+export const getUser = () => (dispatch) => {
   // 쿠키에서 서버와의 통신 시 사용할 토큰을 가져온다.
   const bearerToken = getCookie('token');
   // 서버와 통신시 헤더에 토큰을 기본값으로 넣는다

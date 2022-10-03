@@ -10,11 +10,13 @@ import ProfileImage from '../ProfileImage';
 
 const Topbar = ({
   profileImg,
+  roleType,
   onLogOut,
   changeInput,
   handleEnterKey,
   clickSearchBtn,
   showSidebar,
+  clickAdminBtn,
 }) => {
   const isLogin = !!getCookie('token');
   const profileImage = !!profileImg ? profileImg : basicProfile;
@@ -42,6 +44,11 @@ const Topbar = ({
                     isBorder={false}
                   />
                 </ProfileImageWrapper>
+                {roleType === 'ADMIN' && (
+                  <AdminButton onClick={clickAdminBtn}>
+                    관리자 페이지
+                  </AdminButton>
+                )}
                 <LogoutButton onClick={onLogOut}>로그아웃</LogoutButton>
               </>
             ) : (
@@ -151,4 +158,8 @@ const FaBarIcon = styled(FaBars)`
 const ProfileImageWrapper = styled.div`
   margin: 5px 8px;
 `;
+const AdminButton = styled.button`
+  margin: 5px;
+`;
+
 export default Topbar;
